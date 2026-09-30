@@ -1,0 +1,19 @@
+{
+  "name": "seancollinson-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for the Mediation Office of S. Collinson. Builds to plain HTML for Bluehost shared hosting.",
+  "type": "module",
+  "scripts": {
+    "images": "node tools/images.mjs",
+    "build": "node build.mjs",
+    "build:draft": "node build.mjs --draft",
+    "preview": "node tools/serve.mjs bluehost-upload",
+    "preview:draft": "node tools/serve.mjs preview-draft",
+    "test": "node tests/qa.mjs",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

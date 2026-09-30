@@ -1,0 +1,20 @@
+{
+  "name": "Mediation Office of S. Collinson",
+  "short_name": "S. Collinson Mediation",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F7F4EE",
+  "theme_color": "#0B1628",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Only the form handler may be requested directly.
+<FilesMatch "^(?!submit\.php$).*$">
+  Require all denied
+</FilesMatch>
+Options -Indexes

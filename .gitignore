@@ -1,0 +1,4 @@
+node_modules/
+preview-draft/
+qa-screenshots/
+.DS_Store
