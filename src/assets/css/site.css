@@ -705,3 +705,6 @@ picture, picture img { display: block; width: 100%; }
   .hero__media img { object-position: 78% 20%; }
   .hero--photo::before { background: linear-gradient(180deg, rgba(12, 34, 68, 0.55) 0%, rgba(12, 34, 68, 0) 18%, rgba(12, 34, 68, 0) calc(var(--header-h) + 34vw), var(--sky-950) calc(var(--header-h) + 70vw)); }
 }
+
+/* Uniform 20% black veil over the hero photograph, beneath the navy scrim */
+.hero__media::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.2); pointer-events: none; }

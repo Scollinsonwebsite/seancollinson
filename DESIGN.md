@@ -161,7 +161,7 @@ White tiles with `--lift`, or `sky-50` fills where the section is already white.
 A transparent header over the sky with white text and a white pill on the current page; after 24px of scroll (or with the mobile menu open) it becomes white glass with ink text. On mobile, a circular menu button opens a full-width list.
 
 ### Photo hero (home)
-Full-bleed `<picture>` (`images.hero`) with `object-position: 70% 30%`; a left-to-right scrim from `sky-950` at 92% to transparent by 72% keeps white copy at AA contrast while Sean stays clear on the right. Credentials sit in a frosted four-column strip (`.hero__strip`) under the actions. On phones the photo crops to Sean at the top and fades into `sky-950` behind the copy.
+Full-bleed `<picture>` (`images.hero`) with `object-position: 70% 30%`; a uniform 20% black veil (`.hero__media::after`), then a left-to-right scrim from `sky-950` at 92% to transparent by 72%, keeps white copy at AA contrast while Sean stays clear on the right. Credentials sit in a frosted four-column strip (`.hero__strip`) under the actions. On phones the photo crops to Sean at the top and fades into `sky-950` behind the copy.
 
 ### Contrails (signature)
 `contrails()` in `src/lib/render.mjs`: an SVG with two converging paths and their joined continuation, each drawn twice (a 12px blurred haze and a 1.8px core). Used static in the closing CTA band; softened on narrow screens. A `.hero .trail` draw-in animation remains available for a sky-only hero.
