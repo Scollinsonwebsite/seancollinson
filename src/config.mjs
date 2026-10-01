@@ -80,6 +80,14 @@ export const analytics = {
 // Candidate originals already exist in the WordPress media library
 // (Sean.pic44-1.png, sean.picdesk-2.png); confirm they are approved first.
 export const images = {
+  // Home page hero, supplied 2026-10-01. Sean seated at a conference table, right of frame.
+  hero: {
+    file: 'sean-collinson-hero.jpg',
+    width: 1672,
+    height: 941,
+    alt: 'Sean Collinson in a navy suit, seated at a marble conference table with his hands clasped',
+    note: 'Wide 16:9 photo with Sean on the right and open space on the left, 2560 × 1440 px ideal',
+  },
   portrait: {
     file: 'sean-collinson-portrait.jpg',
     width: 1200,

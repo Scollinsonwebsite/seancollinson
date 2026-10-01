@@ -11,6 +11,7 @@ Everything below is a placeholder in `src/config.mjs` (or a page file). The prod
 | 3 | **Office phone number** | `contact.phone` (E.164, e.g. `+13105550100`) and `contact.phoneDisplay` | Enables phone links, the mobile Call bar, and `telephone` in schema. |
 | 4 | **Office email address** | `contact.email` | Enables email links and `email` in schema. |
 | 5 | **Form recipient and sending address** | `src/static/forms/config.php`, then `forms.enabled = true` | Forms stay disabled, with a notice, until this is done and tested. |
+| 5b | ~~Home page hero photo~~ **Supplied 2026-10-01** (1672 × 941) | `src/assets/img/source/sean-collinson-hero.webp` | In place. A 2560 × 1440 original would look sharper on large high-resolution screens. |
 | 6 | **Approved portrait of Sean** | `src/assets/img/source/sean-collinson-portrait.jpg` | Vertical 4:5, at least 1200 × 1500 px. Candidate in WordPress media: `Sean.pic44-1.png` (995 × 1074, slightly small). Update `images.portrait.alt`. |
 | 7 | **Approved environmental photo** | `src/assets/img/source/sean-collinson-at-desk.jpg` | Horizontal 16:9, at least 1600 × 900 px. Candidate in WordPress media: `sean.picdesk-2.png` (1736 × 974). Update `images.office.alt`. |
 | 8 | **Professional review of legal pages** | `src/pages/legal.mjs`, then `legal.<page>.reviewed = true` | Privacy Policy, Terms of Use, Accessibility Statement, and Disclaimer are starter drafts, marked as drafts, `noindex`, and excluded from the sitemap until reviewed. |

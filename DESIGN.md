@@ -97,7 +97,7 @@ components:
 
 ## Overview
 
-A clear daylight sky carries every page top: deep cornflower at the upper left, opening into pale haze toward the lower right. Two white contrails enter from opposite edges, meet, and fly on as one line, which is the practice's convergence mark drawn at sky scale. Over the sky sit a heavy white grotesk headline and one frosted-glass panel; below it, a bento of white rounded tiles rises over the sky's edge onto a pale sky-tint ground. The world comes from the user's reference image (sky-blue photographic hero, glass card, white bento). The hero is an abstract CSS-drawn sky with no person, by the user's choice.
+A clear daylight sky carries every page top: deep cornflower at the upper left, opening into pale haze toward the lower right. Two white contrails enter from opposite edges, meet, and fly on as one line, which is the practice's convergence mark drawn at sky scale. Over the sky sit a heavy white grotesk headline and one frosted-glass panel; below it, a bento of white rounded tiles rises over the sky's edge onto a pale sky-tint ground. The world comes from the user's reference image (sky-blue photographic hero, glass card, white bento). The home hero is a full-bleed photograph of Sean (supplied 2026-10-01) under a deep-sky scrim on the left; interior pages keep the CSS-drawn sky.
 
 The aim is calm, legible authority for people in a hard moment: bright and open rather than courthouse navy, with every claim factual.
 
@@ -160,8 +160,11 @@ White tiles with `--lift`, or `sky-50` fills where the section is already white.
 ### Navigation
 A transparent header over the sky with white text and a white pill on the current page; after 24px of scroll (or with the mobile menu open) it becomes white glass with ink text. On mobile, a circular menu button opens a full-width list.
 
+### Photo hero (home)
+Full-bleed `<picture>` (`images.hero`) with `object-position: 70% 30%`; a left-to-right scrim from `sky-950` at 92% to transparent by 72% keeps white copy at AA contrast while Sean stays clear on the right. Credentials sit in a frosted four-column strip (`.hero__strip`) under the actions. On phones the photo crops to Sean at the top and fades into `sky-950` behind the copy.
+
 ### Contrails (signature)
-`contrails()` in `src/lib/render.mjs`: an SVG with two converging paths and their joined continuation, each drawn twice (a 12px blurred haze and a 1.8px core). In the home hero they draw in once on load, about 2.6s with an exponential ease; they are static under reduced motion and softened on narrow screens.
+`contrails()` in `src/lib/render.mjs`: an SVG with two converging paths and their joined continuation, each drawn twice (a 12px blurred haze and a 1.8px core). Used static in the closing CTA band; softened on narrow screens. A `.hero .trail` draw-in animation remains available for a sky-only hero.
 
 ## Do's and Don'ts
 
@@ -177,4 +180,4 @@ A transparent header over the sky with white text and a white pill on the curren
 
 ## Raster provenance
 
-All shipping rasters are generated from code by `tools/images.mjs` (Chromium screenshots of authored HTML/SVG); there is no stock or AI imagery. `assets/img/social-share.jpg` (1200 × 630), `assets/img/logo.png` (600 × 600), and the favicon set in `assets/icons/`. Approved photos of Sean, when supplied, go in `src/assets/img/source/` and are resized by the same tool.
+All shipping rasters are generated from code by `tools/images.mjs` (Chromium screenshots of authored HTML/SVG); there is no stock or AI imagery. Supplied photography: `src/assets/img/source/sean-collinson-hero.webp` (1672 × 941, provided by the user), resized to 480–1672 px WebP/JPEG in `assets/img/generated/`. Generated from code: `assets/img/social-share.jpg` (1200 × 630), `assets/img/logo.png` (600 × 600), and the favicon set in `assets/icons/`. Approved photos of Sean, when supplied, go in `src/assets/img/source/` and are resized by the same tool.

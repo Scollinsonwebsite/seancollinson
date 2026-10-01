@@ -103,7 +103,8 @@ Put approved originals in `src/assets/img/source/` using these names, then run `
 
 | File | Use | Recommended size |
 | --- | --- | --- |
-| `sean-collinson-portrait.jpg` | Home hero, About, Masterclass instructor | 1200 × 1500 px or larger, vertical 4:5 |
+| `sean-collinson-hero.webp` (supplied) | Home page hero, full width | 2560 × 1440 px ideal, Sean on the right |
+| `sean-collinson-portrait.jpg` | About header, Masterclass instructor | 1200 × 1500 px or larger, vertical 4:5 |
 | `sean-collinson-at-desk.jpg` | Home "about Sean" section | 1600 × 900 px or larger, horizontal 16:9 |
 
 The tool creates 480, 800, 1200, and 1600 px WebP and JPEG versions and the pages switch from the designed placeholders to responsive `<picture>` elements. Update the `alt` text for each image in `src/config.mjs` so it describes the actual photograph. Two likely candidates already exist in the current WordPress media library (`Sean.pic44-1.png`, 995 × 1074, and `sean.picdesk-2.png`, 1736 × 974); confirm they are approved before using them.

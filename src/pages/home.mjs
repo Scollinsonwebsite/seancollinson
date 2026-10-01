@@ -1,7 +1,7 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, businessSchema, personSchema, contrails,
+  websiteSchema, businessSchema, personSchema,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 
@@ -187,8 +187,8 @@ function bento() {
 
 export function render() {
   const body = `
-<section class="hero sky" aria-labelledby="hero-title">
-  ${contrails('hero__trails')}
+<section class="hero hero--photo sky" aria-labelledby="hero-title">
+  <div class="hero__media">${photo('hero', { eager: true, sizes: '100vw', className: 'hero__photo' })}</div>
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
@@ -201,18 +201,16 @@ export function render() {
         <li>Private</li><li>Practical</li><li>Solution-focused</li>
       </ul>
     </div>
-    <aside class="glass hero__panel" aria-labelledby="glance-title">
-      <div class="glass__head">
-        <h2 id="glance-title" class="glass__title">Sean Collinson</h2>
-        <a class="glass__link" href="/about/">Profile ${icon('arrow-up-right', 'icon icon--sm')}</a>
-      </div>
-      <p class="glass__role">Family and civil mediator</p>
-      <ul class="glance">
+  </div>
+  <div class="wrap">
+    <aside class="glass hero__strip" aria-labelledby="glance-title">
+      <h2 id="glance-title" class="visually-hidden">Sean Collinson at a glance</h2>
+      <ul class="glance glance--row">
         <li>${icon('clock')}<span><strong>22+ years</strong> of mediation experience</span></li>
         <li>${icon('graduation-cap')}<span><strong>Harvard and Loyola</strong> negotiation and mediation training</span></li>
         <li>${icon('shield-check')}<span><strong>FBI-trained</strong> crisis negotiator</span></li>
+        <li>${icon('video')}<span><strong>California and Zoom</strong> in person or virtual, nationwide</span></li>
       </ul>
-      <p class="glass__foot">Divorce mediation in Los Angeles and across California, with virtual sessions nationwide.</p>
     </aside>
   </div>
 </section>

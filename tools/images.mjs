@@ -119,8 +119,9 @@ if (existsSync(sourceDir)) {
         img.src = `data:${mime};base64,${data}`;
         await img.decode();
         const out = [];
-        for (const w of [480, 800, 1200, 1600]) {
-          if (w > img.naturalWidth && w !== 480) continue;
+        const sizes = [480, 800, 1200, 1600, 2000, 2560].filter((w) => w <= img.naturalWidth);
+        if (!sizes.includes(img.naturalWidth) && img.naturalWidth > sizes[sizes.length - 1]) sizes.push(img.naturalWidth);
+        for (const w of sizes) {
           const h = Math.round((img.naturalHeight / img.naturalWidth) * w);
           const c = document.createElement('canvas');
           c.width = w; c.height = h;

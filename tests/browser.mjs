@@ -168,13 +168,14 @@ for (const [name, w, h] of widths) {
   await context.close();
 }
 
-// Reduced motion: hero lines must not animate
+// Reduced motion: nothing keeps animating
 {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
   await page.goto(base + '/', { waitUntil: 'networkidle' });
-  const anim = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .trail')).animationName);
-  anim === 'none' ? notes.push('Hero animation is disabled when reduced motion is requested') : problems.push('Hero animates despite reduced motion: ' + anim);
+  await page.waitForTimeout(300);
+  const running = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length);
+  running === 0 ? notes.push('No animation runs when reduced motion is requested') : problems.push(`${running} animations still running despite reduced motion`);
   await context.close();
 }
 

@@ -1,6 +1,6 @@
 // Shared rendering helpers: escaping, placeholders, images, header, footer,
 // metadata, and structured data. Pages import these and return HTML strings.
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { site, contact, social, analytics, images, legal } from '../config.mjs';
 import { icon } from './icons.mjs';
@@ -39,11 +39,17 @@ export function photo(key, { eager = false, sizes = '100vw', className = '' } = 
   const spec = images[key];
   const base = spec.file.replace(/\.[a-z]+$/i, '');
   const imgDir = join(ctx.srcDir, 'assets/img/generated');
-  const widths = [480, 800, 1200, 1600].filter((w) => existsSync(join(imgDir, `${base}-${w}.webp`)));
+  const widths = existsSync(imgDir)
+    ? readdirSync(imgDir)
+        .map((f) => f.match(new RegExp(`^${base}-(\\d+)\\.webp$`)))
+        .filter(Boolean)
+        .map((m) => Number(m[1]))
+        .sort((a, b) => a - b)
+    : [];
   const loading = eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"';
   if (widths.length) {
     const srcset = (ext) => widths.map((w) => `/assets/img/generated/${base}-${w}.${ext} ${w}w`).join(', ');
-    const fallback = widths.includes(800) ? 800 : widths[widths.length - 1];
+    const fallback = widths.includes(1200) ? 1200 : widths[widths.length - 1];
     return `<picture class="${className}">
       <source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}">
       <img src="/assets/img/generated/${base}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" width="${spec.width}" height="${spec.height}" alt="${esc(spec.alt)}" ${loading}>
