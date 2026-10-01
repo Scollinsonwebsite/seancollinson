@@ -55,10 +55,9 @@ export function render() {
       : '';
 
   const body = `
-${crumbs.html}
 <section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
-    <p class="eyebrow">Contact the office</p>
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">Questions about divorce, family, civil, workplace, or business mediation, attorney referrals, and masterclass inquiries are all welcome. If you already know you would like to meet, the <a href="/consultation/">consultation request</a> is the quickest route.</p>
   </div>

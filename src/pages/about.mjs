@@ -44,11 +44,10 @@ const values = [
 export function render() {
   const crumbs = breadcrumbs([{ name: 'About', path: meta.path }]);
   const body = `
-${crumbs.html}
 <section class="page-hero page-hero--split" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap page-hero__grid">
     <div>
-      <p class="eyebrow">Family and civil mediator</p>
       <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
       <p class="page-hero__lede">An experienced neutral who brings order, calm, and practical judgment to disputes that feel stuck, from divorce and custody to business and civil conflict.</p>
       <div class="btn-row"><a class="btn btn--primary" href="/consultation/">${CTA_PRIMARY}</a></div>

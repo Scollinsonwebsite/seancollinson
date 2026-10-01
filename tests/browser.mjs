@@ -173,7 +173,7 @@ for (const [name, w, h] of widths) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
   await page.goto(base + '/', { waitUntil: 'networkidle' });
-  const anim = await page.evaluate(() => getComputedStyle(document.querySelector('.hero__line')).animationName);
+  const anim = await page.evaluate(() => getComputedStyle(document.querySelector('.hero .trail')).animationName);
   anim === 'none' ? notes.push('Hero animation is disabled when reduced motion is requested') : problems.push('Hero animates despite reduced motion: ' + anim);
   await context.close();
 }

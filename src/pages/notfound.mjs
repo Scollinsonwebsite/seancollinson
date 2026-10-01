@@ -13,7 +13,6 @@ export function render() {
   const body = `
 <section class="page-hero page-hero--compact notfound" aria-labelledby="page-title">
   <div class="wrap narrow">
-    <p class="eyebrow">Error 404</p>
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">The link may be out of date, or the address may have been typed incorrectly. These pages are a good place to continue:</p>
     <ul class="notfound__links">

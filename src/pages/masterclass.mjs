@@ -91,12 +91,11 @@ export function render() {
     .join('');
 
   const body = `
-${crumbs.html}
 <section class="page-hero page-hero--dark" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
-    <p class="eyebrow">Think Like a Hostage Negotiator</p>
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
-    <p class="page-hero__lede">A practical negotiation and conflict resolution masterclass informed by more than two decades of mediation and by crisis-negotiation training. Learn the listening, de-escalation, and negotiation skills that keep hard conversations productive.</p>
+    <p class="page-hero__lede"><strong>Think Like a Hostage Negotiator</strong> is a practical negotiation and conflict resolution masterclass informed by more than two decades of mediation and by crisis-negotiation training. Learn the listening, de-escalation, and negotiation skills that keep hard conversations productive.</p>
     <div class="btn-row"><a class="btn btn--light" href="#training-request">Request Training Information</a></div>
   </div>
 </section>

@@ -150,10 +150,9 @@ const faqs = [
 export function render() {
   const crumbs = breadcrumbs([{ name: 'Mediation', path: meta.path }]);
   const body = `
-${crumbs.html}
 <section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
-    <p class="eyebrow">Divorce, family, civil, and business mediation</p>
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">Mediation is often the best path because it gives you greater control over the outcome while reducing the cost, delay, stress, and uncertainty of litigation. Instead of leaving critical decisions to a judge, the parties work with a neutral mediator in a private and confidential setting to develop practical agreements designed around their unique needs.</p>
     <div class="btn-row"><a class="btn btn--primary" href="/consultation/">${CTA_PRIMARY}</a></div>

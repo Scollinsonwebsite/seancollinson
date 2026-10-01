@@ -128,10 +128,9 @@ export function render() {
   }
 
   const body = `
-${crumbs.html}
 <section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
-    <p class="eyebrow">Videos</p>
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">Short, practical videos in which Sean Collinson explains how mediation works, how to prepare for a hard conversation, and what crisis negotiation teaches about listening, de-escalation, and moving a stalled discussion forward.</p>
   </div>

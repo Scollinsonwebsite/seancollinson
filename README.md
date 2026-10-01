@@ -5,6 +5,7 @@ A fast, fully static website for Sean Collinson's mediation practice. Every page
 - **Pages:** Home, About, Mediation, Consultation, Videos, Masterclass, Contact, plus Privacy Policy, Terms of Use, Accessibility Statement, Disclaimer, and a custom 404 page.
 - **Deployable output:** `bluehost-upload/` (the folder) and `bluehost-upload.zip` (the same files, with `index.html` at the root of the archive).
 - **Before launch:** work through [`CONTENT-NEEDED.md`](CONTENT-NEEDED.md).
+- **Design system:** [`DESIGN.md`](DESIGN.md) (visual rules) and [`PRODUCT.md`](PRODUCT.md) (product facts and constraints).
 
 ## Project layout
 
@@ -15,7 +16,7 @@ src/lib/render.mjs    ← shared header, footer, metadata, structured data
 src/lib/forms.mjs     ← accessible form fields
 src/assets/css/       ← site.css (design tokens at the top)
 src/assets/js/        ← site.js (menu, forms, video embeds; no libraries)
-src/assets/fonts/     ← self-hosted Manrope and Cormorant Garamond (SIL Open Font License)
+src/assets/fonts/     ← self-hosted Schibsted Grotesk and Manrope (SIL Open Font License)
 src/assets/img/       ← logo, social image; approved photos go in img/source/
 src/static/forms/     ← PHP form handler for Bluehost
 build.mjs             ← builds bluehost-upload/ and the zip

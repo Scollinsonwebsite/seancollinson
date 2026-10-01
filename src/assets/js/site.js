@@ -8,6 +8,17 @@
     el.textContent = String(new Date().getFullYear());
   });
 
+  // ── Header: transparent over the sky, solid once the page scrolls ─────────
+  var header = document.querySelector('[data-header]');
+  var setSolid = function () {
+    if (!header) return;
+    var open = header.querySelector('[data-menu-toggle]');
+    var solid = window.scrollY > 24 || (open && open.getAttribute('aria-expanded') === 'true');
+    header.classList.toggle('is-solid', Boolean(solid));
+  };
+  window.addEventListener('scroll', setSolid, { passive: true });
+  setSolid();
+
   // ── Mobile menu ───────────────────────────────────────────────────────────
   var toggle = document.querySelector('[data-menu-toggle]');
   var menu = document.querySelector('[data-menu]');
@@ -18,6 +29,7 @@
     var open = function () {
       menu.hidden = false;
       toggle.setAttribute('aria-expanded', 'true');
+      setSolid();
       var first = menu.querySelector('a');
       if (first) first.focus();
       document.addEventListener('keydown', onKey);
@@ -25,6 +37,7 @@
     var close = function (returnFocus) {
       menu.hidden = true;
       toggle.setAttribute('aria-expanded', 'false');
+      setSolid();
       document.removeEventListener('keydown', onKey);
       if (returnFocus) toggle.focus();
     };

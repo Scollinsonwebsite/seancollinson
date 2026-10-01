@@ -160,7 +160,7 @@ if (existsSync('bluehost-upload.zip') && dir === 'bluehost-upload') {
   const bad = list.filter((f) => /node_modules|\.env$|\.md$|\.mjs$|package\.json$/.test(f));
   bad.length ? fail(`ZIP contains dev files: ${bad.join(', ')}`) : pass(`ZIP contains ${list.length} deployable files only`);
 }
-for (const f of ['.htaccess', 'robots.txt', 'sitemap.xml', '404.html', 'favicon.ico', 'site.webmanifest', 'assets/img/social-share.png', 'assets/icons/apple-touch-icon.png', 'forms/submit.php']) {
+for (const f of ['.htaccess', 'robots.txt', 'sitemap.xml', '404.html', 'favicon.ico', 'site.webmanifest', 'assets/img/social-share.jpg', 'assets/icons/apple-touch-icon.png', 'forms/submit.php']) {
   existsSync(join(dir, f)) ? pass(`${f} present`) : fail(`${f} missing`);
 }
 

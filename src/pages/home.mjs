@@ -1,8 +1,9 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, businessSchema, personSchema,
+  websiteSchema, businessSchema, personSchema, contrails,
 } from '../lib/render.mjs';
+import { icon } from '../lib/icons.mjs';
 
 export const meta = {
   path: '/',
@@ -86,20 +87,6 @@ const faqs = [
   },
 ];
 
-function trustBar() {
-  const items = [
-    ['22+ years', 'of mediation experience'],
-    ['Harvard and Loyola', 'negotiation and mediation training'],
-    ['FBI-trained', 'crisis negotiator'],
-    ['California and virtual', 'sessions by Zoom nationwide'],
-  ];
-  return `<section class="trust" aria-label="Credentials at a glance">
-  <ul class="wrap trust__list">
-    ${items.map(([a, b]) => `<li class="trust__item"><strong>${a}</strong> <span>${b}</span></li>`).join('')}
-  </ul>
-</section>`;
-}
-
 function verifiedClaims() {
   const enabled = Object.values(claims).filter((c) => c.enabled && c.value && c.note);
   if (!enabled.length) return '';
@@ -132,32 +119,105 @@ function testimonialsSection() {
 </section>`;
 }
 
+function bento() {
+  return `<section class="bento-wrap" aria-label="Mediation at a glance">
+  <div class="wrap bento">
+    <article class="tile tile--route" aria-labelledby="route-title">
+      <div class="tile__head">
+        <h2 id="route-title" class="tile__title">How mediation works</h2>
+        <a class="tile__link" href="/mediation/#process">The full process ${icon('arrow-up-right', 'icon icon--sm')}</a>
+      </div>
+      <p class="tile__lede">Four stages, each with one purpose. Most people find the structure itself lowers the temperature.</p>
+      <ol class="route">
+        ${steps.map((st, i) => `<li class="route__stop"><span class="route__node" aria-hidden="true"></span><h3 class="route__title">${st.title}</h3><p>${st.text}</p></li>`).join('')}
+      </ol>
+    </article>
+
+    <article class="tile tile--start" aria-labelledby="start-title">
+      <span class="chip chip--blue">${icon('calendar-check')}</span>
+      <h2 id="start-title" class="tile__title">Start with a confidential consultation</h2>
+      <p>A private first conversation about your dispute, the format, and fees.</p>
+      <div class="stage" aria-hidden="true">
+        <span class="stage__seg is-on"></span><span class="stage__seg"></span><span class="stage__seg"></span><span class="stage__seg"></span>
+      </div>
+      <p class="stage__label">Step 1 of 4</p>
+      <ul class="where">
+        <li>${icon('map-pin', 'icon icon--sm')} In person across California</li>
+        <li>${icon('video', 'icon icon--sm')} By Zoom, nationwide</li>
+      </ul>
+      <a class="btn btn--primary btn--block btn--sm" href="/consultation/">${CTA_PRIMARY}</a>
+    </article>
+
+    <a class="tile tile--service tile--blue" href="/mediation/#divorce-and-family">
+      <span class="chip chip--blue">${icon('users')}</span>
+      <h2 class="tile__title">Divorce and family</h2>
+      <p>Parenting, support, property, and debt, worked through at a pace both of you can manage.</p>
+      <span class="tile__go" aria-hidden="true">${icon('arrow-up-right')}</span>
+    </a>
+
+    <a class="tile tile--service tile--violet" href="/mediation/#custody-and-parenting">
+      <span class="chip chip--violet">${icon('baby')}</span>
+      <h2 class="tile__title">Custody and parenting plans</h2>
+      <p>Schedules, holidays, and decision-making built around your children.</p>
+      <span class="tile__go" aria-hidden="true">${icon('arrow-up-right')}</span>
+    </a>
+
+    <a class="tile tile--service tile--amber" href="/mediation/#civil-and-business">
+      <span class="chip chip--amber">${icon('briefcase-business')}</span>
+      <h2 class="tile__title">Civil and business</h2>
+      <p>Contract, partnership, and workplace disputes, before or during litigation.</p>
+      <span class="tile__go" aria-hidden="true">${icon('arrow-up-right')}</span>
+    </a>
+
+
+
+    <article class="tile tile--decide" aria-labelledby="decide-title">
+      <span class="chip chip--green">${icon('check')}</span>
+      <h2 id="decide-title" class="tile__title">Who decides the outcome?</h2>
+      <dl class="decide">
+        <div class="decide__row decide__row--yes"><dt>Mediation</dt><dd>You and the other party</dd></div>
+        <div class="decide__row"><dt>Litigation</dt><dd>A judge</dd></div>
+      </dl>
+      <p class="tile__note">Nothing in mediation is imposed. <a href="/mediation/#comparison">Compare the two</a></p>
+    </article>
+
+  </div>
+</section>`;
+}
+
 export function render() {
   const body = `
-<section class="hero" aria-labelledby="hero-title">
-  <svg class="hero__lines" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path class="hero__line hero__line--a" pathLength="1" d="M-20 12 C 560 12, 900 104, 1460 104" />
-    <path class="hero__line hero__line--b" pathLength="1" d="M-20 156 C 560 156, 900 104, 1460 104" />
-  </svg>
+<section class="hero sky" aria-labelledby="hero-title">
+  ${contrails('hero__trails')}
   <div class="wrap hero__grid">
     <div class="hero__copy">
-      <p class="eyebrow">Private. Practical. Solution-Focused.</p>
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
-      <div class="btn-row">
-        <a class="btn btn--primary" href="/consultation/">${CTA_PRIMARY}</a>
-        <a class="btn btn--secondary" href="/mediation/">${CTA_SECONDARY}</a>
+      <div class="hero__actions">
+        <a class="btn btn--white" href="/consultation/">${CTA_PRIMARY}</a>
+        <a class="btn btn--glass" href="/mediation/">${CTA_SECONDARY}</a>
       </div>
-      <p class="hero__note">Divorce mediation in Los Angeles and across California, with virtual sessions available nationwide.</p>
+      <ul class="hero__values" aria-label="The approach">
+        <li>Private</li><li>Practical</li><li>Solution-focused</li>
+      </ul>
     </div>
-    <figure class="hero__figure">
-      <div class="hero__frame">${photo('portrait', { eager: true, sizes: '(min-width: 1000px) 34vw, 90vw', className: 'hero__photo' })}</div>
-      <figcaption class="hero__caption"><span class="hero__caption-name">Sean Collinson</span> Family and civil mediator for more than 22 years</figcaption>
-    </figure>
+    <aside class="glass hero__panel" aria-labelledby="glance-title">
+      <div class="glass__head">
+        <h2 id="glance-title" class="glass__title">Sean Collinson</h2>
+        <a class="glass__link" href="/about/">Profile ${icon('arrow-up-right', 'icon icon--sm')}</a>
+      </div>
+      <p class="glass__role">Family and civil mediator</p>
+      <ul class="glance">
+        <li>${icon('clock')}<span><strong>22+ years</strong> of mediation experience</span></li>
+        <li>${icon('graduation-cap')}<span><strong>Harvard and Loyola</strong> negotiation and mediation training</span></li>
+        <li>${icon('shield-check')}<span><strong>FBI-trained</strong> crisis negotiator</span></li>
+      </ul>
+      <p class="glass__foot">Divorce mediation in Los Angeles and across California, with virtual sessions nationwide.</p>
+    </aside>
   </div>
 </section>
 
-${trustBar()}
+${bento()}
 
 <section class="section" aria-labelledby="why-title">
   <div class="wrap">
@@ -218,19 +278,7 @@ ${trustBar()}
   </div>
 </section>
 
-<section class="section section--ivory" aria-labelledby="process-title">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 id="process-title" class="section__title">How the process works</h2>
-      <p class="section__lede">Four stages, each with a clear purpose. Most people find the structure itself lowers the temperature.</p>
-    </div>
-    <ol class="steps">
-      ${steps.map((s) => `<li class="step"><h3 class="step__title">${s.title}</h3><p>${s.text}</p></li>`).join('')}
-    </ol>
-  </div>
-</section>
-
-<section class="statement" aria-labelledby="experience-title">
+<section class="statement sky sky--dusk" aria-labelledby="experience-title">
   <div class="wrap statement__inner">
     <h2 id="experience-title" class="statement__label">Experience you can trust</h2>
     <p class="statement__quote">With more than 22 years of mediation experience and advanced training from Harvard, Loyola Law School, and the FBI, Sean Collinson brings proven judgment, calm leadership, and practical problem-solving to every case.</p>

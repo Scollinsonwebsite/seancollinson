@@ -57,7 +57,7 @@ const copy = (from, to) => cpSync(join(srcDir, from), join(outDir, to), { recurs
 copy('assets/fonts', 'assets/fonts');
 copy('assets/icons', 'assets/icons');
 mkdirSync(join(outDir, 'assets/img'), { recursive: true });
-for (const f of ['social-share.png', 'logo.png']) {
+for (const f of ['social-share.jpg', 'logo.png']) {
   if (existsSync(join(srcDir, 'assets/img', f))) copy(`assets/img/${f}`, `assets/img/${f}`);
 }
 if (existsSync(join(srcDir, 'assets/img/generated'))) copy('assets/img/generated', 'assets/img/generated');

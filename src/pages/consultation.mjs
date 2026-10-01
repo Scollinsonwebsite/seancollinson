@@ -85,10 +85,9 @@ export function render() {
   ].join('\n');
 
   const body = `
-${crumbs.html}
 <section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
-    <p class="eyebrow">Mediation consultation</p>
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">A consultation is a private conversation with Sean Collinson about your situation and whether mediation is a sensible next step. It is available for divorce, family, civil, workplace, and business disputes, in person in California or online.</p>
     <div class="btn-row"><a class="btn btn--primary" href="#request">Request a consultation</a></div>

@@ -23,11 +23,10 @@ const imgDir = join(src, 'img');
 mkdirSync(iconsDir, { recursive: true });
 mkdirSync(join(imgDir, 'generated'), { recursive: true });
 
-const NAVY = '#0B1628', BRASS = '#B89B5E', IVORY = '#F7F4EE', SLATE = '#263548';
+const SKY = '#1F4F96', DEEP = '#123366', WHITE = '#FFFFFF', HAZE = '#DBE7F7';
 
 const fontCss = `
-@font-face{font-family:C;src:url(${font('cormorant-garamond-latin-500-normal.woff2')})}
-@font-face{font-family:C6;src:url(${font('cormorant-garamond-latin-600-normal.woff2')})}
+@font-face{font-family:G;src:url(${font('schibsted-grotesk-var-latin.woff2')});font-weight:400 900}
 @font-face{font-family:M;src:url(${font('manrope-var-latin.woff2')});font-weight:200 800}
 html,body{margin:0;padding:0}`;
 
@@ -36,31 +35,31 @@ const markPath = (stroke, w = 1.6) =>
 
 // Square icon: navy tile, brass converging lines, ivory meeting point.
 const iconSvg = (size, radius = 0.18) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="${size}" height="${size}">
-<rect width="64" height="64" rx="${64 * radius}" fill="${NAVY}"/>
-<g transform="translate(10 18) scale(1.1)">${markPath(BRASS, 2.6)}<circle cx="39" cy="12" r="2.8" fill="${IVORY}"/></g>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${DEEP}"/><stop offset="1" stop-color="#3F7BC8"/></linearGradient></defs><rect width="64" height="64" rx="${64 * radius}" fill="url(#g)"/>
+<g transform="translate(10 18) scale(1.1)">${markPath(WHITE, 2.8)}<circle cx="39" cy="12" r="2.8" fill="${WHITE}"/></g>
 </svg>`;
 
 writeFileSync(join(iconsDir, 'favicon.svg'), iconSvg(64));
 
 const socialHtml = `<!doctype html><html><head><style>${fontCss}
-body{width:1200px;height:630px;background:${NAVY};color:${IVORY};font-family:M;position:relative;overflow:hidden}
+body{width:1200px;height:630px;color:#fff;font-family:M;position:relative;overflow:hidden;background:radial-gradient(55% 60% at 88% 4%,rgba(255,255,255,.34),transparent 62%),radial-gradient(70% 55% at 78% 112%,rgba(214,231,250,.7),transparent 64%),linear-gradient(158deg,#123366 0%,#1F4F96 36%,#2B62B0 64%,#5B92D6 100%)}
 svg.lines{position:absolute;inset:0}
 .c{position:absolute;left:84px;top:96px;width:900px}
-.n{font-family:C;font-size:104px;line-height:1;letter-spacing:-1px;margin:0 0 22px}
-.o{font-family:M;font-weight:600;font-size:30px;margin:0 0 30px;color:${IVORY}}
-.t{font-family:M;font-size:25px;line-height:1.5;color:#C9CFD8;margin:0;max-width:640px}
+.n{font-family:G;font-weight:800;font-size:104px;line-height:1;letter-spacing:-3.5px;margin:0 0 24px}
+.o{font-family:M;font-weight:700;font-size:30px;margin:0 0 30px;color:#fff}
+.t{font-family:M;font-size:25px;line-height:1.5;color:${HAZE};margin:0;max-width:640px}
 </style></head><body>
-<svg class="lines" viewBox="0 0 1200 630" width="1200" height="630"><path d="M-10 452 C 420 452, 760 540, 1210 540" fill="none" stroke="#4A5A70" stroke-width="2"/><path d="M-10 628 C 420 628, 760 540, 1210 540" fill="none" stroke="${BRASS}" stroke-width="2.5"/></svg>
+<svg class="lines" viewBox="0 0 1200 630" width="1200" height="630"><g fill="none" stroke="#fff" stroke-linecap="round"><g opacity=".3" stroke-width="12" style="filter:blur(5px)"><path d="M760 -20 C 820 160, 900 320, 1040 360"/><path d="M980 650 C 960 520, 990 400, 1040 360"/><path d="M1040 360 C 1120 375, 1170 360, 1220 340"/></g><g stroke-width="2"><path d="M760 -20 C 820 160, 900 320, 1040 360"/><path d="M980 650 C 960 520, 990 400, 1040 360"/><path d="M1040 360 C 1120 375, 1170 360, 1220 340"/></g></g></svg>
 <div class="c"><p class="n">Sean Collinson</p><p class="o">Mediation Office of S. Collinson</p><p class="t">Family and civil mediation in Los Angeles, across California, and virtually nationwide.</p></div>
 </body></html>`;
 
 const logoHtml = `<!doctype html><html><head><style>${fontCss}
-body{width:600px;height:600px;background:${IVORY};display:grid;place-items:center}
-.w{text-align:center;color:${NAVY}}
-.n{font-family:C6;font-size:68px;line-height:1;margin:26px 0 12px}
-.s{font-family:M;font-weight:600;font-size:24px;color:#5C6673;margin:0}
+body{width:600px;height:600px;background:#fff;display:grid;place-items:center}
+.w{text-align:center;color:#0E1B2E}
+.n{font-family:G;font-weight:800;font-size:64px;letter-spacing:-2px;line-height:1;margin:26px 0 12px}
+.s{font-family:M;font-weight:600;font-size:24px;color:#475569;margin:0}
 </style></head><body><div class="w">
-<svg viewBox="0 0 42 24" width="210" height="120" style="margin:0 auto;display:block">${markPath(BRASS, 1.4)}<circle cx="39" cy="12" r="1.6" fill="${NAVY}"/></svg>
+<svg viewBox="0 0 42 24" width="210" height="120" style="margin:0 auto;display:block">${markPath(SKY, 1.6)}<circle cx="39" cy="12" r="1.8" fill="${DEEP}"/></svg>
 <p class="n">Sean Collinson</p><p class="s">Mediation Office</p></div></body></html>`;
 
 function ico(pngs) {
@@ -86,7 +85,8 @@ async function shot(html, width, height, out) {
   await page.setViewportSize({ width, height });
   await page.setContent(html, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
-  const buf = await page.screenshot({ type: 'png', omitBackground: false, clip: { x: 0, y: 0, width, height } });
+  const jpeg = out && out.endsWith('.jpg');
+  const buf = await page.screenshot(jpeg ? { type: 'jpeg', quality: 88, clip: { x: 0, y: 0, width, height } } : { type: 'png', omitBackground: false, clip: { x: 0, y: 0, width, height } });
   if (out) writeFileSync(out, buf);
   return buf;
 }
@@ -101,7 +101,7 @@ const fullIcon = (size) => `<!doctype html><html><head><style>html,body{margin:0
 await shot(fullIcon(180), 180, 180, join(iconsDir, 'apple-touch-icon.png'));
 await shot(fullIcon(192), 192, 192, join(iconsDir, 'icon-192.png'));
 await shot(fullIcon(512), 512, 512, join(iconsDir, 'icon-512.png'));
-await shot(socialHtml, 1200, 630, join(imgDir, 'social-share.png'));
+await shot(socialHtml, 1200, 630, join(imgDir, 'social-share.jpg'));
 await shot(logoHtml, 600, 600, join(imgDir, 'logo.png'));
 console.log('Brand images rendered.');
 

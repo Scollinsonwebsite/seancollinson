@@ -95,7 +95,7 @@ export const images = {
     note: 'Horizontal 16:9 environmental photo of Sean at work, 1600 × 900 px minimum',
   },
   social: {
-    file: 'social-share.png',
+    file: 'social-share.jpg',
     width: 1200,
     height: 630,
   },

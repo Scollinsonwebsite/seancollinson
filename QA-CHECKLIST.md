@@ -16,11 +16,11 @@ Results from the final production build (`npm run build`), checked with `npm tes
 - [x] Lighthouse Accessibility 100 on all seven primary pages (mobile and desktop)
 - [x] One H1 per page; logical heading order; header, nav, main, and footer landmarks
 - [x] Skip link is the first focusable element and moves to `<main>`
-- [x] Visible focus ring on every interactive element (navy on light, ivory on dark)
+- [x] Visible focus ring on every interactive element (sky blue on light grounds, white on sky)
 - [x] Mobile menu: opens by keyboard, moves focus in, keeps focus inside, Escape closes and returns focus to the toggle, `aria-expanded` kept in sync
 - [x] FAQ accordions use native `<details>`/`<summary>` and open with the keyboard
 - [x] Forms: visible labels (no placeholder-only labels), required and optional marked in text, hints and errors linked with `aria-describedby`, `aria-invalid` on errors, a focused error summary with links to each field, and success/error messages in a live region
-- [x] Color contrast meets AA (axe and Lighthouse); brass is used only for lines and marks on light backgrounds, and as text only on navy
+- [x] Color contrast meets AA (axe and Lighthouse); text over the sky is white or pale blue, and text over pale haze sits inside the dark-tinted glass panel
 - [x] `prefers-reduced-motion`: the one hero animation and smooth scrolling are turned off (verified in the browser)
 - [x] No autoplaying audio or video; video players load only when a visitor presses play
 - [x] Icon-only controls have accessible names (menu toggle, video play buttons)
@@ -75,10 +75,10 @@ Results from the final production build (`npm run build`), checked with `npm tes
 
 ## Performance
 - [x] Lighthouse (local preview, placeholder imagery), all seven pages:
-  - Mobile: Performance 99–100, Accessibility 100, Best Practices 100, SEO 100; LCP 1.7–2.1 s; CLS 0; TBT 0 ms
+  - Mobile: Performance 97–100, Accessibility 100, Best Practices 100, SEO 100; LCP 1.8–2.0 s; CLS 0; TBT 0 ms (re-measured after the sky redesign on Home, Mediation, Consultation)
   - Desktop: Performance 100, Accessibility 100, Best Practices 100, SEO 100; LCP 0.4–0.5 s; CLS 0; TBT 0 ms
-- [x] Total production site about 394 KB; zip about 238 KB
-- [x] Self-hosted fonts (4 WOFF2 files, about 95 KB), with the two main faces preloaded and `font-display: swap`
+- [x] Total production site about 640 KB on disk; zip about 310 KB
+- [x] Self-hosted fonts (2 variable WOFF2 files, about 55 KB), with the two main faces preloaded and `font-display: swap`
 - [x] One CSS file and one small deferred JS file; no frameworks or animation libraries
 - [x] Width and height, or an aspect ratio, on every image, placeholder, and video frame (CLS 0)
 - [x] Hero image is not lazy-loaded (`fetchpriority="high"`); below-the-fold images and video embeds are lazy

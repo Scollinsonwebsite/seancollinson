@@ -91,8 +91,8 @@ export const legalPages = pages.map((p) => ({
   render() {
     const crumbs = breadcrumbs([{ name: p.h1, path: p.path }]);
     const body = `
-${crumbs.html}
 <section class="page-hero page-hero--compact" aria-labelledby="page-title">
+  <div class="wrap">${crumbs.html}</div>
   <div class="wrap narrow">
     <h1 id="page-title" class="page-hero__title">${p.h1}</h1>
   </div>

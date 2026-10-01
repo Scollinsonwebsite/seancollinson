@@ -3,6 +3,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { site, contact, social, analytics, images, legal } from '../config.mjs';
+import { icon } from './icons.mjs';
 
 export const ctx = { mode: 'production', year: new Date().getFullYear(), srcDir: '' };
 export const isDraft = () => ctx.mode === 'draft';
@@ -63,6 +64,27 @@ export function photo(key, { eager = false, sizes = '100vw', className = '' } = 
 export const markSvg = (cls = 'brand__mark') =>
   `<svg class="${cls}" viewBox="0 0 42 24" aria-hidden="true" focusable="false"><path d="M1 3 C 14 3, 22 12, 39 12" /><path d="M1 21 C 14 21, 22 12, 39 12" /><circle cx="39" cy="12" r="1.6" /></svg>`;
 
+// Two contrails that enter from opposite edges of the sky and meet, then fly on
+// as one: the convergence mark drawn at sky scale. Pure geometry, decorative.
+export const contrails = (cls = '') =>
+  `<svg class="trails ${cls}" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="trail-fade-a" gradientUnits="userSpaceOnUse" x1="520" y1="0" x2="1110" y2="330"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <linearGradient id="trail-fade-b" gradientUnits="userSpaceOnUse" x1="690" y1="800" x2="1110" y2="330"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <filter id="trail-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <g class="trails__haze" filter="url(#trail-soft)">
+    <path class="trail" pathLength="1" stroke="url(#trail-fade-a)" d="M520 -20 C 740 110, 950 245, 1110 330"/>
+    <path class="trail trail--b" pathLength="1" stroke="url(#trail-fade-b)" d="M690 820 C 850 630, 990 430, 1110 330"/>
+    <path class="trail trail--joined" pathLength="1" stroke="#fff" d="M1110 330 C 1240 312, 1350 302, 1480 296"/>
+  </g>
+  <g class="trails__core">
+    <path class="trail" pathLength="1" stroke="url(#trail-fade-a)" d="M520 -20 C 740 110, 950 245, 1110 330"/>
+    <path class="trail trail--b" pathLength="1" stroke="url(#trail-fade-b)" d="M690 820 C 850 630, 990 430, 1110 330"/>
+    <path class="trail trail--joined" pathLength="1" stroke="#fff" d="M1110 330 C 1240 312, 1350 302, 1480 296"/>
+  </g>
+</svg>`;
+
 // ── Navigation ───────────────────────────────────────────────────────────────
 export const nav = [
   { path: '/', label: 'Home' },
@@ -88,13 +110,13 @@ function header(path) {
 <header class="site-header" data-header>
   <div class="site-header__inner wrap">
     <a class="brand" href="/" aria-label="Mediation Office of S. Collinson, home">
-      ${markSvg()}
+      <span class="brand__badge">${markSvg()}</span>
       <span class="brand__text"><span class="brand__name">Sean Collinson</span><span class="brand__sub">Mediation Office</span></span>
     </a>
     <nav class="primary-nav" aria-label="Primary">
       <ul class="primary-nav__list">${items}</ul>
     </nav>
-    <a class="btn btn--primary btn--sm site-header__cta" href="/consultation/">Schedule a Consultation</a>
+    <a class="btn btn--header btn--sm site-header__cta" href="/consultation/">Schedule a Consultation</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
       <span class="menu-toggle__bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
     </button>
@@ -163,13 +185,13 @@ ${
 export function breadcrumbs(trail) {
   // trail: [{ name, path }] excluding Home
   const all = [{ name: 'Home', path: '/' }, ...trail];
-  const html = `<div class="crumb-bar"><nav class="breadcrumbs wrap" aria-label="Breadcrumb"><ol>${all
+  const html = `<nav class="breadcrumbs" aria-label="Breadcrumb"><ol>${all
     .map((c, i) =>
       i === all.length - 1
         ? `<li><span aria-current="page">${esc(c.name)}</span></li>`
         : `<li><a href="${c.path}">${esc(c.name)}</a></li>`
     )
-    .join('')}</ol></nav></div>`;
+    .join('')}</ol></nav>`;
   const schema = {
     '@type': 'BreadcrumbList',
     itemListElement: all.map((c, i) => ({
@@ -241,7 +263,7 @@ export function businessSchema() {
       'Workplace mediation',
     ],
     logo: abs('/assets/img/logo.png'),
-    image: abs('/assets/img/social-share.png'),
+    image: abs('/assets/img/social-share.jpg'),
   };
   if (hasPhone()) b.telephone = contact.phone;
   if (hasEmail()) b.email = contact.email;
@@ -278,7 +300,7 @@ export const jsonld = (graph) =>
 // ── Document ─────────────────────────────────────────────────────────────────
 export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '' }) {
   const canonical = abs(path);
-  const ogImage = abs('/assets/img/social-share.png');
+  const ogImage = abs('/assets/img/social-share.jpg');
   const robots = noindex || isDraft() ? '<meta name="robots" content="noindex, follow">' : '';
   const verification = analytics.googleSiteVerification
     ? `<meta name="google-site-verification" content="${esc(analytics.googleSiteVerification)}">`
@@ -311,13 +333,13 @@ ${path === '/404.html' ? '' : `<meta property="og:url" content="${canonical}">`}
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${ogImage}">
-<meta name="theme-color" content="#0B1628">
+<meta name="theme-color" content="#1F4F96">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/manrope-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css?v=${ctx.version}">
 ${jsonld(schema)}
 ${ga}
@@ -337,14 +359,14 @@ ${footer()}
 
 // ── Reusable sections ────────────────────────────────────────────────────────
 export function ctaBand({ heading, text, primary = CTA_PRIMARY, secondary = null }) {
-  return `<section class="cta-band" aria-labelledby="cta-${slug(heading)}">
+  return `<section class="cta-band sky sky--dusk" aria-labelledby="cta-${slug(heading)}">
+  ${contrails('cta-band__trails')}
   <div class="wrap cta-band__inner">
-    ${markSvg('cta-band__mark')}
     <h2 id="cta-${slug(heading)}" class="cta-band__title">${heading}</h2>
     <p class="cta-band__text">${text}</p>
     <div class="btn-row">
-      <a class="btn btn--light" href="/consultation/">${primary}</a>
-      ${secondary ? `<a class="btn btn--ghost-light" href="${secondary.href}">${secondary.label}</a>` : ''}
+      <a class="btn btn--white" href="/consultation/">${primary}</a>
+      ${secondary ? `<a class="btn btn--glass" href="${secondary.href}">${secondary.label}</a>` : ''}
     </div>
   </div>
 </section>`;
