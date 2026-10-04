@@ -5,7 +5,8 @@ A fast, fully static website for Sean Collinson's mediation practice. Every page
 - **Pages:** Home, About, Mediation, Consultation, Videos, Masterclass, Contact, plus Privacy Policy, Terms of Use, Accessibility Statement, Disclaimer, and a custom 404 page.
 - **Deployable output:** `bluehost-upload/` (the folder) and `bluehost-upload.zip` (the same files, with `index.html` at the root of the archive).
 - **Before launch:** work through [`CONTENT-NEEDED.md`](CONTENT-NEEDED.md).
-- **Design system:** [`DESIGN.md`](DESIGN.md) (visual rules) and [`PRODUCT.md`](PRODUCT.md) (product facts and constraints).
+- **Design system:** [`DESIGN.md`](DESIGN.md) (visual rules), [`PRODUCT.md`](PRODUCT.md) (product facts and constraints), and [`docs/brand-guidelines.md`](docs/brand-guidelines.md) (voice, logo, imagery).
+- **Brand files (not uploaded to the site):** `assets/brand/` (logo mark SVG, horizontal lockups) and `assets/banners/` (social card options, LinkedIn and X headers). Rebuild banners with `node tools/banners.mjs`.
 
 ## Project layout
 

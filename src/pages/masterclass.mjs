@@ -158,7 +158,7 @@ ${calmSection()}
     <div class="form-layout__aside">
       <h2 class="section__title">Bring the masterclass to your team</h2>
       <p>Tell us about your group and what you would like the training to address. You will receive details on availability, format, and pricing.</p>
-      <p>Looking for help with a dispute rather than training? <a href="/consultation/">Request a mediation consultation</a>.</p>
+      <p>Looking for help with a dispute rather than training? <a href="/consultation/">Schedule a Confidential Consultation</a>.</p>
     </div>
     ${formShell({
       type: 'masterclass',

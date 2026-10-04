@@ -125,7 +125,7 @@ function bento() {
     <article class="tile tile--route" aria-labelledby="route-title">
       <div class="tile__head">
         <h2 id="route-title" class="tile__title">How mediation works</h2>
-        <a class="tile__link" href="/mediation/#process">The full process ${icon('arrow-up-right', 'icon icon--sm')}</a>
+        <a class="tile__link" href="/mediation/#process">The full process</a>
       </div>
       <p class="tile__lede">Four stages, each with one purpose. Most people find the structure itself lowers the temperature.</p>
       <ol class="route">
@@ -152,21 +152,18 @@ function bento() {
       <span class="chip chip--blue">${icon('users')}</span>
       <h2 class="tile__title">Divorce and family</h2>
       <p>Parenting, support, property, and debt, worked through at a pace both of you can manage.</p>
-      <span class="tile__go" aria-hidden="true">${icon('arrow-up-right')}</span>
     </a>
 
     <a class="tile tile--service tile--violet" href="/mediation/#custody-and-parenting">
       <span class="chip chip--violet">${icon('baby')}</span>
       <h2 class="tile__title">Custody and parenting plans</h2>
       <p>Schedules, holidays, and decision-making built around your children.</p>
-      <span class="tile__go" aria-hidden="true">${icon('arrow-up-right')}</span>
     </a>
 
     <a class="tile tile--service tile--amber" href="/mediation/#civil-and-business">
       <span class="chip chip--amber">${icon('briefcase-business')}</span>
       <h2 class="tile__title">Civil and business</h2>
       <p>Contract, partnership, and workplace disputes, before or during litigation.</p>
-      <span class="tile__go" aria-hidden="true">${icon('arrow-up-right')}</span>
     </a>
 
 

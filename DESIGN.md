@@ -25,6 +25,16 @@ colors:
   green: "#1fa971"
   green-ink: "#12704b"
   error: "#b42318"
+  blue-100: "#e3edff"
+  violet-100: "#ece9ff"
+  amber-100: "#fff1d9"
+  green-100: "#ddf5ea"
+  sky-250: "#c3d3ea"
+  slate-400: "#8c9cb3"
+  dusk-500: "#3a54a8"
+  dusk-glow: "rgba(176,160,255,0.32)"
+  dusk-warm: "rgba(255,196,140,0.18)"
+  photo-veil: "rgba(0,0,0,0.2)"
 typography:
   display:
     fontFamily: "Schibsted Grotesk, Manrope, system-ui, sans-serif"
@@ -51,6 +61,9 @@ typography:
     lineHeight: 1.65
     letterSpacing: "normal"
 rounded:
+  hairline: "2px"
+  xs: "6px"
+  label: "10px"
   sm: "12px"
   md: "16px"
   lg: "26px"

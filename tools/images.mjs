@@ -101,7 +101,7 @@ const fullIcon = (size) => `<!doctype html><html><head><style>html,body{margin:0
 await shot(fullIcon(180), 180, 180, join(iconsDir, 'apple-touch-icon.png'));
 await shot(fullIcon(192), 192, 192, join(iconsDir, 'icon-192.png'));
 await shot(fullIcon(512), 512, 512, join(iconsDir, 'icon-512.png'));
-await shot(socialHtml, 1200, 630, join(imgDir, 'social-share.jpg'));
+// social-share.jpg is produced by tools/banners.mjs (photo direction)
 await shot(logoHtml, 600, 600, join(imgDir, 'logo.png'));
 console.log('Brand images rendered.');
 

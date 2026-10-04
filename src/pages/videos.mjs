@@ -146,7 +146,7 @@ ${library}
     <div class="panel">
       <h2 class="panel__title">Facing a dispute of your own?</h2>
       <p>If you are dealing with a divorce, custody, business, or civil dispute, a private consultation is the fastest way to get specific guidance on the process.</p>
-      <p><a class="text-link" href="/consultation/">Schedule a confidential consultation</a></p>
+      <p><a class="text-link" href="/consultation/">Schedule a Confidential Consultation</a></p>
     </div>
   </div>
 </section>
