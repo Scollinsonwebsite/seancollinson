@@ -52,13 +52,16 @@ AXE_PATH=/path/to/axe-core/axe.min.js npm run test:browser   # browser QA, optio
 
 ## Upload to Bluehost
 
-1. Build the site (`npm run build`).
-2. In Bluehost, open **Advanced → File Manager** and go to `public_html` (or the folder for this domain).
-3. **Back up and remove the current WordPress site first** if this site is replacing it. At minimum, move WordPress's own `index.php` and `.htaccess` out of the way, or Apache will keep serving WordPress. Keep a full backup (Bluehost → Backups) before deleting anything.
-4. Upload `bluehost-upload.zip` to `public_html` and choose **Extract**. `index.html`, `.htaccess`, and the page folders should now be directly inside `public_html`.
-5. Turn on **Show hidden files** in File Manager and confirm `.htaccess` is present.
-6. Visit each page and confirm the 404 page works (for example `/nothing-here/`).
-7. After confirming the domain and your choice of `www` or non-`www`, set `site.domainConfirmed = true` (and `site.preferWww` if needed) in `src/config.mjs`, rebuild, and re-upload `.htaccess`. That switches on the HTTPS redirect, the canonical-host redirect, and HSTS. Make sure Bluehost's free SSL certificate is active first.
+seancollinson.com is served from the account's main `public_html` folder, which also contains other domains' folders. The generated `.htaccess` is built for that: every rule is limited to seancollinson.com, and it keeps the cPanel PHP handler the other sites inherit. WordPress files can stay in place; `index.html` takes priority, so rolling back is simple.
+
+1. **Back up:** in Bluehost, run a full backup. In File Manager (with **Settings → Show Hidden Files** on), download `public_html/.htaccess` to your computer.
+2. **Remove the old archive:** rename or delete the existing `public_html/bluehost-upload.zip` (an older, unrelated file from August).
+3. **Upload:** upload this project's `bluehost-upload.zip` into `public_html`, choose **Extract**, and confirm overwriting `.htaccess`, `robots.txt`, and `favicon.ico`.
+4. **Check `.htaccess`:** open it and confirm it starts with "Mediation Office of S. Collinson" and ends with the "cPanel-generated handler" block.
+5. **Test:** visit `https://seancollinson.com/` and each page, then `/nothing-here/` (branded 404) and `/contact-us/` (should redirect to `/contact/`). Then open two or three of the other sites hosted in this account and confirm they still load.
+6. **Clean up:** delete the uploaded zip from `public_html`.
+7. **Roll back if needed:** delete `index.html` from `public_html` and re-upload the `.htaccess` you downloaded in step 1; WordPress returns immediately.
+8. **Later:** after confirming `www` or non-`www`, set `site.domainConfirmed = true` (and `site.preferWww` if needed) in `src/config.mjs`, rebuild, and re-upload `.htaccess` to switch on the HTTPS redirect and HSTS.
 
 ## Forms
 
