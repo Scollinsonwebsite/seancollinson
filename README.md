@@ -71,6 +71,10 @@ Forms ship **disabled**: they show a notice and a disabled Send button, and they
 
 **Using a form service instead:** if you prefer Formspree, Basin, or a similar provider, set `forms.endpoint` to its URL. The front end expects a JSON response of `{ "ok": true }` on success, so choose a provider that supports AJAX/JSON submissions, and turn on that provider's spam filtering. Never put an API secret in the site's JavaScript.
 
+## MailerLite
+
+Each valid submission also adds the sender to a MailerLite group (name, email and phone only; case details stay in the email). Groups are matched by name in `forms/config.php`: `Consultation request` (pop-up and Consultation form), `Contact messages`, `Master class inquiries`. The API token never goes in the zip or GitHub: on the server, copy `forms/config.local.example.php` to `forms/config.local.php`, set `api_key`, `recipient`, `from`, `salt`, `enabled`. That file overrides `config.php` and is never overwritten by site updates. If MailerLite fails, the request email is still sent.
+
 ## Scheduler
 
 Add the approved Calendly, Acuity, or other scheduler link to `scheduler.url` (and `scheduler.provider`) in `src/config.mjs`. The Consultation page then shows a scheduling section that links to it, and the site's security policy is updated automatically to allow it.

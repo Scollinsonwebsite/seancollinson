@@ -21,6 +21,66 @@ function respond(int $status, array $body): void {
     exit;
 }
 
+/**
+ * Adds the sender to a MailerLite group. Sends only name, email and phone:
+ * case details never leave this server. Failures are ignored on purpose so
+ * the request email (the primary delivery) is never affected.
+ */
+function mailerlite_subscribe(array $config, string $type, array $clean): void {
+    $ml = $config['mailerlite'] ?? [];
+    $key = (string)($ml['api_key'] ?? '');
+    $groupName = (string)($ml['groups'][$type] ?? '');
+    if ($key === '' || !function_exists('curl_init') || empty($clean['email'])) { return; }
+
+    $call = function (string $method, string $path, ?array $body = null) use ($key): ?array {
+        $ch = curl_init('https://connect.mailerlite.com/api' . $path);
+        curl_setopt_array($ch, [
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 3,
+            CURLOPT_TIMEOUT => 5,
+            CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $key, 'Accept: application/json', 'Content-Type: application/json'],
+        ]);
+        if ($body !== null) { curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body, JSON_UNESCAPED_UNICODE)); }
+        $out = curl_exec($ch);
+        $code = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        $data = is_string($out) ? json_decode($out, true) : null;
+        return ($code >= 200 && $code < 300 && is_array($data)) ? $data : null;
+    };
+
+    // Find the group id by name (case, spacing and a trailing "s" are ignored), cached for a day.
+    $norm = fn(string $v): string => preg_replace('/s$/', '', preg_replace('/[^a-z0-9]/', '', strtolower($v)));
+    $cache = sys_get_temp_dir() . '/sc_ml_groups_' . hash('sha256', $key);
+    $map = [];
+    if (is_file($cache) && filemtime($cache) > time() - 86400) {
+        $map = json_decode((string)file_get_contents($cache), true) ?: [];
+    }
+    $want = $norm($groupName);
+    $groupId = $want !== '' ? ($map[$want] ?? null) : null;
+    if ($want !== '' && $groupId === null) {
+        $res = $call('GET', '/groups?limit=100');
+        foreach (($res['data'] ?? []) as $g) {
+            if (isset($g['id'], $g['name'])) { $map[$norm((string)$g['name'])] = (string)$g['id']; }
+        }
+        if ($map) { @file_put_contents($cache, json_encode($map), LOCK_EX); }
+        $groupId = $map[$want] ?? null;
+    }
+
+    $first = $clean['first_name'] ?? '';
+    $last = '';
+    if ($first === '' && !empty($clean['name'])) {
+        $parts = preg_split('/\s+/', trim($clean['name']), 2);
+        $first = $parts[0] ?? '';
+        $last = $parts[1] ?? '';
+    }
+    $fields = array_filter(['name' => $first, 'last_name' => $last, 'phone' => $clean['phone'] ?? ''], fn($v) => $v !== '');
+    $payload = ['email' => $clean['email']];
+    if ($fields) { $payload['fields'] = $fields; }
+    if ($groupId !== null) { $payload['groups'] = [$groupId]; }
+    $call('POST', '/subscribers', $payload);
+}
+
 $config = @include __DIR__ . '/config.php';
 if (!is_array($config) || empty($config['enabled']) || empty($config['recipient'])
     || !filter_var($config['recipient'], FILTER_VALIDATE_EMAIL)) {
@@ -164,6 +224,8 @@ $sent = @mail($config['recipient'], '=?UTF-8?B?' . base64_encode($subject) . '?=
 if (!$sent) {
     respond(502, ['ok' => false, 'message' => 'Your message could not be delivered right now. Please try again later.']);
 }
+
+mailerlite_subscribe($config, $type, $clean);
 
 $hits[] = $now;
 @file_put_contents($rateFile, implode(',', $hits), LOCK_EX);
