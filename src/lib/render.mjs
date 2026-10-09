@@ -4,6 +4,7 @@ import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { site, contact, social, analytics, images, legal } from '../config.mjs';
 import { icon } from './icons.mjs';
+import { quickRequestDialog } from './forms.mjs';
 
 export const ctx = { mode: 'production', year: new Date().getFullYear(), srcDir: '' };
 export const isDraft = () => ctx.mode === 'draft';
@@ -122,7 +123,7 @@ function header(path) {
     <nav class="primary-nav" aria-label="Primary">
       <ul class="primary-nav__list">${items}</ul>
     </nav>
-    <a class="btn btn--header btn--sm site-header__cta" href="/consultation/">Schedule a Consultation</a>
+    <a class="btn btn--header btn--sm site-header__cta" href="/consultation/" data-consult-open>Schedule a Consultation</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
       <span class="menu-toggle__bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
     </button>
@@ -131,7 +132,7 @@ function header(path) {
     <nav aria-label="Mobile">
       <ul class="mobile-menu__list">${items}</ul>
     </nav>
-    <a class="btn btn--primary mobile-menu__cta" href="/consultation/">${CTA_PRIMARY}</a>
+    <a class="btn btn--primary mobile-menu__cta" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
   </div>
 </header>`;
 }
@@ -182,7 +183,7 @@ function footer() {
 </footer>
 ${
   hasPhone()
-    ? `<div class="mobile-cta" aria-label="Quick contact"><a class="mobile-cta__btn" href="tel:${esc(contact.phone)}">Call</a><a class="mobile-cta__btn mobile-cta__btn--primary" href="/consultation/">Consultation</a></div>`
+    ? `<div class="mobile-cta" aria-label="Quick contact"><a class="mobile-cta__btn" href="tel:${esc(contact.phone)}">Call</a><a class="mobile-cta__btn mobile-cta__btn--primary" href="/consultation/" data-consult-open>Consultation</a></div>`
     : ''
 }`;
 }
@@ -357,6 +358,7 @@ ${header(path)}
 ${body}
 </main>
 ${footer()}
+${quickRequestDialog()}
 <script src="/assets/js/site.js?v=${ctx.version}" defer></script>
 </body>
 </html>
@@ -371,7 +373,7 @@ export function ctaBand({ heading, text, primary = CTA_PRIMARY, secondary = null
     <h2 id="cta-${slug(heading)}" class="cta-band__title">${heading}</h2>
     <p class="cta-band__text">${text}</p>
     <div class="btn-row">
-      <a class="btn btn--white" href="/consultation/">${primary}</a>
+      <a class="btn btn--white" href="/consultation/" data-consult-open>${primary}</a>
       ${secondary ? `<a class="btn btn--glass" href="${secondary.href}">${secondary.label}</a>` : ''}
     </div>
   </div>

@@ -50,7 +50,7 @@ export function render() {
     <div>
       <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
       <p class="page-hero__lede">An experienced neutral who brings order, calm, and practical judgment to disputes that feel stuck, from divorce and custody to business and civil conflict.</p>
-      <div class="btn-row"><a class="btn btn--primary" href="/consultation/">${CTA_PRIMARY}</a></div>
+      <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
     </div>
     <figure class="page-hero__figure">
       ${photo('portrait', { eager: true, sizes: '(min-width: 1000px) 32vw, 90vw' })}

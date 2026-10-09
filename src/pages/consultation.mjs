@@ -90,7 +90,7 @@ export function render() {
   <div class="wrap">
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">A consultation is a private conversation with Sean Collinson about your situation and whether mediation is a sensible next step. It is available for divorce, family, civil, workplace, and business disputes, in person in California or online.</p>
-    <div class="btn-row"><a class="btn btn--primary" href="#request">Request a consultation</a></div>
+    <div class="btn-row"><a class="btn btn--primary" href="#request" data-consult-open>Request a consultation</a></div>
   </div>
 </section>
 

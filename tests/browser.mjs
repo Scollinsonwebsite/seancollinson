@@ -109,11 +109,21 @@ for (const [name, w, h] of widths) {
 
   // Forms: when disabled, the submit button is disabled and the notice is shown
   await page.goto(base + '/consultation/', { waitUntil: 'networkidle' });
-  const disabled = await page.evaluate(() => document.querySelector('form[data-form]').hasAttribute('data-disabled'));
+  const disabled = await page.evaluate(() => document.querySelector('main form[data-form]').hasAttribute('data-disabled'));
   if (disabled) {
-    const btnDisabled = await page.locator('form[data-form] button[type=submit]').isDisabled();
+    const btnDisabled = await page.locator('main form[data-form] button[type=submit]').isDisabled();
     btnDisabled ? notes.push('Forms are clearly marked as not yet accepting submissions; submit is disabled') : problems.push('Disabled form still has an active submit button');
   }
+  // Pop-up: header CTA opens the quick request dialog with three fields; Escape closes and returns focus
+  await page.goto(base + '/', { waitUntil: 'networkidle' });
+  await page.click('.cta-band [data-consult-open]');
+  const dlg = await page.evaluate(() => {
+    const d = document.querySelector('#consult-modal');
+    return { open: d.open, fields: [...d.querySelectorAll('input:not([type=hidden]):not([tabindex="-1"])')].map((i) => i.name) };
+  });
+  dlg.open && dlg.fields.join() === 'first_name,phone,email' ? notes.push('Consultation pop-up opens with first name, phone, email') : problems.push('Pop-up wrong: ' + JSON.stringify(dlg));
+  await page.keyboard.press('Escape');
+  (await page.evaluate(() => !document.querySelector('#consult-modal').open)) ? notes.push('Pop-up closes with Escape') : problems.push('Pop-up did not close with Escape');
   await context.close();
 }
 
@@ -124,13 +134,13 @@ for (const [name, w, h] of widths) {
   await page.route('**/forms/submit.php', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }));
   await page.goto(base + '/consultation/', { waitUntil: 'networkidle' });
   await page.evaluate(() => {
-    const f = document.querySelector('form[data-form]');
+    const f = document.querySelector('main form[data-form]');
     f.removeAttribute('data-disabled');
     const b = f.querySelector('button[type=submit]');
     b.disabled = false; b.removeAttribute('aria-disabled');
   });
-  await page.click('form[data-form] button[type=submit]');
-  const summaryVisible = await page.locator('[data-error-summary]').isVisible();
+  await page.click('main form[data-form] button[type=submit]');
+  const summaryVisible = await page.locator('main [data-error-summary]').isVisible();
   const summaryFocused = await page.evaluate(() => document.activeElement.matches('[data-error-summary]'));
   const invalidCount = await page.locator('[aria-invalid="true"]').count();
   summaryVisible && summaryFocused && invalidCount > 0
@@ -139,7 +149,7 @@ for (const [name, w, h] of widths) {
   await page.screenshot({ path: `${shotDir}/form-errors.png`, fullPage: false });
   await page.fill('#f-name', 'Test Person');
   await page.fill('#f-email', 'not-an-email');
-  await page.click('form[data-form] button[type=submit]');
+  await page.click('main form[data-form] button[type=submit]');
   const emailErr = await page.locator('#f-email-error').textContent();
   /format/.test(emailErr) ? notes.push('Invalid email gets a specific message') : problems.push('Invalid email message missing');
   await page.fill('#f-email', 'test@example.com');
@@ -149,9 +159,9 @@ for (const [name, w, h] of widths) {
   await page.selectOption('#f-session_format', { index: 2 });
   await page.fill('#f-summary', 'General summary for testing.');
   await page.check('#f-consent');
-  await page.click('form[data-form] button[type=submit]');
+  await page.click('main form[data-form] button[type=submit]');
   await page.waitForSelector('.form__status.is-success');
-  const msg = await page.locator('.form__status').textContent();
+  const msg = await page.locator('main .form__status').textContent();
   /not yet an appointment/.test(msg) ? notes.push('Successful submission shows a success message that does not claim an appointment is booked') : problems.push('Success message wrong: ' + msg);
   await page.screenshot({ path: `${shotDir}/form-success.png` });
 
@@ -162,7 +172,7 @@ for (const [name, w, h] of widths) {
   await page.check('input[name=contact_method][value=Email]');
   await page.selectOption('#f-dispute_type', { index: 1 }); await page.fill('#f-other_party', 'X');
   await page.selectOption('#f-session_format', { index: 2 }); await page.fill('#f-summary', 'Test'); await page.check('#f-consent');
-  await page.click('form[data-form] button[type=submit]');
+  await page.click('main form[data-form] button[type=submit]');
   await page.waitForSelector('.form__status.is-error');
   notes.push('Server error shows an error state with the server’s message');
   await context.close();

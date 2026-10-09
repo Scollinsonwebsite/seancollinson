@@ -155,7 +155,7 @@ export function render() {
   <div class="wrap">
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
     <p class="page-hero__lede">Mediation is often the best path because it gives you greater control over the outcome while reducing the cost, delay, stress, and uncertainty of litigation. Instead of leaving critical decisions to a judge, the parties work with a neutral mediator in a private and confidential setting to develop practical agreements designed around their unique needs.</p>
-    <div class="btn-row"><a class="btn btn--primary" href="/consultation/">${CTA_PRIMARY}</a></div>
+    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
     <nav class="jump" aria-label="On this page">
       <p class="jump__label">On this page</p>
       <ul>
@@ -217,7 +217,7 @@ export function render() {
     </div>
     <div class="inline-cta">
       <p>Not sure which category your situation falls into? That is exactly what the consultation is for.</p>
-      <a class="btn btn--primary" href="/consultation/">${CTA_PRIMARY}</a>
+      <a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </div>
   </div>
 </section>

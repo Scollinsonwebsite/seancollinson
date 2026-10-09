@@ -28,7 +28,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/manrope-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=996f13614e">
+<link rel="stylesheet" href="/assets/css/site.css?v=ba60dd635b">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://seancollinson.com/"},{"@type":"ListItem","position":2,"name":"Accessibility Statement","item":"https://seancollinson.com/accessibility/"}]}]}</script>
 </head>
 <body class="page-legal">
@@ -42,7 +42,7 @@
 <nav class="primary-nav" aria-label="Primary">
 <ul class="primary-nav__list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/mediation/">Mediation</a></li><li><a href="/consultation/">Consultation</a></li><li><a href="/videos/">Videos</a></li><li><a href="/masterclass/">Masterclass</a></li><li><a href="/contact/">Contact</a></li></ul>
 </nav>
-<a class="btn btn--header btn--sm site-header__cta" href="/consultation/">Schedule a Consultation</a>
+<a class="btn btn--header btn--sm site-header__cta" href="/consultation/" data-consult-open>Schedule a Consultation</a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
 <span class="menu-toggle__bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
 </button>
@@ -51,7 +51,7 @@
 <nav aria-label="Mobile">
 <ul class="mobile-menu__list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/mediation/">Mediation</a></li><li><a href="/consultation/">Consultation</a></li><li><a href="/videos/">Videos</a></li><li><a href="/masterclass/">Masterclass</a></li><li><a href="/contact/">Contact</a></li></ul>
 </nav>
-<a class="btn btn--primary mobile-menu__cta" href="/consultation/">Schedule a Confidential Consultation</a>
+<a class="btn btn--primary mobile-menu__cta" href="/consultation/" data-consult-open>Schedule a Confidential Consultation</a>
 </div>
 </header>
 <main id="main" tabindex="-1">
@@ -106,6 +106,45 @@
 <p>&copy; <span data-year>2026</span> Mediation Office of S. Collinson. All rights reserved.</p>
 </div>
 </footer>
-<script src="/assets/js/site.js?v=996f13614e" defer></script>
+<dialog class="modal" id="consult-modal" aria-labelledby="quick-form-title" data-consult-modal>
+<div class="modal__panel">
+<button class="modal__close" type="button" data-modal-close aria-label="Close consultation request"><span aria-hidden="true">&times;</span></button>
+<form class="form modal__form" data-form="quick" action="/forms/submit.php" method="post" novalidate data-success="Thank you. Your request has been sent. It is not yet an appointment: the office will contact you to arrange a time." data-disabled aria-labelledby="quick-form-title">
+<h2 class="form__title" id="quick-form-title">Request a consultation</h2>
+<p class="form__intro">Share your contact details and the office will reach out to arrange a time.</p>
+<div class="form__notice" role="note"><p><strong>This form is not accepting submissions yet.</strong> Please check back soon.</p></div>
+<div class="form__summary" data-error-summary tabindex="-1" hidden>
+<h3 class="form__summary-title">Please correct the following before sending:</h3>
+<ul></ul>
+</div>
+<input type="hidden" name="form_type" value="quick">
+<input type="hidden" name="_t" value="" data-timestamp>
+<div class="hp" aria-hidden="true"><label for="quick-website">Leave this field empty</label><input id="quick-website" type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
+<div class="modal__fields">
+<div class="field">
+<label class="field__label" for="q-first_name">First name <span class="field__req">(required)</span></label>
+<input id="q-first_name" name="first_name" type="text" required aria-required="true" autocomplete="given-name" maxlength="80" aria-describedby="q-first_name-error">
+<p class="field__error" id="q-first_name-error" hidden></p>
+</div>
+<div class="field">
+<label class="field__label" for="q-phone">Phone number <span class="field__req">(required)</span></label>
+<input id="q-phone" name="phone" type="tel" required aria-required="true" autocomplete="tel" maxlength="40" inputmode="tel" aria-describedby="q-phone-error">
+<p class="field__error" id="q-phone-error" hidden></p>
+</div>
+<div class="field">
+<label class="field__label" for="q-email">Email address <span class="field__req">(required)</span></label>
+<input id="q-email" name="email" type="email" required aria-required="true" autocomplete="email" maxlength="160" aria-describedby="q-email-error">
+<p class="field__error" id="q-email-error" hidden></p>
+</div>
+</div>
+<div class="form__actions">
+<button class="btn btn--primary" type="submit" disabled aria-disabled="true">Submit</button>
+</div>
+<p class="form__privacy">Please do not include confidential information. Submitting this form does not create an attorney-client relationship. See the <a href="/privacy-policy/">Privacy Policy</a>.</p>
+<div class="form__status" role="status" aria-live="polite" data-status></div>
+</form>
+</div>
+</dialog>
+<script src="/assets/js/site.js?v=ba60dd635b" defer></script>
 </body>
 </html>

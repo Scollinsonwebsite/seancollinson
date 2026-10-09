@@ -793,3 +793,22 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
 /* Consultation: "What mediation can do" checklist on the tinted section */
 .section--ivory .checklist li { background: var(--white); }
 .checklist--wide { max-width: 48rem; }
+
+/* Consultation pop-up */
+.modal { border: 0; padding: 0; background: transparent; width: min(30rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: visible; color: var(--ink); }
+.modal::backdrop { background: rgba(8, 24, 48, 0.62); backdrop-filter: blur(3px); }
+.modal__panel { position: relative; max-height: calc(100dvh - 2rem); overflow-y: auto; border-radius: var(--radius-lg); background: var(--white); box-shadow: 0 30px 80px rgba(8, 24, 48, 0.35); }
+.modal__form.form { box-shadow: none; padding: clamp(1.5rem, 5vw, 2.25rem); }
+.modal__form .form__title { font-size: var(--step-2); padding-right: 2.5rem; }
+.modal__fields { display: grid; gap: 1.1rem; margin-top: 1.25rem; }
+.modal__form .form__actions { margin-top: 1.5rem; }
+.modal__form .form__actions .btn { width: 100%; justify-content: center; }
+.modal__form .form__privacy { margin-top: 1rem; }
+.modal__close { position: absolute; top: 0.6rem; right: 0.6rem; z-index: 1; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--sky-50); color: var(--ink); font-size: 1.75rem; line-height: 1; cursor: pointer; }
+.modal__close:hover { background: var(--sky-100); }
+.modal__close:focus-visible { outline: 3px solid var(--sky-700); outline-offset: 2px; }
+.has-modal { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .modal[open] .modal__panel { animation: modal-in 0.25s var(--ease); }
+  @keyframes modal-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+}

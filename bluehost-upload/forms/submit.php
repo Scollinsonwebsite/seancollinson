@@ -80,6 +80,11 @@ $schemas = [
         'summary' => ['Brief summary', true, 1500, 'textarea'],
         'consent' => ['Consent', true, 3, 'choice:yes'],
     ],
+    'quick' => [
+        'first_name' => ['First name', true, 80, 'text'],
+        'phone' => ['Phone', true, 40, 'tel'],
+        'email' => ['Email', true, 160, 'email'],
+    ],
     'contact' => [
         'name' => ['Name', true, 120, 'text'],
         'email' => ['Email', true, 160, 'email'],
@@ -134,6 +139,7 @@ if ($errors) {
 // validated Reply-To address.
 $subjects = [
     'consultation' => 'Consultation request',
+    'quick' => 'Quick consultation request',
     'contact' => 'Website message',
     'masterclass' => 'Masterclass inquiry',
 ];

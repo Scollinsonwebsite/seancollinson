@@ -56,6 +56,33 @@
     window.matchMedia('(min-width: 1180px)').addEventListener('change', function (mq) { if (mq.matches) close(false); });
   }
 
+  // ── Consultation pop-up (quick request) ───────────────────────────────────
+  // Buttons keep a normal href, so they still work if JavaScript is off.
+  var modal = document.querySelector('[data-consult-modal]');
+  if (modal && typeof modal.showModal === 'function') {
+    var lastTrigger = null;
+    var closeModal = function () { if (modal.open) modal.close(); };
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-consult-open]');
+      if (!t || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      lastTrigger = t;
+      if (menu && !menu.hidden && toggle) { menu.hidden = true; toggle.setAttribute('aria-expanded', 'false'); setSolid(); }
+      var stamp = modal.querySelector('[data-timestamp]');
+      if (stamp) stamp.value = String(Math.floor(Date.now() / 1000));
+      modal.showModal();
+      document.documentElement.classList.add('has-modal');
+      var first = modal.querySelector('input:not([type="hidden"]):not([tabindex="-1"])');
+      if (first) first.focus();
+    });
+    modal.querySelector('[data-modal-close]').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    modal.addEventListener('close', function () {
+      document.documentElement.classList.remove('has-modal');
+      if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
+    });
+  }
+
   // ── Forms ─────────────────────────────────────────────────────────────────
   var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 

@@ -145,7 +145,7 @@ function bento() {
         <li>${icon('map-pin', 'icon icon--sm')} In person across California</li>
         <li>${icon('video', 'icon icon--sm')} By Zoom, nationwide</li>
       </ul>
-      <a class="btn btn--primary btn--block btn--sm" href="/consultation/">${CTA_PRIMARY}</a>
+      <a class="btn btn--primary btn--block btn--sm" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </article>
 
     <a class="tile tile--service tile--blue" href="/mediation/#divorce-and-family">
@@ -191,7 +191,7 @@ export function render() {
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
       <div class="hero__actions">
-        <a class="btn btn--white" href="/consultation/">${CTA_PRIMARY}</a>
+        <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
         <a class="btn btn--glass" href="/mediation/">${CTA_SECONDARY}</a>
       </div>
       <ul class="hero__values" aria-label="The approach">
