@@ -1,95 +1,113 @@
-# Upload the new seancollinson.com (File Manager or FTP)
+# Upload the new seancollinson.com (File Manager or FTP), version 2
 
-**Package:** `bluehost-upload.zip` (44 files, about 875 KB). It is the complete website: seven pages, four policy pages, the 404 page, images, fonts, form handler, and the `.htaccess` file.
-**Where it goes:** `public_html`, the folder for seancollinson.com (full server path `/home2/morningj/public_html/`).
-**Time:** about 10 minutes.
+**Files you need**
+- `bluehost-upload.zip`: the complete website (43 files, about 870 KB). It no longer contains an `.htaccess` file, so extracting it can never overwrite WordPress's rules.
+- `htaccess-static-site-block.txt`: a short block of settings you paste at the top of your existing `.htaccess` (Step 4).
 
-## What this changes, and what it does not
+**Where it goes:** `public_html` (full path `/home2/morningj/public_html/`).
+**Time:** about 15 minutes.
 
-| It adds or replaces | It does not touch |
+## What went wrong before, and what is different now
+
+My first install replaced your server's `.htaccess` file. That file contains the rules that let WordPress answer special addresses, including the ones the WordPress connector uses to sign in. With those rules gone, the connector could not register ("Couldn't register with … sign-in service").
+
+This version never replaces `.htaccess`. WordPress's rules stay exactly as they were. The new site's settings are a small block added **above** them, and every line in it applies only to seancollinson.com and the new site's own pages.
+
+| This install adds or replaces | It does not touch |
 | --- | --- |
-| `index.html` and the folders `about`, `mediation`, `consultation`, `videos`, `masterclass`, `contact`, `privacy-policy`, `terms-of-use`, `accessibility`, `disclaimer`, `assets`, `forms` | WordPress itself (`wp-admin`, `wp-includes`, `wp-content`, `wp-config.php`) |
-| `404.html`, `sitemap.xml`, `site.webmanifest` | Your other websites' folders (resetwithsean, themediatorshow, errless, and the rest) |
-| **Replaces** these three: `.htaccess`, `robots.txt`, `favicon.ico` | Old folders `css`, `js`, `images` |
-
-Because `index.html` now exists, visitors see the new site. WordPress stays installed but hidden behind it, and `/wp-admin` and the WordPress API still work.
+| `index.html`, the folders `about`, `mediation`, `consultation`, `videos`, `masterclass`, `contact`, `privacy-policy`, `terms-of-use`, `accessibility`, `disclaimer`, `assets`, `forms`, and the files `404.html`, `sitemap.xml`, `site.webmanifest` | WordPress (`wp-admin`, `wp-includes`, `wp-content`, `wp-config.php`) |
+| **Replaces** two files: `robots.txt` and `favicon.ico` | Your other websites' folders; the old `css`, `js`, `images` folders; WordPress's `.htaccess` rules |
 
 ---
 
-## Step 0: Back up first (do not skip)
+## Step 0: Turn on hidden files
 
-1. Log in to Bluehost. Open **Websites → your site → Settings**, or **Advanced → Backups**, and run a full backup.
-2. Open **Advanced → File Manager**. Go into the `public_html` folder.
-3. Click **Settings** (top right of File Manager), tick **Show Hidden Files (dotfiles)**, and click **Save**.
-4. Find the file `.htaccess`. Right-click it and choose **Download**. Keep it on your computer. This is your undo button.
+1. In Bluehost, open **Advanced → File Manager** and go into `public_html`.
+2. Click **Settings** (top right), tick **Show Hidden Files (dotfiles)**, and click **Save**.
 
-## Option A: File Manager (easiest, recommended)
+## Step 1: Put WordPress's original `.htaccess` back (this fixes the connector)
 
-1. In File Manager, make sure you are inside `public_html` (the path at the top should read `/public_html`).
-2. Click **Upload** at the top.
-3. Drag `bluehost-upload.zip` into the upload box (or click **Select File**). Wait for the bar to reach 100%, then click **Go Back to …/public_html**.
-4. Click `bluehost-upload.zip` once to select it, then click **Extract** in the top toolbar.
-5. In the box that appears, leave the folder as `/public_html` (nothing after it) and click **Extract File(s)**. Click **Close** when it finishes.
-6. If it asks whether to overwrite anything, say **Yes** (only `.htaccess`, `robots.txt` and `favicon.ico` already exist).
-7. Check the result in `public_html`. You should see `index.html`, `.htaccess`, and the folders `about`, `assets`, `contact`, and so on, directly inside `public_html`, **not** inside a folder named `bluehost-upload`.
-8. Delete `bluehost-upload.zip` from `public_html` (right-click it, **Delete**). The extracted files stay.
-9. Go to **Part C: Check that it works**.
+Before my first install I saved a copy of your original `.htaccess` on the server, outside the public website. This puts it back.
 
-## Option B: FTP program (FileZilla or similar)
+1. In File Manager, click the **Home Directory** link on the left (the folder above `public_html`). Open `site-backups`, then `seancollinson-2026-10-09`. You should see a file named `.htaccess` there, among others.
+2. Go back to `public_html`. Right-click the `.htaccess` that is there now and choose **Rename**. Rename it to `.htaccess-new-site-v1` (this keeps it, just in case).
+3. Go back to `site-backups/seancollinson-2026-10-09`. Right-click `.htaccess` and choose **Copy**. In the box, set the destination to `/public_html/.htaccess` and click **Copy File(s)**.
+4. In `public_html`, check there is a file named `.htaccess` again (its size should be about 6 KB).
+5. Open `https://seancollinson.com/wp-json/` in a private/incognito window. You should see a block of text starting with `{"name":`. If so, WordPress is working again.
+6. Go to **https://claude.ai/customize/connectors**, reconnect the WordPress connector, and start a new session. Once it is connected, the new session can finish the rest for you, or you can continue below.
 
-FTP programs upload files and folders, not zip files, so you unzip on your computer first.
+Your site stays up throughout. Until Step 4 you will lack some extras (security headers, the old-page redirects), but the new pages work.
 
-1. **Unzip** `bluehost-upload.zip` on your computer. Open the unzipped folder. You should see `index.html`, `about`, `assets`, and so on. Hidden files may not show, so turn on "show hidden files" in your file browser (Windows: View → Hidden items; Mac: Cmd+Shift+period) and check that `.htaccess` is there.
-2. **Find your FTP login:** in Bluehost, open **Advanced → FTP Accounts** and click **Configure FTP Client** next to your account. It shows the **host name**, **username**, and **port**. The password is the one you set for that FTP account (use **Change Password** there if you do not know it). Use the exact values Bluehost shows.
-3. **Connect** in FileZilla: **File → Site Manager → New site**. Enter the host, username, password, and port from step 2, choose **Use explicit FTP over TLS if available**, and click **Connect**. If it warns about a certificate, accept it.
-4. **Show hidden files:** in FileZilla choose **Server → Force showing hidden files**. This lets you see and overwrite `.htaccess`.
-5. **Choose the folders:** on the right ("Remote site") open `/public_html`. On the left ("Local site") open the unzipped `bluehost-upload` folder.
-6. **Back up the live `.htaccess` first** (if you skipped Step 0): right-click it on the right and choose **Download**.
-7. **Upload the contents, not the folder itself:** on the left, select everything inside the folder (Ctrl+A, or Cmd+A), including `.htaccess`, then drag it onto the right side's `/public_html` (or right-click → **Upload**).
-8. When FileZilla asks about files that already exist, choose **Overwrite**, tick **Always use this action**, and click **OK**. Only `.htaccess`, `robots.txt` and `favicon.ico` already exist.
-9. Wait until the queue at the bottom is empty and the **Failed transfers** tab shows nothing. Then go to **Part C**.
+## Step 2: Back up
 
----
+Run a full Bluehost backup (**Advanced → Backups**), and download the restored `.htaccess` to your computer (right-click → Download).
 
-## Part C: Check that it works (do all of these)
+## Step 3: Upload the new site
 
-Open each address in your browser. Use a private/incognito window so you don't see a cached copy.
+### Option A: File Manager (easiest)
+1. In File Manager, open `public_html`.
+2. Click **Upload** and drag in `bluehost-upload.zip`. Wait until it reaches 100%, then click **Go Back to …/public_html**.
+3. Click the zip once, then click **Extract** in the toolbar.
+4. Leave the folder as `/public_html` (nothing after it) and click **Extract File(s)**. Say **Yes** if asked to overwrite (only `robots.txt` and `favicon.ico` already exist). Click **Close**.
+5. Check that `index.html` and the folders `about`, `assets`, `contact` and so on are directly inside `public_html`, **not** inside a folder named `bluehost-upload`.
+6. Right-click `bluehost-upload.zip` and delete it. The extracted files stay.
+
+### Option B: FTP program (FileZilla or similar)
+FTP programs upload files and folders, not zips.
+1. **Unzip** `bluehost-upload.zip` on your computer.
+2. **Get your FTP login:** in Bluehost open **Advanced → FTP Accounts**, click **Configure FTP Client** next to your account, and note the host name, username and port it shows. (If you don't know the password, use **Change Password** there.)
+3. In FileZilla: **File → Site Manager → New site**. Enter the host, username, password and port. Choose **Use explicit FTP over TLS if available**. Click **Connect** and accept the certificate.
+4. Choose **Server → Force showing hidden files**.
+5. On the right ("Remote site") open `/public_html`. On the left ("Local site") open the unzipped folder.
+6. Select **everything inside** the unzipped folder (Ctrl+A or Cmd+A) and drag it onto `/public_html` on the right. Do not drag the folder itself.
+7. If asked about existing files, choose **Overwrite** (only `robots.txt` and `favicon.ico` exist already).
+8. Wait for the queue to empty, and make sure **Failed transfers** is empty.
+
+## Step 4: Add the new site's settings block (recommended)
+
+This adds the security headers, the redirect from the old `/contact-us/` address, and the HTTPS redirect for the new site. The site works without it, so you can skip this and do it later.
+
+1. Open `htaccess-static-site-block.txt` on your computer and copy **all of it**.
+2. In File Manager, open `public_html`, right-click `.htaccess` and choose **Edit**. If a window asks about encoding, click **Edit**.
+3. Click at the very start of the text, or press Ctrl+Home (Cmd+Up on a Mac), so the cursor is on line 1.
+4. Paste. The first line of the file should now be `# BEGIN Static website (seancollinson.com)`, and below the pasted block should be `# BEGIN WordPress` and the rest of the old file, unchanged.
+5. Click **Save Changes** (top right), then **Close**.
+6. Immediately re-check `https://seancollinson.com/wp-json/` (it should still show `{"name":`). If it doesn't, delete the pasted block, save, and tell me.
+
+## Step 5: Check that it works
+
+Use a private/incognito window.
 
 | Address | You should see |
 | --- | --- |
 | `https://seancollinson.com/` | The new home page with Sean's photo |
 | `/about/`, `/mediation/`, `/consultation/`, `/videos/`, `/masterclass/`, `/contact/` | Each new page |
 | `/consultation/` | The section reads "What mediation can do"; there is no "Mediation cannot" box |
-| `https://seancollinson.com/wp-json/` | A block of plain text starting with `{"name":` (this is WordPress's API, and it proves the connector can work again) |
+| `https://seancollinson.com/wp-json/` | Text starting `{"name":` |
 | `https://seancollinson.com/wp-admin/` | The WordPress login page |
-| `https://seancollinson.com/nothing-here/` | The new "page not found" page |
-| `https://seancollinson.com/contact-us/` | Jumps to `/contact/` |
-| `http://www.seancollinson.com/` | Jumps to `https://seancollinson.com/` |
-| Two or three of your other sites (for example `resetwithsean.com`, `socialmediacourt.com`) | They load exactly as before |
+| `https://seancollinson.com/contact-us/` (needs Step 4) | Jumps to `/contact/` |
+| `http://seancollinson.com/` (needs Step 4) | Jumps to `https://seancollinson.com/` |
+| Two or three of your other sites | They load exactly as before |
 
-If everything matches, you are done. Reconnect the WordPress connector at **https://claude.ai/customize/connectors** and start a new session.
+A mistyped address (for example `/nothing-here/`) now shows WordPress's own "page not found" page, not the new site's. That is intentional: it keeps every WordPress feature working.
 
-## Part D: If something is wrong, undo it
+## Undo
 
-1. In File Manager (or FileZilla), delete `index.html` from `public_html`.
-2. Upload the `.htaccess` you downloaded in Step 0 over the one in `public_html`.
+- **Undo only Step 4:** delete everything from `# BEGIN Static website` down to `# END Static website (seancollinson.com)` in `.htaccess`, and save.
+- **Undo everything:** delete `index.html` from `public_html` (and, if you added it, the Step 4 block). WordPress returns immediately.
 
-The old WordPress site is back immediately. The other new files can stay; they are harmless without `index.html`.
-
-## Part E: Common problems
+## Common problems
 
 | What you see | What to do |
 | --- | --- |
-| Still seeing the old site | Hard refresh (Ctrl+Shift+R, or Cmd+Shift+R on Mac), or open a private window. Bluehost caching can take a few minutes: in WordPress admin use the Bluehost menu and clear the cache. |
-| "500 Internal Server Error" on every page | The `.htaccess` is wrong or incomplete. Upload the backup `.htaccess` from Step 0 (Part D), then tell me what happened. |
-| The site shows at `seancollinson.com/bluehost-upload/` | The files went into a subfolder. Move the contents of that folder up into `public_html`, or redo the extract/upload as described. |
-| Can't see `.htaccess` | Turn on hidden files (File Manager: Settings → Show Hidden Files; FileZilla: Server → Force showing hidden files). |
-| Pages load but look unstyled | The `assets` folder did not upload fully. Re-upload the `assets` folder and its contents. |
-| `/wp-json/` shows the site's "page not found" | The new `.htaccess` did not replace the old one. Open it in File Manager and check it contains the words `wp-json`; if not, upload it again from the package. |
-| An unrelated site stopped working | Restore the Step 0 `.htaccess` (Part D), then tell me which site. |
+| Still seeing the old site | Hard refresh (Ctrl+Shift+R, or Cmd+Shift+R), or use a private window. In WordPress admin, clear the Bluehost cache from the Bluehost menu. |
+| "500 Internal Server Error" after Step 4 | A line was pasted incorrectly. Delete the whole block (Undo, above), save, and tell me what happened. |
+| The site shows at `…/bluehost-upload/` | The files went into a subfolder. Move the contents of that folder up into `public_html`. |
+| Can't see `.htaccess` | Turn on hidden files (Step 0, or FileZilla's Force showing hidden files). |
+| Pages look unstyled | The `assets` folder didn't upload fully. Upload it again, with its contents. |
+| The connector still shows the sign-in error after Step 1 | Tell me exactly what `https://seancollinson.com/wp-json/` and `https://seancollinson.com/.well-known/oauth-authorization-server` show (a block of text, or a "page not found" page). |
 
 ## Things to know
-
-- **The forms** show "not accepting submissions yet" until an inbox is set in `forms/config.php` (steps are in `README.md`).
-- **Don't re-save WordPress Settings → Permalinks.** Saving can rewrite `.htaccess` and partly bring back the old site.
-- **Do not delete** `wp-config.php`, `wp-content`, or any folder belonging to another site.
+- The forms show "not accepting submissions yet" until an inbox is set in `forms/config.php` (see `README.md`).
+- Don't re-save WordPress **Settings → Permalinks** unless you must; if you do, check `/wp-json/` and the home page afterwards.
+- Never delete `wp-config.php`, `wp-content`, or any other site's folder.

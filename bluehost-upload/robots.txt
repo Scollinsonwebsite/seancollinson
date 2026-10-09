@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /forms/
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
 
 Sitemap: https://seancollinson.com/sitemap.xml

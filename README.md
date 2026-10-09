@@ -52,19 +52,11 @@ AXE_PATH=/path/to/axe-core/axe.min.js npm run test:browser   # browser QA, optio
 
 ## Upload to Bluehost
 
-**Deployed 2026-10-09** (commit `21164d6`) into `public_html`. Backups of the replaced `.htaccess`, `robots.txt`, `favicon.ico`, and the old August `bluehost-upload.zip` are in `/home2/morningj/site-backups/seancollinson-2026-10-09/` (outside the public site). To roll back: delete `public_html/index.html` and copy the backed-up `.htaccess` over `public_html/.htaccess`.
+Full step-by-step (File Manager and FTP): [`UPLOAD-INSTRUCTIONS.md`](UPLOAD-INSTRUCTIONS.md).
 
-seancollinson.com is served from the account's main `public_html` folder, which also contains other domains' folders. The generated `.htaccess` is built for that: every rule is limited to seancollinson.com, and it keeps the cPanel PHP handler the other sites inherit. WordPress files can stay in place; `index.html` takes priority, so rolling back is simple.
+Key rule: **the zip never contains `.htaccess`.** The live `public_html/.htaccess` holds WordPress's catch-all rules (REST API, OAuth and `.well-known` routing), Newfold caching, and the cPanel PHP handler; replacing it breaks the WordPress connector and plugins. The build writes a scoped block to `deploy/htaccess-static-site-block.txt`, which is pasted at the **top** of the existing file. Every line is limited to this host and to the new site's own pages.
 
-1. **Back up:** in Bluehost, run a full backup. In File Manager (with **Settings → Show Hidden Files** on), download `public_html/.htaccess` to your computer.
-2. **Remove the old archive:** rename or delete the existing `public_html/bluehost-upload.zip` (an older, unrelated file from August).
-3. **Upload:** upload this project's `bluehost-upload.zip` into `public_html`, choose **Extract**, and confirm overwriting `.htaccess`, `robots.txt`, and `favicon.ico`.
-4. **Check `.htaccess`:** open it and confirm it starts with "Mediation Office of S. Collinson" and ends with the "cPanel-generated handler" block.
-5. **Test:** visit `https://seancollinson.com/` and each page, then `/nothing-here/` (branded 404) and `/contact-us/` (should redirect to `/contact/`). Then open two or three of the other sites hosted in this account and confirm they still load.
-6. **Clean up:** delete the uploaded zip from `public_html`.
-7. **Roll back if needed:** delete `index.html` from `public_html` and re-upload the `.htaccess` you downloaded in step 1; WordPress returns immediately.
-8. **Keep WordPress working:** the generated `.htaccess` hands `/wp-json/` back to WordPress, so the WordPress connector and plugins keep working. After uploading, test `https://seancollinson.com/wp-json/` (it should show JSON, not the site's 404 page).
-9. **Later:** after confirming `www` or non-`www`, set `site.domainConfirmed = true` (and `site.preferWww` if needed) in `src/config.mjs`, rebuild, and re-upload `.htaccess` to switch on the HTTPS redirect and HSTS.
+Backups from the first install (2026-10-09, commit `21164d6`) are in `/home2/morningj/site-backups/seancollinson-2026-10-09/` (outside the public site), including the original `.htaccess`.
 
 ## Forms
 

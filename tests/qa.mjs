@@ -160,8 +160,30 @@ if (existsSync('bluehost-upload.zip') && dir === 'bluehost-upload') {
   const bad = list.filter((f) => /node_modules|\.env$|\.md$|\.mjs$|package\.json$/.test(f));
   bad.length ? fail(`ZIP contains dev files: ${bad.join(', ')}`) : pass(`ZIP contains ${list.length} deployable files only`);
 }
-for (const f of ['.htaccess', 'robots.txt', 'sitemap.xml', '404.html', 'favicon.ico', 'site.webmanifest', 'assets/img/social-share.jpg', 'assets/icons/apple-touch-icon.png', 'forms/submit.php']) {
+for (const f of ['robots.txt', 'sitemap.xml', '404.html', 'favicon.ico', 'site.webmanifest', 'assets/img/social-share.jpg', 'assets/icons/apple-touch-icon.png', 'forms/submit.php']) {
   existsSync(join(dir, f)) ? pass(`${f} present`) : fail(`${f} missing`);
+}
+
+// ── .htaccess safety (shared public_html next to WordPress) ──────────────────
+if (dir === 'bluehost-upload') {
+  existsSync(join(dir, '.htaccess')) ? fail('Upload folder ships a root .htaccess: it would overwrite the server\'s WordPress rules') : pass('Upload folder ships no root .htaccess');
+  const blockFile = 'deploy/htaccess-static-site-block.txt';
+  if (!existsSync(blockFile)) fail(blockFile + ' missing');
+  else {
+    const block = readFileSync(blockFile, 'utf8');
+    const lines = block.split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
+    let bad = 0;
+    lines.forEach((l, i) => {
+      if (/^Header\b/.test(l) && !/"expr=%\{HTTP_HOST\}/.test(l)) { bad++; fail('Unscoped Header rule: ' + l.slice(0, 60)); }
+      if (/^RewriteRule\b/.test(l)) {
+        const prev = lines.slice(Math.max(0, i - 4), i).join(' ');
+        if (!/RewriteCond %\{HTTP_HOST\} \^\(www\\\.\)\?/.test(prev)) { bad++; fail('RewriteRule without a host condition: ' + l.slice(0, 60)); }
+      }
+      if (/^(Options|ErrorDocument|DirectoryIndex|AddHandler|RedirectMatch|Redirect|php_)/.test(l)) { bad++; fail('Server-wide directive in block: ' + l.slice(0, 60)); }
+    });
+    if (/RewriteRule \. \/index\.php/.test(block)) fail('Block must not replace the WordPress catch-all');
+    if (!bad) pass('Static-site .htaccess block is scoped to its own host and pages');
+  }
 }
 
 // ── Report ──────────────────────────────────────────────────────────────────
