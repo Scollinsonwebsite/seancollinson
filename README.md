@@ -63,7 +63,8 @@ seancollinson.com is served from the account's main `public_html` folder, which 
 5. **Test:** visit `https://seancollinson.com/` and each page, then `/nothing-here/` (branded 404) and `/contact-us/` (should redirect to `/contact/`). Then open two or three of the other sites hosted in this account and confirm they still load.
 6. **Clean up:** delete the uploaded zip from `public_html`.
 7. **Roll back if needed:** delete `index.html` from `public_html` and re-upload the `.htaccess` you downloaded in step 1; WordPress returns immediately.
-8. **Later:** after confirming `www` or non-`www`, set `site.domainConfirmed = true` (and `site.preferWww` if needed) in `src/config.mjs`, rebuild, and re-upload `.htaccess` to switch on the HTTPS redirect and HSTS.
+8. **Keep WordPress working:** the generated `.htaccess` hands `/wp-json/` back to WordPress, so the WordPress connector and plugins keep working. After uploading, test `https://seancollinson.com/wp-json/` (it should show JSON, not the site's 404 page).
+9. **Later:** after confirming `www` or non-`www`, set `site.domainConfirmed = true` (and `site.preferWww` if needed) in `src/config.mjs`, rebuild, and re-upload `.htaccess` to switch on the HTTPS redirect and HSTS.
 
 ## Forms
 

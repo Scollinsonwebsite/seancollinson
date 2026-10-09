@@ -184,6 +184,14 @@ AddType application/manifest+json .webmanifest
   RewriteEngine On
 ${redirects}
 
+  # WordPress stays installed for admin and integrations: hand its REST API
+  # (used by the site's WordPress connector and plugins) back to WordPress.
+  RewriteCond %{HTTP_HOST} ${hostRe} [NC]
+  RewriteRule ^wp-json(/.*)?$ /index.php [L]
+  RewriteCond %{HTTP_HOST} ${hostRe} [NC]
+  RewriteCond %{QUERY_STRING} (^|&)rest_route= [NC]
+  RewriteRule ^$ /index.php [L]
+
   # Old WordPress addresses → new pages (permanent).
   RewriteCond %{HTTP_HOST} ${hostRe} [NC]
   RewriteRule ^contact-us/?$ /contact/ [R=301,L]

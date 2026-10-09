@@ -25,6 +25,14 @@ AddType application/manifest+json .webmanifest
   RewriteCond %{HTTP_HOST} !^seancollinson\.com$ [NC]
   RewriteRule ^ https://seancollinson.com%{REQUEST_URI} [L,R=301]
 
+  # WordPress stays installed for admin and integrations: hand its REST API
+  # (used by the site's WordPress connector and plugins) back to WordPress.
+  RewriteCond %{HTTP_HOST} ^(www\.)?seancollinson\.com$ [NC]
+  RewriteRule ^wp-json(/.*)?$ /index.php [L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?seancollinson\.com$ [NC]
+  RewriteCond %{QUERY_STRING} (^|&)rest_route= [NC]
+  RewriteRule ^$ /index.php [L]
+
   # Old WordPress addresses → new pages (permanent).
   RewriteCond %{HTTP_HOST} ^(www\.)?seancollinson\.com$ [NC]
   RewriteRule ^contact-us/?$ /contact/ [R=301,L]
