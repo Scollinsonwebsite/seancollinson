@@ -105,29 +105,14 @@ export function render() {
 
 <section class="section section--ivory" aria-labelledby="can-title">
   <div class="wrap">
-    <h2 id="can-title" class="section__title">What mediation can and cannot do</h2>
-    <div class="two-col">
-      <div class="panel">
-        <h3 class="panel__title">Mediation can</h3>
-        <ul class="plain-list">
-          <li>Give both parties a structured, private place to be heard</li>
-          <li>Clarify the real issues and the information needed to decide them</li>
-          <li>Help you create options a court might not consider</li>
-          <li>Narrow a dispute even when it does not settle everything</li>
-          <li>Produce written terms you can review with your own counsel</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3 class="panel__title">Mediation cannot</h3>
-        <ul class="plain-list">
-          <li>Force either party to agree to anything</li>
-          <li>Replace legal advice from your own attorney</li>
-          <li>Guarantee a particular result or timeline</li>
-          <li>Substitute for emergency help or court protection when safety is at risk</li>
-          <li>Finalize a divorce without the required court process</li>
-        </ul>
-      </div>
-    </div>
+    <h2 id="can-title" class="section__title">What mediation can do</h2>
+    <ul class="checklist checklist--wide">
+      <li>Give both parties a structured, private place to be heard</li>
+      <li>Clarify the real issues and the information needed to decide them</li>
+      <li>Help you create options a court might not consider</li>
+      <li>Narrow a dispute even when it does not settle everything</li>
+      <li>Produce written terms you can review with your own counsel</li>
+    </ul>
     <p class="section__aside">Want to understand the process first? <a href="/mediation/#process">Read how the four-step mediation process works</a>.</p>
   </div>
 </section>

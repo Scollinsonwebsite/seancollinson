@@ -789,3 +789,7 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
 /* Outcomes: numbered rows on hairlines */
 .outcomes { gap: 0; }
 .outcomes li { background: none; box-shadow: none; border-radius: 0; padding: 0.95rem 0; border-bottom: 1px solid var(--sky-200); }
+
+/* Consultation: "What mediation can do" checklist on the tinted section */
+.section--ivory .checklist li { background: var(--white); }
+.checklist--wide { max-width: 48rem; }
