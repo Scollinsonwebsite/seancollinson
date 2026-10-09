@@ -52,6 +52,8 @@ AXE_PATH=/path/to/axe-core/axe.min.js npm run test:browser   # browser QA, optio
 
 ## Upload to Bluehost
 
+**Deployed 2026-10-09** (commit `21164d6`) into `public_html`. Backups of the replaced `.htaccess`, `robots.txt`, `favicon.ico`, and the old August `bluehost-upload.zip` are in `/home2/morningj/site-backups/seancollinson-2026-10-09/` (outside the public site). To roll back: delete `public_html/index.html` and copy the backed-up `.htaccess` over `public_html/.htaccess`.
+
 seancollinson.com is served from the account's main `public_html` folder, which also contains other domains' folders. The generated `.htaccess` is built for that: every rule is limited to seancollinson.com, and it keeps the cPanel PHP handler the other sites inherit. WordPress files can stay in place; `index.html` takes priority, so rolling back is simple.
 
 1. **Back up:** in Bluehost, run a full backup. In File Manager (with **Settings → Show Hidden Files** on), download `public_html/.htaccess` to your computer.

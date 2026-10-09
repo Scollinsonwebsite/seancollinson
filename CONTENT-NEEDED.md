@@ -6,8 +6,8 @@ Everything below is a placeholder in `src/config.mjs` (or a page file). The prod
 
 | # | Item | Where | Notes |
 | --- | --- | --- | --- |
-| 1 | **Confirm the production domain** | `site.url` | Set to `https://seancollinson.com`, taken from the current WordPress site settings. Confirm it is correct. |
-| 2 | **`www` or non-`www`** | `site.preferWww`, then `site.domainConfirmed = true` | Turns on HTTPS, canonical-host redirects, and HSTS in `.htaccess`. |
+| 1 | ~~Confirm the production domain~~ **Done 2026-10-09: live at https://seancollinson.com** | `site.url` | Set to `https://seancollinson.com`, taken from the current WordPress site settings. Confirm it is correct. |
+| 2 | ~~`www` or non-`www`~~ **Done: non-www, HTTPS redirect and HSTS on** | `site.preferWww`, then `site.domainConfirmed = true` | Turns on HTTPS, canonical-host redirects, and HSTS in `.htaccess`. |
 | 3 | **Office phone number** | `contact.phone` (E.164, e.g. `+13105550100`) and `contact.phoneDisplay` | Enables phone links, the mobile Call bar, and `telephone` in schema. |
 | 4 | **Office email address** | `contact.email` | Enables email links and `email` in schema. |
 | 5 | **Form recipient and sending address** | `src/static/forms/config.php`, then `forms.enabled = true` | Forms stay disabled, with a notice, until this is done and tested. |
