@@ -16,7 +16,7 @@ export const site = {
 
   // Set to true only after the domain and the www / non-www choice are
   // confirmed. Turns on the HTTPS + canonical-host redirects in .htaccess.
-  domainConfirmed: false,
+  domainConfirmed: true,
   preferWww: false,
 
   name: 'Mediation Office of S. Collinson',
