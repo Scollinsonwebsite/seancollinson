@@ -58,7 +58,7 @@ export const social = [
 // shown with an explanation and a disabled submit button; they never pretend
 // to send.
 export const forms = {
-  enabled: false,
+  enabled: true,
   endpoint: '/forms/submit.php',
 };
 
