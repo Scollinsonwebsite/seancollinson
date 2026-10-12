@@ -96,6 +96,14 @@ export const images = {
     alt: '', // decorative background; the page heading carries the meaning
     note: 'Wide 16:9 photo with Sean right of centre, 1300 × 703 px supplied',
   },
+  // Masterclass hero, supplied 2026-10-12. Cropped to Sean only (the original shows a TV-station studio sign).
+  masterclass: {
+    file: 'sean-collinson-masterclass.jpg',
+    width: 580,
+    height: 1140,
+    alt: '', // decorative background; the page heading carries the meaning
+    note: 'Vertical photo of Sean in a dark suit, cropped from head to waist',
+  },
   portrait: {
     file: 'sean-collinson-portrait.jpg',
     width: 1200,

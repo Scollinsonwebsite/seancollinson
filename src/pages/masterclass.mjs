@@ -91,7 +91,8 @@ export function render() {
     .join('');
 
   const body = `
-<section class="page-hero page-hero--dark" aria-labelledby="page-title">
+<section class="page-hero page-hero--dark page-hero--photo page-hero--portrait" aria-labelledby="page-title">
+  <div class="hero__media">${photo('masterclass', { eager: true, sizes: '(min-width: 820px) 40vw, 100vw', className: 'hero__photo' })}</div>
   <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
