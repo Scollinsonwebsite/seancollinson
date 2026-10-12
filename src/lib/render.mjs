@@ -1,6 +1,7 @@
 // Shared rendering helpers: escaping, placeholders, images, header, footer,
 // metadata, and structured data. Pages import these and return HTML strings.
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { site, contact, social, analytics, images, legal } from '../config.mjs';
 import { icon } from './icons.mjs';
@@ -49,11 +50,14 @@ export function photo(key, { eager = false, sizes = '100vw', className = '' } = 
     : [];
   const loading = eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"';
   if (widths.length) {
-    const srcset = (ext) => widths.map((w) => `/assets/img/generated/${base}-${w}.${ext} ${w}w`).join(', ');
+    // Content hash in the URL so a replaced photo is never served from a stale cache.
+    const ver = (w, ext) => createHash('md5').update(readFileSync(join(imgDir, `${base}-${w}.${ext}`))).digest('hex').slice(0, 8);
+    const url = (w, ext) => `/assets/img/generated/${base}-${w}.${ext}?v=${ver(w, ext)}`;
+    const srcset = (ext) => widths.map((w) => `${url(w, ext)} ${w}w`).join(', ');
     const fallback = widths.includes(1200) ? 1200 : widths[widths.length - 1];
     return `<picture class="${className}">
       <source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}">
-      <img src="/assets/img/generated/${base}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" width="${spec.width}" height="${spec.height}" alt="${esc(spec.alt)}" ${loading}>
+      <img src="${url(fallback, 'jpg')}" srcset="${srcset('jpg')}" sizes="${sizes}" width="${spec.width}" height="${spec.height}" alt="${esc(spec.alt)}" ${loading}>
     </picture>`;
   }
   // Placeholder: decorative in production, labelled in draft.
