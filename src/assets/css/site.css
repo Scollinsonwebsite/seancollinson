@@ -812,3 +812,20 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
   .modal[open] .modal__panel { animation: modal-in 0.25s var(--ease); }
   @keyframes modal-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
 }
+
+/* Interior page hero with a photograph (Consultation) */
+.page-hero--photo { background: linear-gradient(158deg, var(--sky-950) 0%, var(--sky-900) 60%, #14305c 100%); overflow: hidden; }
+.page-hero--photo .hero__media { left: auto; right: 0; width: 62%; z-index: -2;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%); mask-image: linear-gradient(90deg, transparent 0%, #000 38%); }
+.page-hero--photo .hero__media img { object-position: 50% 18%; }
+.page-hero--photo .page-hero__lede { max-width: 30em; }
+.page-hero--photo::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(12, 34, 68, 0.5) 0%, rgba(12, 34, 68, 0) 28%, rgba(12, 34, 68, 0) 75%, rgba(12, 34, 68, 0.45) 100%); }
+@media (max-width: 819px) {
+  .page-hero--photo { padding-top: calc(var(--header-h) + 50vw); }
+  .page-hero--photo .hero__media { left: 0; right: 0; width: 100%; bottom: auto; height: calc(var(--header-h) + 70vw);
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
+  .page-hero--photo .hero__media img { object-position: 60% 0%; }
+  .page-hero--photo .page-hero__lede { max-width: none; }
+  .page-hero--photo .page-hero__title { max-width: none; }
+}

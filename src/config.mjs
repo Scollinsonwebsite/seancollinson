@@ -88,6 +88,14 @@ export const images = {
     alt: 'Sean Collinson in a navy suit, seated at a marble conference table with his hands clasped',
     note: 'Wide 16:9 photo with Sean on the right and open space on the left, 2560 × 1440 px ideal',
   },
+  // Consultation page hero background, supplied 2026-10-12. Sean in a dark suit against a world-map backdrop.
+  consultation: {
+    file: 'sean-collinson-consultation.jpg',
+    width: 1300,
+    height: 703,
+    alt: '', // decorative background; the page heading carries the meaning
+    note: 'Wide 16:9 photo with Sean right of centre, 1300 × 703 px supplied',
+  },
   portrait: {
     file: 'sean-collinson-portrait.jpg',
     width: 1200,

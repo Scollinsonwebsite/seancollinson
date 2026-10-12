@@ -1,5 +1,5 @@
 import { scheduler } from '../config.mjs';
-import { layout, breadcrumbs, phBlock, esc, isDraft } from '../lib/render.mjs';
+import { layout, breadcrumbs, phBlock, esc, isDraft, photo } from '../lib/render.mjs';
 import { field, formShell, warning, consentField } from '../lib/forms.mjs';
 
 export const meta = {
@@ -85,7 +85,8 @@ export function render() {
   ].join('\n');
 
   const body = `
-<section class="page-hero" aria-labelledby="page-title">
+<section class="page-hero page-hero--photo" aria-labelledby="page-title">
+  <div class="hero__media">${photo('consultation', { eager: true, sizes: '(min-width: 820px) 62vw, 100vw', className: 'hero__photo' })}</div>
   <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
