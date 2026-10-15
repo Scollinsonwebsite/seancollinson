@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" >
+<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1226"/><stop offset=".5" stop-color="#3a3b5e"/><stop offset=".8" stop-color="#c98550"/><stop offset="1" stop-color="#f2b36d"/></linearGradient></defs>
+<rect width="640" height="360" fill="url(#s)"/>
+<polygon points="0,360 0,230 90,170 150,215 260,110 330,190 410,140 520,210 640,160 640,360" fill="#2a3252"/>
+<polygon points="260,110 300,160 280,152 262,180 244,146 226,160" fill="#cdd9ee" opacity=".85"/>
+<polygon points="0,360 0,290 110,240 200,285 320,225 430,290 540,245 640,285 640,360" fill="#121729"/>
+<polygon points="0,360 0,325 160,310 330,332 500,312 640,330 640,360" fill="#080b16"/>
+</svg>
