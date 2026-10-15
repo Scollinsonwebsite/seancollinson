@@ -90,8 +90,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   linear-gradient(180deg,#050912 0%,#070d1b 60%,#0a0f1a 100%);overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(4,6,11,.95) 0%,rgba(4,6,11,.55) 38%,transparent 60%)}
 .hero__glow{position:absolute;inset:auto 0 0 0;height:30%;z-index:-1;background:linear-gradient(0deg,rgba(4,6,11,.9),transparent)}
-.hero__photo{position:absolute;z-index:-1;top:0;bottom:0;left:36%;width:min(31vw,520px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 74%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 74%,transparent 100%)}
-.hero__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 8%;filter:saturate(1.05) contrast(1.04)}
+.hero__photo{position:absolute;z-index:-1;inset:0;overflow:hidden}
+.hero__photo::before{content:"";position:absolute;inset:0 0 0 30%;background:linear-gradient(0deg,#04060b 2%,rgba(4,6,11,0) 42%),linear-gradient(rgba(4,6,11,.38),rgba(4,6,11,.38)),url("../art/city-dusk.svg") 60% 100%/cover;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%)}
+.hero__photo img{position:absolute;left:36%;top:calc(var(--header-h) + 6px);width:min(30vw,470px);height:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,.55))}
 .hero__inner{position:relative;display:grid;grid-template-columns:minmax(0,41%) minmax(0,1fr) minmax(0,20%) minmax(0,13%);align-items:center;padding-block:clamp(28px,3vw,56px) clamp(70px,7vw,120px)}
 .hero__copy{grid-column:1;max-width:640px}
 .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(10px,1.2vw,18px);font-size:.66rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
@@ -190,8 +191,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 /* ---------- About ---------- */
 .about{position:relative;isolation:isolate;overflow:hidden;margin-top:clamp(4px,.4vw,8px);min-height:clamp(260px,19vw,320px);display:flex;background:
   linear-gradient(90deg,#050812 30%,#070b16 100%)}
-.about__photo{position:absolute;z-index:-1;inset:0 auto 0 0;width:44%;-webkit-mask-image:linear-gradient(90deg,#000 55%,transparent 100%);mask-image:linear-gradient(90deg,#000 55%,transparent 100%)}
-.about__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.about__photo{position:absolute;z-index:-1;inset:0 auto 0 0;width:44%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 62%,transparent 100%);mask-image:linear-gradient(90deg,#000 62%,transparent 100%)}
+.about__photo::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#050812 2%,rgba(5,8,18,0) 45%),linear-gradient(rgba(4,6,11,.3),rgba(4,6,11,.3)),url("../art/city-dusk.svg") 20% 60%/cover}
+.about__photo img{position:absolute;left:46%;top:6%;height:172%;width:auto;transform:translateX(-50%);filter:drop-shadow(0 14px 30px rgba(0,0,0,.5))}
 .about__inner{position:relative;display:grid;grid-template-columns:minmax(0,36%) minmax(0,38%) minmax(0,26%);align-items:center;column-gap:clamp(20px,2.6vw,48px);padding-block:clamp(28px,3vw,48px)}
 .about__copy{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .h-serif{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,1rem + 1.7vw,2.45rem);line-height:1.1;text-wrap:balance}
@@ -222,7 +224,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   .nav{font-size:.68rem;gap:14px}
   .hero__inner{grid-template-columns:minmax(0,46%) minmax(0,1fr) minmax(0,25%)}
   .hero__script{display:none}
-  .hero__photo{left:30%;width:40vw}
   .previews__meta .sub-caps,.rule{display:none}
   .players{grid-template-columns:repeat(3,minmax(260px,1fr));overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
   .players::-webkit-scrollbar{display:none}
@@ -243,8 +244,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   .header__tools .btn{display:none}
 
   .hero{min-height:0;display:block}
-  .hero__photo{position:relative;left:auto;width:100%;height:clamp(360px,84vw,560px);margin-top:0;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
-  .hero__photo img{object-position:50% 14%}
+  .hero__photo{position:relative;inset:auto;height:clamp(380px,92vw,600px);-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
+  .hero__photo::before{inset:0;-webkit-mask-image:none;mask-image:none}
+  .hero__photo img{left:50%;top:14px;width:min(72vw,360px);transform:translateX(-50%)}
   .hero::before{display:none}
   .hero{padding-top:var(--header-h)}
   .hero__inner{display:flex;flex-direction:column;align-items:flex-start;gap:36px;margin-top:-90px;padding-block:0 44px}
@@ -259,7 +261,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   .features__grid{grid-template-columns:1fr}
   .features__grid .fcard:last-child{grid-column:auto}
   .about{display:block;min-height:0}
-  .about__photo{position:relative;width:100%;height:clamp(240px,56vw,420px);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
+  .about__photo{position:relative;width:100%;height:clamp(280px,64vw,440px);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
   .about__inner{display:flex;flex-direction:column;align-items:stretch;gap:26px;margin-top:-50px}
   .about__spacer{display:none}
   .about__quote{border-left:0;border-top:1px solid rgba(224,180,90,.4);min-height:180px;border-radius:var(--r-card)}
