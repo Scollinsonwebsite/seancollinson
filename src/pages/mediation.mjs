@@ -39,7 +39,7 @@ const services = [
   {
     id: 'support',
     title: 'Child and spousal support discussions',
-    body: `<p>Support is often the most emotionally charged financial topic. Mediation creates room to discuss child support, spousal support (sometimes called alimony), duration, and related expenses with the numbers in front of everyone. California uses guideline calculations for child support; your attorney or a financial professional can help you understand how they apply.</p>`,
+    body: `<p>Support is often the most emotionally charged financial topic. Mediation creates room to discuss child support, spousal support (sometimes called alimony), duration, and related expenses with the numbers in front of everyone. California uses guideline calculations for child support; your attorney or a financial professional can help you understand how they apply. <a href="/child-support-mediation/">Learn more about child support mediation</a>.</p>`,
   },
   {
     id: 'property-and-finances',

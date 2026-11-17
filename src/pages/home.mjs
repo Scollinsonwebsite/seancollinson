@@ -92,7 +92,7 @@ const faqs = [
   },
   {
     q: 'Can mediation address custody, support, and property?',
-    a: `<p>Yes. Parenting schedules, decision-making, child and spousal support, property, debt, and retirement assets can all be discussed in mediation. <a href="/mediation/#services">See the full list of mediation services</a>.</p>`,
+    a: `<p>Yes. Parenting schedules, decision-making, child and spousal support, property, debt, and retirement assets can all be discussed in mediation. <a href="/child-support-mediation/">Read about child support mediation</a>. <a href="/mediation/#services">See the full list of mediation services</a>.</p>`,
   },
 ];
 
