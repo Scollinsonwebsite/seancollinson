@@ -67,10 +67,10 @@ export const reviews = {
   rating: '4.9',
   count: 30,
   source: 'Google',
-  // Google Business Profile, opens the reviews (supplied by Sean 2026-11-17).
-  url: 'https://maps.app.goo.gl/bf7M1erHgG23CqPS9',
-  // "Write a review" link, not shown on the site yet.
-  writeUrl: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
+  // Google "write a review" link, used for the rating line (Sean, 2026-11-17).
+  url: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
+  // Business profile page for reading reviews.
+  profileUrl: 'https://maps.app.goo.gl/bf7M1erHgG23CqPS9',
 };
 
 // Areas served, confirmed by Sean on 2026-11-17.
