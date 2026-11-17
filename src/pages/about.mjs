@@ -1,4 +1,4 @@
-import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial, services, guides, officeAddress, officePhoneLink, reviewsLine, areasLine } from '../lib/render.mjs';
+import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial, services, guides, officeAddress, officePhoneLink, reviewsLine, areasHtml } from '../lib/render.mjs';
 
 export const meta = {
   path: '/about/',
@@ -132,7 +132,7 @@ ${partial('about-hero.html')}
     <p>Sessions are held at the office in Sherman Oaks or by Zoom, for parties throughout California and nationwide.</p>
     <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
     <h3>Areas served</h3>
-    <p>${areasLine()}, plus virtual sessions across California and nationwide.</p>
+    ${areasHtml()}
     <h3>What clients say</h3>
     <p>${reviewsLine()}</p>
   </div>

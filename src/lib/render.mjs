@@ -131,7 +131,10 @@ export const guides = [
 
 export const reviewsLine = () =>
   `<a href="${esc(reviews.url)}" rel="noopener" target="_blank"><span aria-hidden="true">★</span> ${esc(reviews.rating)} out of 5 from ${reviews.count} ${esc(reviews.source)} reviews<span class="visually-hidden"> (opens in a new tab)</span></a>`;
-export const areasLine = () => `${areasServed.slice(0, -1).join(', ')}, and ${areasServed[areasServed.length - 1]}`;
+const andList = (items) => `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+export const areasHtml = () => `<p>${esc(areasServed.line)}</p>
+    <p><strong>Counties:</strong> ${esc(andList(areasServed.counties))}.</p>
+    <p><strong>Cities:</strong> ${esc(andList(areasServed.cities))}.</p>`;
 
 // "Book a Consultation" opens the online booking page in a new tab.
 export const bookingLink = (cls) =>

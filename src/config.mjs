@@ -88,11 +88,13 @@ export const serviceRegion = {
   cities: ['Los Angeles', 'Irvine', 'Woodland Hills', 'Encino', 'Sherman Oaks'],
 };
 
-// Areas served, confirmed by Sean on 2026-11-17.
-export const areasServed = [
-  'Sherman Oaks', 'Encino', 'Studio City', 'Van Nuys', 'Burbank', 'Glendale',
-  'Pasadena', 'Beverly Hills', 'West Los Angeles', 'Santa Monica', 'the San Fernando Valley',
-];
+// About page "Areas served" list (Sean, 2026-11-17). Its cities intentionally
+// differ from serviceRegion.cities, as Sean specified for the About page.
+export const areasServed = {
+  line: 'In person across Southern California, and by Zoom nationwide. Office in Sherman Oaks.',
+  counties: ['Los Angeles County', 'Orange County', 'Ventura County', 'Riverside County', 'San Bernardino County', 'San Diego County'],
+  cities: ['Los Angeles', 'Huntington Beach', 'Irvine', 'Burbank', 'Sherman Oaks'],
+};
 
 // Social profiles. Only list real, active profiles owned by the practice.
 export const social = [
