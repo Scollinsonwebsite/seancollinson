@@ -64,6 +64,10 @@ for (const f of ['social-share.jpg', 'logo.png']) {
   if (existsSync(join(srcDir, 'assets/img', f))) copy(`assets/img/${f}`, `assets/img/${f}`);
 }
 if (existsSync(join(srcDir, 'assets/img/generated'))) copy('assets/img/generated', 'assets/img/generated');
+// Page photos added directly on the live site (home video poster, About and Mediation heroes).
+for (const d of ['home', 'about', 'mediation']) {
+  if (existsSync(join(srcDir, 'assets/img', d))) copy(`assets/img/${d}`, `assets/img/${d}`);
+}
 copy('static/forms', 'forms');
 writeFileSync(join(outDir, 'assets/.htaccess'), 'Options -Indexes\n');
 cpSync(join(srcDir, 'assets/icons/favicon.ico'), join(outDir, 'favicon.ico'));
