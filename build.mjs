@@ -14,6 +14,7 @@ import { site, contact, analytics, scheduler } from './src/config.mjs';
 import * as home from './src/pages/home.mjs';
 import * as about from './src/pages/about.mjs';
 import * as mediation from './src/pages/mediation.mjs';
+import * as custody from './src/pages/custody.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -71,7 +72,7 @@ writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
 
 // ── Pages ───────────────────────────────────────────────────────────────────
-const primary = [home, about, mediation, consultation, videos, masterclass, contactPage];
+const primary = [home, about, mediation, custody, consultation, videos, masterclass, contactPage];
 const all = [...primary, ...legalPages, notfound];
 for (const p of all) {
   const html = minifyHtml(p.render());

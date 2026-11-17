@@ -34,7 +34,7 @@ const services = [
     id: 'custody-and-parenting',
     title: 'Child custody and parenting plans',
     body: `<p>Parenting plan mediation focuses on a schedule and set of decisions that work for your children: weekday and weekend time, holidays, school breaks, transportation, and how you will make decisions about education, health, and activities. Co-parenting mediation can also help parents adjust an existing plan as children grow.</p>
-<p>Private mediation is separate from the court-connected child custody services California family courts provide. Some families use both.</p>`,
+<p>Private mediation is separate from the court-connected child custody services California family courts provide. Some families use both. <a href="/child-custody-mediation/">Learn more about child custody mediation</a>.</p>`,
   },
   {
     id: 'support',

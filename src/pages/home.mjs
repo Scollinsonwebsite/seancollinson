@@ -29,7 +29,7 @@ const services = [
   },
   {
     title: 'Child custody and parenting plans',
-    href: '/mediation/#custody-and-parenting',
+    href: '/child-custody-mediation/',
     text: 'Schedules, holidays, and decision-making built around your children rather than the courtroom calendar.',
   },
   {
@@ -167,7 +167,7 @@ function bento() {
       <p>Parenting, support, property, and debt, worked through at a pace both of you can manage.</p>
     </a>
 
-    <a class="tile tile--service tile--violet" href="/mediation/#custody-and-parenting">
+    <a class="tile tile--service tile--violet" href="/child-custody-mediation/">
       <span class="chip chip--violet">${icon('baby')}</span>
       <h2 class="tile__title">Custody and parenting plans</h2>
       <p>Schedules, holidays, and decision-making built around your children.</p>
