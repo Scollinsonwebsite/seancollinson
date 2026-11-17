@@ -23,7 +23,7 @@ const services = [
     id: 'divorce-and-family',
     title: 'Divorce and family mediation',
     body: `<p>Divorce mediation gives spouses a private, structured way to work through the decisions a divorce requires: parenting, support, property, and debt. Sean helps you set an agenda, understand what information is needed, and work through each issue in an order that makes sense for your family. Mediation works well for amicable and uncontested divorces, and it can also help in high-conflict situations where a steady structure matters most.</p>
-<p>California divorces still move through the court. Mediation does not replace that process; it gives you a better way to reach the agreements the court will ultimately review.</p>`,
+<p>California divorces still move through the court. Mediation does not replace that process; it gives you a better way to reach the agreements the court will ultimately review. <a href="/divorce-mediation/">Learn more about divorce mediation</a>.</p>`,
   },
   {
     id: 'legal-separation',

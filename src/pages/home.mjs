@@ -18,7 +18,7 @@ export const meta = {
 const services = [
   {
     title: 'Divorce and family mediation',
-    href: '/mediation/#divorce-and-family',
+    href: '/divorce-mediation/',
     text: 'A structured, private process for working through the decisions a divorce requires, at a pace both of you can manage.',
     lead: true,
   },
@@ -161,7 +161,7 @@ function bento() {
       <a class="btn btn--primary btn--block btn--sm" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </article>
 
-    <a class="tile tile--service tile--blue" href="/mediation/#divorce-and-family">
+    <a class="tile tile--service tile--blue" href="/divorce-mediation/">
       <span class="chip chip--blue">${icon('users')}</span>
       <h2 class="tile__title">Divorce and family</h2>
       <p>Parenting, support, property, and debt, worked through at a pace both of you can manage.</p>
