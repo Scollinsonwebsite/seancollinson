@@ -67,8 +67,10 @@ export const reviews = {
   rating: '4.9',
   count: 30,
   source: 'Google',
-  // Replace with the exact Google Business Profile link when available.
-  url: 'https://www.google.com/maps/search/?api=1&query=The+Mediation+Office+of+Sean+Collinson+15301+Ventura+Blvd+Sherman+Oaks+CA+91403',
+  // Google Business Profile, opens the reviews (supplied by Sean 2026-11-17).
+  url: 'https://maps.app.goo.gl/bf7M1erHgG23CqPS9',
+  // "Write a review" link, not shown on the site yet.
+  writeUrl: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
 };
 
 // Areas served, confirmed by Sean on 2026-11-17.
