@@ -46,6 +46,39 @@ export const contact = {
   mapEmbedUrl: null,
 };
 
+// Office name, address, and phone shown in the footer of every page and in the
+// home page consultation tile (added 2026-11-17). Kept separate from `contact`
+// so the mobile call bar, contact page, and schema are unchanged.
+export const office = {
+  name: 'The Mediation Office of Sean Collinson',
+  street: '15301 Ventura Blvd',
+  city: 'Sherman Oaks',
+  region: 'CA',
+  postalCode: '91403',
+  phone: '+18184027500',
+  phoneDisplay: '(818) 402-7500',
+};
+
+// Google rating, as supplied by Sean on 2026-11-17 (Google Business Profile).
+// Shown as text with a link to the source. Never add AggregateRating or
+// Review schema for these: Google treats self-published review markup as
+// ineligible, and tests/qa.mjs blocks it.
+export const reviews = {
+  rating: '4.9',
+  count: 30,
+  source: 'Google',
+  // Google Business Profile, opens the reviews (supplied by Sean 2026-11-17).
+  url: 'https://maps.app.goo.gl/bf7M1erHgG23CqPS9',
+  // "Write a review" link, not shown on the site yet.
+  writeUrl: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
+};
+
+// Areas served, confirmed by Sean on 2026-11-17.
+export const areasServed = [
+  'Sherman Oaks', 'Encino', 'Studio City', 'Van Nuys', 'Burbank', 'Glendale',
+  'Pasadena', 'Beverly Hills', 'West Los Angeles', 'Santa Monica', 'the San Fernando Valley',
+];
+
 // Social profiles. Only list real, active profiles owned by the practice.
 export const social = [
   // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/…' },
@@ -71,7 +104,7 @@ export const scheduler = {
 
 // Analytics and Search Console. Never invent IDs.
 export const analytics = {
-  ga4MeasurementId: null, // e.g. 'G-XXXXXXXXXX'
+  ga4MeasurementId: 'G-MJXLZN2W0J', // GA4 web stream for the Mediation website, added 2026-11-17
   googleSiteVerification: null, // content value of the google-site-verification meta tag
 };
 

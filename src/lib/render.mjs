@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { site, contact, social, analytics, images, legal } from '../config.mjs';
+import { site, contact, office, social, analytics, images, legal, reviews, areasServed } from '../config.mjs';
 import { icon } from './icons.mjs';
 import { quickRequestDialog } from './forms.mjs';
 
@@ -33,6 +33,10 @@ export const phoneLink = (cls = '') =>
   hasPhone() ? `<a class="${cls}" href="tel:${esc(contact.phone)}">${esc(contact.phoneDisplay)}</a>` : '';
 export const emailLink = (cls = '') =>
   hasEmail() ? `<a class="${cls}" href="mailto:${esc(contact.email)}">${esc(contact.email)}</a>` : '';
+
+export const officeAddress = () =>
+  `${esc(office.name)}, ${esc(office.street)}, ${esc(office.city)}, ${esc(office.region)} ${esc(office.postalCode)}`;
+export const officePhoneLink = () => `<a href="tel:${esc(office.phone)}">${esc(office.phoneDisplay)}</a>`;
 
 // ── Images ───────────────────────────────────────────────────────────────────
 // Returns responsive <picture> markup if the optimised files exist (see
@@ -107,6 +111,28 @@ export const nav = [
   { path: '/contact/', label: 'Contact' },
 ];
 
+// Service and guide pages, shown in the Mediation dropdown and the footer.
+export const services = [
+  { path: '/divorce-mediation/', label: 'Divorce mediation' },
+  { path: '/child-custody-mediation/', label: 'Child custody' },
+  { path: '/child-support-mediation/', label: 'Child support' },
+  { path: '/spousal-support-mediation/', label: 'Spousal support' },
+  { path: '/property-division-mediation/', label: 'Property and finances' },
+  { path: '/legal-separation-mediation/', label: 'Legal separation' },
+  { path: '/paternity-mediation/', label: 'Paternity' },
+  { path: '/holiday-parenting-schedules/', label: 'Holiday schedules' },
+  { path: '/business-mediation/', label: 'Civil and business' },
+  { path: '/workplace-mediation/', label: 'Workplace' },
+];
+export const guides = [
+  { path: '/how-mediation-works/', label: 'How mediation works' },
+  { path: '/faq/', label: 'FAQ' },
+];
+
+export const reviewsLine = () =>
+  `<a href="${esc(reviews.url)}" rel="noopener" target="_blank"><span aria-hidden="true">★</span> ${esc(reviews.rating)} out of 5 from ${reviews.count} ${esc(reviews.source)} reviews<span class="visually-hidden"> (opens in a new tab)</span></a>`;
+export const areasLine = () => `${areasServed.slice(0, -1).join(', ')}, and ${areasServed[areasServed.length - 1]}`;
+
 export const CTA_PRIMARY = 'Schedule a Confidential Consultation';
 export const CTA_SECONDARY = 'Explore Mediation Services';
 
@@ -117,6 +143,17 @@ function header(path) {
         `<li><a href="${n.path}"${n.path === path ? ' aria-current="page"' : ''}>${n.label}</a></li>`
     )
     .join('');
+  const sub = [...services, ...guides];
+  const subLinks = sub
+    .map((s) => `<li><a href="${s.path}"${s.path === path ? ' aria-current="page"' : ''}>${s.label}</a></li>`)
+    .join('');
+  const withSub = (html, mobile) =>
+    html.replace(
+      /<li><a href="\/mediation\/"([^>]*)>Mediation<\/a><\/li>/,
+      mobile
+        ? `<li><a href="/mediation/"$1>Mediation</a><ul class="mobile-menu__sub">${subLinks}</ul></li>`
+        : `<li class="has-sub"><a href="/mediation/"$1>Mediation</a><button class="subnav-toggle" type="button" aria-expanded="false" aria-controls="subnav-mediation" data-subnav-toggle><span class="visually-hidden">Show mediation services</span></button><ul class="subnav" id="subnav-mediation">${subLinks}</ul></li>`
+    );
   return `<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header" data-header>
   <div class="site-header__inner wrap">
@@ -125,7 +162,7 @@ function header(path) {
       <span class="brand__text"><span class="brand__name">Sean Collinson</span><span class="brand__sub">Mediation Office</span></span>
     </a>
     <nav class="primary-nav" aria-label="Primary">
-      <ul class="primary-nav__list">${items}</ul>
+      <ul class="primary-nav__list">${withSub(items, false)}</ul>
     </nav>
     <a class="btn btn--header btn--sm site-header__cta" href="/consultation/" data-consult-open>Schedule a Consultation</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -134,7 +171,7 @@ function header(path) {
   </div>
   <div class="mobile-menu" id="mobile-menu" data-menu hidden>
     <nav aria-label="Mobile">
-      <ul class="mobile-menu__list">${items}</ul>
+      <ul class="mobile-menu__list">${withSub(items, true)}</ul>
     </nav>
     <a class="btn btn--primary mobile-menu__cta" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
   </div>
@@ -143,12 +180,15 @@ function header(path) {
 
 function footer() {
   const pageLinks = nav.map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
+  const serviceLinks = [...services, ...guides].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const socials = social.length
     ? `<ul class="footer__social">${social
         .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>`)
         .join('')}</ul>`
     : '';
   const contactLines = [
+    `<li><address style="font-style:normal">${officeAddress()}</address></li>`,
+    `<li>Phone: ${officePhoneLink()}</li>`,
     hasPhone() ? `<li>Phone: ${phoneLink()}</li>` : isDraft() ? `<li>${ph('office phone number')}</li>` : '',
     hasEmail() ? `<li>Email: ${emailLink()}</li>` : isDraft() ? `<li>${ph('office email address')}</li>` : '',
     !hasPhone() && !hasEmail()
@@ -163,12 +203,18 @@ function footer() {
       <p class="footer__name">${esc(site.name)}</p>
       <p>${esc(site.positioning)}</p>
       <ul class="footer__contact">${contactLines}</ul>
+      <p class="footer__rating">${reviewsLine()}</p>
       <p class="footer__area">${esc(site.serviceArea)}</p>
+      <p class="footer__area">Areas served: ${esc(areasLine())}.</p>
       ${socials}
     </div>
     <nav class="footer__nav" aria-label="Footer">
       <p class="footer__heading">Pages</p>
       <ul>${pageLinks}</ul>
+    </nav>
+    <nav class="footer__nav" aria-label="Services">
+      <p class="footer__heading">Services</p>
+      <ul>${serviceLinks}</ul>
     </nav>
     <nav class="footer__nav" aria-label="Legal">
       <p class="footer__heading">Policies</p>
@@ -219,6 +265,7 @@ export function breadcrumbs(trail) {
 export const ids = {
   website: abs('/#website'),
   business: abs('/#practice'),
+  organization: abs('/#organization'),
   person: abs('/about/#sean-collinson'),
 };
 
@@ -250,22 +297,64 @@ export function personSchema() {
   return p;
 }
 
+// Office details (name, Sherman Oaks address, phone) come from `office` in
+// config.mjs, so the schema matches the footer and home page exactly.
+const officePostalAddress = () => ({
+  '@type': 'PostalAddress',
+  streetAddress: office.street,
+  addressLocality: office.city,
+  addressRegion: office.region,
+  postalCode: office.postalCode,
+  addressCountry: 'US',
+});
+const losAngeles = () => ({
+  '@type': 'City',
+  name: 'Los Angeles',
+  containedInPlace: { '@type': 'State', name: 'California' },
+});
+
+export function organizationSchema() {
+  const o = {
+    '@type': 'Organization',
+    '@id': ids.organization,
+    name: office.name,
+    alternateName: [site.name, 'Sean Collinson Mediation'],
+    url: abs('/'),
+    logo: abs('/assets/img/logo.png'),
+    image: abs('/assets/img/social-share.jpg'),
+    description: site.positioning,
+    telephone: office.phone,
+    address: officePostalAddress(),
+    areaServed: losAngeles(),
+    founder: { '@id': ids.person },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: office.phone,
+      contactType: 'customer service',
+      areaServed: losAngeles(),
+      availableLanguage: 'English',
+    },
+  };
+  if (hasEmail()) o.email = contact.email;
+  if (social.length) o.sameAs = social.map((s) => s.url);
+  return o;
+}
+
 export function businessSchema() {
   const b = {
-    '@type': 'ProfessionalService',
+    '@type': ['LocalBusiness', 'ProfessionalService'],
     '@id': ids.business,
-    name: site.name,
-    alternateName: 'Sean Collinson Mediation',
+    name: office.name,
+    alternateName: [site.name, 'Sean Collinson Mediation'],
     url: abs('/'),
     description: site.positioning,
+    telephone: office.phone,
+    address: officePostalAddress(),
+    areaServed: losAngeles(),
+    parentOrganization: { '@id': ids.organization },
     founder: { '@id': ids.person },
     employee: { '@id': ids.person },
-    areaServed: [
-      { '@type': 'City', name: 'Los Angeles' },
-      { '@type': 'State', name: 'California' },
-      { '@type': 'Country', name: 'United States' },
-    ],
-    serviceType: [
+    knowsAbout: [
       'Divorce mediation',
       'Family mediation',
       'Child custody mediation',
@@ -276,18 +365,7 @@ export function businessSchema() {
     logo: abs('/assets/img/logo.png'),
     image: abs('/assets/img/social-share.jpg'),
   };
-  if (hasPhone()) b.telephone = contact.phone;
   if (hasEmail()) b.email = contact.email;
-  if (contact.address) {
-    b.address = {
-      '@type': 'PostalAddress',
-      streetAddress: contact.address.street,
-      addressLocality: contact.address.city,
-      addressRegion: contact.address.region,
-      postalCode: contact.address.postalCode,
-      addressCountry: contact.address.country,
-    };
-  }
   if (social.length) b.sameAs = social.map((s) => s.url);
   return b;
 }
@@ -298,7 +376,7 @@ export function websiteSchema() {
     '@id': ids.website,
     url: abs('/'),
     name: site.name,
-    publisher: { '@id': ids.business },
+    publisher: { '@id': ids.organization },
     inLanguage: 'en-US',
   };
 }
@@ -309,7 +387,10 @@ export const jsonld = (graph) =>
     : '';
 
 // ── Document ─────────────────────────────────────────────────────────────────
-export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '' }) {
+// Hand-built page sections kept as exact HTML (ported from the live site).
+export const partial = (name) => readFileSync(join(ctx.srcDir, 'partials', name), 'utf8').replace(/\n$/, '');
+
+export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '', headExtra = '', bodyEnd = '' }) {
   const canonical = abs(path);
   const ogImage = abs('/assets/img/social-share.jpg');
   const robots = noindex || isDraft() ? '<meta name="robots" content="noindex, follow">' : '';
@@ -353,6 +434,7 @@ ${path === '/404.html' ? '' : `<meta property="og:url" content="${canonical}">`}
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css?v=${ctx.version}">
 ${jsonld(schema)}
+${headExtra}
 ${ga}
 </head>
 <body class="${bodyClass}${isDraft() ? ' is-draft' : ''}">
@@ -364,6 +446,7 @@ ${body}
 ${footer()}
 ${quickRequestDialog()}
 <script src="/assets/js/site.js?v=${ctx.version}" defer></script>
+${bodyEnd}
 </body>
 </html>
 `;
@@ -386,6 +469,19 @@ export function ctaBand({ heading, text, primary = CTA_PRIMARY, secondary = null
 
 export const slug = (s) =>
   String(s).toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+// FAQPage structured data for the given FAQ items. The answer text is the
+// same HTML shown on the page, so the markup always matches what visitors see.
+export function faqSchema(items) {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: items.map((q) => ({
+      '@type': 'Question',
+      name: q.q,
+      acceptedAnswer: { '@type': 'Answer', text: q.a },
+    })),
+  };
+}
 
 // FAQ list rendered as native disclosure widgets (keyboard accessible).
 export function faqList(items, { idPrefix = 'faq' } = {}) {

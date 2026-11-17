@@ -1,7 +1,7 @@
 import { claims, testimonials } from '../config.mjs';
 import {
-  layout, photo, ctaBand, faqList, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, businessSchema, personSchema,
+  layout, photo, ctaBand, faqList, faqSchema, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
+  websiteSchema, organizationSchema, businessSchema, personSchema, partial, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 
@@ -11,13 +11,14 @@ export const meta = {
   title: 'Los Angeles Divorce Mediator | Sean Collinson',
   description:
     'Resolve divorce, family, civil, and business disputes privately with experienced Los Angeles mediator Sean Collinson. In-person and virtual mediation.',
-  h1: 'Resolve Conflict Without Losing Control',
+  h1: 'Los Angeles Divorce and Family Mediator',
+  subtitle: 'Resolve Conflict Without Losing Control',
 };
 
 const services = [
   {
     title: 'Divorce and family mediation',
-    href: '/mediation/#divorce-and-family',
+    href: '/divorce-mediation/',
     text: 'A structured, private process for working through the decisions a divorce requires, at a pace both of you can manage.',
     lead: true,
   },
@@ -28,7 +29,7 @@ const services = [
   },
   {
     title: 'Child custody and parenting plans',
-    href: '/mediation/#custody-and-parenting',
+    href: '/child-custody-mediation/',
     text: 'Schedules, holidays, and decision-making built around your children rather than the courtroom calendar.',
   },
   {
@@ -82,10 +83,21 @@ const faqs = [
     a: `<p>It depends on how many issues are in dispute, how complex the finances are, and how prepared both sides are. Some matters settle in a single session; others take several sessions over a few weeks. You will have a clearer sense after the consultation.</p>`,
   },
   {
+    q: 'How much does mediation cost?',
+    a: `<p>Cost depends on the number of sessions and the preparation required. Mediation is often less expensive than contested litigation because it involves fewer hearings and less formal discovery, but every matter is different. Fees and payment terms are explained during the <a href="/consultation/">consultation</a>.</p>`,
+  },
+  {
+    q: 'What is the difference between mediation and court?',
+    a: `<p>In mediation, you and the other party decide the outcome together, in private. In court, a judge decides the contested issues, and the proceedings are public. Mediation is more private, more flexible, and less adversarial. Court remains available if mediation does not resolve everything.</p>`,
+  },
+  {
     q: 'Can mediation address custody, support, and property?',
-    a: `<p>Yes. Parenting schedules, decision-making, child and spousal support, property, debt, and retirement assets can all be discussed in mediation. <a href="/mediation/#services">See the full list of mediation services</a>.</p>`,
+    a: `<p>Yes. Parenting schedules, decision-making, child and spousal support, property, debt, and retirement assets can all be discussed in mediation. <a href="/child-support-mediation/">Read about child support mediation</a>. <a href="/mediation/#services">See the full list of mediation services</a>.</p>`,
   },
 ];
+
+// The cost, timeline, and mediation-versus-court questions carry FAQPage schema.
+const schemaFaqs = ['How much does mediation cost?', 'How long does mediation take?', 'What is the difference between mediation and court?'];
 
 function verifiedClaims() {
   const enabled = Object.values(claims).filter((c) => c.enabled && c.value && c.note);
@@ -145,16 +157,17 @@ function bento() {
         <li>${icon('map-pin', 'icon icon--sm')} In person across California</li>
         <li>${icon('video', 'icon icon--sm')} By Zoom, nationwide</li>
       </ul>
+      <address style="font-style:normal;font-size:0.95rem;color:var(--muted);margin:0 0 1rem">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
       <a class="btn btn--primary btn--block btn--sm" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </article>
 
-    <a class="tile tile--service tile--blue" href="/mediation/#divorce-and-family">
+    <a class="tile tile--service tile--blue" href="/divorce-mediation/">
       <span class="chip chip--blue">${icon('users')}</span>
       <h2 class="tile__title">Divorce and family</h2>
       <p>Parenting, support, property, and debt, worked through at a pace both of you can manage.</p>
     </a>
 
-    <a class="tile tile--service tile--violet" href="/mediation/#custody-and-parenting">
+    <a class="tile tile--service tile--violet" href="/child-custody-mediation/">
       <span class="chip chip--violet">${icon('baby')}</span>
       <h2 class="tile__title">Custody and parenting plans</h2>
       <p>Schedules, holidays, and decision-making built around your children.</p>
@@ -179,6 +192,7 @@ function bento() {
     </article>
 
   </div>
+${partial('home-video.html')}
 </section>`;
 }
 
@@ -189,6 +203,7 @@ export function render() {
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
+      <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--white);margin:0 0 0.75em">${meta.subtitle}</p>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
       <div class="hero__actions">
         <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
@@ -302,7 +317,9 @@ ${ctaBand({
     title: meta.title,
     description: meta.description,
     body,
-    schema: [websiteSchema(), businessSchema(), personSchema()],
+    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-home',
+    headExtra: partial('home-head.html'),
+    bodyEnd: partial('home-script.html'),
   });
 }

@@ -1,10 +1,16 @@
-import { legal, site } from '../config.mjs';
+import { legal, site, analytics } from '../config.mjs';
 import { layout, breadcrumbs } from '../lib/render.mjs';
 
 const draftNote = (reviewed) =>
   reviewed
     ? ''
     : `<div class="notice notice--draft" role="note"><p class="notice__title">Draft pending professional review</p><p>This page is a starting draft. It has not yet been reviewed by a qualified professional and will be updated before it is relied on.</p></div>`;
+
+// Shown in the Privacy Policy. Once a GA4 ID is set, the "will be updated"
+// promise is replaced with the Google Analytics disclosure.
+const analyticsSentence = analytics.ga4MeasurementId
+  ? ' This website uses Google Analytics, a service provided by Google, to understand how visitors use the site, such as which pages are viewed and how visitors arrive. Google Analytics uses cookies and collects information such as browser type, device, approximate location, and pages visited. The office uses this information only in aggregate, and the details you enter in forms are not sent to Google Analytics. You can opt out with Google’s browser add-on (<a href="https://tools.google.com/dlpage/gaoptout">tools.google.com/dlpage/gaoptout</a>) or by blocking cookies in your browser.'
+  : ' If analytics are added in the future, this policy will be updated to describe them before they are enabled.';
 
 const pages = [
   {
@@ -20,7 +26,7 @@ const pages = [
 <h2>How information is used</h2>
 <p>Information you submit is used to respond to your inquiry, to check for conflicts of interest, and to arrange a consultation if you request one. It is not sold.</p>
 <h2>Technical information</h2>
-<p>Like most websites, the hosting provider may record standard server logs, such as IP address, browser type, and pages visited, for security and maintenance. If analytics are added in the future, this policy will be updated to describe them before they are enabled.</p>
+<p>Like most websites, the hosting provider may record standard server logs, such as IP address, browser type, and pages visited, for security and maintenance.${analyticsSentence}</p>
 <h2>Third-party services</h2>
 <p>Embedded videos are loaded from YouTube or Vimeo only after you choose to play them. Once a video loads, that provider’s own privacy policy applies.</p>
 <p>When you submit a form, your name, email address, and phone number are also stored in the office’s contact list with MailerLite, an email service provider, so the office can follow up on your request. The details you write about your matter are not sent to MailerLite. MailerLite’s own privacy policy applies to the information it holds.</p>

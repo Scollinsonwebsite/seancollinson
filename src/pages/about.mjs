@@ -1,4 +1,4 @@
-import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY } from '../lib/render.mjs';
+import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial, services, guides, officeAddress, officePhoneLink, reviewsLine, areasLine } from '../lib/render.mjs';
 
 export const meta = {
   path: '/about/',
@@ -44,19 +44,7 @@ const values = [
 export function render() {
   const crumbs = breadcrumbs([{ name: 'About', path: meta.path }]);
   const body = `
-<section class="page-hero page-hero--split" aria-labelledby="page-title">
-  <div class="wrap">${crumbs.html}</div>
-  <div class="wrap page-hero__grid">
-    <div>
-      <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
-      <p class="page-hero__lede">An experienced neutral who brings order, calm, and practical judgment to disputes that feel stuck, from divorce and custody to business and civil conflict.</p>
-      <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
-    </div>
-    <figure class="page-hero__figure">
-      ${photo('portrait', { eager: true, sizes: '(min-width: 1000px) 32vw, 90vw' })}
-    </figure>
-  </div>
-</section>
+${partial('about-hero.html')}
 
 <section class="section" aria-labelledby="bio-title">
   <div class="wrap narrow prose">
@@ -127,6 +115,29 @@ export function render() {
   </div>
 </section>
 
+<section class="section section--ivory" aria-labelledby="mediates-title">
+  <div class="wrap narrow prose">
+    <h2 id="mediates-title" class="section__title">What Sean mediates</h2>
+    <p>Sean brings the same disciplined, neutral approach to every kind of dispute, from the most personal family decisions to business and workplace conflict:</p>
+    <ul>
+      ${services.map((s) => `<li><a href="${s.path}">${s.label}</a></li>`).join('\n      ')}
+    </ul>
+    <p>New to mediation? Start with <a href="${guides[0].path}">how mediation works</a> or the <a href="${guides[1].path}">FAQ</a>.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="office-title">
+  <div class="wrap narrow prose">
+    <h2 id="office-title" class="section__title">In person in Sherman Oaks, or online</h2>
+    <p>Sessions are held at the office in Sherman Oaks or by Zoom, for parties throughout California and nationwide.</p>
+    <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
+    <h3>Areas served</h3>
+    <p>${areasLine()}, plus virtual sessions across California and nationwide.</p>
+    <h3>What clients say</h3>
+    <p>${reviewsLine()}</p>
+  </div>
+</section>
+
 ${ctaBand({
   heading: 'Talk Through Your Situation With Sean',
   text: 'Start with a confidential consultation to discuss the dispute, the people involved, and whether mediation is the right next step.',
@@ -134,6 +145,7 @@ ${ctaBand({
 })}
 `;
   return layout({
+    headExtra: partial('about-head.html'),
     path: meta.path,
     title: meta.title,
     description: meta.description,

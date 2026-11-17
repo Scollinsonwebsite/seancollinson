@@ -1,4 +1,4 @@
-import { layout, ctaBand, breadcrumbs, faqList, CTA_PRIMARY } from '../lib/render.mjs';
+import { layout, ctaBand, breadcrumbs, faqList, faqSchema, partial, CTA_PRIMARY } from '../lib/render.mjs';
 
 export const meta = {
   path: '/mediation/',
@@ -6,7 +6,7 @@ export const meta = {
   title: 'Divorce, Family, Civil and Business Mediation | Los Angeles',
   description:
     'Private mediation for divorce, custody, legal separation, civil, workplace, and business disputes in California, with virtual sessions available nationwide.',
-  h1: 'A Better Way to Resolve Difficult Disputes',
+  h1: 'Mediation Services in Los Angeles',
 };
 
 const comparison = [
@@ -23,7 +23,7 @@ const services = [
     id: 'divorce-and-family',
     title: 'Divorce and family mediation',
     body: `<p>Divorce mediation gives spouses a private, structured way to work through the decisions a divorce requires: parenting, support, property, and debt. Sean helps you set an agenda, understand what information is needed, and work through each issue in an order that makes sense for your family. Mediation works well for amicable and uncontested divorces, and it can also help in high-conflict situations where a steady structure matters most.</p>
-<p>California divorces still move through the court. Mediation does not replace that process; it gives you a better way to reach the agreements the court will ultimately review.</p>`,
+<p>California divorces still move through the court. Mediation does not replace that process; it gives you a better way to reach the agreements the court will ultimately review. <a href="/divorce-mediation/">Learn more about divorce mediation</a>.</p>`,
   },
   {
     id: 'legal-separation',
@@ -34,12 +34,12 @@ const services = [
     id: 'custody-and-parenting',
     title: 'Child custody and parenting plans',
     body: `<p>Parenting plan mediation focuses on a schedule and set of decisions that work for your children: weekday and weekend time, holidays, school breaks, transportation, and how you will make decisions about education, health, and activities. Co-parenting mediation can also help parents adjust an existing plan as children grow.</p>
-<p>Private mediation is separate from the court-connected child custody services California family courts provide. Some families use both.</p>`,
+<p>Private mediation is separate from the court-connected child custody services California family courts provide. Some families use both. <a href="/child-custody-mediation/">Learn more about child custody mediation</a>.</p>`,
   },
   {
     id: 'support',
     title: 'Child and spousal support discussions',
-    body: `<p>Support is often the most emotionally charged financial topic. Mediation creates room to discuss child support, spousal support (sometimes called alimony), duration, and related expenses with the numbers in front of everyone. California uses guideline calculations for child support; your attorney or a financial professional can help you understand how they apply.</p>`,
+    body: `<p>Support is often the most emotionally charged financial topic. Mediation creates room to discuss child support, spousal support (sometimes called alimony), duration, and related expenses with the numbers in front of everyone. California uses guideline calculations for child support; your attorney or a financial professional can help you understand how they apply. <a href="/child-support-mediation/">Learn more about child support mediation</a>.</p>`,
   },
   {
     id: 'property-and-finances',
@@ -91,7 +91,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between divorce mediation and litigation?',
-    a: `<p>In litigation, each side presents its case and a judge decides contested issues. In mediation, the parties decide together with the help of a neutral. Mediation is generally more private, more flexible, and less adversarial. Litigation remains available if mediation does not resolve everything.</p>`,
+    a: `<p>In litigation, each side presents its case and a judge decides contested issues, and the proceedings are public. In mediation, the parties decide together, in private, with the help of a neutral. Mediation is more private, more flexible, and less adversarial. Litigation remains available if mediation does not resolve everything.</p>`,
   },
   {
     q: 'What should I expect in divorce mediation?',
@@ -107,7 +107,7 @@ const faqs = [
   },
   {
     q: 'How long does divorce mediation take?',
-    a: `<p>It varies with the number and complexity of the issues and how quickly information is exchanged. Some couples resolve everything in one or two sessions; others meet several times over a few weeks or months. There is no fixed timeline, and no one can promise one.</p>`,
+    a: `<p>It depends on how many issues are in dispute, how complex the finances are, and how prepared both sides are. Some matters settle in a single session; others take several sessions over a few weeks. There is no fixed timeline, and no one can promise one.</p>`,
   },
   {
     q: 'How much does divorce mediation cost?',
@@ -147,28 +147,13 @@ const faqs = [
   },
 ];
 
+// The cost, timeline, and mediation-versus-litigation questions carry FAQPage schema.
+const schemaFaqs = ['How much does divorce mediation cost?', 'How long does divorce mediation take?', 'What is the difference between divorce mediation and litigation?'];
+
 export function render() {
   const crumbs = breadcrumbs([{ name: 'Mediation', path: meta.path }]);
   const body = `
-<section class="page-hero" aria-labelledby="page-title">
-  <div class="wrap">${crumbs.html}</div>
-  <div class="wrap">
-    <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
-    <p class="page-hero__lede">Mediation is often the best path because it gives you greater control over the outcome while reducing the cost, delay, stress, and uncertainty of litigation. Instead of leaving critical decisions to a judge, the parties work with a neutral mediator in a private and confidential setting to develop practical agreements designed around their unique needs.</p>
-    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
-    <nav class="jump" aria-label="On this page">
-      <p class="jump__label">On this page</p>
-      <ul>
-        <li><a href="#how-mediation-works">How mediation works</a></li>
-        <li><a href="#comparison">Mediation versus litigation</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#process">The process</a></li>
-        <li><a href="#what-to-bring">What to bring</a></li>
-        <li><a href="#faq">Questions</a></li>
-      </ul>
-    </nav>
-  </div>
-</section>
+${partial('mediation-hero.html')}
 
 <section class="section" id="how-mediation-works" aria-labelledby="works-title">
   <div class="wrap split split--text">
@@ -257,11 +242,12 @@ ${ctaBand({
 })}
 `;
   return layout({
+    headExtra: partial('mediation-head.html'),
     path: meta.path,
     title: meta.title,
     description: meta.description,
     body,
-    schema: [crumbs.schema],
+    schema: [crumbs.schema, faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-mediation',
   });
 }

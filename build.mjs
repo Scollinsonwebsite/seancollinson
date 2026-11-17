@@ -14,6 +14,12 @@ import { site, contact, analytics, scheduler } from './src/config.mjs';
 import * as home from './src/pages/home.mjs';
 import * as about from './src/pages/about.mjs';
 import * as mediation from './src/pages/mediation.mjs';
+import * as divorce from './src/pages/divorce.mjs';
+import * as custody from './src/pages/custody.mjs';
+import * as support from './src/pages/support.mjs';
+import { spousal, property, separation, paternity, holidays } from './src/pages/services-family.mjs';
+import { business, workplace, howItWorks, faq } from './src/pages/services-other.mjs';
+import { blogPages } from './src/pages/blog.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -61,6 +67,10 @@ for (const f of ['social-share.jpg', 'logo.png']) {
   if (existsSync(join(srcDir, 'assets/img', f))) copy(`assets/img/${f}`, `assets/img/${f}`);
 }
 if (existsSync(join(srcDir, 'assets/img/generated'))) copy('assets/img/generated', 'assets/img/generated');
+// Page photos added directly on the live site (home video poster, About and Mediation heroes).
+for (const d of ['home', 'about', 'mediation']) {
+  if (existsSync(join(srcDir, 'assets/img', d))) copy(`assets/img/${d}`, `assets/img/${d}`);
+}
 copy('static/forms', 'forms');
 writeFileSync(join(outDir, 'assets/.htaccess'), 'Options -Indexes\n');
 cpSync(join(srcDir, 'assets/icons/favicon.ico'), join(outDir, 'favicon.ico'));
@@ -71,7 +81,12 @@ writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
 
 // ── Pages ───────────────────────────────────────────────────────────────────
-const primary = [home, about, mediation, consultation, videos, masterclass, contactPage];
+const primary = [
+  home, about, mediation, howItWorks, faq,
+  divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace,
+  consultation, videos, masterclass, contactPage,
+  ...blogPages(),
+];
 const all = [...primary, ...legalPages, notfound];
 for (const p of all) {
   const html = minifyHtml(p.render());
