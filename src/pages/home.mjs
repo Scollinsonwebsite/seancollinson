@@ -1,7 +1,7 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, businessSchema, personSchema, officeAddress, officePhoneLink,
+  websiteSchema, organizationSchema, businessSchema, personSchema, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 
@@ -305,7 +305,7 @@ ${ctaBand({
     title: meta.title,
     description: meta.description,
     body,
-    schema: [websiteSchema(), businessSchema(), personSchema()],
+    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema()],
     bodyClass: 'page-home',
   });
 }

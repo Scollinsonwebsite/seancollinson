@@ -225,6 +225,7 @@ export function breadcrumbs(trail) {
 export const ids = {
   website: abs('/#website'),
   business: abs('/#practice'),
+  organization: abs('/#organization'),
   person: abs('/about/#sean-collinson'),
 };
 
@@ -256,22 +257,64 @@ export function personSchema() {
   return p;
 }
 
+// Office details (name, Sherman Oaks address, phone) come from `office` in
+// config.mjs, so the schema matches the footer and home page exactly.
+const officePostalAddress = () => ({
+  '@type': 'PostalAddress',
+  streetAddress: office.street,
+  addressLocality: office.city,
+  addressRegion: office.region,
+  postalCode: office.postalCode,
+  addressCountry: 'US',
+});
+const losAngeles = () => ({
+  '@type': 'City',
+  name: 'Los Angeles',
+  containedInPlace: { '@type': 'State', name: 'California' },
+});
+
+export function organizationSchema() {
+  const o = {
+    '@type': 'Organization',
+    '@id': ids.organization,
+    name: office.name,
+    alternateName: [site.name, 'Sean Collinson Mediation'],
+    url: abs('/'),
+    logo: abs('/assets/img/logo.png'),
+    image: abs('/assets/img/social-share.jpg'),
+    description: site.positioning,
+    telephone: office.phone,
+    address: officePostalAddress(),
+    areaServed: losAngeles(),
+    founder: { '@id': ids.person },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: office.phone,
+      contactType: 'customer service',
+      areaServed: losAngeles(),
+      availableLanguage: 'English',
+    },
+  };
+  if (hasEmail()) o.email = contact.email;
+  if (social.length) o.sameAs = social.map((s) => s.url);
+  return o;
+}
+
 export function businessSchema() {
   const b = {
-    '@type': 'ProfessionalService',
+    '@type': ['LocalBusiness', 'ProfessionalService'],
     '@id': ids.business,
-    name: site.name,
-    alternateName: 'Sean Collinson Mediation',
+    name: office.name,
+    alternateName: [site.name, 'Sean Collinson Mediation'],
     url: abs('/'),
     description: site.positioning,
+    telephone: office.phone,
+    address: officePostalAddress(),
+    areaServed: losAngeles(),
+    parentOrganization: { '@id': ids.organization },
     founder: { '@id': ids.person },
     employee: { '@id': ids.person },
-    areaServed: [
-      { '@type': 'City', name: 'Los Angeles' },
-      { '@type': 'State', name: 'California' },
-      { '@type': 'Country', name: 'United States' },
-    ],
-    serviceType: [
+    knowsAbout: [
       'Divorce mediation',
       'Family mediation',
       'Child custody mediation',
@@ -282,18 +325,7 @@ export function businessSchema() {
     logo: abs('/assets/img/logo.png'),
     image: abs('/assets/img/social-share.jpg'),
   };
-  if (hasPhone()) b.telephone = contact.phone;
   if (hasEmail()) b.email = contact.email;
-  if (contact.address) {
-    b.address = {
-      '@type': 'PostalAddress',
-      streetAddress: contact.address.street,
-      addressLocality: contact.address.city,
-      addressRegion: contact.address.region,
-      postalCode: contact.address.postalCode,
-      addressCountry: contact.address.country,
-    };
-  }
   if (social.length) b.sameAs = social.map((s) => s.url);
   return b;
 }
@@ -304,7 +336,7 @@ export function websiteSchema() {
     '@id': ids.website,
     url: abs('/'),
     name: site.name,
-    publisher: { '@id': ids.business },
+    publisher: { '@id': ids.organization },
     inLanguage: 'en-US',
   };
 }
