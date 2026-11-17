@@ -20,7 +20,7 @@ const topicText = {
 };
 
 const complete = (v) =>
-  v.title && v.platform && v.id && v.thumbnail && v.duration && v.uploadDate && v.summary && v.transcript;
+  v.title && v.platform && v.id && v.thumbnail && v.uploadDate && v.summary;
 
 const embedUrl = (v) =>
   v.platform === 'vimeo'
@@ -42,13 +42,13 @@ function card(v, { featured = false } = {}) {
     </button>
   </div>
   <div class="video__body">
-    <p class="video__meta">${esc(cat ? cat.label : '')}<span class="video__sep" aria-hidden="true">/</span><span>${esc(v.durationLabel || '')}</span><span class="video__sep" aria-hidden="true">/</span><time datetime="${esc(v.uploadDate)}">${date}</time></p>
+    <p class="video__meta">${esc(cat ? cat.label : '')}${v.durationLabel ? `<span class="video__sep" aria-hidden="true">/</span><span>${esc(v.durationLabel)}</span>` : ''}<span class="video__sep" aria-hidden="true">/</span><time datetime="${esc(v.uploadDate)}">${date}</time></p>
     <h3 class="video__title" id="v-${slug(v.title)}">${esc(v.title)}</h3>
     <p>${esc(v.summary)}</p>
-    <details class="video__transcript"><summary>Read the transcript</summary><div class="prose">${esc(v.transcript)
+    ${v.transcript ? `<details class="video__transcript"><summary>Read the transcript</summary><div class="prose">${esc(v.transcript)
       .split(/\n{2,}/)
       .map((p) => `<p>${p}</p>`)
-      .join('')}</div></details>
+      .join('')}</div></details>` : ''}
     <p class="video__link"><a href="${esc(watchUrl(v))}" target="_blank" rel="noopener noreferrer">Watch on ${v.platform === 'vimeo' ? 'Vimeo' : 'YouTube'}<span class="visually-hidden"> (opens in a new tab)</span></a></p>
   </div>
 </article>`;
@@ -61,10 +61,10 @@ function videoSchema(v) {
     description: v.summary,
     thumbnailUrl: v.thumbnail,
     uploadDate: v.uploadDate,
-    duration: v.duration,
+    ...(v.duration ? { duration: v.duration } : {}),
     embedUrl: embedUrl(v),
     contentUrl: watchUrl(v),
-    transcript: v.transcript,
+    ...(v.transcript ? { transcript: v.transcript } : {}),
   };
 }
 

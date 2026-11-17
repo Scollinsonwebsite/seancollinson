@@ -1,7 +1,7 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, faqSchema, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, organizationSchema, businessSchema, personSchema, partial, officeAddress, officePhoneLink,
+  websiteSchema, organizationSchema, businessSchema, personSchema, partial, serviceRegionHtml, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 
@@ -288,6 +288,12 @@ ${bento()}
       <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to every mediation, while staying strictly neutral between the parties.</p>
       <p><a class="text-link" href="/about/">Read Sean Collinson’s background and approach</a></p>
     </div>
+  </div>
+</section>
+
+<section class="section section--ivory" aria-labelledby="region-title">
+  <div class="wrap narrow prose">
+    ${serviceRegionHtml()}
   </div>
 </section>
 

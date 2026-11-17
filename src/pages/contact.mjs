@@ -1,6 +1,6 @@
 import { contact, site } from '../config.mjs';
 import { office } from '../config.mjs';
-import { layout, breadcrumbs, esc, ph, isDraft, hasPhone, hasEmail, phoneLink, emailLink, officePhoneLink } from '../lib/render.mjs';
+import { layout, breadcrumbs, esc, ph, isDraft, hasPhone, hasEmail, phoneLink, emailLink, officePhoneLink, bookingLink } from '../lib/render.mjs';
 import { field, formShell, warning, consentField } from '../lib/forms.mjs';
 
 export const meta = {
@@ -8,7 +8,7 @@ export const meta = {
   out: 'contact/index.html',
   title: 'Contact Sean Collinson | Mediation Services',
   description:
-    'Contact the Mediation Office of S. Collinson to discuss divorce, family, civil, business, workplace, or virtual mediation services.',
+    'Contact The Mediation Office of Sean Collinson to discuss divorce, family, civil, business, workplace, or virtual mediation services.',
   h1: 'Let’s Find a Practical Way Forward',
 };
 
@@ -23,7 +23,7 @@ function details() {
   rows.push(['Service area', esc(site.serviceArea)]);
   rows.push(['Virtual sessions', 'Mediation and consultations by Zoom for parties anywhere in the United States.']);
   return `<dl class="contact-details">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-<p><a class="btn btn--primary" href="tel:${esc(office.phone)}">Tap to call ${esc(office.phoneDisplay)}</a></p>`;
+<div class="btn-row"><a class="btn btn--primary" href="tel:${esc(office.phone)}">Tap to call ${esc(office.phoneDisplay)}</a>${bookingLink('btn btn--secondary')}</div>`;
 }
 
 export function render() {

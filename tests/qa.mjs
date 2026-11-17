@@ -86,7 +86,9 @@ for (const [path, html] of Object.entries(pages)) {
           });
         }
         if (node['@type'] === 'VideoObject') {
-          for (const k of ['name', 'description', 'thumbnailUrl', 'uploadDate', 'duration', 'embedUrl']) if (!node[k]) fail(`${path}: VideoObject missing ${k}`);
+          // Google requires name, thumbnailUrl and uploadDate; description and embedUrl are kept as
+          // site rules. Duration is recommended, not required (YouTube does not expose it to us).
+          for (const k of ['name', 'description', 'thumbnailUrl', 'uploadDate', 'embedUrl']) if (!node[k]) fail(`${path}: VideoObject missing ${k}`);
         }
         if (node['@type'] === 'Course') fail(`${path}: Course schema present without confirmed data`);
         if (node.address && !node.address.streetAddress) fail(`${path}: empty address in schema`);
