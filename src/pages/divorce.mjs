@@ -1,14 +1,14 @@
 import {
-  layout, ctaBand, breadcrumbs, faqList, faqSchema, CTA_PRIMARY,
+  layout, ctaBand, breadcrumbs, faqList, faqSchema, officeAddress, officePhoneLink, CTA_PRIMARY,
 } from '../lib/render.mjs';
 
 export const meta = {
   path: '/divorce-mediation/',
   out: 'divorce-mediation/index.html',
-  title: 'Divorce Mediator in Los Angeles, Sean Collinson',
+  title: 'Divorce Mediator in Los Angeles | Sean Collinson',
   description:
     'Private divorce mediation in Los Angeles. Decide property, finances, parenting, and support together instead of leaving it to a judge, with mediator Sean Collinson.',
-  h1: 'Divorce Mediator in Los Angeles, Sean Collinson',
+  h1: 'Divorce Mediator in Los Angeles',
 };
 
 const steps = [
@@ -67,7 +67,7 @@ export function render() {
         <li><a href="#property-and-finances">Property and finances</a></li>
         <li><a href="#parenting-and-support">Parenting and support</a></li>
         <li><a href="#private">You decide, in private</a></li>
-        <li><a href="#good-fit">Is it a good fit?</a></li>
+        <li><a href="#good-fit">Mediation or court?</a></li>
         <li><a href="#faq">Questions</a></li>
       </ul>
     </nav>
@@ -124,7 +124,7 @@ export function render() {
 
 <section class="section section--ivory" id="good-fit" aria-labelledby="fit-title">
   <div class="wrap narrow prose">
-    <h2 id="fit-title" class="section__title">When divorce mediation is a good fit</h2>
+    <h2 id="fit-title" class="section__title">When mediation is a good fit, and when court may be better</h2>
     <p>Mediation tends to work well when:</p>
     <ul>
       <li>You both want to make the decisions yourselves rather than leave them to a judge</li>
@@ -133,11 +133,20 @@ export function render() {
       <li>You care about privacy, cost, and keeping things as calm as possible</li>
     </ul>
     <p>You do not need to agree on everything to start. Most couples begin far apart on at least one issue.</p>
-    <p>Mediation may not be appropriate if there is a history of abuse, threats, or intimidation, or if one spouse cannot participate safely and freely. Raise any safety concern during the consultation, and consider speaking with an attorney or advocate.</p>
+    <p>Court may be the better path if there is a history of abuse, threats, or intimidation, if one spouse cannot participate safely and freely, or if one spouse refuses to share financial information. Raise any safety concern during the consultation, and consider speaking with an attorney or advocate. Court also remains available for anything mediation does not resolve.</p>
   </div>
 </section>
 
-<section class="section" id="about-sean" aria-labelledby="about-sean-title">
+<section class="section" id="consultation" aria-labelledby="contact-title">
+  <div class="wrap narrow prose">
+    <h2 id="contact-title" class="section__title">Book a confidential consultation</h2>
+    <p>A private first conversation about your situation, the decisions ahead, the format, and fees. Call the office or request a consultation online.</p>
+    <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
+    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
+  </div>
+</section>
+
+<section class="section section--ivory" id="about-sean" aria-labelledby="about-sean-title">
   <div class="wrap narrow prose">
     <h2 id="about-sean-title" class="section__title">A steady neutral for difficult conversations</h2>
     <p>Sean Collinson has more than 22 years of mediation experience helping families and individuals resolve disputes they could not settle on their own. His training includes Harvard’s Program on Negotiation and Loyola Law School’s Mediating the Litigated Case program.</p>
@@ -146,7 +155,7 @@ export function render() {
   </div>
 </section>
 
-<section class="section section--ivory" id="faq" aria-labelledby="faq-title">
+<section class="section" id="faq" aria-labelledby="faq-title">
   <div class="wrap narrow">
     <h2 id="faq-title" class="section__title">Questions about divorce mediation</h2>
     ${faqList(faqs, { idPrefix: 'faq' })}
