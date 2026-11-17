@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { site, contact, office, social, analytics, images, legal } from '../config.mjs';
+import { site, contact, office, social, analytics, images, legal, reviews, areasServed } from '../config.mjs';
 import { icon } from './icons.mjs';
 import { quickRequestDialog } from './forms.mjs';
 
@@ -111,6 +111,28 @@ export const nav = [
   { path: '/contact/', label: 'Contact' },
 ];
 
+// Service and guide pages, shown in the Mediation dropdown and the footer.
+export const services = [
+  { path: '/divorce-mediation/', label: 'Divorce mediation' },
+  { path: '/child-custody-mediation/', label: 'Child custody' },
+  { path: '/child-support-mediation/', label: 'Child support' },
+  { path: '/spousal-support-mediation/', label: 'Spousal support' },
+  { path: '/property-division-mediation/', label: 'Property and finances' },
+  { path: '/legal-separation-mediation/', label: 'Legal separation' },
+  { path: '/paternity-mediation/', label: 'Paternity' },
+  { path: '/holiday-parenting-schedules/', label: 'Holiday schedules' },
+  { path: '/business-mediation/', label: 'Civil and business' },
+  { path: '/workplace-mediation/', label: 'Workplace' },
+];
+export const guides = [
+  { path: '/how-mediation-works/', label: 'How mediation works' },
+  { path: '/faq/', label: 'FAQ' },
+];
+
+export const reviewsLine = () =>
+  `<a href="${esc(reviews.url)}" rel="noopener" target="_blank"><span aria-hidden="true">★</span> ${esc(reviews.rating)} out of 5 from ${reviews.count} ${esc(reviews.source)} reviews<span class="visually-hidden"> (opens in a new tab)</span></a>`;
+export const areasLine = () => `${areasServed.slice(0, -1).join(', ')}, and ${areasServed[areasServed.length - 1]}`;
+
 export const CTA_PRIMARY = 'Schedule a Confidential Consultation';
 export const CTA_SECONDARY = 'Explore Mediation Services';
 
@@ -121,6 +143,17 @@ function header(path) {
         `<li><a href="${n.path}"${n.path === path ? ' aria-current="page"' : ''}>${n.label}</a></li>`
     )
     .join('');
+  const sub = [...services, ...guides];
+  const subLinks = sub
+    .map((s) => `<li><a href="${s.path}"${s.path === path ? ' aria-current="page"' : ''}>${s.label}</a></li>`)
+    .join('');
+  const withSub = (html, mobile) =>
+    html.replace(
+      /<li><a href="\/mediation\/"([^>]*)>Mediation<\/a><\/li>/,
+      mobile
+        ? `<li><a href="/mediation/"$1>Mediation</a><ul class="mobile-menu__sub">${subLinks}</ul></li>`
+        : `<li class="has-sub"><a href="/mediation/"$1>Mediation</a><button class="subnav-toggle" type="button" aria-expanded="false" aria-controls="subnav-mediation" data-subnav-toggle><span class="visually-hidden">Show mediation services</span></button><ul class="subnav" id="subnav-mediation">${subLinks}</ul></li>`
+    );
   return `<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header" data-header>
   <div class="site-header__inner wrap">
@@ -129,7 +162,7 @@ function header(path) {
       <span class="brand__text"><span class="brand__name">Sean Collinson</span><span class="brand__sub">Mediation Office</span></span>
     </a>
     <nav class="primary-nav" aria-label="Primary">
-      <ul class="primary-nav__list">${items}</ul>
+      <ul class="primary-nav__list">${withSub(items, false)}</ul>
     </nav>
     <a class="btn btn--header btn--sm site-header__cta" href="/consultation/" data-consult-open>Schedule a Consultation</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -138,7 +171,7 @@ function header(path) {
   </div>
   <div class="mobile-menu" id="mobile-menu" data-menu hidden>
     <nav aria-label="Mobile">
-      <ul class="mobile-menu__list">${items}</ul>
+      <ul class="mobile-menu__list">${withSub(items, true)}</ul>
     </nav>
     <a class="btn btn--primary mobile-menu__cta" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
   </div>
@@ -147,6 +180,7 @@ function header(path) {
 
 function footer() {
   const pageLinks = nav.map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
+  const serviceLinks = [...services, ...guides].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const socials = social.length
     ? `<ul class="footer__social">${social
         .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>`)
@@ -169,12 +203,18 @@ function footer() {
       <p class="footer__name">${esc(site.name)}</p>
       <p>${esc(site.positioning)}</p>
       <ul class="footer__contact">${contactLines}</ul>
+      <p class="footer__rating">${reviewsLine()}</p>
       <p class="footer__area">${esc(site.serviceArea)}</p>
+      <p class="footer__area">Areas served: ${esc(areasLine())}.</p>
       ${socials}
     </div>
     <nav class="footer__nav" aria-label="Footer">
       <p class="footer__heading">Pages</p>
       <ul>${pageLinks}</ul>
+    </nav>
+    <nav class="footer__nav" aria-label="Services">
+      <p class="footer__heading">Services</p>
+      <ul>${serviceLinks}</ul>
     </nav>
     <nav class="footer__nav" aria-label="Legal">
       <p class="footer__heading">Policies</p>

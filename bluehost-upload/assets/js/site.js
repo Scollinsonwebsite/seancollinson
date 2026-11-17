@@ -19,6 +19,20 @@
   window.addEventListener('scroll', setSolid, { passive: true });
   setSolid();
 
+  // ── Mediation dropdown ────────────────────────────────────────────────────
+  // Opens on hover and keyboard focus through CSS; the button adds click/tap
+  // and Escape support and keeps aria-expanded accurate.
+  var subToggle = document.querySelector('[data-subnav-toggle]');
+  if (subToggle) {
+    var subnav = document.getElementById(subToggle.getAttribute('aria-controls'));
+    var setSub = function (open) { subToggle.setAttribute('aria-expanded', String(open)); subnav.classList.toggle('is-open', open); };
+    subToggle.addEventListener('click', function () { setSub(subToggle.getAttribute('aria-expanded') !== 'true'); });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.has-sub')) setSub(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && subToggle.getAttribute('aria-expanded') === 'true') { setSub(false); subToggle.focus(); }
+    });
+  }
+
   // ── Mobile menu ───────────────────────────────────────────────────────────
   var toggle = document.querySelector('[data-menu-toggle]');
   var menu = document.querySelector('[data-menu]');

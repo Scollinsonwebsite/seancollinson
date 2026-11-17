@@ -6,7 +6,7 @@ export const meta = {
   title: 'Divorce, Family, Civil and Business Mediation | Los Angeles',
   description:
     'Private mediation for divorce, custody, legal separation, civil, workplace, and business disputes in California, with virtual sessions available nationwide.',
-  h1: 'A Better Way to Resolve Difficult Disputes',
+  h1: 'Mediation Services in Los Angeles',
 };
 
 const comparison = [

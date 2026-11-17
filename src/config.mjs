@@ -59,6 +59,24 @@ export const office = {
   phoneDisplay: '(818) 402-7500',
 };
 
+// Google rating, as supplied by Sean on 2026-11-17 (Google Business Profile).
+// Shown as text with a link to the source. Never add AggregateRating or
+// Review schema for these: Google treats self-published review markup as
+// ineligible, and tests/qa.mjs blocks it.
+export const reviews = {
+  rating: '4.9',
+  count: 30,
+  source: 'Google',
+  // Replace with the exact Google Business Profile link when available.
+  url: 'https://www.google.com/maps/search/?api=1&query=The+Mediation+Office+of+Sean+Collinson+15301+Ventura+Blvd+Sherman+Oaks+CA+91403',
+};
+
+// Areas served, confirmed by Sean on 2026-11-17.
+export const areasServed = [
+  'Sherman Oaks', 'Encino', 'Studio City', 'Van Nuys', 'Burbank', 'Glendale',
+  'Pasadena', 'Beverly Hills', 'West Los Angeles', 'Santa Monica', 'the San Fernando Valley',
+];
+
 // Social profiles. Only list real, active profiles owned by the practice.
 export const social = [
   // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/…' },

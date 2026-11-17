@@ -17,6 +17,9 @@ import * as mediation from './src/pages/mediation.mjs';
 import * as divorce from './src/pages/divorce.mjs';
 import * as custody from './src/pages/custody.mjs';
 import * as support from './src/pages/support.mjs';
+import { spousal, property, separation, paternity, holidays } from './src/pages/services-family.mjs';
+import { business, workplace, howItWorks, faq } from './src/pages/services-other.mjs';
+import { blogPages } from './src/pages/blog.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -78,7 +81,12 @@ writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
 
 // ── Pages ───────────────────────────────────────────────────────────────────
-const primary = [home, about, mediation, divorce, custody, support, consultation, videos, masterclass, contactPage];
+const primary = [
+  home, about, mediation, howItWorks, faq,
+  divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace,
+  consultation, videos, masterclass, contactPage,
+  ...blogPages(),
+];
 const all = [...primary, ...legalPages, notfound];
 for (const p of all) {
   const html = minifyHtml(p.render());

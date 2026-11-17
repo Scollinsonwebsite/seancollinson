@@ -1,4 +1,4 @@
-import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial } from '../lib/render.mjs';
+import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial, services, guides, officeAddress, officePhoneLink, reviewsLine, areasLine } from '../lib/render.mjs';
 
 export const meta = {
   path: '/about/',
@@ -112,6 +112,29 @@ ${partial('about-hero.html')}
       ${values.map(([t, d]) => `<div class="value"><dt>${t}</dt><dd>${d}</dd></div>`).join('')}
     </dl>
     <p class="section__aside">Sean also teaches these skills to leaders and teams in the <a href="/masterclass/">Think Like a Hostage Negotiator masterclass</a>.</p>
+  </div>
+</section>
+
+<section class="section section--ivory" aria-labelledby="mediates-title">
+  <div class="wrap narrow prose">
+    <h2 id="mediates-title" class="section__title">What Sean mediates</h2>
+    <p>Sean brings the same disciplined, neutral approach to every kind of dispute, from the most personal family decisions to business and workplace conflict:</p>
+    <ul>
+      ${services.map((s) => `<li><a href="${s.path}">${s.label}</a></li>`).join('\n      ')}
+    </ul>
+    <p>New to mediation? Start with <a href="${guides[0].path}">how mediation works</a> or the <a href="${guides[1].path}">FAQ</a>.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="office-title">
+  <div class="wrap narrow prose">
+    <h2 id="office-title" class="section__title">In person in Sherman Oaks, or online</h2>
+    <p>Sessions are held at the office in Sherman Oaks or by Zoom, for parties throughout California and nationwide.</p>
+    <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
+    <h3>Areas served</h3>
+    <p>${areasLine()}, plus virtual sessions across California and nationwide.</p>
+    <h3>What clients say</h3>
+    <p>${reviewsLine()}</p>
   </div>
 </section>
 
