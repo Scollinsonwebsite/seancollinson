@@ -88,7 +88,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between mediation and court?',
-    a: `<p>In mediation, you and the other party decide the outcome together, in private. In court, a judge decides the contested issues, and the proceedings are generally public. Mediation is more private, more flexible, and less adversarial. Court remains available if mediation does not resolve everything.</p>`,
+    a: `<p>In mediation, you and the other party decide the outcome together, in private. In court, a judge decides the contested issues, and the proceedings are public. Mediation is more private, more flexible, and less adversarial. Court remains available if mediation does not resolve everything.</p>`,
   },
   {
     q: 'Can mediation address custody, support, and property?',

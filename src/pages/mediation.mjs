@@ -91,7 +91,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between divorce mediation and litigation?',
-    a: `<p>In litigation, each side presents its case and a judge decides contested issues, and the proceedings are generally public. In mediation, the parties decide together, in private, with the help of a neutral. Mediation is more private, more flexible, and less adversarial. Litigation remains available if mediation does not resolve everything.</p>`,
+    a: `<p>In litigation, each side presents its case and a judge decides contested issues, and the proceedings are public. In mediation, the parties decide together, in private, with the help of a neutral. Mediation is more private, more flexible, and less adversarial. Litigation remains available if mediation does not resolve everything.</p>`,
   },
   {
     q: 'What should I expect in divorce mediation?',
