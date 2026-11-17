@@ -84,7 +84,7 @@ export const scheduler = {
 
 // Analytics and Search Console. Never invent IDs.
 export const analytics = {
-  ga4MeasurementId: null, // e.g. 'G-XXXXXXXXXX'
+  ga4MeasurementId: 'G-MJXLZN2W0J', // GA4 web stream for the Mediation website, added 2026-11-17
   googleSiteVerification: null, // content value of the google-site-verification meta tag
 };
 
