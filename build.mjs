@@ -167,7 +167,8 @@ const csp = [
 // paths, so nothing else (WordPress, other domains) is affected.
 const hostRe = `^(www\\.)?${host.replace(/\./g, '\\.')}$`;
 const ownRoutes = [...primary, ...legalPages].map((p) => p.meta.path.replace(/\//g, '')).filter(Boolean);
-const ownPathRe = `^/($|(${ownRoutes.join('|')})(/|$)|assets/|forms/|404\\.html$)`;
+// Apache serves "/" as "/index.html" internally, so match that name too.
+const ownPathRe = `^/($|index\\.html$|(${ownRoutes.join('|')})(/|$)|assets/|forms/|404\\.html$)`;
 const ours = `%{HTTP_HOST} =~ m#${hostRe}#i && %{REQUEST_URI} =~ m#${ownPathRe}#`;
 const hstsLine = site.domainConfirmed
   ? `\n  Header always set Strict-Transport-Security "max-age=31536000" "expr=${ours}"`
