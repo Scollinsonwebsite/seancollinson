@@ -347,7 +347,10 @@ export const jsonld = (graph) =>
     : '';
 
 // ── Document ─────────────────────────────────────────────────────────────────
-export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '' }) {
+// Hand-built page sections kept as exact HTML (ported from the live site).
+export const partial = (name) => readFileSync(join(ctx.srcDir, 'partials', name), 'utf8').replace(/\n$/, '');
+
+export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '', headExtra = '', bodyEnd = '' }) {
   const canonical = abs(path);
   const ogImage = abs('/assets/img/social-share.jpg');
   const robots = noindex || isDraft() ? '<meta name="robots" content="noindex, follow">' : '';
@@ -391,6 +394,7 @@ ${path === '/404.html' ? '' : `<meta property="og:url" content="${canonical}">`}
 <link rel="preload" href="/assets/fonts/schibsted-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css?v=${ctx.version}">
 ${jsonld(schema)}
+${headExtra}
 ${ga}
 </head>
 <body class="${bodyClass}${isDraft() ? ' is-draft' : ''}">
@@ -402,6 +406,7 @@ ${body}
 ${footer()}
 ${quickRequestDialog()}
 <script src="/assets/js/site.js?v=${ctx.version}" defer></script>
+${bodyEnd}
 </body>
 </html>
 `;

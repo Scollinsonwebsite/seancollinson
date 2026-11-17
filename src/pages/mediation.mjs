@@ -1,4 +1,4 @@
-import { layout, ctaBand, breadcrumbs, faqList, faqSchema, CTA_PRIMARY } from '../lib/render.mjs';
+import { layout, ctaBand, breadcrumbs, faqList, faqSchema, partial, CTA_PRIMARY } from '../lib/render.mjs';
 
 export const meta = {
   path: '/mediation/',
@@ -153,25 +153,7 @@ const schemaFaqs = ['How much does divorce mediation cost?', 'How long does divo
 export function render() {
   const crumbs = breadcrumbs([{ name: 'Mediation', path: meta.path }]);
   const body = `
-<section class="page-hero" aria-labelledby="page-title">
-  <div class="wrap">${crumbs.html}</div>
-  <div class="wrap">
-    <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
-    <p class="page-hero__lede">Mediation is often the best path because it gives you greater control over the outcome while reducing the cost, delay, stress, and uncertainty of litigation. Instead of leaving critical decisions to a judge, the parties work with a neutral mediator in a private and confidential setting to develop practical agreements designed around their unique needs.</p>
-    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
-    <nav class="jump" aria-label="On this page">
-      <p class="jump__label">On this page</p>
-      <ul>
-        <li><a href="#how-mediation-works">How mediation works</a></li>
-        <li><a href="#comparison">Mediation versus litigation</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#process">The process</a></li>
-        <li><a href="#what-to-bring">What to bring</a></li>
-        <li><a href="#faq">Questions</a></li>
-      </ul>
-    </nav>
-  </div>
-</section>
+${partial('mediation-hero.html')}
 
 <section class="section" id="how-mediation-works" aria-labelledby="works-title">
   <div class="wrap split split--text">
@@ -260,6 +242,7 @@ ${ctaBand({
 })}
 `;
   return layout({
+    headExtra: partial('mediation-head.html'),
     path: meta.path,
     title: meta.title,
     description: meta.description,

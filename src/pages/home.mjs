@@ -1,7 +1,7 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, faqSchema, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, organizationSchema, businessSchema, personSchema, officeAddress, officePhoneLink,
+  websiteSchema, organizationSchema, businessSchema, personSchema, partial, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 
@@ -192,6 +192,7 @@ function bento() {
     </article>
 
   </div>
+${partial('home-video.html')}
 </section>`;
 }
 
@@ -318,5 +319,7 @@ ${ctaBand({
     body,
     schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-home',
+    headExtra: partial('home-head.html'),
+    bodyEnd: partial('home-script.html'),
   });
 }

@@ -1,4 +1,4 @@
-import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY } from '../lib/render.mjs';
+import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial } from '../lib/render.mjs';
 
 export const meta = {
   path: '/about/',
@@ -44,19 +44,7 @@ const values = [
 export function render() {
   const crumbs = breadcrumbs([{ name: 'About', path: meta.path }]);
   const body = `
-<section class="page-hero page-hero--split" aria-labelledby="page-title">
-  <div class="wrap">${crumbs.html}</div>
-  <div class="wrap page-hero__grid">
-    <div>
-      <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
-      <p class="page-hero__lede">An experienced neutral who brings order, calm, and practical judgment to disputes that feel stuck, from divorce and custody to business and civil conflict.</p>
-      <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>
-    </div>
-    <figure class="page-hero__figure">
-      ${photo('portrait', { eager: true, sizes: '(min-width: 1000px) 32vw, 90vw' })}
-    </figure>
-  </div>
-</section>
+${partial('about-hero.html')}
 
 <section class="section" aria-labelledby="bio-title">
   <div class="wrap narrow prose">
@@ -134,6 +122,7 @@ ${ctaBand({
 })}
 `;
   return layout({
+    headExtra: partial('about-head.html'),
     path: meta.path,
     title: meta.title,
     description: meta.description,
