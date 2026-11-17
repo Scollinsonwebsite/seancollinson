@@ -1,4 +1,4 @@
-import { layout, ctaBand, breadcrumbs, faqList, CTA_PRIMARY } from '../lib/render.mjs';
+import { layout, ctaBand, breadcrumbs, faqList, faqSchema, CTA_PRIMARY } from '../lib/render.mjs';
 
 export const meta = {
   path: '/mediation/',
@@ -91,7 +91,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between divorce mediation and litigation?',
-    a: `<p>In litigation, each side presents its case and a judge decides contested issues. In mediation, the parties decide together with the help of a neutral. Mediation is generally more private, more flexible, and less adversarial. Litigation remains available if mediation does not resolve everything.</p>`,
+    a: `<p>In litigation, each side presents its case and a judge decides contested issues, and the proceedings are generally public. In mediation, the parties decide together, in private, with the help of a neutral. Mediation is more private, more flexible, and less adversarial. Litigation remains available if mediation does not resolve everything.</p>`,
   },
   {
     q: 'What should I expect in divorce mediation?',
@@ -107,7 +107,7 @@ const faqs = [
   },
   {
     q: 'How long does divorce mediation take?',
-    a: `<p>It varies with the number and complexity of the issues and how quickly information is exchanged. Some couples resolve everything in one or two sessions; others meet several times over a few weeks or months. There is no fixed timeline, and no one can promise one.</p>`,
+    a: `<p>It depends on how many issues are in dispute, how complex the finances are, and how prepared both sides are. Some matters settle in a single session; others take several sessions over a few weeks. There is no fixed timeline, and no one can promise one.</p>`,
   },
   {
     q: 'How much does divorce mediation cost?',
@@ -146,6 +146,9 @@ const faqs = [
     a: `<p>Yes. Online mediation by Zoom is available for parties throughout California and nationwide. Virtual sessions can use private breakout rooms, which many people find easier than sitting across the table. Sean confirms the format and technology in advance.</p>`,
   },
 ];
+
+// The cost, timeline, and mediation-versus-litigation questions carry FAQPage schema.
+const schemaFaqs = ['How much does divorce mediation cost?', 'How long does divorce mediation take?', 'What is the difference between divorce mediation and litigation?'];
 
 export function render() {
   const crumbs = breadcrumbs([{ name: 'Mediation', path: meta.path }]);
@@ -261,7 +264,7 @@ ${ctaBand({
     title: meta.title,
     description: meta.description,
     body,
-    schema: [crumbs.schema],
+    schema: [crumbs.schema, faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-mediation',
   });
 }

@@ -1,6 +1,6 @@
 import { claims, testimonials } from '../config.mjs';
 import {
-  layout, photo, ctaBand, faqList, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
+  layout, photo, ctaBand, faqList, faqSchema, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
   websiteSchema, organizationSchema, businessSchema, personSchema, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
@@ -83,10 +83,21 @@ const faqs = [
     a: `<p>It depends on how many issues are in dispute, how complex the finances are, and how prepared both sides are. Some matters settle in a single session; others take several sessions over a few weeks. You will have a clearer sense after the consultation.</p>`,
   },
   {
+    q: 'How much does mediation cost?',
+    a: `<p>Cost depends on the number of sessions and the preparation required. Mediation is often less expensive than contested litigation because it involves fewer hearings and less formal discovery, but every matter is different. Fees and payment terms are explained during the <a href="/consultation/">consultation</a>.</p>`,
+  },
+  {
+    q: 'What is the difference between mediation and court?',
+    a: `<p>In mediation, you and the other party decide the outcome together, in private. In court, a judge decides the contested issues, and the proceedings are generally public. Mediation is more private, more flexible, and less adversarial. Court remains available if mediation does not resolve everything.</p>`,
+  },
+  {
     q: 'Can mediation address custody, support, and property?',
     a: `<p>Yes. Parenting schedules, decision-making, child and spousal support, property, debt, and retirement assets can all be discussed in mediation. <a href="/mediation/#services">See the full list of mediation services</a>.</p>`,
   },
 ];
+
+// The cost, timeline, and mediation-versus-court questions carry FAQPage schema.
+const schemaFaqs = ['How much does mediation cost?', 'How long does mediation take?', 'What is the difference between mediation and court?'];
 
 function verifiedClaims() {
   const enabled = Object.values(claims).filter((c) => c.enabled && c.value && c.note);
@@ -305,7 +316,7 @@ ${ctaBand({
     title: meta.title,
     description: meta.description,
     body,
-    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema()],
+    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-home',
   });
 }

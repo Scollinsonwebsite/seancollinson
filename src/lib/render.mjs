@@ -425,6 +425,19 @@ export function ctaBand({ heading, text, primary = CTA_PRIMARY, secondary = null
 export const slug = (s) =>
   String(s).toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
+// FAQPage structured data for the given FAQ items. The answer text is the
+// same HTML shown on the page, so the markup always matches what visitors see.
+export function faqSchema(items) {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: items.map((q) => ({
+      '@type': 'Question',
+      name: q.q,
+      acceptedAnswer: { '@type': 'Answer', text: q.a },
+    })),
+  };
+}
+
 // FAQ list rendered as native disclosure widgets (keyboard accessible).
 export function faqList(items, { idPrefix = 'faq' } = {}) {
   return `<div class="faq">${items
