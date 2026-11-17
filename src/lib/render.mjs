@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { site, contact, social, analytics, images, legal } from '../config.mjs';
+import { site, contact, office, social, analytics, images, legal } from '../config.mjs';
 import { icon } from './icons.mjs';
 import { quickRequestDialog } from './forms.mjs';
 
@@ -33,6 +33,10 @@ export const phoneLink = (cls = '') =>
   hasPhone() ? `<a class="${cls}" href="tel:${esc(contact.phone)}">${esc(contact.phoneDisplay)}</a>` : '';
 export const emailLink = (cls = '') =>
   hasEmail() ? `<a class="${cls}" href="mailto:${esc(contact.email)}">${esc(contact.email)}</a>` : '';
+
+export const officeAddress = () =>
+  `${esc(office.name)}, ${esc(office.street)}, ${esc(office.city)}, ${esc(office.region)} ${esc(office.postalCode)}`;
+export const officePhoneLink = () => `<a href="tel:${esc(office.phone)}">${esc(office.phoneDisplay)}</a>`;
 
 // ── Images ───────────────────────────────────────────────────────────────────
 // Returns responsive <picture> markup if the optimised files exist (see
@@ -149,6 +153,8 @@ function footer() {
         .join('')}</ul>`
     : '';
   const contactLines = [
+    `<li><address style="font-style:normal">${officeAddress()}</address></li>`,
+    `<li>Phone: ${officePhoneLink()}</li>`,
     hasPhone() ? `<li>Phone: ${phoneLink()}</li>` : isDraft() ? `<li>${ph('office phone number')}</li>` : '',
     hasEmail() ? `<li>Email: ${emailLink()}</li>` : isDraft() ? `<li>${ph('office email address')}</li>` : '',
     !hasPhone() && !hasEmail()

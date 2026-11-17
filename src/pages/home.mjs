@@ -1,7 +1,7 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, businessSchema, personSchema,
+  websiteSchema, businessSchema, personSchema, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 
@@ -11,7 +11,8 @@ export const meta = {
   title: 'Los Angeles Divorce Mediator | Sean Collinson',
   description:
     'Resolve divorce, family, civil, and business disputes privately with experienced Los Angeles mediator Sean Collinson. In-person and virtual mediation.',
-  h1: 'Resolve Conflict Without Losing Control',
+  h1: 'Los Angeles Divorce and Family Mediator',
+  subtitle: 'Resolve Conflict Without Losing Control',
 };
 
 const services = [
@@ -145,6 +146,7 @@ function bento() {
         <li>${icon('map-pin', 'icon icon--sm')} In person across California</li>
         <li>${icon('video', 'icon icon--sm')} By Zoom, nationwide</li>
       </ul>
+      <address style="font-style:normal;font-size:0.95rem;color:var(--muted);margin:0 0 1rem">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
       <a class="btn btn--primary btn--block btn--sm" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </article>
 
@@ -189,6 +191,7 @@ export function render() {
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
+      <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--white);margin:0 0 0.75em">${meta.subtitle}</p>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
       <div class="hero__actions">
         <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>

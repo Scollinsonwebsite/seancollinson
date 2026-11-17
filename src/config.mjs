@@ -46,6 +46,19 @@ export const contact = {
   mapEmbedUrl: null,
 };
 
+// Office name, address, and phone shown in the footer of every page and in the
+// home page consultation tile (added 2026-11-17). Kept separate from `contact`
+// so the mobile call bar, contact page, and schema are unchanged.
+export const office = {
+  name: 'The Mediation Office of Sean Collinson',
+  street: '15301 Ventura Blvd',
+  city: 'Sherman Oaks',
+  region: 'CA',
+  postalCode: '91403',
+  phone: '+18184027500',
+  phoneDisplay: '(818) 402-7500',
+};
+
 // Social profiles. Only list real, active profiles owned by the practice.
 export const social = [
   // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/…' },
