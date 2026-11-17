@@ -83,17 +83,16 @@ export const reviews = {
 // schema areaServed. The office itself is only in Sherman Oaks (see `office`).
 export const serviceRegion = {
   heading: 'Serving Southern California',
-  line: 'In person across Southern California, and by Zoom nationwide.',
+  line: 'In person across Southern California, and by Zoom nationwide. Office in Sherman Oaks.',
   counties: ['Los Angeles', 'Orange', 'Ventura', 'Riverside', 'San Bernardino', 'San Diego'],
-  cities: ['Los Angeles', 'Irvine', 'Woodland Hills', 'Encino', 'Sherman Oaks'],
+  cities: ['Los Angeles', 'Huntington Beach', 'Irvine', 'Burbank', 'Sherman Oaks'],
 };
 
-// About page "Areas served" list (Sean, 2026-11-17). Its cities intentionally
-// differ from serviceRegion.cities, as Sean specified for the About page.
+// About page "Areas served": the same single list as serviceRegion (Sean, 2026-11-17).
 export const areasServed = {
-  line: 'In person across Southern California, and by Zoom nationwide. Office in Sherman Oaks.',
-  counties: ['Los Angeles County', 'Orange County', 'Ventura County', 'Riverside County', 'San Bernardino County', 'San Diego County'],
-  cities: ['Los Angeles', 'Huntington Beach', 'Irvine', 'Burbank', 'Sherman Oaks'],
+  line: serviceRegion.line,
+  counties: serviceRegion.counties.map((c) => `${c} County`),
+  cities: serviceRegion.cities,
 };
 
 // Social profiles. Only list real, active profiles owned by the practice.
