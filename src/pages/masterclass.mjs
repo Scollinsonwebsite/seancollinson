@@ -135,8 +135,7 @@ ${calmSection()}
 </section>
 
 <section class="section section--ivory" aria-labelledby="instructor-title">
-  <div class="wrap split">
-    <div class="split__media">${photo('portrait', { sizes: '(min-width: 1000px) 30vw, 90vw', className: 'split__photo split__photo--narrow' })}</div>
+  <div class="wrap narrow">
     <div class="split__copy">
       <h2 id="instructor-title" class="section__title">Your instructor</h2>
       <p>Sean Collinson is a family and civil mediator with more than 22 years of experience. He trained through Harvard’s Program on Negotiation and Loyola Law School’s Mediating the Litigated Case program, and he is an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department.</p>

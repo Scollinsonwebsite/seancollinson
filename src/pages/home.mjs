@@ -277,7 +277,10 @@ ${bento()}
 <section class="section" aria-labelledby="about-preview-title">
   <div class="wrap split">
     <div class="split__media">
-      ${photo('office', { sizes: '(min-width: 1000px) 45vw, 90vw', className: 'split__photo' })}
+      <picture class="split__photo">
+        <source type="image/webp" srcset="/assets/img/about/sean-collinson-about-480.webp?v=20261027 480w, /assets/img/about/sean-collinson-about-800.webp?v=20261027 800w, /assets/img/about/sean-collinson-about-1200.webp?v=20261027 1200w, /assets/img/about/sean-collinson-about-1676.webp?v=20261027 1676w" sizes="(min-width: 1000px) 45vw, 90vw">
+        <img src="/assets/img/about/sean-collinson-about-1200.jpg?v=20261027" srcset="/assets/img/about/sean-collinson-about-480.jpg?v=20261027 480w, /assets/img/about/sean-collinson-about-800.jpg?v=20261027 800w, /assets/img/about/sean-collinson-about-1200.jpg?v=20261027 1200w, /assets/img/about/sean-collinson-about-1676.jpg?v=20261027 1676w" sizes="(min-width: 1000px) 45vw, 90vw" width="1676" height="939" alt="Sean Collinson, family and civil mediator, in his Los Angeles office" loading="lazy" decoding="async">
+      </picture>
     </div>
     <div class="split__copy">
       <h2 id="about-preview-title" class="section__title">A steady neutral for difficult conversations</h2>
@@ -320,6 +323,5 @@ ${ctaBand({
     schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-home',
     headExtra: partial('home-head.html'),
-    bodyEnd: partial('home-script.html'),
   });
 }

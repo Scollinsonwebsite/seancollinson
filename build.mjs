@@ -145,11 +145,11 @@ if (scheduler.url) frameSrc.push(new URL(scheduler.url).origin);
 if (contact.mapEmbedUrl) frameSrc.push(new URL(contact.mapEmbedUrl).origin);
 const csp = [
   "default-src 'self'",
-  `script-src 'self'${gaInline ? ` ${gaHash} https://www.googletagmanager.com` : ''}`,
+  `script-src 'self'${gaInline ? ` ${gaHash} https://*.googletagmanager.com` : ''}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://i.ytimg.com https://i.vimeocdn.com" + (gaInline ? ' https://www.google-analytics.com https://www.googletagmanager.com' : ''),
+  "img-src 'self' data: https://i.ytimg.com https://i.vimeocdn.com" + (gaInline ? ' https://*.google-analytics.com https://*.googletagmanager.com' : ''),
   "font-src 'self'",
-  "connect-src 'self'" + (gaInline ? ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com' : ''),
+  "connect-src 'self'" + (gaInline ? ' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com' : ''),
   `frame-src ${frameSrc.join(' ')}`,
   "form-action 'self'",
   "base-uri 'self'",
@@ -198,6 +198,11 @@ ${httpsBlock}
   RewriteRule ^contact-us/?$ /contact/ [R=301,L]
   RewriteCond %{HTTP_HOST} ${hostRe} [NC]
   RewriteRule ^(home|hello-world)/?$ / [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\\.)?seancollinson\\.com$ [NC]
+  RewriteRule ^(category/uncategorized|author/theneutral|feed|comments/feed)/?$ / [R=301,L]
+  # Yoast's WordPress sitemaps listed the old pages; point them at the real sitemap.
+  RewriteCond %{HTTP_HOST} ^(www\\.)?seancollinson\\.com$ [NC]
+  RewriteRule ^(sitemap_index|post-sitemap|page-sitemap|category-sitemap|author-sitemap)\\.xml$ /sitemap.xml [R=301,L]
 
   # /about/index.html -> /about/
   RewriteCond %{HTTP_HOST} ${hostRe} [NC]

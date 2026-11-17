@@ -1,5 +1,6 @@
 import { contact, site } from '../config.mjs';
-import { layout, breadcrumbs, esc, ph, isDraft, hasPhone, hasEmail, phoneLink, emailLink } from '../lib/render.mjs';
+import { office } from '../config.mjs';
+import { layout, breadcrumbs, esc, ph, isDraft, hasPhone, hasEmail, phoneLink, emailLink, officePhoneLink } from '../lib/render.mjs';
 import { field, formShell, warning, consentField } from '../lib/forms.mjs';
 
 export const meta = {
@@ -13,21 +14,16 @@ export const meta = {
 
 function details() {
   const rows = [];
-  if (hasPhone()) rows.push(['Phone', phoneLink()]);
-  else if (isDraft()) rows.push(['Phone', ph('office phone number')]);
+  rows.push(['Phone', officePhoneLink()]);
   if (hasEmail()) rows.push(['Email', emailLink()]);
   else if (isDraft()) rows.push(['Email', ph('office email address')]);
   if (contact.officeHours) rows.push(['Office hours', esc(contact.officeHours)]);
   else if (isDraft()) rows.push(['Office hours', ph('office hours')]);
-  if (contact.address) {
-    const a = contact.address;
-    rows.push(['Office', `<address>${esc(a.street)}<br>${esc(a.city)}, ${esc(a.region)} ${esc(a.postalCode)}</address>`]);
-  } else if (isDraft()) {
-    rows.push(['Office', ph('verified public office address, only if clients are received there')]);
-  }
+  rows.push(['Office', `<address>${esc(office.name)}<br>${esc(office.street)}<br>${esc(office.city)}, ${esc(office.region)} ${esc(office.postalCode)}</address>`]);
   rows.push(['Service area', esc(site.serviceArea)]);
   rows.push(['Virtual sessions', 'Mediation and consultations by Zoom for parties anywhere in the United States.']);
-  return `<dl class="contact-details">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+  return `<dl class="contact-details">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+<p><a class="btn btn--primary" href="tel:${esc(office.phone)}">Tap to call ${esc(office.phoneDisplay)}</a></p>`;
 }
 
 export function render() {
