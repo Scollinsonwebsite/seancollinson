@@ -88,7 +88,9 @@ ${photo}
 <div class="wrap">${crumbs.html}</div>
 <div class="wrap mh">
 <div class="mh__eyebrow"><h1 id="page-title" class="mh__name" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;margin:0;max-width:min(100%, 42rem)">${meta.h1}</h1><span class="mh__role">Sean Collinson, Mediator</span></div>
-<p class="page-hero__title mh__title"><span class="mh__line">High-Conflict Settlement Officer</span> <span class="mh__line mh__gold">High-Conflict Cases</span></p>
+<p class="page-hero__title mh__title"><span class="mh__line">High-Conflict Settlement Officer</span> <span class="mh__line mh__gold">I settle high-conflict cases</span></p>
+<p class="hc__calm">Sean brings the calm presence of a hostage negotiator and the staircase of calm, lowering the temperature one step at a time until the parties can focus on the decisions in front of them.</p>
+<p class="hc__pc">Sean can also serve as a parental coordinator for <a href="/child-custody-mediation/">parenting plans</a> and <a href="/holiday-parenting-schedules/">holiday schedules</a>.</p>
 <p class="hc__tagline">When a Case Is Stuck, Bring in a Different Kind of Neutral.</p>
 <p class="hc__kicker">High conflict settlement conferences for family and civil cases.</p>
 <div class="page-hero__lede mh__lede">
@@ -162,7 +164,7 @@ ${ctaBand({
     bodyClass: 'page-high-conflict-settlement-officer',
     // Read at render time, once the build has set ctx.srcDir.
     headExtra: `${partial('mediation-head.html')}
-<style>.page-high-conflict-settlement-officer .mh__line{white-space:normal}.page-high-conflict-settlement-officer .mh__title{max-width:9.5em}@media (min-width:820px){.page-high-conflict-settlement-officer .hero__media img{object-position:24% 20%}}.hc__tagline{margin:1.6rem 0 .4rem;font-family:var(--display);font-weight:700;font-size:var(--step-2);line-height:1.2;color:#fff;max-width:24em}.hc__kicker{margin:0;font-size:.8rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#e1c690}.page-high-conflict-settlement-officer .mh__lede p{margin:0 0 .8em}.hc__note{margin-top:1rem;font-size:.9rem;color:#d6cfc2}</style>`,
+<style>.page-high-conflict-settlement-officer .mh__line{white-space:normal}.page-high-conflict-settlement-officer .mh__title{max-width:9.5em}.page-high-conflict-settlement-officer .mh__title .mh__gold{font-size:.82em;margin-top:.15em}@media (min-width:820px){.page-high-conflict-settlement-officer .hero__media img{object-position:24% 20%}}.hc__tagline{margin:1.6rem 0 .4rem;font-family:var(--display);font-weight:700;font-size:var(--step-2);line-height:1.2;color:#fff;max-width:24em}.hc__kicker{margin:0;font-size:.8rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#e1c690}.page-high-conflict-settlement-officer .mh__lede p{margin:0 0 .8em}.hc__calm{margin:1.4rem 0 0;max-width:34em;font-size:var(--step-1);line-height:1.5;color:#f4efe6}.hc__pc{margin:.7rem 0 0;max-width:34em;color:#d6cfc2}.hc__pc a{color:#e1c690}.hc__note{margin-top:1rem;font-size:.9rem;color:#d6cfc2}</style>`,
   });
 }
 

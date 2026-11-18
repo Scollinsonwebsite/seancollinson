@@ -47,6 +47,11 @@ const services = [
     href: '/mediation/#partnership-contract-workplace',
     text: 'Employment conflict, landlord and tenant matters, and neighbor or community disagreements.',
   },
+  {
+    title: 'High-conflict settlement officer',
+    href: '/high-conflict-settlement-officer/',
+    text: 'For family and civil cases that are stuck. Sean also serves as a parental coordinator for parenting plans and holiday schedules.',
+  },
 ];
 
 const steps = [
@@ -205,6 +210,7 @@ export function render() {
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
       <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--white);margin:0 0 0.75em">${meta.subtitle}</p>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
+      <p class="hero__lede">Case stuck? Sean also serves as a <a href="/high-conflict-settlement-officer/" style="color:var(--white);text-decoration:underline;text-underline-offset:3px">High-Conflict Settlement Officer</a> and parental coordinator.</p>
       <div class="hero__actions">
         <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
         <a class="btn btn--glass" href="/mediation/">${CTA_SECONDARY}</a>
@@ -328,6 +334,6 @@ ${ctaBand({
     body,
     schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
     bodyClass: 'page-home',
-    headExtra: partial('home-head.html'),
+    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}</style>',
   });
 }
