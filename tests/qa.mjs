@@ -54,7 +54,7 @@ for (const [path, html] of Object.entries(pages)) {
   for (const m of html.matchAll(/<iframe\b[^>]*>/g)) if (!/\stitle="/.test(m[0])) fail(`${path}: <iframe> without title`);
   // Positioning rules
   const text = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
-  for (const re of [/\blaw firm\b/i, /\bEsq\.?\b/, /\battorney at law\b/i, /\b(best|top|leading|#1|number one)\s+(divorce\s+)?mediator\b/i, /\bguarantee(s|d)?\b(?! a particular| any| a similar| a result| a specific)/i]) {
+  for (const re of [/\blaw firm\b/i, /\bEsq\.?\b/, /\battorney at law\b/i, /\b(best|top|leading|#1|number one)\s+(divorce\s+)?mediator\b/i, /\bguarantee(s|d)?\b(?! a particular| any| a similar| a result| a specific| that the case will settle)/i]) {
     const hit = text.match(re);
     if (hit && !/no result is guaranteed/i.test(hit.input.slice(Math.max(0, hit.index - 30), hit.index + 40))) {
       // "best divorce mediator" is allowed only inside quotation marks in the how-to-choose FAQ

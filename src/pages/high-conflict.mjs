@@ -1,14 +1,14 @@
-// High-Conflict Settlement Officer page: shared service template with the
-// Mediation page's gold conference-room hero.
-import { servicePage, costAnswer, timingAnswer } from '../lib/service-page.mjs';
-import { partial, CTA_PRIMARY } from '../lib/render.mjs';
+// High-Conflict Settlement Officer page. Copy supplied by Sean (2026-11-18);
+// hero uses the Mediation page's gold conference-room style.
+import { office } from '../config.mjs';
+import { layout, breadcrumbs, faqList, faqSchema, ctaBand, partial, esc } from '../lib/render.mjs';
 
 const meta = {
   path: '/high-conflict-settlement-officer/',
   out: 'high-conflict-settlement-officer/index.html',
-  title: 'High-Conflict Settlement Officer in Los Angeles | Sean Collinson',
+  title: 'High Conflict Settlement Officer | Family and Civil Cases | Sean Collinson',
   description:
-    'Private settlement sessions for high-conflict divorce, custody, and business disputes in Los Angeles, led by mediator and FBI-trained crisis negotiator Sean Collinson.',
+    'When family or civil litigation is deadlocked, Sean Collinson brings 22+ years of mediation experience and crisis negotiation training to help attorneys and parties move toward resolution.',
   h1: 'High-Conflict Settlement Officer in Los Angeles',
 };
 
@@ -17,79 +17,151 @@ const photo = `<div class="hero__media"><picture class="hero__photo">
 <img src="/assets/img/mediation/sean-collinson-mediation-800.jpg?v=20261027" srcset="/assets/img/mediation/sean-collinson-mediation-480.jpg?v=20261027 480w, /assets/img/mediation/sean-collinson-mediation-800.jpg?v=20261027 800w, /assets/img/mediation/sean-collinson-mediation-1118.jpg?v=20261027 1118w" sizes="(min-width: 820px) 66vw, 100vw" width="1118" height="638" alt="" fetchpriority="high">
 </picture></div>`;
 
-const hero = (crumbs, jumpNav) => `<section class="page-hero page-hero--photo page-hero--mediation" aria-labelledby="page-title">
+const arrow = `<svg class="mh__arrow" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
+const tel = `tel:${esc(office.phone)}`;
+
+const conferenceIncludes = [
+  'Private sessions with each side',
+  'Joint discussion when useful and appropriate',
+  'A clear agenda focused on unresolved issues',
+  'Careful listening to identify concerns beneath stated positions',
+  'Direct discussion of risks, options, and practical consequences',
+  'Testing proposals for feasibility and durability',
+  'Help documenting terms the parties reach',
+];
+
+const whenToCall = [
+  'The parties are deadlocked despite prior negotiations or mediation.',
+  'Counsel believes the matter may settle, but the client is not moving.',
+  'Offers and counteroffers have stopped producing meaningful progress.',
+  'Strong emotions, mistrust, or communication breakdown are driving the case.',
+  'The parties are facing a trial, hearing, or expensive next phase of litigation.',
+  'A family dispute requires careful attention to ongoing relationships or parenting issues.',
+  'A civil dispute involves significant financial exposure, reputational concerns, or business relationships.',
+  'Counsel needs a neutral who can remain steady, direct, and focused under pressure.',
+];
+
+const steps = [
+  ['Counsel contacts the office', 'Counsel provides a brief description of the matter, the parties, the issues still open, and what has prevented progress.'],
+  ['The case is assessed for fit', 'The office discusses the requested process, participants, timing, conflicts, and any relevant case management needs.'],
+  ['The conference is prepared', 'Counsel and the parties receive instructions about scheduling, submissions, attendance, and the issues to be addressed.'],
+  ['The settlement conference takes place', 'Sean conducts a structured process, which may include separate sessions, joint discussion, or both, depending on the case and the parties’ agreement.'],
+  ['Any agreement is documented', 'If the parties reach agreement, they and their counsel determine how the terms should be documented and finalized.'],
+];
+
+const attorneyChecklist = [
+  'Case type and jurisdiction',
+  'Counsel and party names for conflict review',
+  'Issues resolved and issues still open',
+  'Prior settlement efforts',
+  'Trial or hearing dates, if set',
+  'Whether the parties prefer virtual or in-person sessions',
+  'Any accessibility, safety, or participation concerns',
+];
+
+const faqs = [
+  { q: 'Is Sean acting as a judge or arbitrator?', a: '<p>No. Sean serves as a private neutral settlement officer or mediator, as agreed by the participants. He does not decide the case, issue a ruling, or impose a settlement.</p>', open: true },
+  { q: 'Does Sean represent either party?', a: '<p>No. Sean is a neutral and does not represent any participant. Each party should consult their own attorney about legal advice and settlement decisions.</p>' },
+  { q: 'Can Sean guarantee that the case will settle?', a: '<p>No. Settlement depends on the parties, their authority, the facts, the law, and the available options. The conference is designed to support focused negotiations, but no result is guaranteed.</p>' },
+  { q: 'Can the conference be conducted virtually?', a: '<p>Virtual sessions may be available by arrangement. In-person availability, location, and logistics are confirmed during scheduling.</p>' },
+  { q: 'Does this service replace a party’s attorney?', a: '<p>No. Parties should have counsel advise them about their rights, risks, and proposed settlement terms. Sean’s role is to facilitate and support settlement discussions as a neutral.</p>' },
+  { q: 'Are settlement discussions confidential?', a: '<p>Confidentiality depends on the process selected, applicable law, and any written agreement or court order. The applicable confidentiality terms should be confirmed before the conference begins.</p>' },
+  { q: 'Does Sean accept cases outside California?', a: '<p>Appropriate matters may be considered nationwide by arrangement, subject to jurisdiction, case type, conflicts, and logistics.</p>' },
+];
+
+const list = (items) => `<ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>`;
+const section = (id, title, lede, html, ivory) => `<section class="section${ivory ? ' section--ivory' : ''}" id="${id}" aria-labelledby="${id}-title">
+  <div class="wrap narrow prose">
+    <h2 id="${id}-title" class="section__title">${title}</h2>
+    ${lede ? `<p class="section__lede">${lede}</p>` : ''}
+    ${html}
+  </div>
+</section>`;
+
+export function render() {
+  const crumbs = breadcrumbs([{ name: 'High-Conflict Settlement Officer', path: meta.path }]);
+  const body = `
+<section class="page-hero page-hero--photo page-hero--mediation" aria-labelledby="page-title">
 ${photo}
-<div class="wrap">${crumbs}</div>
+<div class="wrap">${crumbs.html}</div>
 <div class="wrap mh">
 <div class="mh__eyebrow"><h1 id="page-title" class="mh__name" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;margin:0;max-width:min(100%, 42rem)">${meta.h1}</h1><span class="mh__role">Sean Collinson, Mediator</span></div>
 <p class="page-hero__title mh__title"><span class="mh__line">High-Conflict Settlement Officer</span> <span class="mh__line mh__gold">High-Conflict Cases</span></p>
-<p class="page-hero__lede mh__lede">When a case has turned into a war of attrition, the hardest part is getting both sides to a workable agreement. Sean brings structure, calm, and crisis-negotiation discipline to disputes that have stalled everywhere else.</p>
-<div class="btn-row"><a class="btn mh__cta" href="/consultation/" data-consult-open>${CTA_PRIMARY} <svg class="mh__arrow" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
-${jumpNav}
+<p class="hc__tagline">When a Case Is Stuck, Bring in a Different Kind of Neutral.</p>
+<p class="hc__kicker">High conflict settlement conferences for family and civil cases.</p>
+<div class="page-hero__lede mh__lede">
+<p>When attorneys cannot get their clients aligned, negotiations have stopped moving, or the parties are locked in a cycle of conflict, Sean Collinson steps in to structure the conversation and work toward a practical resolution.</p>
+<p>Sean combines more than 22 years of mediation experience with FBI crisis negotiation training and service as a volunteer negotiator with the Los Angeles County Sheriff’s Department. His approach is calm, direct, and focused on the issues keeping the case from moving forward.</p>
 </div>
-</section>`;
+<div class="btn-row"><a class="btn mh__cta" href="/consultation/" data-consult-open>Request a Case Consultation ${arrow}</a><a class="btn btn--glass" href="/contact/">Discuss a Settlement Conference</a></div>
+<p class="hc__note">Serving California and accepting appropriate matters nationwide by arrangement.</p>
+</div>
+</section>
 
-const cfg = {
-  meta,
-  crumb: 'High-Conflict Settlement Officer',
-  hero,
-  lede: '',
-  sections: [
-    {
-      id: 'what-it-is',
-      title: 'What a high-conflict settlement officer does',
-      jump: 'What it is',
-      html: `<p>Some disputes are not short on facts. They are short on trust. Custody battles, contested divorces, and business breakups can reach a point where every message escalates and every proposal is read as an attack. A settlement officer’s job is to change how the negotiation happens, so the people involved can reach terms they can live with.</p>
-    <p>Sean works as a neutral. He does not take sides, decide the outcome, represent either party, or give legal advice. He manages a structured, private process aimed at settlement, and the parties make the decisions.</p>`,
-    },
-    {
-      id: 'how-sessions-work',
-      title: 'How sessions work in high-conflict cases',
-      jump: 'How sessions work',
-      html: `<ul>
-      <li><strong>Separate rooms when needed:</strong> sessions can be joint, fully separate, or a mix, with Sean carrying proposals between the parties.</li>
-      <li><strong>Clear ground rules:</strong> how people speak to each other, how breaks work, and what happens if the conversation escalates.</li>
-      <li><strong>A focused agenda:</strong> one issue at a time, starting where progress is most likely.</li>
-      <li><strong>Pacing:</strong> enough time to think, without letting the case drift for months.</li>
-      <li><strong>In person or by Zoom:</strong> virtual sessions use private breakout rooms, which many people find easier than sitting across the table.</li>
-    </ul>`,
-    },
-    {
-      id: 'crisis-skills',
-      title: 'Crisis negotiation skills, applied to settlement',
-      jump: 'Crisis negotiation skills',
-      html: `<p>Sean is an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. Crisis negotiation is communication at its most demanding: active listening, emotional regulation, rapport, separating positions from interests, and turning those interests into specific, workable terms. Those are the skills high-conflict cases need most. <a href="/about/">Read about Sean’s background</a>.</p>`,
-    },
-    {
-      id: 'attorneys',
-      title: 'Working with attorneys',
-      html: `<p>Attorneys are welcome to attend or to be available during sessions. When the parties reach agreement, the key terms are written down so counsel can review them and prepare final documents. In family matters, agreements then move through the court process that finalizes them. See <a href="/divorce-mediation/">divorce mediation</a> and <a href="/child-custody-mediation/">child custody mediation</a>.</p>`,
-    },
-    {
-      id: 'not-right',
-      title: 'When this is not the right fit',
-      jump: 'When it is not right',
-      html: `<p>A structured process depends on both parties being able to participate safely and freely. If there is a history of abuse, threats, or intimidation, mediation may not be appropriate, or may need special safeguards. Raise any safety concern during the consultation, and consider speaking with an attorney or advocate.</p>`,
-    },
-  ],
-  faqTitle: 'Questions about high-conflict settlement',
-  faqs: [
-    { q: 'How long does a high-conflict settlement take?', a: timingAnswer('how entrenched the positions are, how complex the finances are'), open: true },
-    { q: 'How much does it cost?', a: costAnswer() },
-    { q: 'What if we still can’t agree?', a: `<p>Even when a full settlement is not reached, a structured session often narrows the dispute to a handful of issues and makes any remaining litigation shorter and less expensive. Court remains available for anything that is not resolved.</p>` },
-    { q: 'Can a settlement be changed later?', a: `<p>It depends on the terms. In family matters, custody, parenting time, and child support can usually be revisited when circumstances change, while property division is generally final once a judgment is entered. Business settlements are generally binding once signed. Ask your attorney how this applies before you sign.</p>` },
-  ],
-  seanTopic: 'high-conflict settlement sessions',
-  consultText: 'A private first conversation about the dispute, the people involved, the format, and fees.',
-  cta: { heading: 'Move a Stalled Case Toward Settlement', text: 'Book a confidential consultation to talk through the dispute and the next practical step.', secondary: { href: '/mediation/', label: 'Explore Mediation Services' } },
-};
+${section('problem', 'The case may be ready to settle. The people may not be.', '', `<p>Some cases stall because the legal issues are difficult. Others stall because the people involved cannot hear one another, cannot trust the process, or cannot authorize a move from their stated positions.</p>
+    <p>Counsel may be prepared to negotiate, but their client is not ready to make a decision. The parties may be talking past each other. Every offer may be treated as a provocation. A long history of conflict may be driving the negotiation more than the facts, risks, and available options.</p>
+    <p>When ordinary settlement discussions stop producing progress, a structured settlement conference can create a new path forward.</p>`)}
 
-// The gold hero's styles are read at render time, once the build has set ctx.srcDir.
-export const highConflict = { meta, render: () =>
-    servicePage({
-      ...cfg,
-      // Longer banner lines than the Mediation page: let them wrap on the left, clear of the photo.
-      headExtra: `${partial('mediation-head.html')}
-<style>.page-high-conflict-settlement-officer .mh__line{white-space:normal}.page-high-conflict-settlement-officer .mh__title{max-width:9.5em}</style>`,
-    }),
-};
+${section('what-sean-does', 'What Sean does', 'A focused, structured effort to move negotiations forward', `<p>Sean works with counsel and the parties to identify what is blocking settlement, lower the temperature where possible, and bring attention back to the decisions that need to be made.</p>
+    <p>Depending on the case and the parties’ agreement, the conference may include:</p>
+    ${list(conferenceIncludes)}
+    <p>The goal is not to pressure anyone into an agreement. The goal is to create conditions where the parties can make informed decisions and determine whether an acceptable resolution is possible.</p>`, true)}
+
+${section('when-to-call', 'When to call Sean', 'Consider a settlement conference when:', list(whenToCall))}
+
+${section('family', 'Family law settlement conferences', 'Family disputes need a process that can handle the personal stakes.', `<p>Family cases often involve more than dividing property or resolving a legal claim. They may involve children, support, financial security, trust, and an ongoing relationship between the parties.</p>
+    <p>Sean helps counsel and parties address unresolved family law issues in a structured setting. The conference can focus on the specific issues still in dispute, including custody and parenting arrangements, support, property division, and other financial or post-judgment matters.</p>
+    <p>The process is designed to keep discussions focused and respectful while recognizing the realities of the case. Any agreement remains the parties’ decision. In matters involving children, their interests and applicable legal standards remain central.</p>`, true)}
+
+${section('civil', 'Civil settlement conferences', 'A practical path for cases with real stakes and no forward movement.', `<p>Civil disputes can become entrenched even when both sides recognize the cost, risk, and uncertainty of continuing litigation.</p>
+    <p>Sean works with counsel and parties to clarify the disputed issues, examine settlement options, and identify terms that may be workable in practice. The conference may be appropriate for cases involving significant financial exposure, business or professional disputes, personal injury, contract claims, or other civil matters where the parties are prepared to explore resolution.</p>
+    <p>Each matter is reviewed for fit, conflicts, and the type of neutral process requested.</p>`)}
+
+${section('background', 'A different background at the settlement table', 'Calm under pressure. Direct about the decisions.', `<p>Sean Collinson is a family and civil mediator with more than 22 years of experience. He has completed negotiation training through Harvard’s Program on Negotiation and Loyola Law School’s Mediating the Litigated Case program. He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department.</p>
+    <p>Crisis negotiation training emphasizes disciplined listening, rapport, emotional awareness, and careful communication when people are under pressure. Those skills inform Sean’s settlement work. They do not replace legal analysis or the parties’ counsel. They help create a structured environment where difficult issues can be discussed directly.</p>
+    <blockquote class="pull-quote"><p>Different background. Steady process. A focused effort to find a workable path forward.</p></blockquote>
+    <p class="fine-print">Sean’s volunteer crisis-negotiation service is separate from his mediation practice. Neither the FBI nor the Los Angeles County Sheriff’s Department endorses this practice or its services.</p>`, true)}
+
+<section class="section" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <h2 id="process-title" class="section__title">How the process works</h2>
+    <ol class="steps" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
+      ${steps.map(([t, d]) => `<li class="step"><h3 class="step__title">${t}</h3><p>${d}</p></li>`).join('')}
+    </ol>
+  </div>
+</section>
+
+${section('attorneys', 'For attorneys', 'Refer the case when the negotiation needs a reset.', `<p>You do not need to wait until the eve of trial to bring in a settlement neutral. A conference may be useful when the legal analysis is complete but the negotiation is stuck, when client authorization is an obstacle, or when prior discussions have hardened the parties’ positions.</p>
+    <p>When contacting the office, please include:</p>
+    ${list(attorneyChecklist)}
+    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>Request a Confidential Case Consultation</a></div>`, true)}
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap narrow">
+    <h2 id="faq-title" class="section__title">Frequently asked questions</h2>
+    ${faqList(faqs, { idPrefix: 'faq' })}
+    <p class="fine-print">Sean Collinson serves as a neutral mediator or private settlement officer and does not represent either party. He does not act as a judge, arbitrator, or legal adviser to either side. Participation does not guarantee settlement. Each party should consult independent counsel regarding legal rights and proposed settlement terms. The applicable confidentiality rules depend on the process selected and should be confirmed before the conference begins.</p>
+  </div>
+</section>
+
+${ctaBand({
+  heading: 'The Case Is Stuck. Start a Focused Conversation.',
+  text: 'If the parties are locked in conflict and ordinary settlement efforts have stopped moving the case forward, discuss whether a structured settlement conference is appropriate.',
+  primary: 'Request a Case Consultation',
+  secondary: { href: tel, label: 'Call the Office' },
+})}
+`;
+  return layout({
+    path: meta.path,
+    title: meta.title,
+    description: meta.description,
+    body,
+    schema: [crumbs.schema, faqSchema(faqs)],
+    bodyClass: 'page-high-conflict-settlement-officer',
+    // Read at render time, once the build has set ctx.srcDir.
+    headExtra: `${partial('mediation-head.html')}
+<style>.page-high-conflict-settlement-officer .mh__line{white-space:normal}.page-high-conflict-settlement-officer .mh__title{max-width:9.5em}.hc__tagline{margin:1.6rem 0 .4rem;font-family:var(--display);font-weight:700;font-size:var(--step-2);line-height:1.2;color:#fff;max-width:24em}.hc__kicker{margin:0;font-size:.8rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#e1c690}.page-high-conflict-settlement-officer .mh__lede p{margin:0 0 .8em}.hc__note{margin-top:1rem;font-size:.9rem;color:#d6cfc2}</style>`,
+  });
+}
+
+export const highConflict = { meta, render };
