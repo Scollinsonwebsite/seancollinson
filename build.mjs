@@ -20,6 +20,7 @@ import * as support from './src/pages/support.mjs';
 import { spousal, property, separation, paternity, holidays } from './src/pages/services-family.mjs';
 import { business, workplace, howItWorks, faq } from './src/pages/services-other.mjs';
 import { blogPages } from './src/pages/blog.mjs';
+import { highConflict } from './src/pages/high-conflict.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -83,7 +84,7 @@ writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
 // ── Pages ───────────────────────────────────────────────────────────────────
 const primary = [
   home, about, mediation, howItWorks, faq,
-  divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace,
+  divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
   ...blogPages(),
 ];

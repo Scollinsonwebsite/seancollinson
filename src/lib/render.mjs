@@ -123,6 +123,7 @@ export const services = [
   { path: '/holiday-parenting-schedules/', label: 'Holiday schedules' },
   { path: '/business-mediation/', label: 'Civil and business' },
   { path: '/workplace-mediation/', label: 'Workplace' },
+  { path: '/high-conflict-settlement-officer/', label: 'High-conflict settlement' },
 ];
 export const guides = [
   { path: '/how-mediation-works/', label: 'How mediation works' },

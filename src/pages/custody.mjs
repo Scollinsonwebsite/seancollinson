@@ -107,7 +107,7 @@ export function render() {
       <li><strong>Time and pace:</strong> private sessions are scheduled around your family, and you can take the time a detailed plan needs.</li>
       <li><strong>Tone:</strong> mediation is more private, more flexible, and less adversarial, which matters when you will keep raising children together.</li>
     </ul>
-    <p>Private mediation does not replace legal advice. Many parents consult their own attorneys before signing a final agreement. <a href="/mediation/">See how mediation works</a>, or <a href="/divorce-mediation/">read about divorce mediation</a>.</p>
+    <p>Private mediation does not replace legal advice. Many parents consult their own attorneys before signing a final agreement. <a href="/mediation/">See how mediation works</a>, or <a href="/divorce-mediation/">read about divorce mediation</a>. For custody disputes that have become entrenched, see <a href="/high-conflict-settlement-officer/">high-conflict settlement</a>.</p>
   </div>
 </section>
 

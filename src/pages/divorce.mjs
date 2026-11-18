@@ -133,7 +133,7 @@ export function render() {
       <li>You care about privacy, cost, and keeping things as calm as possible</li>
     </ul>
     <p>You do not need to agree on everything to start. Most couples begin far apart on at least one issue.</p>
-    <p>Court may be the better path if there is a history of abuse, threats, or intimidation, if one spouse cannot participate safely and freely, or if one spouse refuses to share financial information. Raise any safety concern during the consultation, and consider speaking with an attorney or advocate. Court also remains available for anything mediation does not resolve.</p>
+    <p>Court may be the better path if there is a history of abuse, threats, or intimidation, if one spouse cannot participate safely and freely, or if one spouse refuses to share financial information. Raise any safety concern during the consultation, and consider speaking with an attorney or advocate. Court also remains available for anything mediation does not resolve. If your divorce has already become high-conflict, see <a href="/high-conflict-settlement-officer/">high-conflict settlement</a>.</p>
   </div>
 </section>
 

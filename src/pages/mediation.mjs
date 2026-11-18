@@ -49,7 +49,7 @@ const services = [
   {
     id: 'high-asset',
     title: 'High-asset and complex family matters',
-    body: `<p>High-asset divorce mediation often involves business ownership, equity compensation, multiple properties, trusts, or significant separate-property claims. These matters benefit from careful preparation, a clear agenda, and coordination with each party’s attorneys and financial advisors. Mediation also keeps sensitive financial details out of open court as far as possible.</p>`,
+    body: `<p>High-asset divorce mediation often involves business ownership, equity compensation, multiple properties, trusts, or significant separate-property claims. These matters benefit from careful preparation, a clear agenda, and coordination with each party’s attorneys and financial advisors. Mediation also keeps sensitive financial details out of open court as far as possible. For disputes that have become entrenched, see <a href="/high-conflict-settlement-officer/">high-conflict settlement</a>.</p>`,
   },
   {
     id: 'civil-and-business',
