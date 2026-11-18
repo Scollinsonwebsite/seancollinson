@@ -12,9 +12,11 @@ const meta = {
   h1: 'High-Conflict Settlement Officer in Los Angeles',
 };
 
+// Banner photo supplied by Sean (2026-11-18): Sean seated in the conference room.
+// Cropped to remove the screenshot frame and the caption label.
 const photo = `<div class="hero__media"><picture class="hero__photo">
-<source type="image/webp" srcset="/assets/img/mediation/sean-collinson-mediation-480.webp?v=20261027 480w, /assets/img/mediation/sean-collinson-mediation-800.webp?v=20261027 800w, /assets/img/mediation/sean-collinson-mediation-1118.webp?v=20261027 1118w" sizes="(min-width: 820px) 66vw, 100vw">
-<img src="/assets/img/mediation/sean-collinson-mediation-800.jpg?v=20261027" srcset="/assets/img/mediation/sean-collinson-mediation-480.jpg?v=20261027 480w, /assets/img/mediation/sean-collinson-mediation-800.jpg?v=20261027 800w, /assets/img/mediation/sean-collinson-mediation-1118.jpg?v=20261027 1118w" sizes="(min-width: 820px) 66vw, 100vw" width="1118" height="638" alt="" fetchpriority="high">
+<source type="image/webp" srcset="/assets/img/settlement/sean-collinson-settlement-480.webp?v=20261118 480w, /assets/img/settlement/sean-collinson-settlement-800.webp?v=20261118 800w, /assets/img/settlement/sean-collinson-settlement-1200.webp?v=20261118 1200w, /assets/img/settlement/sean-collinson-settlement-1600.webp?v=20261118 1600w" sizes="(min-width: 820px) 66vw, 100vw">
+<img src="/assets/img/settlement/sean-collinson-settlement-800.jpg?v=20261118" srcset="/assets/img/settlement/sean-collinson-settlement-480.jpg?v=20261118 480w, /assets/img/settlement/sean-collinson-settlement-800.jpg?v=20261118 800w, /assets/img/settlement/sean-collinson-settlement-1200.jpg?v=20261118 1200w, /assets/img/settlement/sean-collinson-settlement-1600.jpg?v=20261118 1600w" sizes="(min-width: 820px) 66vw, 100vw" width="1600" height="852" alt="Sean Collinson, mediator, seated in a conference room" fetchpriority="high">
 </picture></div>`;
 
 const arrow = `<svg class="mh__arrow" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
@@ -160,7 +162,7 @@ ${ctaBand({
     bodyClass: 'page-high-conflict-settlement-officer',
     // Read at render time, once the build has set ctx.srcDir.
     headExtra: `${partial('mediation-head.html')}
-<style>.page-high-conflict-settlement-officer .mh__line{white-space:normal}.page-high-conflict-settlement-officer .mh__title{max-width:9.5em}.hc__tagline{margin:1.6rem 0 .4rem;font-family:var(--display);font-weight:700;font-size:var(--step-2);line-height:1.2;color:#fff;max-width:24em}.hc__kicker{margin:0;font-size:.8rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#e1c690}.page-high-conflict-settlement-officer .mh__lede p{margin:0 0 .8em}.hc__note{margin-top:1rem;font-size:.9rem;color:#d6cfc2}</style>`,
+<style>.page-high-conflict-settlement-officer .mh__line{white-space:normal}.page-high-conflict-settlement-officer .mh__title{max-width:9.5em}@media (min-width:820px){.page-high-conflict-settlement-officer .hero__media img{object-position:24% 20%}}.hc__tagline{margin:1.6rem 0 .4rem;font-family:var(--display);font-weight:700;font-size:var(--step-2);line-height:1.2;color:#fff;max-width:24em}.hc__kicker{margin:0;font-size:.8rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#e1c690}.page-high-conflict-settlement-officer .mh__lede p{margin:0 0 .8em}.hc__note{margin-top:1rem;font-size:.9rem;color:#d6cfc2}</style>`,
   });
 }
 
