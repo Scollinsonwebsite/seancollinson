@@ -22,7 +22,7 @@ ${photo}
 <div class="wrap">${crumbs}</div>
 <div class="wrap mh">
 <div class="mh__eyebrow"><h1 id="page-title" class="mh__name" style="font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;margin:0;max-width:min(100%, 42rem)">${meta.h1}</h1><span class="mh__role">Sean Collinson, Mediator</span></div>
-<p class="page-hero__title mh__title"><span class="mh__line">High-Conflict Settlement Officer</span> <span class="mh__line mh__gold">I settle high-conflict cases.</span></p>
+<p class="page-hero__title mh__title"><span class="mh__line">High-Conflict Settlement Officer</span> <span class="mh__line mh__gold">High-Conflict Cases</span></p>
 <p class="page-hero__lede mh__lede">When a case has turned into a war of attrition, the hardest part is getting both sides to a workable agreement. Sean brings structure, calm, and crisis-negotiation discipline to disputes that have stalled everywhere else.</p>
 <div class="btn-row"><a class="btn mh__cta" href="/consultation/" data-consult-open>${CTA_PRIMARY} <svg class="mh__arrow" viewBox="0 0 24 12" aria-hidden="true" focusable="false"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
 ${jumpNav}
