@@ -51,7 +51,11 @@ export function render() {
       : '';
 
   const body = `
-<section class="page-hero" aria-labelledby="page-title">
+<section class="page-hero page-hero--photo page-hero--contact" aria-labelledby="page-title">
+  <div class="hero__media"><picture class="hero__photo">
+<source type="image/webp" srcset="/assets/img/contact/sean-collinson-contact-480.webp?v=20261118 480w, /assets/img/contact/sean-collinson-contact-800.webp?v=20261118 800w, /assets/img/contact/sean-collinson-contact-1200.webp?v=20261118 1200w, /assets/img/contact/sean-collinson-contact-1600.webp?v=20261118 1600w" sizes="(min-width: 820px) 62vw, 100vw">
+<img src="/assets/img/contact/sean-collinson-contact-800.jpg?v=20261118" srcset="/assets/img/contact/sean-collinson-contact-480.jpg?v=20261118 480w, /assets/img/contact/sean-collinson-contact-800.jpg?v=20261118 800w, /assets/img/contact/sean-collinson-contact-1200.jpg?v=20261118 1200w, /assets/img/contact/sean-collinson-contact-1600.jpg?v=20261118 1600w" sizes="(min-width: 820px) 62vw, 100vw" width="1600" height="885" alt="Sean Collinson, mediator, smiling in a dark suit" fetchpriority="high">
+</picture></div>
   <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
@@ -88,5 +92,6 @@ export function render() {
     body,
     schema: [crumbs.schema],
     bodyClass: 'page-contact',
+    headExtra: `<style>.page-hero--contact .hero__media{top:calc(var(--header-h) - 1rem);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%),linear-gradient(180deg,transparent 0,#000 2.5rem);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,#000 38%),linear-gradient(180deg,transparent 0,#000 2.5rem);mask-composite:intersect}.page-hero--contact .hero__media img{object-position:72% 0%}@media (min-width:820px){.page-hero--contact .page-hero__lede{max-width:28em}}@media (max-width:819px){.page-hero--contact{padding-top:calc(var(--header-h) + 62vw)}.page-hero--contact .hero__media{height:72vw;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 2rem,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 2rem,#000 55%,transparent 100%)}.page-hero--contact .hero__media img{object-position:68% 0%}}</style>`,
   });
 }

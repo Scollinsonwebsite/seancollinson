@@ -69,7 +69,7 @@ for (const f of ['social-share.jpg', 'logo.png']) {
 }
 if (existsSync(join(srcDir, 'assets/img/generated'))) copy('assets/img/generated', 'assets/img/generated');
 // Page photos added directly on the live site (home video poster, About and Mediation heroes).
-for (const d of ['home', 'about', 'mediation', 'settlement']) {
+for (const d of ['home', 'about', 'mediation', 'settlement', 'contact']) {
   if (existsSync(join(srcDir, 'assets/img', d))) copy(`assets/img/${d}`, `assets/img/${d}`);
 }
 copy('static/forms', 'forms');
