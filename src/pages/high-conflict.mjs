@@ -98,9 +98,9 @@ ${photo}
 </div>
 </section>
 
-${section('problem', 'The case may be ready to settle. The people may not be.', '', `<p>Some cases stall because the legal issues are difficult. Others stall because the people involved cannot hear one another, cannot trust the process, or cannot authorize a move from their stated positions.</p>
-    <p>Counsel may be prepared to negotiate, but their client is not ready to make a decision. The parties may be talking past each other. Every offer may be treated as a provocation. A long history of conflict may be driving the negotiation more than the facts, risks, and available options.</p>
-    <p>When ordinary settlement discussions stop producing progress, a structured settlement conference can create a new path forward.</p>`)}
+${section('problem', 'The case may be ready to settle. The people may not be.', '', `<p>Some cases stall because the people involved are carrying more than legal questions into the room. In family cases especially, years of hurt, fear, disappointment, and concern for the future can make every decision feel personal and every compromise feel like a loss. When emotions are running high, people can become trapped in the conflict and lose sight of the choices that could move the case forward.</p>
+    <p>Counsel can play an important role in helping clients step back from that cycle. By bringing in a proactive, skilled neutral, attorneys can create a structured opportunity for the parties to feel heard, identify what is truly keeping them stuck, and consider practical options with greater clarity.</p>
+    <p>When direct negotiations have reached an impasse, a focused settlement conference can help the parties move through the conflict and toward a resolution they can live with.</p>`)}
 
 ${section('what-sean-does', 'What Sean does', 'A focused, structured effort to move negotiations forward', `<p>Sean works with counsel and the parties to identify what is blocking settlement, lower the temperature where possible, and bring attention back to the decisions that need to be made.</p>
     <p>Depending on the case and the parties’ agreement, the conference may include:</p>
