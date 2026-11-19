@@ -234,7 +234,7 @@ export function render() {
   </div>
 </section>
 
-${drPhilSection({ postscript: 'Over 400,000 views, the most-watched mediator in the history of the show.' })}
+${drPhilSection({ postscript: 'Nearly 400,000 views, the most-watched mediator in the history of the show.' })}
 
 ${bento()}
 
