@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" >
+<defs>
+ <linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050b18"/><stop offset=".55" stop-color="#14264a"/><stop offset="1" stop-color="#e8a24c"/></linearGradient>
+ <radialGradient id="g" cx=".5" cy=".42" r=".5"><stop offset="0" stop-color="#ffd58a" stop-opacity=".95"/><stop offset=".35" stop-color="#f2a64a" stop-opacity=".45"/><stop offset="1" stop-color="#f2a64a" stop-opacity="0"/></radialGradient>
+ <linearGradient id="m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d4570"/><stop offset=".5" stop-color="#101d39"/><stop offset="1" stop-color="#070d1b"/></linearGradient>
+ <linearGradient id="p" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#b9792a"/><stop offset=".6" stop-color="#ffd582"/><stop offset="1" stop-color="#fff2c9"/></linearGradient>
+ <filter id="b"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<rect width="400" height="300" fill="url(#s)"/>
+<rect width="400" height="300" fill="url(#g)"/>
+<polygon points="0,300 0,200 55,160 100,190 140,140 190,215 260,150 310,185 360,145 400,185 400,300" fill="#0d172e" opacity=".85"/>
+<polygon points="20,300 120,185 165,140 200,66 232,128 262,150 300,195 390,300" fill="url(#m)"/>
+<polygon points="200,66 232,128 214,118 205,134 196,112 178,128 166,140" fill="#dfe8f7" opacity=".9"/>
+<polygon points="200,66 232,128 214,118 205,134" fill="#9fb6d9" opacity=".7"/>
+<polygon points="165,140 196,112 205,134 190,150 176,146" fill="#6f89b7" opacity=".5"/>
+<polygon points="232,128 262,150 300,195 250,170 240,150" fill="#050a14" opacity=".55"/>
+<path d="M205 300 C 110 282 275 252 188 228 C 128 210 246 190 208 160 C 190 146 222 128 204 100 C 200 90 201 80 200 72" fill="none" stroke="#ffc766" stroke-width="7" filter="url(#b)" opacity=".85"/>
+<path d="M205 300 C 110 282 275 252 188 228 C 128 210 246 190 208 160 C 190 146 222 128 204 100 C 200 90 201 80 200 72" fill="none" stroke="url(#p)" stroke-width="3.2" stroke-linecap="round"/>
+<polygon points="0,300 0,268 70,258 150,276 230,262 320,278 400,262 400,300" fill="#050a14"/>
+</svg>

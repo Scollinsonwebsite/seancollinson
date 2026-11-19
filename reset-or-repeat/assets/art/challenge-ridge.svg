@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 320" preserveAspectRatio="xMidYMid slice" >
+<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3f6d"/><stop offset=".5" stop-color="#cf8f62"/><stop offset="1" stop-color="#ffd9a0"/></linearGradient>
+<radialGradient id="g" cx=".62" cy=".62" r=".6"><stop offset="0" stop-color="#fff0c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff0c4" stop-opacity="0"/></radialGradient></defs>
+<rect width="560" height="320" fill="url(#s)"/><rect width="560" height="320" fill="url(#g)"/>
+<polygon points="0,320 0,200 80,160 140,190 230,120 300,175 380,140 470,190 560,150 560,320" fill="#6a5f86" opacity=".7"/>
+<polygon points="0,320 0,250 70,215 150,245 240,200 330,250 420,215 560,262 560,320" fill="#2e2f55"/>
+<polygon points="190,320 250,235 310,205 345,228 420,320" fill="#10152b"/>
+<polygon points="0,320 0,290 120,270 260,296 400,276 560,300 560,320" fill="#070a16"/>
+<g fill="#03050c"><circle cx="305" cy="184" r="5"/><path d="M299 191h12l3 26h-5l-1 15h-3l-1-13-1 13h-3l-1-15h-5z"/></g>
+</svg>
