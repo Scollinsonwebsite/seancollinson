@@ -168,7 +168,7 @@ const csp = [
 // existing file. Every rule is scoped to this host and to the new site's own
 // paths, so nothing else (WordPress, other domains) is affected.
 const hostRe = `^(www\\.)?${host.replace(/\./g, '\\.')}$`;
-const ownRoutes = [...primary, ...legalPages].map((p) => p.meta.path.replace(/\//g, '')).filter(Boolean);
+const ownRoutes = [...new Set([...primary, ...legalPages].map((p) => p.meta.path.split('/')[1]).filter(Boolean))];
 // Apache serves "/" as "/index.html" internally, so match that name too.
 const ownPathRe = `^/($|index\\.html$|(${ownRoutes.join('|')})(/|$)|assets/|forms/|404\\.html$)`;
 const ours = `%{HTTP_HOST} =~ m#${hostRe}#i && %{REQUEST_URI} =~ m#${ownPathRe}#`;

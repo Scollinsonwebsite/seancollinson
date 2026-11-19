@@ -59,7 +59,8 @@ const page = {
           title: 'What Sean mediates',
           jump: 'Services',
           html: `<ul>${serviceLinks.map(([href, label]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul>
-    <p>Not sure which applies to you? <a href="/mediation/">See how mediation works</a>, or ask during the consultation.</p>`,
+    <p>Not sure which applies to you? <a href="/mediation/">See how mediation works</a>, or ask during the consultation.</p>
+    <p>From the blog: <a href="/blog/high-conflict-custody-mediation-los-angeles/">High-conflict custody in Los Angeles: what actually works when you can’t agree on anything</a>.</p>`,
         },
         {
           id: 'where',

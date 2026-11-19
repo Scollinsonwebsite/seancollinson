@@ -93,6 +93,7 @@ export function render() {
     <h2 id="co-parenting-title" class="section__title">Co-parenting after the agreement</h2>
     <p>You will be parents together long after the paperwork is done. Mediation gives you practice making decisions as a team, and the plan you build reflects how your family actually lives. When the children grow, change schools, or pick up new activities, you can come back and adjust the plan rather than start a new fight.</p>
     <p>Sessions can be held together or in separate rooms, in person or by Zoom. If being in the same room is hard, Sean can work with each parent separately and carry proposals between you.</p>
+    <p>From the blog: <a href="/blog/high-conflict-custody-mediation-los-angeles/">High-conflict custody in Los Angeles: what actually works when you can’t agree on anything</a>.</p>
     <p>Child support is usually worked out alongside the parenting plan, because parenting time is part of the calculation. <a href="/child-support-mediation/">Read about child support mediation</a>.</p>
   </div>
 </section>

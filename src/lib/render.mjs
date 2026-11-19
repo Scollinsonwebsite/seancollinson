@@ -108,6 +108,7 @@ export const nav = [
   { path: '/consultation/', label: 'Consultation' },
   { path: '/videos/', label: 'Videos' },
   { path: '/masterclass/', label: 'Masterclass' },
+  { path: '/blog/', label: 'Blog' },
   { path: '/contact/', label: 'Contact' },
 ];
 
