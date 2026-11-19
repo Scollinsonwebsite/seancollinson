@@ -164,6 +164,12 @@ ${partial('mediation-hero.html')}
       <p>Sessions are available in person in California and online by Zoom, which makes virtual mediation practical for parties in different cities or states.</p>
     </div>
   </div>
+  <div class="wrap split split--text" style="margin-top:var(--space-5)">
+    <div><h2 id="mediator-la-title" class="section__title">Mediator Los Angeles</h2></div>
+    <div class="prose">
+      <p>Sean Collinson mediates from his office in Sherman Oaks and serves families and businesses across Los Angeles and Southern California, with Zoom sessions nationwide. <a href="/mediator-los-angeles/">Learn why people choose Sean as their Los Angeles mediator</a>.</p>
+    </div>
+  </div>
 </section>
 
 <section class="section section--ivory" id="comparison" aria-labelledby="compare-title">

@@ -11,7 +11,7 @@ export const meta = {
   out: 'index.html',
   title: 'Los Angeles Divorce Mediator | Sean Collinson',
   description:
-    'Resolve divorce, family, civil, and business disputes privately with experienced Los Angeles mediator Sean Collinson. In-person and virtual mediation.',
+    'Looking for a mediator in Los Angeles? Sean Collinson helps settle divorce, custody, civil, and business disputes privately, in Sherman Oaks or by Zoom.',
   h1: 'Los Angeles Divorce and Family Mediator',
   subtitle: 'Resolve Conflict Without Losing Control',
 };
@@ -234,7 +234,7 @@ export function render() {
   </div>
 </section>
 
-${drPhilSection()}
+${drPhilSection({ postscript: 'Over 400,000 views, the most-watched mediator in the history of the show.' })}
 
 ${bento()}
 
@@ -280,6 +280,7 @@ ${bento()}
     <div class="btn-row btn-row--section">
       <a class="btn btn--secondary" href="/mediation/">See how each type of mediation works</a>
     </div>
+    <p style="margin-top:var(--space-3)"><a href="/mediator-los-angeles/">Mediator Los Angeles: why people choose Sean, where he works, and how to start</a></p>
   </div>
 </section>
 
