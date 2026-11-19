@@ -1,4 +1,5 @@
 import { videos, videoCategories } from '../config.mjs';
+import { drPhilSection, drPhilStyle, drPhilSchema } from '../lib/dr-phil.mjs';
 import { layout, breadcrumbs, ctaBand, esc, isDraft, phBlock, slug } from '../lib/render.mjs';
 
 export const meta = {
@@ -135,6 +136,7 @@ export function render() {
     <p class="page-hero__lede">Short, practical videos in which Sean Collinson explains how mediation works, how to prepare for a hard conversation, and what crisis negotiation teaches about listening, de-escalation, and moving a stalled discussion forward.</p>
   </div>
 </section>
+${drPhilSection({ ivory: true })}
 ${library}
 <section class="section" aria-labelledby="next-title">
   <div class="wrap two-col">
@@ -156,7 +158,8 @@ ${library}
     title: meta.title,
     description: meta.description,
     body,
-    schema: [crumbs.schema, ...list.map(videoSchema)],
+    schema: [crumbs.schema, drPhilSchema(), ...list.map(videoSchema)],
     bodyClass: 'page-videos',
+    headExtra: drPhilStyle,
   });
 }

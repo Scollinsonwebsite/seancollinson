@@ -4,6 +4,7 @@ import {
   websiteSchema, organizationSchema, businessSchema, personSchema, partial, serviceRegionHtml, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
+import { drPhilSection, drPhilStyle, drPhilSchema } from '../lib/dr-phil.mjs';
 
 export const meta = {
   path: '/',
@@ -233,6 +234,8 @@ export function render() {
   </div>
 </section>
 
+${drPhilSection()}
+
 ${bento()}
 
 <section class="section" aria-labelledby="why-title">
@@ -332,8 +335,8 @@ ${ctaBand({
     title: meta.title,
     description: meta.description,
     body,
-    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
+    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q))), drPhilSchema()],
     bodyClass: 'page-home',
-    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}</style>',
+    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}</style>' + drPhilStyle,
   });
 }
