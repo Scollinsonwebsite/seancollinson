@@ -37,7 +37,7 @@ $config = [
     // Free e-book opt-in (forms/ebook.php): MailerLite group and the PDF in the media library.
     'ebook' => [
         'group' => 'Hostage Negotiator E-Book',
-        'pdf_url' => '',
+        'pdf_url' => '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-narcissist-ebook.pdf',
     ],
 ];
 

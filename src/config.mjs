@@ -298,6 +298,19 @@ export const legal = {
 // page, the homepage strip and the internal links are not built.
 export const ebook = {
   path: '/think-like-a-hostage-negotiator/',
-  cover: null, // { src: '/wp-content/uploads/…', width: 0, height: 0 }
-  pdf: null, // '/wp-content/uploads/….pdf'
+  // Media library attachments 150 (cover), 154 (hero photo, cropped from banner 152), 148 (PDF).
+  cover: {
+    src: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover.jpg',
+    width: 1275,
+    height: 1650,
+    srcset: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover-232x300.jpg 232w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover-480x621.jpg 480w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover-768x994.jpg 768w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover.jpg 1275w',
+  },
+  hero: {
+    src: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-hero-photo.jpg',
+    width: 720,
+    height: 634,
+    srcset: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-hero-photo-480x423.jpg 480w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-hero-photo.jpg 720w',
+    alt: 'A negotiator in a tactical vest sitting in the doorway of a command vehicle',
+  },
+  pdf: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-narcissist-ebook.pdf',
 };

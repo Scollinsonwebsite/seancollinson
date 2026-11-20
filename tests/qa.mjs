@@ -117,6 +117,9 @@ for (const [path, html] of Object.entries(pages)) {
       continue;
     }
     linkCount++;
+    // WordPress media library files are served by the server, not the static build
+    // (checked live after each deploy).
+    if (href.startsWith('/wp-content/uploads/')) continue;
     if (href.startsWith('#')) {
       if (href.length > 1 && !idsIn(html).has(href.slice(1))) fail(`${path}: broken anchor ${href}`);
       continue;

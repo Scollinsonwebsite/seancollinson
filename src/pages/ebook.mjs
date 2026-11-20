@@ -30,9 +30,9 @@ const learn = [
 ];
 
 export const coverImg = (cls, sizes, loading = 'eager') =>
-  `<img class="${cls}" src="${esc(ebook.cover.src)}" width="${ebook.cover.width}" height="${ebook.cover.height}" alt="Cover of the e-book ${esc(EBOOK_TITLE)} by Sean Collinson" loading="${loading}" decoding="async" sizes="${sizes}">`;
+  `<img class="${cls}" src="${esc(ebook.cover.src)}" srcset="${esc(ebook.cover.srcset)}" sizes="${sizes}" width="${ebook.cover.width}" height="${ebook.cover.height}" alt="Cover of the e-book ${esc(EBOOK_TITLE)} by Sean Collinson" loading="${loading}" decoding="async">`;
 
-const style = `<style>.ebook-hero__grid{display:grid;gap:var(--space-4);align-items:center}.ebook-hero__sub{font-size:var(--step-1);line-height:1.55;color:var(--on-sky-soft);max-width:36em}.ebook-hero__cover{justify-self:center;width:min(320px,70vw);height:auto;border-radius:6px;box-shadow:0 28px 60px -24px rgba(0,0,0,.65)}@media (min-width:900px){.ebook-hero__grid{grid-template-columns:minmax(0,7fr) minmax(0,4fr)}.ebook-hero__cover{justify-self:end}}.ebook-card{margin-top:var(--space-4);max-width:640px;background:var(--white);color:var(--ink,#0f172a);border-radius:var(--radius-lg);padding:clamp(1.4rem,3vw,2.2rem);box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}.ebook-card .form{background:none;box-shadow:none;border:0;padding:0;margin:0;max-width:none}.ebook-card h2,.page-hero .ebook-card h2{color:var(--sky-950)}.ebook-card .form__title{font-size:var(--step-2);margin-top:0}.page-hero .ebook-card .btn--primary{background:var(--sky-700);color:#fff;box-shadow:none}.page-hero .ebook-card .btn--primary:hover{background:var(--sky-800)}.page-hero .ebook-card p{color:var(--ink,#1f2937)}.page-hero .ebook-card .ebook-nospam{color:var(--muted)}.ebook-card .form__grid{grid-template-columns:1fr}@media (min-width:700px){.ebook-card .form__grid{grid-template-columns:1fr 1fr}}.ebook-card .ebook-nospam{margin:.9rem 0 0;font-size:.9rem;color:var(--muted)}.ebook-thanks:focus{outline:none}.ebook-thanks h2{font-size:var(--step-2);margin:0 0 .5rem}.ebook-learn li{margin-bottom:.6rem}.ebook-about .btn-row{margin-top:1rem}</style>`;
+const style = `<style>.ebook-hero__eyebrow{margin:0 0 .8rem;font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#e1c690}.ebook-hero__title{max-width:18ch}.ebook-hero__sub{font-size:var(--step-1);line-height:1.55;color:var(--on-sky-soft);max-width:32em}.ebook-hero__btn{background:linear-gradient(135deg,#c9a463,#a8844c);color:#0c2244;border:0}.ebook-hero__btn:hover{background:linear-gradient(135deg,#d6b373,#b8945a);color:#0c2244;text-decoration:none}.page-ebook .page-hero--photo .hero__media img{object-position:30% 30%}.ebook-optin{display:grid;gap:var(--space-4);align-items:center;max-width:1040px}.ebook-optin__cover{justify-self:center;width:min(300px,60vw);height:auto;border-radius:6px;box-shadow:0 28px 60px -24px rgba(11,22,38,.55)}@media (min-width:900px){.ebook-optin{grid-template-columns:300px minmax(0,1fr)}}.ebook-card{background:var(--white);border-radius:var(--radius-lg);padding:clamp(1.4rem,3vw,2.4rem);box-shadow:var(--lift)}.ebook-card .form{background:none;box-shadow:none;border:0;padding:0;margin:0;max-width:none}.ebook-card .form__title{font-size:var(--step-2);margin-top:0}.ebook-card .form__grid{grid-template-columns:1fr}@media (min-width:700px){.ebook-card .form__grid{grid-template-columns:1fr 1fr}}.ebook-nospam{margin:.9rem 0 0;font-size:.9rem;color:var(--muted)}.ebook-thanks:focus{outline:none}.ebook-thanks h2{font-size:var(--step-2);margin:0 0 .5rem}.ebook-learn li{margin-bottom:.6rem}.ebook-about .btn-row{margin-top:1rem}</style>`;
 
 export const ebookPage = {
   meta,
@@ -40,17 +40,21 @@ export const ebookPage = {
     const crumbs = breadcrumbs([{ name: 'Free E-Book', path: meta.path }]);
     const f = (o) => field({ ...o, required: true, idPrefix: 'eb' });
     const body = `
-<section class="page-hero page-hero--dark ebook-hero" aria-labelledby="page-title">
+<section class="page-hero page-hero--photo ebook-hero" aria-labelledby="page-title">
+  <div class="hero__media"><img src="${esc(ebook.hero.src)}" srcset="${esc(ebook.hero.srcset)}" sizes="(min-width: 820px) 62vw, 100vw" width="${ebook.hero.width}" height="${ebook.hero.height}" alt="${esc(ebook.hero.alt)}" fetchpriority="high"></div>
   <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
-    <div class="ebook-hero__grid">
-      <div>
-        <h1 id="page-title" class="page-hero__title" style="max-width:20ch">${esc(EBOOK_TITLE)}</h1>
-        <p class="ebook-hero__sub">A free e-book from Los Angeles mediator and FBI-trained crisis negotiator Sean Collinson, the mindset and word-for-word scripts he uses to settle high-conflict divorce and custody cases.</p>
-      </div>
-      ${coverImg('ebook-hero__cover', '(min-width: 900px) 320px, 70vw')}
-    </div>
-    <div class="ebook-card" id="get-the-ebook">
+    <p class="ebook-hero__eyebrow">Free e-book</p>
+    <h1 id="page-title" class="page-hero__title ebook-hero__title">${esc(EBOOK_TITLE)}</h1>
+    <p class="ebook-hero__sub">A free e-book from Los Angeles mediator and FBI-trained crisis negotiator Sean Collinson, the mindset and word-for-word scripts he uses to settle high-conflict divorce and custody cases.</p>
+    <div class="btn-row"><a class="btn ebook-hero__btn" href="#get-the-ebook">Get the free e-book</a></div>
+  </div>
+</section>
+
+<section class="section section--ivory" id="get-the-ebook" aria-labelledby="ebook-form-title">
+  <div class="wrap ebook-optin">
+    ${coverImg('ebook-optin__cover', '(min-width: 900px) 300px, 60vw')}
+    <div class="ebook-card">
       <form class="form" data-ebook action="/forms/ebook.php" method="post" novalidate aria-labelledby="ebook-form-title">
         <h2 class="form__title" id="ebook-form-title">Get the free e-book</h2>
         <input type="hidden" name="_t" value="" data-timestamp>
@@ -95,6 +99,7 @@ export const ebookPage = {
       bookFormat: 'https://schema.org/EBook',
       isAccessibleForFree: true,
       image: `https://seancollinson.com${ebook.cover.src}`,
+      ...(ebook.pdf ? { encodingFormat: 'application/pdf' } : {}),
       url: `https://seancollinson.com${meta.path}`,
     };
     return layout({

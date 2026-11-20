@@ -110,10 +110,24 @@ writeFileSync(
     : `User-agent: *\nAllow: /\nDisallow: /forms/\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\nSitemap: ${base}/sitemap.xml\n`
 );
 const sitemapPages = [...primary, ...legalPages.filter((p) => !p.meta.noindex)];
+// Honest lastmod: a page keeps its previously published date unless its HTML
+// changed since the last committed build (compared with git HEAD).
+const gitShow = (path) => {
+  try { return execFileSync('git', ['show', `HEAD:${path}`], { cwd: root, stdio: ['ignore', 'pipe', 'ignore'] }).toString(); } catch { return null; }
+};
+const prevSitemap = draft ? null : gitShow('bluehost-upload/sitemap.xml');
+const prevLastmod = new Map([...(prevSitemap || '').matchAll(/<loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+const lastmodFor = (p) => {
+  const url = `${base}${p.meta.path}`;
+  const prev = prevLastmod.get(url);
+  if (!prev) return today;
+  const before = gitShow(`bluehost-upload/${p.meta.out}`);
+  return before !== null && before === readFileSync(join(outDir, p.meta.out), 'utf8') ? prev : today;
+};
 writeFileSync(
   join(outDir, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapPages
-    .map((p) => `  <url><loc>${base}${p.meta.path}</loc><lastmod>${today}</lastmod></url>`)
+    .map((p) => `  <url><loc>${base}${p.meta.path}</loc><lastmod>${lastmodFor(p)}</lastmod></url>`)
     .join('\n')}\n</urlset>\n`
 );
 
