@@ -1,3 +1,4 @@
+import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
 import { layout, ctaBand, breadcrumbs, faqList, faqSchema, partial, CTA_PRIMARY } from '../lib/render.mjs';
 
 export const meta = {
@@ -241,6 +242,8 @@ ${partial('mediation-hero.html')}
   </div>
 </section>
 
+${ebookStrip()}
+
 ${ctaBand({
   heading: 'Find Out Whether Mediation Fits Your Situation',
   text: 'Book a confidential consultation to talk through the issues, the format, and the next practical step.',
@@ -248,7 +251,7 @@ ${ctaBand({
 })}
 `;
   return layout({
-    headExtra: partial('mediation-head.html'),
+    headExtra: partial('mediation-head.html') + (ebookReady() ? ebookStripStyle : ''),
     path: meta.path,
     title: meta.title,
     description: meta.description,

@@ -19,7 +19,7 @@ const aboutSean = (topic) => `
     <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to ${topic}. <a href="/about/">Meet Sean Collinson</a>.</p>
     <p class="fine-print">Sean’s volunteer crisis-negotiation service is separate from his mediation practice. Neither the FBI nor the Los Angeles County Sheriff’s Department endorses this practice or its services.</p>`;
 
-export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consultText, seanTopic, cta, hero, headExtra = '', extraSchema = [] }) {
+export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consultText, seanTopic, cta, hero, headExtra = '', extraSchema = [], beforeCta = '' }) {
   const crumbs = breadcrumbs([{ name: crumb, path: meta.path }]);
   const blocks = [
     ...sections,
@@ -81,6 +81,7 @@ ${sectionHtml}
   </div>
 </section>
 
+${beforeCta}
 ${ctaBand(cta)}
 `;
   return layout({

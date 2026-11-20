@@ -5,6 +5,7 @@ import { contact, office } from '../config.mjs';
 import { servicePage, costAnswer, timingAnswer } from '../lib/service-page.mjs';
 import { esc, bookingLink, reviewsLine, areasHtml, officeAddress, officePhoneLink, businessSchema } from '../lib/render.mjs';
 import { drPhilFigure, drPhilStyle, drPhilSchema } from '../lib/dr-phil.mjs';
+import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
 
 export const VIEWS_CAPTION =
   '<strong>Sean Collinson on Dr. Phil.</strong> Nearly 400,000 views on YouTube. Resolve Conflict Without Losing Control.';
@@ -91,7 +92,8 @@ const page = {
       seanTopic: 'every mediation',
       consultText: 'A private first conversation about your situation, the decisions ahead, the format, and fees.',
       cta: { heading: 'Talk With a Los Angeles Mediator', text: 'Book a confidential consultation to talk through your situation and the next practical step.', secondary: { href: '/mediation/', label: 'Explore Mediation Services' } },
-      headExtra: drPhilStyle,
+      headExtra: drPhilStyle + (ebookReady() ? ebookStripStyle : ''),
+      beforeCta: ebookStrip(),
       extraSchema: [businessSchema(), drPhilSchema()],
     }),
 };

@@ -1,3 +1,4 @@
+import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
 import {
   layout, ctaBand, breadcrumbs, faqList, faqSchema, officeAddress, officePhoneLink, CTA_PRIMARY,
 } from '../lib/render.mjs';
@@ -137,6 +138,8 @@ export function render() {
   </div>
 </section>
 
+${ebookStrip()}
+
 ${ctaBand({
   heading: 'Build a Parenting Plan That Works for Your Children',
   text: 'Book a confidential consultation to talk through your schedule, the format, and the next practical step.',
@@ -150,5 +153,6 @@ ${ctaBand({
     body,
     schema: [crumbs.schema, faqSchema(faqs)],
     bodyClass: 'page-custody',
+    headExtra: ebookReady() ? ebookStripStyle : '',
   });
 }

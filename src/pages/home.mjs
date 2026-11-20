@@ -5,7 +5,7 @@ import {
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
 import { drPhilSection, drPhilStyle, drPhilSchema } from '../lib/dr-phil.mjs';
-import { ebookReady, coverImg } from './ebook.mjs';
+import { ebookReady, ebookStrip, ebookStripStyle } from './ebook.mjs';
 import { ebook } from '../config.mjs';
 
 export const meta = {
@@ -138,18 +138,6 @@ function testimonialsSection() {
   </div>
 </section>`;
 }
-
-const ebookStrip = () => ebookReady() ? `<section class="ebook-strip" aria-labelledby="ebook-strip-title">
-  <div class="wrap ebook-strip__inner">
-    ${coverImg('ebook-strip__cover', '72px', 'lazy')}
-    <div class="ebook-strip__text">
-      <h2 id="ebook-strip-title" class="ebook-strip__title">Free E-Book: How to Think Like a Hostage Negotiator When You\u2019re Dealing with a Narcissist</h2>
-      <p class="ebook-strip__line">The mindset and the word-for-word scripts Sean uses to settle high-conflict divorce and custody cases. Free download.</p>
-    </div>
-    <a class="btn ebook-strip__btn" href="${ebook.path}">Get the Free E-Book</a>
-  </div>
-</section>` : '';
-const ebookStripStyle = '<style>.ebook-strip{background:linear-gradient(90deg,#0c2244,#123366);border-top:1px solid rgba(225,198,144,.35);border-bottom:1px solid rgba(225,198,144,.35);color:#fff;padding:1rem 0}.ebook-strip__inner{display:flex;flex-direction:column;align-items:flex-start;gap:.9rem}.ebook-strip__cover{width:64px;height:auto;border-radius:3px;box-shadow:0 8px 20px -8px rgba(0,0,0,.6);flex-shrink:0}.ebook-strip__title{margin:0;font-size:var(--step-0);line-height:1.3;font-weight:750;color:#e1c690;letter-spacing:0}.ebook-strip__line{margin:.25rem 0 0;font-size:.95rem;line-height:1.45;color:rgba(255,255,255,.82)}.ebook-strip__btn{background:linear-gradient(135deg,#c9a463,#a8844c);color:#0c2244;border:0;white-space:nowrap;flex-shrink:0}.ebook-strip__btn:hover{background:linear-gradient(135deg,#d6b373,#b8945a);color:#0c2244;text-decoration:none}@media (min-width:820px){.ebook-strip__inner{flex-direction:row;align-items:center;gap:1.25rem}.ebook-strip__text{flex:1}}</style>';
 
 function bento() {
   return `<section class="bento-wrap" aria-label="Mediation at a glance">

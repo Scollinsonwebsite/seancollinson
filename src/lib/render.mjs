@@ -164,7 +164,7 @@ function header(path) {
         `<li><a href="${n.path}"${n.path === path ? ' aria-current="page"' : ''}>${n.label}</a></li>`
     )
     .join('');
-  const sub = [...services, ...guides];
+  const sub = [...services, ...guides, { path: '/think-like-a-hostage-negotiator/', label: 'Think Like a Hostage Negotiator' }];
   const subLinks = sub
     .map((s) => `<li><a href="${s.path}"${s.path === path ? ' aria-current="page"' : ''}>${s.label}</a></li>`)
     .join('');
