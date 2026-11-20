@@ -1,4 +1,4 @@
-# Only the form handler may be requested directly.
+# Only the form handlers may be requested directly.
 <FilesMatch "^(?!submit\.php$).*$">
   Require all denied
 </FilesMatch>
