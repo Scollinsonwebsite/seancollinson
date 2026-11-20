@@ -339,7 +339,7 @@ ${reviewStrip()}
 ${ctaBand({
   heading: 'Your Dispute Does Not Have to Control Your Future',
   text: 'A short, confidential consultation is the simplest way to find out whether mediation fits your situation.',
-  primary: 'Schedule a Consultation',
+  primary: 'Book a Free Consultation',
 })}
 `;
   return layout({

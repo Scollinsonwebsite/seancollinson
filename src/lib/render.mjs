@@ -154,7 +154,7 @@ export const socialIcons = (cls) =>
         .join('')}</ul>`
     : '';
 
-export const CTA_PRIMARY = 'Schedule a Confidential Consultation';
+export const CTA_PRIMARY = 'Book a Free Consultation';
 export const CTA_SECONDARY = 'Explore Mediation Services';
 
 function header(path) {
