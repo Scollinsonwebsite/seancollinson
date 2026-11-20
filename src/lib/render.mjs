@@ -426,6 +426,9 @@ export const jsonld = (graph) =>
 // Hand-built page sections kept as exact HTML (ported from the live site).
 export const partial = (name) => readFileSync(join(ctx.srcDir, 'partials', name), 'utf8').replace(/\n$/, '');
 
+// Pages that never load the engagement pop-up (they already have their own form).
+export const ENGAGE_EXCLUDED = ['/contact/', '/think-like-a-hostage-negotiator/'];
+
 export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '', headExtra = '', bodyEnd = '' }) {
   const canonical = abs(path);
   const ogImage = abs('/assets/img/social-share.jpg');
@@ -482,7 +485,7 @@ ${body}
 ${footer()}
 ${quickRequestDialog()}
 <script src="/assets/js/site.js?v=${ctx.version}" defer></script>
-${bodyEnd}
+${ENGAGE_EXCLUDED.includes(path) ? '' : `<script src="/assets/js/engage.js?v=${ctx.engageVersion}" defer></script>\n`}${bodyEnd}
 </body>
 </html>
 `;

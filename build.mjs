@@ -42,6 +42,7 @@ ctx.year = new Date().getFullYear();
 const cssRaw = readFileSync(join(srcDir, 'assets/css/site.css'), 'utf8');
 const jsRaw = readFileSync(join(srcDir, 'assets/js/site.js'), 'utf8');
 ctx.version = createHash('sha256').update(cssRaw + jsRaw).digest('hex').slice(0, 10);
+ctx.engageVersion = createHash('sha256').update(readFileSync(join(srcDir, 'assets/js/engage.js'))).digest('hex').slice(0, 10);
 
 // Light, safe minification (comments and redundant whitespace only).
 const minifyCss = (css) =>
@@ -83,6 +84,8 @@ mkdirSync(join(outDir, 'assets/js'), { recursive: true });
 writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
 writeFileSync(join(outDir, 'assets/js/ebook.js'), readFileSync(join(srcDir, 'assets/js/ebook.js'), 'utf8'));
+const engageRaw = readFileSync(join(srcDir, 'assets/js/engage.js'), 'utf8');
+writeFileSync(join(outDir, 'assets/js/engage.js'), engageRaw);
 
 // ── Pages ───────────────────────────────────────────────────────────────────
 const primary = [
