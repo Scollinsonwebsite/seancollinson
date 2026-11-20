@@ -943,7 +943,10 @@ code { background: var(--surface-2); color: var(--t-body); }
 .img-ph { background: linear-gradient(160deg, var(--n1), var(--n1c)); }
 
 /* Header: darkest navy, cream text, pale gold accents */
-.site-header, .site-header.is-solid { background: var(--n0); color: var(--cream); box-shadow: 0 1px 0 var(--line); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.site-header { background: linear-gradient(180deg, rgba(6, 13, 26, 0.6) 0%, rgba(6, 13, 26, 0.28) 60%, rgba(6, 13, 26, 0) 100%); color: var(--cream); box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.site-header.is-solid { background: var(--n0); color: var(--cream); box-shadow: 0 1px 0 var(--line), 0 10px 30px -22px rgba(0, 0, 0, 0.7); }
+/* Pages without a hero: solid navy header from the start */
+body:not(:has(.hero, .page-hero)) .site-header { background: var(--n0); box-shadow: 0 1px 0 var(--line); }
 .brand__badge { background: var(--cream); }
 .brand__mark { stroke: var(--n1); }
 .brand__mark circle { fill: var(--n1); }
