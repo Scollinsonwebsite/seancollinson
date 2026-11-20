@@ -44,6 +44,8 @@ $config = [
     'optins' => [
         'checklist' => ['group' => 'Mediation Checklist'],
         'newsletter' => ['group' => 'Think Like a Hostage Negotiator Newsletter'],
+        // Narcissist or Negotiator Quiz email gate: quiz group plus the e-book group, so quiz takers get the free e-book.
+        'quiz' => ['group' => 'Narcissist or Negotiator Quiz', 'extra_groups' => ['Hostage Negotiator E-Book']],
     ],
 ];
 

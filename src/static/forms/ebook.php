@@ -100,23 +100,33 @@ $call = function (string $method, string $path, ?array $body = null) use ($key):
     return [$code, is_string($out) ? (json_decode($out, true) ?: []) : []];
 };
 
-// Find the group by exact name (cached for a day); create it if it does not exist.
-$cache = sys_get_temp_dir() . '/sc_ml_optin_group_' . hash('sha256', $key . $groupName);
-$groupId = is_file($cache) && filemtime($cache) > time() - 86400 ? trim((string)file_get_contents($cache)) : '';
-if ($groupId === '') {
-    [$code, $res] = $call('GET', '/groups?limit=100&filter[name]=' . rawurlencode($groupName));
+// Find each group by exact name (cached for a day); create it if it does not exist.
+// An opt-in can list extra groups (config ['optins'][...]['extra_groups']); the subscriber joins all of them.
+$resolveGroup = function (string $name) use ($call, $key): string {
+    $cache = sys_get_temp_dir() . '/sc_ml_optin_group_' . hash('sha256', $key . $name);
+    $id = is_file($cache) && filemtime($cache) > time() - 86400 ? trim((string)file_get_contents($cache)) : '';
+    if ($id !== '') { return $id; }
+    [$code, $res] = $call('GET', '/groups?limit=100&filter[name]=' . rawurlencode($name));
     foreach (($res['data'] ?? []) as $g) {
-        if (isset($g['id'], $g['name']) && strcasecmp(trim((string)$g['name']), $groupName) === 0) { $groupId = (string)$g['id']; break; }
+        if (isset($g['id'], $g['name']) && strcasecmp(trim((string)$g['name']), $name) === 0) { $id = (string)$g['id']; break; }
     }
-    if ($groupId === '') {
-        [$code, $res] = $call('POST', '/groups', ['name' => $groupName]);
-        $groupId = (string)($res['data']['id'] ?? '');
+    if ($id === '') {
+        [$code, $res] = $call('POST', '/groups', ['name' => $name]);
+        $id = (string)($res['data']['id'] ?? '');
     }
-    if ($groupId !== '') { @file_put_contents($cache, $groupId, LOCK_EX); }
+    if ($id !== '') { @file_put_contents($cache, $id, LOCK_EX); }
+    return $id;
+};
+$groupNames = [$groupName];
+foreach ((array)($ebook['extra_groups'] ?? []) as $extra) {
+    if (is_string($extra) && trim($extra) !== '') { $groupNames[] = trim($extra); }
 }
+$groupIds = [];
+foreach (array_unique($groupNames) as $name) { $groupIds[] = $resolveGroup($name); }
+$allFound = !in_array('', $groupIds, true);
 
-[$code] = $groupId !== ''
-    ? $call('POST', '/subscribers', ['email' => $email, 'fields' => ['name' => $first], 'groups' => [$groupId]])
+[$code] = $allFound
+    ? $call('POST', '/subscribers', ['email' => $email, 'fields' => ['name' => $first], 'groups' => $groupIds])
     : [0];
 $hits[] = $now;
 @file_put_contents($rateFile, implode(',', $hits), LOCK_EX);

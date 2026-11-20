@@ -165,7 +165,7 @@ function header(path) {
         `<li><a href="${n.path}"${n.path === path ? ' aria-current="page"' : ''}>${n.label}</a></li>`
     )
     .join('');
-  const sub = [...services, ...guides, { path: '/mediation-cost/', label: 'Mediation cost' }, { path: '/think-like-a-hostage-negotiator/', label: 'Think Like a Hostage Negotiator' }];
+  const sub = [...services, ...guides, { path: '/mediation-cost/', label: 'Mediation cost' }, { path: '/think-like-a-hostage-negotiator/', label: 'Think Like a Hostage Negotiator' }, { path: '/narcissist-or-negotiator-quiz/', label: 'Narcissist or Negotiator Quiz' }];
   const subLinks = sub
     .map((s) => `<li><a href="${s.path}"${s.path === path ? ' aria-current="page"' : ''}>${s.label}</a></li>`)
     .join('');
@@ -450,7 +450,7 @@ export const jsonld = (graph) =>
 export const partial = (name) => readFileSync(join(ctx.srcDir, 'partials', name), 'utf8').replace(/\n$/, '');
 
 // Pages that never load the engagement pop-up (they already have their own form).
-export const ENGAGE_EXCLUDED = ['/contact/', '/think-like-a-hostage-negotiator/'];
+export const ENGAGE_EXCLUDED = ['/contact/', '/think-like-a-hostage-negotiator/', '/narcissist-or-negotiator-quiz/'];
 
 export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '', headExtra = '', bodyEnd = '' }) {
   const canonical = abs(path);

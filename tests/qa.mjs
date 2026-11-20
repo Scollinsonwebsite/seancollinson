@@ -113,7 +113,7 @@ let linkCount = 0;
 for (const [path, html] of Object.entries(pages)) {
   for (const m of html.matchAll(/\s(?:href|src)="([^"]+)"/g)) {
     const href = m[1];
-    if (/^(https?:|mailto:|tel:|data:)/.test(href)) {
+    if (/^(https?:|mailto:|tel:|sms:|data:)/.test(href)) {
       if (/^http:\/\//.test(href)) fail(`${path}: insecure http link ${href}`);
       continue;
     }
@@ -190,6 +190,26 @@ if (dir === 'bluehost-upload') {
     if (/RewriteRule \. \/index\.php/.test(block)) fail('Block must not replace the WordPress catch-all');
     if (!bad) pass('Static-site .htaccess block is scoped to its own host and pages');
   }
+}
+
+// ── Narcissist or Negotiator quiz ───────────────────────────────────────────
+{
+  const qp = '/narcissist-or-negotiator-quiz/';
+  const html = pages[qp];
+  if (!html) fail('Quiz page missing');
+  else {
+    const m = html.match(/<script type="application\/json" id="quiz-data">([\s\S]*?)<\/script>/);
+    const data = m ? JSON.parse(m[1]) : null;
+    const okData = data && data.questions.length === 25 && data.questions.every((q) => q.answers.length === 4 && q.answers.map((a) => a.value).sort((a, b) => a - b).join() === '-2,-1,1,2') && data.bands.length === 4;
+    okData ? pass('Quiz: 25 questions, 4 scored answers each, 4 bands') : fail('Quiz data malformed');
+    const visible = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
+    const allText = visible + (m ? m[1] : '');
+    for (const re of [/diagnosed/i, /you are a narcissist/i, /—/, /\.pdf/i]) if (re.test(allText)) fail('Quiz page contains banned text ' + re);
+    /engage\.js/.test(html) ? fail('Quiz page must not load the pop-up') : pass('Quiz page excluded from the pop-up');
+    /href="https:\/\/tidycal\.com\/mediation\/consul"/.test(html) && /href="https:\/\/seancollinson\.com\/think-like-a-hostage-negotiator\/"/.test(html) ? pass('Quiz results link to booking and the e-book page') : fail('Quiz results links missing');
+  }
+  const missingNav = Object.entries(pages).filter(([p, h]) => p !== '/404.html' && !h.includes('href="/narcissist-or-negotiator-quiz/"'));
+  missingNav.length ? fail('Quiz link missing from nav on ' + missingNav.map(([p]) => p).join(', ')) : pass('Quiz linked in the Mediation menu on every page');
 }
 
 // ── Report ──────────────────────────────────────────────────────────────────
