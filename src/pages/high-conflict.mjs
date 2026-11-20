@@ -138,7 +138,7 @@ ${section('background', 'A different background at the settlement table', 'Calm 
   </div>
 </section>
 
-${section('attorneys', 'For attorneys', 'Refer the case when the negotiation needs a reset.', `<p>You do not need to wait until the eve of trial to bring in a settlement neutral. A conference may be useful when the legal analysis is complete but the negotiation is stuck, when client authorization is an obstacle, or when prior discussions have hardened the parties’ positions.</p>
+${section('attorneys', 'For attorneys', 'Refer the case when the negotiation needs a reset.', `<p>Helping attorneys and their clients navigate difficult negotiations, overcome settlement impasses, and find practical pathways to resolution. You do not need to wait until the eve of trial to bring in a settlement neutral. A conference may be useful when the legal analysis is complete but the negotiation is stuck, when client authorization is an obstacle, or when prior discussions have hardened the parties’ positions.</p>
     <p>When contacting the office, please include:</p>
     ${list(attorneyChecklist)}
     <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>Request a Confidential Case Consultation</a></div>`, true)}
