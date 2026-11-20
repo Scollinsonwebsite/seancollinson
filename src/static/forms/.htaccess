@@ -1,5 +1,5 @@
 # Only the form handlers may be requested directly.
-<FilesMatch "^(?!submit\.php$).*$">
+<FilesMatch "^(?!(submit|ebook)\.php$).*$">
   Require all denied
 </FilesMatch>
 Options -Indexes
