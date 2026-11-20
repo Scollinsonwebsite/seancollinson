@@ -55,11 +55,11 @@
     var header = document.querySelector('.site-header');
     var offset = header ? header.getBoundingClientRect().height : 0;
     var top = root.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo(0, Math.max(0, top));
+    window.scrollTo({ top: Math.max(0, top), behavior: 'instant' }); // jump, do not animate, between screens
   }
   function show(name) {
     Object.keys(screens).forEach(function (k) { screens[k].hidden = k !== name; });
-    hero.hidden = !(name === 'intro' || name === 'gate');
+    hero.hidden = name !== 'intro'; // the email screen carries its own copy of the title
     var el = screens[name];
     if (name !== 'intro') { scrollToQuiz(); }
     try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }

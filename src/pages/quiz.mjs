@@ -200,8 +200,13 @@ const style = `<style>
 .quiz-footer-line{font-size:.875rem;color:#34435A;margin:2rem 0 0;padding-bottom:clamp(2rem,5vw,3.5rem)}
 .quiz .btn-big{min-height:58px;padding:1rem 1.75rem;font-size:1.0625rem;width:100%;max-width:420px}
 .quiz-gate{max-width:560px}
+.quiz-gate__title{font-size:clamp(2.1rem,1.5rem + 3vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.04;margin:0 0 1rem;color:#0A1B31}
 .quiz-gate__lead{font-size:var(--step-1);font-weight:650;margin:0 0 1.25rem}
-.quiz-gate .form{background:none;box-shadow:none;padding:0;color:#0A1B31;--t-head:#0A1B31;--t-body:#0A1B31;--t-muted:#34435A}
+.section--ivory .quiz-gate .form{background:none;box-shadow:none;padding:0;color:#0A1B31;--t-head:#0A1B31;--t-body:#0A1B31;--t-muted:#34435A}
+.section--ivory .quiz-gate .field__label{color:#0A1B31}
+.section--ivory .quiz-gate .field__req{color:#34435A}
+.section--ivory .quiz-gate .field__error,.section--ivory .quiz-gate .form__status.is-error{color:var(--error)}
+.section--ivory .quiz-gate .form__status.is-error{background:var(--red-50);box-shadow:inset 0 0 0 1.5px var(--error)}
 .quiz-gate .form__grid{grid-template-columns:1fr}
 .quiz-gate .field input{border-color:rgba(10,27,49,.45)!important}
 .quiz-privacy{font-size:.9rem;color:#34435A;margin:1rem 0 0}
@@ -304,8 +309,9 @@ export const quizPage = {
     </div>
 
     <div class="quiz-screen quiz-gate" data-screen="gate" tabindex="-1" hidden>
+      <h2 class="quiz-gate__title" id="quiz-gate-title">${esc(h1)}</h2>
       <p class="quiz-gate__lead">${esc(gateCopy)}</p>
-      <form class="form" data-quiz-gate action="/forms/ebook.php" method="post" novalidate aria-labelledby="page-title">
+      <form class="form" data-quiz-gate action="/forms/ebook.php" method="post" novalidate aria-labelledby="quiz-gate-title">
         <input type="hidden" name="offer" value="quiz">
         <input type="hidden" name="_t" value="" data-timestamp>
         <div class="hp" aria-hidden="true"><label for="quiz-website">Leave this field empty</label><input id="quiz-website" type="text" name="company_website" tabindex="-1" autocomplete="off"></div>

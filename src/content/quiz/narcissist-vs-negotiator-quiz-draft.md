@@ -14,7 +14,7 @@ Footer line for the page, same spirit as the existing draft: "Questions were wri
 2. Title options
 Sean's original hook stays in view in every option. Recommendation is Option 1.
 
-1. RECOMMENDED. Headline: "Can You Pass the Narcissist Test?" Subhead carries the new spectrum framing: "25 questions. One spectrum. Find out if you think like a narcissist or like a hostage negotiator when the fight is with the other parent."
+1. RECOMMENDED. Headline: "Can You Pass the Hostage Negotiator or Narcissist Test?" Subhead carries the new spectrum framing: "25 questions. One spectrum. Find out if you think like a narcissist or like a hostage negotiator when the fight is with the other parent."
    Why: the hook is the search term and the Shorts line. The spectrum is the surprise that makes people finish and share.
 2. Headline: "Narcissist or Negotiator?" Subhead: "How do you actually think in a divorce or custody fight? 25 real situations, one honest answer."
    Why: shortest, most shareable, best screenshot title. Weaker on the original "pass the test" hook.
@@ -26,7 +26,7 @@ Meta title draft: Narcissist or Negotiator Quiz: 25 Questions | Sean Collinson, 
 Meta description draft: A free 25 question quiz from a Los Angeles mediator and FBI trained crisis negotiator. See whether your thinking in divorce and custody fights leans narcissist or hostage negotiator. Educational only, not a diagnosis.
 3. Intro copy for the page (draft)
 Headline
-Can You Pass the Narcissist Test?
+Can You Pass the Hostage Negotiator or Narcissist Test?
 Subhead
 25 questions. One spectrum. Find out if you think like a narcissist or like a hostage negotiator when the fight is with the other parent.
 Opening copy
