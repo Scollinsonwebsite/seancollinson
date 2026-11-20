@@ -34,7 +34,8 @@ $config = [
             'masterclass' => 'Master class inquiries',
         ],
     ],
-    // Free e-book opt-in (forms/ebook.php): MailerLite group and the PDF in the media library.
+    // Free e-book opt-in (forms/ebook.php): MailerLite group. pdf_url is the media-library
+    // PDF linked from the MailerLite automation email (not returned to the browser).
     'ebook' => [
         'group' => 'Hostage Negotiator E-Book',
         'pdf_url' => '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-narcissist-ebook.pdf',

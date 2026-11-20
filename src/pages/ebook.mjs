@@ -67,10 +67,9 @@ export const ebookPage = {
         <p class="ebook-nospam">No spam. Unsubscribe anytime.</p>
         <div class="form__status" role="status" aria-live="polite" data-status></div>
       </form>
-      <div class="ebook-thanks" data-ebook-thanks tabindex="-1" hidden>
-        <h2>Thank you. Your e-book is ready.</h2>
-        <p>Download it now. You do not need to wait for an email.</p>
-        <p><a class="btn btn--primary" href="#" data-download download>Download the E-Book</a></p>
+      <div class="ebook-thanks" data-ebook-thanks tabindex="-1" role="status" hidden>
+        <h2>Check your email to download your free e-book.</h2>
+        <p>The download link is on its way to your inbox. If you don\u2019t see it in a few minutes, check your spam or promotions folder.</p>
       </div>
     </div>
   </div>
@@ -99,7 +98,6 @@ export const ebookPage = {
       bookFormat: 'https://schema.org/EBook',
       isAccessibleForFree: true,
       image: `https://seancollinson.com${ebook.cover.src}`,
-      ...(ebook.pdf ? { encodingFormat: 'application/pdf' } : {}),
       url: `https://seancollinson.com${meta.path}`,
     };
     return layout({

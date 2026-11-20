@@ -1,5 +1,6 @@
-// E-book opt-in: posts to /forms/ebook.php and, on success, shows the
-// thank-you panel with the download button. No third-party scripts.
+// E-book opt-in: posts to /forms/ebook.php and, on success, replaces the form
+// with the check-your-email message. The e-book itself is delivered by email
+// (MailerLite double opt-in, then the automation). No third-party scripts.
 (function () {
   var form = document.querySelector('form[data-ebook]');
   if (!form) return;
@@ -39,9 +40,7 @@
     fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, credentials: 'same-origin' })
       .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
       .then(function (data) {
-        if (data && data.ok && data.download) {
-          var link = thanks.querySelector('[data-download]');
-          link.href = data.download;
+        if (data && data.ok) {
           form.hidden = true;
           thanks.hidden = false;
           thanks.focus();

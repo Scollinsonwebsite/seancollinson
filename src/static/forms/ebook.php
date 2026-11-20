@@ -2,8 +2,10 @@
 /**
  * E-book opt-in handler (/think-like-a-hostage-negotiator/).
  * Adds the visitor to the MailerLite group named in config.php ['ebook']['group']
- * (created if missing), mapping First name to the subscriber "name" field, and
- * returns the e-book download URL so the page can show it immediately.
+ * (created if missing), mapping First name to the subscriber "name" field.
+ * The e-book is delivered by email: the MailerLite account uses double opt-in,
+ * and an automation on the group sends the download link once the visitor
+ * confirms. The PDF link is never returned to the browser.
  * The MailerLite API key ('ebook' => api_key, else 'mailerlite' => api_key) is read
  * from config.local.php on the server and never sent to the browser.
  */
@@ -25,8 +27,7 @@ $ebook = is_array($config) ? ($config['ebook'] ?? []) : [];
 $key = (string)($ebook['api_key'] ?? '');
 if ($key === '' && is_array($config)) { $key = (string)($config['mailerlite']['api_key'] ?? ''); }
 $groupName = (string)($ebook['group'] ?? '');
-$download = (string)($ebook['pdf_url'] ?? '');
-if ($key === '' || $groupName === '' || $download === '' || !function_exists('curl_init')) {
+if ($key === '' || $groupName === '' || !function_exists('curl_init')) {
     respond(503, ['ok' => false, 'message' => 'The e-book download is not available yet. Please check back soon.']);
 }
 
@@ -45,7 +46,7 @@ if ($origin !== '') {
 }
 
 if (!empty($_POST['company_website'])) {
-    respond(200, ['ok' => true, 'download' => $download]); // bots: pretend success, store nothing
+    respond(200, ['ok' => true]); // bots: pretend success, store nothing
 }
 
 $started = (int)($_POST['_t'] ?? 0);
@@ -110,11 +111,11 @@ if ($groupId === '') {
 [$code] = $groupId !== ''
     ? $call('POST', '/subscribers', ['email' => $email, 'fields' => ['name' => $first], 'groups' => [$groupId]])
     : [0];
-if ($code < 200 || $code >= 300) {
-    // Never block the download; record the failure (no personal data) for follow-up.
-    @file_put_contents(sys_get_temp_dir() . '/sc_ebook_errors.log', gmdate('c') . " mailerlite http $code\n", FILE_APPEND | LOCK_EX);
-}
-
 $hits[] = $now;
 @file_put_contents($rateFile, implode(',', $hits), LOCK_EX);
-respond(200, ['ok' => true, 'download' => $download]);
+if ($code < 200 || $code >= 300) {
+    // The e-book only arrives by email, so tell the visitor rather than pretend.
+    @file_put_contents(sys_get_temp_dir() . '/sc_ebook_errors.log', gmdate('c') . " mailerlite http $code\n", FILE_APPEND | LOCK_EX);
+    respond(502, ['ok' => false, 'message' => 'We could not sign you up just now. Please try again in a few minutes.']);
+}
+respond(200, ['ok' => true]);
