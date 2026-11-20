@@ -12,4 +12,8 @@ return [
     'mailerlite' => [
         'api_key' => 'paste-your-MailerLite-API-token-here',
     ],
+    // Optional: a separate MailerLite account for the free e-book opt-in.
+    'ebook' => [
+        'api_key' => 'paste-the-e-book-MailerLite-API-token-here',
+    ],
 ];

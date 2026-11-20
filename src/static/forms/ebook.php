@@ -4,7 +4,8 @@
  * Adds the visitor to the MailerLite group named in config.php ['ebook']['group']
  * (created if missing), mapping First name to the subscriber "name" field, and
  * returns the e-book download URL so the page can show it immediately.
- * The MailerLite API key is read from config.local.php and never sent to the browser.
+ * The MailerLite API key ('ebook' => api_key, else 'mailerlite' => api_key) is read
+ * from config.local.php on the server and never sent to the browser.
  */
 declare(strict_types=1);
 
@@ -19,8 +20,10 @@ function respond(int $status, array $body): void {
 }
 
 $config = @include __DIR__ . '/config.php';
-$key = is_array($config) ? (string)($config['mailerlite']['api_key'] ?? '') : '';
 $ebook = is_array($config) ? ($config['ebook'] ?? []) : [];
+// The e-book list can live in its own MailerLite account: ['ebook']['api_key'] (config.local.php) wins.
+$key = (string)($ebook['api_key'] ?? '');
+if ($key === '' && is_array($config)) { $key = (string)($config['mailerlite']['api_key'] ?? ''); }
 $groupName = (string)($ebook['group'] ?? '');
 $download = (string)($ebook['pdf_url'] ?? '');
 if ($key === '' || $groupName === '' || $download === '' || !function_exists('curl_init')) {
