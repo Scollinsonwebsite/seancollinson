@@ -895,7 +895,7 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
 /* ════════════════════════════════════════════════════════════════════════
    Navy, cream and pale gold palette (2026-11-20)
    Text colors run through --t-* variables so light bands (.section--ivory,
-   now cream) can flip them to navy, and navy cards inside a cream band flip
+   now white) can flip them to navy, and navy cards inside a light band flip
    them back. Colors only: no layout, spacing or copy changes.
    ════════════════════════════════════════════════════════════════════════ */
 :root {
@@ -906,8 +906,8 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
   --n1d: #14304F;
   --surface: #0F2440;     /* cards on navy */
   --surface-2: #15304F;   /* raised rows inside cards */
-  --cream: #F4EEDC;       /* headings, cream bands */
-  --ivory: #E9E4D4;       /* body text on navy */
+  --cream: #FFFFFF;       /* headings and light bands: white */
+  --ivory: #FFFFFF;       /* body text on navy: white */
   --mist: #C9CFDB;        /* secondary text */
   --tan: #B9B094;         /* small labels, captions */
   --gold: #EED9A4;        /* accent */
@@ -976,7 +976,7 @@ code { background: var(--surface-2); color: var(--t-body); }
   --line: rgba(10, 27, 49, 0.16); --line-strong: rgba(10, 27, 49, 0.3); --gold-wash: rgba(10, 27, 49, 0.07);
   --focus-ring: var(--n1);
 }
-/* Navy cards inside a cream band keep light text */
+/* Navy cards inside a light band keep light text */
 .section--ivory :is(.tile, .service, .credential, .review, .faq__item, .panel, .form, .inline-cta, .checklist li, .table-wrap, .compare tr,
   .contact-details div, .pull-quote, .calm__item, .service-detail, .format, .form__notice, .form__status, .decide__row, .booking__card,
   .ebook-card, .newsletter-card, .post-card, .checklist-card, .price-table, .vs-table, .dr-phil__card) {
@@ -1078,7 +1078,7 @@ form input[type='text'], form input[type='email'], form input[type='tel'] { back
 .btn.booking__btn:focus-visible, .btn.ebook-strip__btn:focus-visible, .btn.ebook-hero__btn:focus-visible, .btn.mh__cta:focus-visible {
   background: var(--hl); color: var(--btn-ink); border-color: var(--hl); text-decoration: none;
 }
-/* On a cream band the gold button keeps a navy edge so it stays defined */
+/* On a light band the gold button keeps a navy edge so it stays defined */
 .section--ivory .btn:not(.section--ivory :is(.form, .panel, .inline-cta, .tile, .service, .ebook-card, .newsletter-card, .faq__item) .btn) { border-color: var(--n1); }
 .section--ivory .service--lead { box-shadow: 0 0 0 1px rgba(10, 27, 49, 0.28), 0 18px 40px -26px rgba(10, 27, 49, 0.45); }
 .site-header .primary-nav a:hover, .site-header .primary-nav a[aria-current='page'], .primary-nav .subnav a:hover, .primary-nav .subnav a[aria-current='page'],
