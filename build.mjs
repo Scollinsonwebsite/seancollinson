@@ -25,6 +25,7 @@ import { mediatorLosAngeles } from './src/pages/mediator-los-angeles.mjs';
 import { ebookPage, ebookReady } from './src/pages/ebook.mjs';
 import { mediationCost, mediationVsLitigation, testimonialsPage, neighborhoods } from './src/pages/growth-pages.mjs';
 import { checklistPage } from './src/pages/checklist.mjs';
+import { newsletterPage } from './src/pages/newsletter.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -95,7 +96,7 @@ const primary = [
   divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
   ...(ebookReady() ? [ebookPage] : []),
-  checklistPage, testimonialsPage,
+  checklistPage, testimonialsPage, newsletterPage,
   ...blogPages(),
 ];
 const all = [...primary, ...legalPages, notfound];

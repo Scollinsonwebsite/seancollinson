@@ -203,7 +203,7 @@ function header(path) {
 }
 
 function footer() {
-  const pageLinks = [...nav, { path: '/testimonials/', label: 'Testimonials' }].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
+  const pageLinks = [...nav, { path: '/testimonials/', label: 'Testimonials' }, { path: '/newsletter/', label: 'Newsletter' }].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const serviceLinks = [...services, ...guides].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const socials = social.length
     ? `<ul class="footer__social">${social

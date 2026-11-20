@@ -9,7 +9,7 @@ import { join } from 'node:path';
 import { site, office } from '../config.mjs';
 import { layout, breadcrumbs, esc, abs, ctx, bookingLink, officeAddress, faqSchema, ids } from '../lib/render.mjs';
 import { markdown } from '../lib/markdown.mjs';
-import { ebookReady, EBOOK_ANCHOR } from './ebook.mjs';
+import { ebookReady, EBOOK_ANCHOR, ebookStripStyle } from './ebook.mjs';
 import { ebook } from '../config.mjs';
 
 export const posts = [
@@ -78,6 +78,12 @@ const index = {
     <p class="page-hero__lede">Practical guidance on mediation, written in plain language.</p>
   </div>
 </section>
+<section class="ebook-strip newsletter-strip" aria-label="Newsletter">
+  <div class="wrap ebook-strip__inner">
+    <div class="ebook-strip__text"><p class="ebook-strip__title" style="margin:0">Get Think Like a Hostage Negotiator, Sean\u2019s weekly newsletter.</p></div>
+    <a class="btn ebook-strip__btn" href="/newsletter/">Subscribe free</a>
+  </div>
+</section>
 <section class="section" aria-label="Articles">
   <div class="wrap narrow">
     <ul class="post-list">
@@ -101,7 +107,7 @@ ${postCta()}
       publisher: { '@id': ids.organization },
       blogPost: sorted().map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: abs(`/blog/${p.slug}/`), datePublished: p.date })),
     };
-    return layout({ path: this.meta.path, title: this.meta.title, description: this.meta.description, body: html, schema: [crumbs.schema, list], bodyClass: 'page-blog', headExtra: blogStyle });
+    return layout({ path: this.meta.path, title: this.meta.title, description: this.meta.description, body: html, schema: [crumbs.schema, list], bodyClass: 'page-blog', headExtra: blogStyle + ebookStripStyle });
   },
 };
 

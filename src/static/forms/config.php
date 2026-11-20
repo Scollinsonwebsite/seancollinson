@@ -43,6 +43,7 @@ $config = [
     // Other opt-ins handled by forms/ebook.php (hidden field "offer"); same MailerLite account.
     'optins' => [
         'checklist' => ['group' => 'Mediation Checklist'],
+        'newsletter' => ['group' => 'Think Like a Hostage Negotiator Newsletter'],
     ],
 ];
 
