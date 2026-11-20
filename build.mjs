@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 
 import { ctx } from './src/lib/render.mjs';
-import { site, contact, analytics, scheduler } from './src/config.mjs';
+import { site, contact, analytics, scheduler, paidConsult } from './src/config.mjs';
 import * as home from './src/pages/home.mjs';
 import * as about from './src/pages/about.mjs';
 import * as mediation from './src/pages/mediation.mjs';
@@ -166,12 +166,12 @@ const gaInline = analytics.ga4MeasurementId
   ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${analytics.ga4MeasurementId}');`
   : '';
 const gaHash = gaInline ? `'sha256-${createHash('sha256').update(gaInline).digest('base64')}'` : '';
-const frameSrc = ["https://www.youtube-nocookie.com", "https://player.vimeo.com"];
+const frameSrc = ["https://www.youtube-nocookie.com", "https://player.vimeo.com", new URL(paidConsult.url).origin];
 if (scheduler.url) frameSrc.push(new URL(scheduler.url).origin);
 if (contact.mapEmbedUrl) frameSrc.push(new URL(contact.mapEmbedUrl).origin);
 const csp = [
   "default-src 'self'",
-  `script-src 'self'${gaInline ? ` ${gaHash} https://*.googletagmanager.com` : ''}`,
+  `script-src 'self' ${new URL(paidConsult.embedScript).origin}${gaInline ? ` ${gaHash} https://*.googletagmanager.com` : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://i.ytimg.com https://i.vimeocdn.com" + (gaInline ? ' https://*.google-analytics.com https://*.googletagmanager.com' : ''),
   "font-src 'self'",

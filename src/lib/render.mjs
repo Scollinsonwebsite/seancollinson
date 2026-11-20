@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { site, contact, office, social, analytics, images, legal, reviews, areasServed, booking, serviceRegion } from '../config.mjs';
+import { site, contact, office, social, analytics, images, legal, reviews, areasServed, booking, serviceRegion, paidConsult } from '../config.mjs';
 import { icon } from './icons.mjs';
 import { quickRequestDialog } from './forms.mjs';
 
@@ -200,6 +200,28 @@ function header(path) {
     ${socialIcons('mobile-menu__social')}
   </div>
 </header>`;
+}
+
+// Paid consultation booking, an inline TidyCal embed above the footer on every
+// page. site.js loads TidyCal's official embed script when this section nears
+// the viewport, so pages stay fast. If the script cannot load, the gold button
+// below is shown instead.
+function bookingSection() {
+  return `<section class="booking" id="book-consultation" aria-labelledby="booking-title">
+  <div class="wrap booking__inner">
+    <div class="booking__intro">
+      <h2 id="booking-title" class="booking__title">${esc(paidConsult.heading)}</h2>
+      <p class="booking__text">${esc(paidConsult.text)}</p>
+    </div>
+    <div class="booking__card">
+      <div class="booking__frame" data-booking-embed data-src="${esc(paidConsult.embedScript)}">
+        <div class="tidycal-embed" data-path="${esc(paidConsult.path)}"></div>
+      </div>
+      <p class="booking__fallback" data-booking-fallback hidden><a class="btn booking__btn" href="${esc(paidConsult.url)}" target="_blank" rel="noopener">${esc(paidConsult.heading)}</a></p>
+      <noscript><p class="booking__fallback"><a class="btn booking__btn" href="${esc(paidConsult.url)}" target="_blank" rel="noopener">${esc(paidConsult.heading)}</a></p></noscript>
+    </div>
+  </div>
+</section>`;
 }
 
 function footer() {
@@ -483,6 +505,7 @@ ${header(path)}
 <main id="main" tabindex="-1">
 ${body}
 </main>
+${bookingSection()}
 ${footer()}
 ${quickRequestDialog()}
 <script src="/assets/js/site.js?v=${ctx.version}" defer></script>

@@ -305,3 +305,35 @@
     });
   }
 })();
+
+// Paid consultation booking: load TidyCal's official embed script only when the
+// booking section nears the viewport. If it fails, show the gold button.
+(function () {
+  var frame = document.querySelector('[data-booking-embed]');
+  if (!frame) return;
+  var started = false;
+  function fail() {
+    frame.classList.add('is-failed');
+    var fb = document.querySelector('[data-booking-fallback]');
+    if (fb) fb.hidden = false;
+  }
+  function load() {
+    if (started) return;
+    started = true;
+    var s = document.createElement('script');
+    s.src = frame.getAttribute('data-src');
+    s.async = true;
+    s.onerror = fail;
+    document.body.appendChild(s);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { io.disconnect(); load(); return; }
+      }
+    }, { rootMargin: '900px 0px' });
+    io.observe(frame);
+  } else {
+    load();
+  }
+})();

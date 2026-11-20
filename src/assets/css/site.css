@@ -890,3 +890,25 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
   .page-hero--portrait .hero__media img { object-position: 50% 4%; }
   .page-hero--portrait .page-hero__lede { max-width: none; }
 }
+
+/* Paid consultation booking (TidyCal inline embed), above the footer on every page */
+.booking { background: linear-gradient(180deg, #faf7f1 0%, var(--sky-50) 100%); border-top: 1px solid rgba(168, 132, 76, 0.28); padding-block: clamp(2.75rem, 6vw, 4.5rem); }
+.booking__inner { display: grid; gap: clamp(1.25rem, 3vw, 2rem); }
+.booking__intro { max-width: 46rem; }
+.booking__title { position: relative; margin: 0 0 0.6rem; padding-top: 1rem; font-size: var(--step-3); color: var(--sky-950); }
+.booking__title::before { content: ""; position: absolute; top: 0; left: 0; width: 56px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #e1c690, #a8844c); }
+.booking__text { margin: 0; font-size: var(--step-1); line-height: 1.55; color: var(--muted); }
+.booking__card { background: var(--white); border: 1px solid var(--sky-100); border-top: 4px solid #c9a96a; border-radius: var(--radius); box-shadow: 0 24px 48px -32px rgba(12, 34, 68, 0.45); padding: clamp(0.5rem, 2vw, 1.25rem); overflow: hidden; }
+.booking__frame { position: relative; }
+.booking__frame:has(> div.tidycal-embed) { min-height: 700px; }
+.booking__frame:has(> div.tidycal-embed)::after { content: "Loading the booking calendar"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: var(--step--1); }
+.booking__frame iframe { display: block; width: 100%; min-width: 100%; border: 0; }
+.booking__fallback { margin: 0; padding: 1.5rem 0.5rem; text-align: center; }
+.booking__btn { background: linear-gradient(90deg, #e1c690, #b8945a); color: var(--sky-950); box-shadow: 0 10px 24px -12px rgba(168, 132, 76, 0.8); }
+.booking__btn:hover { background: linear-gradient(90deg, #e8d1a2, #c4a067); color: var(--sky-950); }
+.booking__frame.is-failed { display: none; }
+@media (max-width: 640px) {
+  .booking__inner { padding-inline: 0; }
+  .booking__intro { padding-inline: var(--gutter); }
+  .booking__card { border-radius: 0; border-left: 0; border-right: 0; padding: 0; }
+}

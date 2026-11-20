@@ -123,6 +123,17 @@ export const booking = {
   url: 'https://tidycal.com/mediation/consul',
 };
 
+// Paid consultation (a different offer from the free consultation above).
+// Shown as an inline TidyCal embed near the bottom of every page. Do not label
+// it free and do not state a duration in site copy.
+export const paidConsult = {
+  heading: 'Book a Consultation with The Mediator',
+  text: 'Ready to talk it through? Book a consultation with Sean and leave with a clear picture of your options and next steps.',
+  url: 'https://tidycal.com/mediation/30-minute-consultation-with-the-mediator',
+  path: 'mediation/30-minute-consultation-with-the-mediator',
+  embedScript: 'https://asset-tidycal.b-cdn.net/js/embed.js',
+};
+
 // Online scheduler (Calendly, Acuity, etc.). Paste the public scheduling URL
 // once an account exists. When null, the scheduler area is hidden in production.
 export const scheduler = {
