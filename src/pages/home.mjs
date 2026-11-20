@@ -166,7 +166,7 @@ function bento() {
         <li>${icon('map-pin', 'icon icon--sm')} In person across California</li>
         <li>${icon('video', 'icon icon--sm')} By Zoom, nationwide</li>
       </ul>
-      <address style="font-style:normal;font-size:0.95rem;color:var(--muted);margin:0 0 1rem">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
+      <address style="font-style:normal;font-size:0.95rem;color:var(--t-muted);margin:0 0 1rem">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
       <a class="btn btn--primary btn--block btn--sm" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </article>
 
@@ -212,9 +212,9 @@ export function render() {
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
-      <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--white);margin:0 0 0.75em">${meta.subtitle}</p>
+      <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--t-head);margin:0 0 0.75em">${meta.subtitle}</p>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
-      <p class="hero__lede">Case stuck? Sean also serves as a <a href="/high-conflict-settlement-officer/" style="color:var(--white);text-decoration:underline;text-underline-offset:3px">High-Conflict Settlement Officer</a> and parental coordinator.</p>
+      <p class="hero__lede">Case stuck? Sean also serves as a <a href="/high-conflict-settlement-officer/" style="color:var(--t-head);text-decoration:underline;text-underline-offset:3px">High-Conflict Settlement Officer</a> and parental coordinator.</p>
       <div class="hero__actions">
         <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
         <a class="btn btn--glass" href="/mediation/">${CTA_SECONDARY}</a>
@@ -301,7 +301,7 @@ ${bento()}
     </div>
     <div class="split__copy">
       <h2 id="about-preview-title" class="section__title">A steady neutral for difficult conversations</h2>
-      <p class="positioning-line" style="margin:-.25rem 0 1rem;font-size:1.05rem;font-weight:700;line-height:1.4;color:var(--sky-800)">Family Court, Divorce and Civil Mediator, Settlement Neutral, FBI-Trained Crisis Negotiator</p>
+      <p class="positioning-line" style="margin:-.25rem 0 1rem;font-size:1.05rem;font-weight:700;line-height:1.4;color:var(--t-accent)">Family Court, Divorce and Civil Mediator, Settlement Neutral, FBI-Trained Crisis Negotiator</p>
       <p>Helping attorneys and their clients navigate difficult negotiations, overcome settlement impasses, and find practical pathways to resolution. Sean Collinson has spent more than 22 years helping people resolve disputes they could not settle on their own. His training includes Harvard’s Program on Negotiation, Loyola Law School’s Mediating the Litigated Case program, and advanced family mediation training recognized by the Florida Supreme Court.</p>
       <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to every mediation, while staying strictly neutral between the parties.</p>
       <p><a class="text-link" href="/about/">Read Sean Collinson’s background and approach</a></p>
