@@ -304,6 +304,7 @@ main:focus { outline: none; }
 @media (min-width: 640px) { .site-header__cta { display: inline-flex; } }
 @media (min-width: 1180px) { .primary-nav { display: block; } .menu-toggle, .mobile-menu { display: none !important; } .header-social { display: flex; } }
 @media (min-width: 1180px) and (max-width: 1365px) { .site-header .header-social { display: none; } }
+@media (min-width: 1366px) { .site-header .header-social a { width: 26px; height: 26px; } .site-header .primary-nav a { padding-left: 0.42rem; padding-right: 0.42rem; } .site-header .primary-nav .has-sub > a { padding-right: 0.25rem; } }
 
 /* Heroes sit under the transparent header */
 .hero, .page-hero { margin-top: calc(var(--header-h) * -1); }

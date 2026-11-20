@@ -145,12 +145,13 @@ export const bookingLink = (cls) =>
 const socialSvg = {
   YouTube: '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3L10 15Z" fill="currentColor"/>',
   Instagram: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>',
+  X: '<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>',
   LinkedIn: '<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-3.95v-11Z" fill="currentColor"/>',
 };
 export const socialIcons = (cls) =>
   social.length
     ? `<ul class="${cls}">${social
-        .map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener" aria-label="${esc(s.label)} (opens in a new tab)"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">${socialSvg[s.label] || ''}</svg></a></li>`)
+        .map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener" aria-label="${esc(s.aria || s.label)} (opens in a new tab)"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">${socialSvg[s.label] || ''}</svg></a></li>`)
         .join('')}</ul>`
     : '';
 
@@ -206,7 +207,7 @@ function footer() {
   const serviceLinks = [...services, ...guides].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const socials = social.length
     ? `<ul class="footer__social">${social
-        .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>`)
+        .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank"${s.aria ? ` aria-label="${esc(s.aria)} (opens in a new tab)"` : ''}>${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>`)
         .join('')}</ul>`
     : '';
   const contactLines = [

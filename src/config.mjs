@@ -98,6 +98,8 @@ export const areasServed = {
 // Social profiles. Only list real, active profiles owned by the practice.
 export const social = [
   { label: 'YouTube', url: 'https://www.youtube.com/@SeanCollinson' },
+  // X account verified live by Sean, 2026-11-20 (@seancollinson).
+  { label: 'X', url: 'https://x.com/seancollinson', aria: 'Sean Collinson on X' },
   // Verified 2026-11-17: LinkedIn's preview shows "Sean Collinson - Mediation Offices S. Collinson".
   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/seancollinson' },
   { label: 'Instagram', url: 'https://www.instagram.com/seancollinson_official/' },
