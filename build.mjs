@@ -23,6 +23,8 @@ import { blogPages } from './src/pages/blog.mjs';
 import { highConflict } from './src/pages/high-conflict.mjs';
 import { mediatorLosAngeles } from './src/pages/mediator-los-angeles.mjs';
 import { ebookPage, ebookReady } from './src/pages/ebook.mjs';
+import { mediationCost, mediationVsLitigation, testimonialsPage, neighborhoods } from './src/pages/growth-pages.mjs';
+import { checklistPage } from './src/pages/checklist.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -89,10 +91,11 @@ writeFileSync(join(outDir, 'assets/js/engage.js'), engageRaw);
 
 // ── Pages ───────────────────────────────────────────────────────────────────
 const primary = [
-  home, about, mediation, mediatorLosAngeles, howItWorks, faq,
+  home, about, mediation, mediationCost, mediationVsLitigation, mediatorLosAngeles, ...neighborhoods, howItWorks, faq,
   divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
   ...(ebookReady() ? [ebookPage] : []),
+  checklistPage, testimonialsPage,
   ...blogPages(),
 ];
 const all = [...primary, ...legalPages, notfound];

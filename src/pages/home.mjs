@@ -6,6 +6,7 @@ import {
 import { icon } from '../lib/icons.mjs';
 import { drPhilSection, drPhilStyle, drPhilSchema } from '../lib/dr-phil.mjs';
 import { ebookReady, ebookStrip, ebookStripStyle } from './ebook.mjs';
+import { statsBand, reviewStrip, checklistStrip, credentialsSection, stripsStyle } from '../lib/strips.mjs';
 import { ebook } from '../config.mjs';
 
 export const meta = {
@@ -236,6 +237,8 @@ export function render() {
   </div>
 </section>
 
+${statsBand()}
+
 ${ebookStrip()}
 
 ${drPhilSection({ postscript: 'Nearly 400,000 views, the most-watched mediator in the history of the show.' })}
@@ -311,6 +314,8 @@ ${bento()}
   </div>
 </section>
 
+${credentialsSection()}
+
 <section class="statement sky sky--dusk" aria-labelledby="experience-title">
   <div class="wrap statement__inner">
     <h2 id="experience-title" class="statement__label">Experience you can trust</h2>
@@ -329,6 +334,8 @@ ${testimonialsSection()}
   </div>
 </section>
 
+${reviewStrip()}
+
 ${ctaBand({
   heading: 'Your Dispute Does Not Have to Control Your Future',
   text: 'A short, confidential consultation is the simplest way to find out whether mediation fits your situation.',
@@ -342,6 +349,6 @@ ${ctaBand({
     body,
     schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q))), drPhilSchema()],
     bodyClass: 'page-home',
-    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}</style>' + drPhilStyle + (ebookReady() ? ebookStripStyle : ''),
+    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}</style>' + drPhilStyle + (ebookReady() ? ebookStripStyle : '') + stripsStyle,
   });
 }

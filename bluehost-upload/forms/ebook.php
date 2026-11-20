@@ -23,6 +23,13 @@ function respond(int $status, array $body): void {
 
 $config = @include __DIR__ . '/config.php';
 $ebook = is_array($config) ? ($config['ebook'] ?? []) : [];
+// Which opt-in this is: the e-book (default) or another offer listed in config ['optins'].
+$offer = preg_replace('/[^a-z]/', '', (string)($_POST['offer'] ?? 'ebook'));
+if ($offer !== 'ebook') {
+    $optin = is_array($config) ? ($config['optins'][$offer] ?? null) : null;
+    if (!is_array($optin)) { http_response_code(400); header('Content-Type: application/json'); echo '{"ok":false,"message":"Unknown form."}'; exit; }
+    $ebook = array_merge($ebook, $optin);
+}
 // The e-book list can live in its own MailerLite account: ['ebook']['api_key'] (config.local.php) wins.
 $key = (string)($ebook['api_key'] ?? '');
 if ($key === '' && is_array($config)) { $key = (string)($config['mailerlite']['api_key'] ?? ''); }
@@ -94,7 +101,7 @@ $call = function (string $method, string $path, ?array $body = null) use ($key):
 };
 
 // Find the group by exact name (cached for a day); create it if it does not exist.
-$cache = sys_get_temp_dir() . '/sc_ml_ebook_group_' . hash('sha256', $key . $groupName);
+$cache = sys_get_temp_dir() . '/sc_ml_optin_group_' . hash('sha256', $key . $groupName);
 $groupId = is_file($cache) && filemtime($cache) > time() - 86400 ? trim((string)file_get_contents($cache)) : '';
 if ($groupId === '') {
     [$code, $res] = $call('GET', '/groups?limit=100&filter[name]=' . rawurlencode($groupName));

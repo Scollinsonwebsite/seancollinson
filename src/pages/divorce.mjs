@@ -1,4 +1,5 @@
 import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
+import { statsBand, reviewStrip, checklistStrip, credentialsSection, stripsStyle } from '../lib/strips.mjs';
 import {
   layout, ctaBand, breadcrumbs, faqList, faqSchema, officeAddress, officePhoneLink, CTA_PRIMARY,
 } from '../lib/render.mjs';
@@ -135,6 +136,7 @@ export function render() {
     </ul>
     <p>You do not need to agree on everything to start. Most couples begin far apart on at least one issue.</p>
     <p>Court may be the better path if there is a history of abuse, threats, or intimidation, if one spouse cannot participate safely and freely, or if one spouse refuses to share financial information. Raise any safety concern during the consultation, and consider speaking with an attorney or advocate. Court also remains available for anything mediation does not resolve. If your divorce has already become high-conflict, see <a href="/high-conflict-settlement-officer/">high-conflict settlement</a>.</p>
+    <p>Compare the two paths side by side: <a href="/mediation-vs-litigation/">mediation vs. litigation</a>.</p>
   </div>
 </section>
 
@@ -163,7 +165,11 @@ export function render() {
   </div>
 </section>
 
+${reviewStrip()}
+
 ${ebookStrip()}
+
+${checklistStrip()}
 
 ${ctaBand({
   heading: 'Make the Decisions Yourselves, in Private',
@@ -178,6 +184,6 @@ ${ctaBand({
     body,
     schema: [crumbs.schema, faqSchema(faqs)],
     bodyClass: 'page-divorce',
-    headExtra: ebookReady() ? ebookStripStyle : '',
+    headExtra: (ebookReady() ? ebookStripStyle : '') + stripsStyle,
   });
 }

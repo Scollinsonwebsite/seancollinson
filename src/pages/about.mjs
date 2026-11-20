@@ -30,6 +30,11 @@ const credentials = [
     org: 'FBI-trained; volunteer with the Los Angeles County Sheriff’s Department',
     text: 'Crisis-negotiation training applied in a volunteer capacity with the department’s crisis-negotiation function.',
   },
+  {
+    name: 'Author',
+    org: 'RESET OR REPEAT: Break Your Patterns Before They Break You',
+    text: 'Sean\u2019s book on breaking the patterns that keep conflict going.',
+  },
 ];
 
 const values = [
@@ -57,7 +62,7 @@ ${partial('about-hero.html')}
 <section class="section section--ivory" aria-labelledby="training-title">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="training-title" class="section__title">Training and credentials</h2>
+      <h2 id="training-title" class="section__title">Training and Background</h2>
       <p class="section__lede">Formal training in negotiation, litigated-case mediation, family mediation, and crisis communication.</p>
     </div>
     <ul class="credentials">

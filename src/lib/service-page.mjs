@@ -19,7 +19,7 @@ const aboutSean = (topic) => `
     <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to ${topic}. <a href="/about/">Meet Sean Collinson</a>.</p>
     <p class="fine-print">Sean’s volunteer crisis-negotiation service is separate from his mediation practice. Neither the FBI nor the Los Angeles County Sheriff’s Department endorses this practice or its services.</p>`;
 
-export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consultText, seanTopic, cta, hero, headExtra = '', extraSchema = [], beforeCta = '' }) {
+export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consultText, seanTopic, cta, hero, headExtra = '', extraSchema = [], beforeCta = '', consultActions = '' }) {
   const crumbs = breadcrumbs([{ name: crumb, path: meta.path }]);
   const blocks = [
     ...sections,
@@ -28,7 +28,7 @@ export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consu
       title: 'Book a confidential consultation',
       html: `<p>${consultText || 'A private first conversation about your situation, the issues to settle, the format, and fees.'} Call the office or request a consultation online.</p>
     <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
-    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>`,
+    <div class="btn-row">${consultActions || `<a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>`}</div>`,
     },
   ];
   const sectionHtml = blocks

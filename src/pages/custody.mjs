@@ -1,4 +1,5 @@
 import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
+import { statsBand, reviewStrip, checklistStrip, credentialsSection, stripsStyle } from '../lib/strips.mjs';
 import {
   layout, ctaBand, breadcrumbs, faqList, faqSchema, officeAddress, officePhoneLink, CTA_PRIMARY,
 } from '../lib/render.mjs';
@@ -138,7 +139,11 @@ export function render() {
   </div>
 </section>
 
+${reviewStrip()}
+
 ${ebookStrip()}
+
+${checklistStrip()}
 
 ${ctaBand({
   heading: 'Build a Parenting Plan That Works for Your Children',
@@ -153,6 +158,6 @@ ${ctaBand({
     body,
     schema: [crumbs.schema, faqSchema(faqs)],
     bodyClass: 'page-custody',
-    headExtra: ebookReady() ? ebookStripStyle : '',
+    headExtra: (ebookReady() ? ebookStripStyle : '') + stripsStyle,
   });
 }

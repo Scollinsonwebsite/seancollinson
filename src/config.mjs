@@ -71,7 +71,7 @@ export const office = {
 // ineligible, and tests/qa.mjs blocks it.
 export const reviews = {
   rating: '4.9',
-  count: 30,
+  count: 36, // Sean, 2026-11-20
   source: 'Google',
   // Google "write a review" link, used for the rating line (Sean, 2026-11-17).
   url: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
@@ -116,7 +116,7 @@ export const forms = {
 // Booking link for the "Book a Consultation" buttons in the header, footer,
 // and Contact page (Sean's TidyCal "Consultation in-office", 2026-11-17).
 export const booking = {
-  label: 'Book a Consultation',
+  label: 'Book a Free Consultation',
   provider: 'TidyCal',
   url: 'https://tidycal.com/mediation/consul',
 };

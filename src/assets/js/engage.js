@@ -1,6 +1,6 @@
-// Engagement pop-up: once per browser session, after 15 seconds on a page.
+// Engagement pop-up: once per browser session, after 30 seconds on a page.
 // Not loaded on /contact/ or /think-like-a-hostage-negotiator/ (see layout()).
-// A small non-blocking card in the lower corner; never a second form.
+// A small non-blocking white card in the lower corner; no form, no email field.
 (function () {
   var KEY = 'sc_engage_seen';
   var store = {
@@ -10,19 +10,20 @@
   if (store.get()) return;
 
   var css = '' +
-    '.engage{position:fixed;z-index:60;right:20px;bottom:20px;width:min(360px,calc(100vw - 32px));background:#0c2244;color:#fff;border-radius:14px;border:1px solid rgba(225,198,144,.45);box-shadow:0 24px 60px -20px rgba(0,0,0,.6);padding:22px 22px 20px;font-family:inherit}' +
+    '.engage{position:fixed;z-index:60;right:20px;bottom:20px;width:min(380px,calc(100vw - 32px));background:#ffffff;color:#111111;border-radius:14px;border-top:6px solid #c9a463;box-shadow:0 26px 60px -12px rgba(0,0,0,.55),0 4px 14px rgba(0,0,0,.18);padding:20px 22px 20px;font-family:inherit}' +
     '.engage[hidden]{display:none}' +
-    '.engage__title{margin:0 36px 8px 0;font-size:1.25rem;line-height:1.25;font-weight:800;color:#e1c690;letter-spacing:-.01em}' +
-    '.engage__body{margin:0 0 16px;font-size:.98rem;line-height:1.55;color:rgba(255,255,255,.88)}' +
+    '.engage__brand{margin:0 36px 6px 0;font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a6a35}' +
+    '.engage__title{margin:0 36px 8px 0;font-size:1.45rem;line-height:1.2;font-weight:900;color:#000000;letter-spacing:-.015em}' +
+    '.engage__body{margin:0 0 16px;font-size:1rem;line-height:1.55;color:#111111}' +
     '.engage__actions{display:flex;flex-direction:column;gap:10px}' +
-    '.engage__btn{display:block;text-align:center;padding:12px 16px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;line-height:1.2}' +
-    '.engage__btn--primary{background:linear-gradient(135deg,#c9a463,#a8844c);color:#0c2244}' +
-    '.engage__btn--primary:hover{background:linear-gradient(135deg,#d6b373,#b8945a);color:#0c2244;text-decoration:none}' +
-    '.engage__btn--secondary{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}' +
-    '.engage__btn--secondary:hover{box-shadow:inset 0 0 0 1.5px #fff;color:#fff;text-decoration:none}' +
-    '.engage__close{position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}' +
-    '.engage__close:hover{background:rgba(255,255,255,.12)}' +
-    '.engage a:focus-visible,.engage button:focus-visible{outline:3px solid #e1c690;outline-offset:2px}' +
+    '.engage__btn{display:block;text-align:center;border-radius:999px;font-weight:800;text-decoration:none;line-height:1.2}' +
+    '.engage__btn--call{background:#000000;color:#ffffff;font-size:1.2rem;padding:16px 18px}' +
+    '.engage__btn--call:hover{background:#1f1f1f;color:#ffffff;text-decoration:none}' +
+    '.engage__btn--book{background:#ffffff;color:#000000;font-size:.95rem;padding:11px 16px;box-shadow:inset 0 0 0 2px #c9a463}' +
+    '.engage__btn--book:hover{background:#fbf6ec;color:#000000;text-decoration:none}' +
+    '.engage__close{position:absolute;top:12px;right:10px;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:#111111;font-size:1.7rem;line-height:1;cursor:pointer}' +
+    '.engage__close:hover{background:#f1f1f1}' +
+    '.engage a:focus-visible,.engage button:focus-visible{outline:3px solid #c9a463;outline-offset:2px}' +
     '@media (max-width:480px){.engage{right:16px;left:16px;bottom:16px;width:auto}}' +
     '@media (prefers-reduced-motion:no-preference){.engage{animation:engage-in .35s ease-out}@keyframes engage-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}}';
 
@@ -39,11 +40,12 @@
     card.setAttribute('aria-describedby', 'engage-body');
     card.innerHTML =
       '<button class="engage__close" type="button" aria-label="Close">&times;</button>' +
+      '<p class="engage__brand">Sean Collinson, The Mediator</p>' +
       '<p class="engage__title" id="engage-title">Are you still there?</p>' +
-      '<p class="engage__body" id="engage-body">If you would like a free consultation, reach out now. Send the contact form and we will get back to you, or tap to call and talk it through.</p>' +
+      '<p class="engage__body" id="engage-body">Your consultation is free, and one call can change how this goes. Tap to call and talk it through right now, or download my free e-book on handling a high-conflict ex.</p>' +
       '<div class="engage__actions">' +
-      '<a class="engage__btn engage__btn--primary" href="/contact/#contact-form-title">Send the Contact Form</a>' +
-      '<a class="engage__btn engage__btn--secondary" href="tel:+18184027500">Call (818) 402-7500</a>' +
+      '<a class="engage__btn engage__btn--call" href="tel:+18184027500">Call (818) 402-7500</a>' +
+      '<a class="engage__btn engage__btn--book" href="https://seancollinson.com/think-like-a-hostage-negotiator/">Download the Free E-Book</a>' +
       '</div>';
     document.body.appendChild(card);
 
@@ -72,5 +74,5 @@
     build();
   }
 
-  setTimeout(show, 15000);
+  setTimeout(show, 30000);
 })();

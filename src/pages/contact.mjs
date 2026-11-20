@@ -31,7 +31,7 @@ export function render() {
   const fields = [
     field({ name: 'name', label: 'Name', required: true, autocomplete: 'name', maxlength: 120 }),
     field({ name: 'email', label: 'Email', type: 'email', required: true, autocomplete: 'email', maxlength: 160 }),
-    field({ name: 'phone', label: 'Phone', type: 'tel', autocomplete: 'tel', maxlength: 40 }),
+    field({ name: 'phone', label: 'Phone', type: 'tel', required: true, autocomplete: 'tel', maxlength: 40 }),
     field({
       name: 'reason',
       label: 'Reason for contacting',
@@ -39,6 +39,10 @@ export function render() {
       required: true,
       options: ['Question about mediation', 'Consultation or scheduling', 'Attorney referral', 'Masterclass or training', 'Media or speaking request', 'Other'],
     }),
+    field({ name: 'matter_type', label: 'What type of matter', type: 'select', options: ['Divorce', 'Child custody', 'Child support', 'Property or finances', 'Workplace or business', 'Other'] }),
+    field({ name: 'children', label: 'Are children under 18 involved?', type: 'radio', options: ['Yes', 'No'] }),
+    field({ name: 'court_filed', label: 'Has anything been filed in court yet?', type: 'radio', options: ['Yes', 'No'] }),
+    field({ name: 'urgent', label: 'Anything urgent we should know', maxlength: 200, width: 'full' }),
     field({ name: 'contact_method', label: 'Preferred contact method', type: 'radio', required: true, options: ['Email', 'Phone'] }),
     warning(),
     field({ name: 'message', label: 'Message', type: 'textarea', required: true, maxlength: 1500, width: 'full' }),

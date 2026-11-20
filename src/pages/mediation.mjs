@@ -188,6 +188,7 @@ ${partial('mediation-hero.html')}
         </tbody>
       </table>
     </div>
+    <p class="compare-more">See the full comparison with cost ranges: <a href="/mediation-vs-litigation/">mediation vs. litigation</a>. And see <a href="/mediation-cost/">what mediation with Sean costs</a>.</p>
   </div>
 </section>
 

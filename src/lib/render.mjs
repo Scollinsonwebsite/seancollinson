@@ -164,7 +164,7 @@ function header(path) {
         `<li><a href="${n.path}"${n.path === path ? ' aria-current="page"' : ''}>${n.label}</a></li>`
     )
     .join('');
-  const sub = [...services, ...guides, { path: '/think-like-a-hostage-negotiator/', label: 'Think Like a Hostage Negotiator' }];
+  const sub = [...services, ...guides, { path: '/mediation-cost/', label: 'Mediation cost' }, { path: '/think-like-a-hostage-negotiator/', label: 'Think Like a Hostage Negotiator' }];
   const subLinks = sub
     .map((s) => `<li><a href="${s.path}"${s.path === path ? ' aria-current="page"' : ''}>${s.label}</a></li>`)
     .join('');
@@ -202,7 +202,7 @@ function header(path) {
 }
 
 function footer() {
-  const pageLinks = nav.map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
+  const pageLinks = [...nav, { path: '/testimonials/', label: 'Testimonials' }].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const serviceLinks = [...services, ...guides].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const socials = social.length
     ? `<ul class="footer__social">${social
