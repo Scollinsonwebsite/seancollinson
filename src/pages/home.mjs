@@ -301,7 +301,7 @@ ${bento()}
     </div>
     <div class="split__copy">
       <h2 id="about-preview-title" class="section__title">A steady neutral for difficult conversations</h2>
-      <p class="positioning-line" style="margin:-.25rem 0 1rem;font-size:1.05rem;font-weight:700;line-height:1.4;color:var(--sky-800)">Family Law &amp; Civil Mediator | Settlement Neutral | FBI-Trained Crisis Negotiator</p>
+      <p class="positioning-line" style="margin:-.25rem 0 1rem;font-size:1.05rem;font-weight:700;line-height:1.4;color:var(--sky-800)">Family Court, Divorce and Civil Mediator, Settlement Neutral, FBI-Trained Crisis Negotiator</p>
       <p>Helping attorneys and their clients navigate difficult negotiations, overcome settlement impasses, and find practical pathways to resolution. Sean Collinson has spent more than 22 years helping people resolve disputes they could not settle on their own. His training includes Harvard’s Program on Negotiation, Loyola Law School’s Mediating the Litigated Case program, and advanced family mediation training recognized by the Florida Supreme Court.</p>
       <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to every mediation, while staying strictly neutral between the parties.</p>
       <p><a class="text-link" href="/about/">Read Sean Collinson’s background and approach</a></p>
