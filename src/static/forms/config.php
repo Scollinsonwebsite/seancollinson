@@ -34,6 +34,11 @@ $config = [
             'masterclass' => 'Master class inquiries',
         ],
     ],
+    // Free e-book opt-in (forms/ebook.php): MailerLite group and the PDF in the media library.
+    'ebook' => [
+        'group' => 'Hostage Negotiator E-Book',
+        'pdf_url' => '',
+    ],
 ];
 
 // Private overrides, never shipped in the zip.

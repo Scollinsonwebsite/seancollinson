@@ -290,3 +290,14 @@ export const legal = {
   accessibility: { reviewed: true },
   disclaimer: { reviewed: true },
 };
+
+// Free e-book (/think-like-a-hostage-negotiator/). The cover and PDF live in
+// the WordPress media library; fill in their URLs after uploading. The PDF URL
+// is also set in forms/config.php ['ebook']['pdf_url'], which the opt-in
+// handler returns after a successful signup. While cover or pdf is null the
+// page, the homepage strip and the internal links are not built.
+export const ebook = {
+  path: '/think-like-a-hostage-negotiator/',
+  cover: null, // { src: '/wp-content/uploads/…', width: 0, height: 0 }
+  pdf: null, // '/wp-content/uploads/….pdf'
+};

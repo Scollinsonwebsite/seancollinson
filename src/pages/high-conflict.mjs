@@ -1,5 +1,7 @@
 // High-Conflict Settlement Officer page. Copy supplied by Sean (2026-11-18);
 // hero uses the Mediation page's gold conference-room style.
+import { ebookReady, EBOOK_ANCHOR } from './ebook.mjs';
+import { ebook } from '../config.mjs';
 import { office } from '../config.mjs';
 import { layout, breadcrumbs, faqList, faqSchema, ctaBand, partial, esc } from '../lib/render.mjs';
 
@@ -124,7 +126,8 @@ ${section('civil', 'Civil settlement conferences', 'A practical path for cases w
 ${section('background', 'A different background at the settlement table', 'Calm under pressure. Direct about the decisions.', `<p>Sean Collinson is a family and civil mediator with more than 22 years of experience. He has completed negotiation training through Harvard’s Program on Negotiation and Loyola Law School’s Mediating the Litigated Case program. He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department.</p>
     <p>Crisis negotiation training emphasizes disciplined listening, rapport, emotional awareness, and careful communication when people are under pressure. Those skills inform Sean’s settlement work. They do not replace legal analysis or the parties’ counsel. They help create a structured environment where difficult issues can be discussed directly.</p>
     <blockquote class="pull-quote"><p>Different background. Steady process. A focused effort to find a workable path forward.</p></blockquote>
-    <p class="fine-print">Sean’s volunteer crisis-negotiation service is separate from his mediation practice. Neither the FBI nor the Los Angeles County Sheriff’s Department endorses this practice or its services.</p>`, true)}
+    ${ebookReady() ? `<p>For the mindset and word-for-word scripts behind this approach, download the <a href="${ebook.path}">${EBOOK_ANCHOR}</a>.</p>
+    ` : ''}<p class="fine-print">Sean’s volunteer crisis-negotiation service is separate from his mediation practice. Neither the FBI nor the Los Angeles County Sheriff’s Department endorses this practice or its services.</p>`, true)}
 
 <section class="section" id="process" aria-labelledby="process-title">
   <div class="wrap">

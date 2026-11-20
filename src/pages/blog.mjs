@@ -9,6 +9,8 @@ import { join } from 'node:path';
 import { site, office } from '../config.mjs';
 import { layout, breadcrumbs, esc, abs, ctx, bookingLink, officeAddress, faqSchema, ids } from '../lib/render.mjs';
 import { markdown } from '../lib/markdown.mjs';
+import { ebookReady, EBOOK_ANCHOR } from './ebook.mjs';
+import { ebook } from '../config.mjs';
 
 export const posts = [
   {
@@ -19,6 +21,7 @@ export const posts = [
     date: '2026-11-19',
     // No featured image supplied: the post uses the standard content-page hero band.
     image: null,
+    ebookLink: true,
     faqs: [
       { q: "Can custody mediation work if we can\'t be in the same room?", a: "Yes. Mediation does not require you to sit together. Sessions can run with each parent in a separate room while the mediator moves between you, or by Zoom. The structure is built for exactly that situation." },
       { q: "What if my co-parent won\'t compromise on anything?", a: "You do not need to agree on everything, or even like each other, to settle a parenting plan. Mediation works on one issue at a time and focuses on your child\'s needs and each parent\'s real interests underneath the positions. Most high-conflict parents are surprised by what moves once the conversation is structured." },
@@ -139,6 +142,7 @@ const postPage = (p) => ({
   <div class="wrap narrow prose">
     ${figure}
     ${body(p)}
+    ${p.ebookLink && ebookReady() ? `<p class="post-ebook">Want the scripts? Download the <a href="${ebook.path}">${EBOOK_ANCHOR}</a>.</p>` : ''}
     <nav class="post-related" aria-labelledby="related-title">
       <h2 id="related-title">Related services</h2>
       <ul>${relatedServices.map(([href, label]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul>

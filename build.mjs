@@ -22,6 +22,7 @@ import { business, workplace, howItWorks, faq } from './src/pages/services-other
 import { blogPages } from './src/pages/blog.mjs';
 import { highConflict } from './src/pages/high-conflict.mjs';
 import { mediatorLosAngeles } from './src/pages/mediator-los-angeles.mjs';
+import { ebookPage, ebookReady } from './src/pages/ebook.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -81,12 +82,14 @@ mkdirSync(join(outDir, 'assets/css'), { recursive: true });
 mkdirSync(join(outDir, 'assets/js'), { recursive: true });
 writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
+writeFileSync(join(outDir, 'assets/js/ebook.js'), readFileSync(join(srcDir, 'assets/js/ebook.js'), 'utf8'));
 
 // ── Pages ───────────────────────────────────────────────────────────────────
 const primary = [
   home, about, mediation, mediatorLosAngeles, howItWorks, faq,
   divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
+  ...(ebookReady() ? [ebookPage] : []),
   ...blogPages(),
 ];
 const all = [...primary, ...legalPages, notfound];
