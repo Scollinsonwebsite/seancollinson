@@ -912,3 +912,76 @@ a.tile:focus-visible { outline-offset: 4px; border-radius: var(--tile-radius); }
   .booking__intro { padding-inline: var(--gutter); }
   .booking__card { border-radius: 0; border-left: 0; border-right: 0; padding: 0; }
 }
+
+
+/* ── Call-to-action buttons (2026-11-20) ─────────────────────────────────
+   On dark or photo backgrounds: white fill, navy text, gold edge.
+   On white or light backgrounds: navy fill, white text, gold edge.
+   Hover or tap: gold fill with navy text. */
+:root { --cta-navy: #0c2244; --cta-gold: #c9a463; --cta-gold-fill: #dcc08a; }
+.btn.btn--primary,
+.btn.btn--secondary,
+.btn.booking__btn,
+.site-header.is-solid .btn.btn--header {
+  background: var(--cta-navy); color: #ffffff; border: 1.5px solid var(--cta-gold);
+  box-shadow: 0 10px 24px -14px rgba(12, 34, 68, 0.7);
+}
+.btn.btn--white,
+.btn.btn--light,
+.btn.btn--glass,
+.btn.btn--ghost-light,
+.btn.btn--header,
+.page-hero .btn.btn--primary,
+.page-hero .btn.btn--secondary,
+.hero .btn.btn--primary,
+.hero .btn.btn--secondary,
+.cta-band .btn.btn--primary,
+.cta-band .btn.btn--secondary,
+.site-footer .footer__book a.btn,
+.btn.ebook-strip__btn,
+.btn.ebook-hero__btn,
+.btn.mh__cta {
+  background: #ffffff; color: var(--cta-navy); border: 1.5px solid var(--cta-gold);
+  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.btn.btn--primary:hover,
+.btn.btn--secondary:hover,
+.btn.booking__btn:hover,
+.site-header.is-solid .btn.btn--header:hover,
+.btn.btn--white:hover,
+.btn.btn--light:hover,
+.btn.btn--glass:hover,
+.btn.btn--ghost-light:hover,
+.btn.btn--header:hover,
+.page-hero .btn.btn--primary:hover,
+.page-hero .btn.btn--secondary:hover,
+.hero .btn.btn--primary:hover,
+.hero .btn.btn--secondary:hover,
+.cta-band .btn.btn--primary:hover,
+.cta-band .btn.btn--secondary:hover,
+.site-footer .footer__book a.btn:hover,
+.btn.ebook-strip__btn:hover,
+.btn.ebook-hero__btn:hover,
+.btn.mh__cta:hover,
+.btn.btn--primary:focus-visible,
+.btn.btn--secondary:focus-visible,
+.btn.booking__btn:focus-visible,
+.site-header.is-solid .btn.btn--header:focus-visible,
+.btn.btn--white:focus-visible,
+.btn.btn--light:focus-visible,
+.btn.btn--glass:focus-visible,
+.btn.btn--ghost-light:focus-visible,
+.btn.btn--header:focus-visible,
+.page-hero .btn.btn--primary:focus-visible,
+.page-hero .btn.btn--secondary:focus-visible,
+.hero .btn.btn--primary:focus-visible,
+.hero .btn.btn--secondary:focus-visible,
+.cta-band .btn.btn--primary:focus-visible,
+.cta-band .btn.btn--secondary:focus-visible,
+.site-footer .footer__book a.btn:focus-visible,
+.btn.ebook-strip__btn:focus-visible,
+.btn.ebook-hero__btn:focus-visible,
+.btn.mh__cta:focus-visible {
+  background: var(--cta-gold-fill); color: var(--cta-navy); border-color: var(--cta-gold); text-decoration: none;
+}
