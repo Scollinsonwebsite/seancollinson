@@ -194,7 +194,7 @@ const style = `<style>
 .quiz-disclaimer{margin:1.75rem 0;padding:1.25rem 1.35rem;border:2px solid #0A1B31;border-radius:var(--radius);background:rgba(238,217,164,.32);color:#0A1B31;font-size:1.0625rem;line-height:1.6}
 .quiz-disclaimer p{margin:0 0 .75rem}.quiz-disclaimer p:last-child{margin:0}
 .quiz-disclaimer a,.quiz-safety a,.quiz a:not(.btn){color:#0A1B31;font-weight:700;text-decoration:underline;text-underline-offset:.2em}
-.quiz-start{margin:1.75rem 0 .75rem}
+.quiz-start{margin:1.75rem 0 2rem;text-align:center}
 .quiz-who{font-size:.95rem;color:#34435A;max-width:38em;margin:0 0 2.25rem}
 .quiz-safety{margin:2rem 0;padding:1.25rem 1.35rem;border-left:4px solid #EED9A4;background:#fff;box-shadow:0 0 0 1px rgba(10,27,49,.16);border-radius:var(--radius-sm);color:#0A1B31}
 .quiz-safety__title{font-size:var(--step-1);margin:0 0 .5rem}
@@ -305,9 +305,9 @@ export const quizPage = {
 
     <div class="quiz-screen" data-screen="intro" tabindex="-1">
       <div class="quiz-copy">${opening.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}</div>
+      <p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start>Start</button></p>
       ${disclaimerHtml(true)}
       <div class="quiz-copy">${instructions.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
-      <p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start>Start</button></p>
       <p class="quiz-who">${esc(whoFor[0])}</p>
       ${safetyBox('quiz-safety')}
       <p class="quiz-footer-line">${esc(footerLine)}</p>
