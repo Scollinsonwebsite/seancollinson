@@ -15,6 +15,8 @@ import { field } from '../lib/forms.mjs';
 const PATH = '/narcissist-or-negotiator-quiz/';
 const EBOOK_URL = 'https://seancollinson.com/think-like-a-hostage-negotiator/';
 const BOOK_URL = 'https://tidycal.com/mediation/consul';
+// Heading on the email screen (Sean, Nov 21, 2026).
+const GATE_TITLE = 'Where do you land on the hostage negotiator or narcissist scale, take the quiz';
 const PRIVACY_LINE = 'Your answers stay on your device. We only receive your name and email from the start screen.';
 
 // Lines from the draft that are deliberately NOT shown, because they promise
@@ -324,7 +326,7 @@ export const quizPage = {
     </div>
 
     <div class="quiz-screen quiz-gate" data-screen="gate" tabindex="-1" hidden>
-      <h2 class="quiz-gate__title" id="quiz-gate-title">${esc(h1)}</h2>
+      <h2 class="quiz-gate__title" id="quiz-gate-title">${esc(GATE_TITLE)}</h2>
       <p class="quiz-gate__lead">${esc(gateCopy)}</p>
       <form class="form" data-quiz-gate action="/forms/ebook.php" method="post" novalidate aria-labelledby="quiz-gate-title">
         <input type="hidden" name="offer" value="quiz">
