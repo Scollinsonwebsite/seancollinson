@@ -188,6 +188,8 @@ const style = `<style>
 .quiz-hero h1{font-size:clamp(2.1rem,1.5rem + 3vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.04;margin:0 0 .6rem}
 .quiz-sub{font-size:var(--step-1);line-height:1.5;font-weight:600;margin:0 0 1.75rem;max-width:36em}
 .quiz-hero .breadcrumbs ol{margin-bottom:1.25rem}
+.quiz-video{margin:0 auto 2rem;max-width:640px}
+.quiz-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:var(--radius);background:#0A1B31;box-shadow:0 18px 40px -24px rgba(10,27,49,.55)}
 .quiz-copy p{max-width:40em}
 .quiz-disclaimer{margin:1.75rem 0;padding:1.25rem 1.35rem;border:2px solid #0A1B31;border-radius:var(--radius);background:rgba(238,217,164,.32);color:#0A1B31;font-size:1.0625rem;line-height:1.6}
 .quiz-disclaimer p{margin:0 0 .75rem}.quiz-disclaimer p:last-child{margin:0}
@@ -296,6 +298,9 @@ export const quizPage = {
       ${crumbs.html}
       <h1 id="page-title">${esc(h1)}</h1>
       <p class="quiz-sub">${esc(subhead)}</p>
+      <figure class="quiz-video">
+        <video controls playsinline preload="metadata" width="1280" height="720" aria-label="Quiz introduction video" data-quiz-video><source src="/assets/video/quiz-intro-video-web.mp4#t=0.1" type="video/mp4"></video>
+      </figure>
     </div>
 
     <div class="quiz-screen" data-screen="intro" tabindex="-1">

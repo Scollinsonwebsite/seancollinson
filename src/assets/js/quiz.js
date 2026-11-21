@@ -60,6 +60,7 @@
   function show(name) {
     Object.keys(screens).forEach(function (k) { screens[k].hidden = k !== name; });
     hero.hidden = name !== 'intro'; // the email screen carries its own copy of the title
+    if (name !== 'intro') { root.querySelectorAll('[data-quiz-video]').forEach(function (v) { if (!v.paused) v.pause(); }); }
     var el = screens[name];
     if (name !== 'intro') { scrollToQuiz(); }
     try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
