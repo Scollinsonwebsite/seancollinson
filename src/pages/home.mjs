@@ -218,6 +218,7 @@ export function render() {
       <div class="hero__actions">
         <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
         <a class="btn btn--glass" href="/mediation/">${CTA_SECONDARY}</a>
+        <a class="btn btn--glass" href="/narcissist-or-negotiator-quiz/">Negotiator Quiz</a>
       </div>
       <ul class="hero__values" aria-label="The approach">
         <li>Private</li><li>Practical</li><li>Solution-focused</li>
@@ -350,6 +351,6 @@ ${ctaBand({
     body,
     schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q))), drPhilSchema()],
     bodyClass: 'page-home',
-    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}</style>' + drPhilStyle + (ebookReady() ? ebookStripStyle : '') + stripsStyle,
+    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}@media (min-width:1000px){.hero--photo .hero__actions{flex-wrap:nowrap;width:max-content;max-width:calc(100vw - 2 * var(--gutter))}}</style>' + drPhilStyle + (ebookReady() ? ebookStripStyle : '') + stripsStyle,
   });
 }
