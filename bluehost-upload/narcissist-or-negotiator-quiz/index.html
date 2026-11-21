@@ -43,8 +43,9 @@
 .quiz-disclaimer p{margin:0 0 .75rem}.quiz-disclaimer p:last-child{margin:0}
 .quiz-disclaimer a,.quiz-safety a,.quiz a:not(.btn){color:#0A1B31;font-weight:700;text-decoration:underline;text-underline-offset:.2em}
 .quiz-start{margin:1.75rem 0 2rem;text-align:center}
-.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]{background:#15803D;color:#fff;border-color:#15803D}
-.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]:hover,.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]:focus-visible{background:#166534;color:#fff;border-color:#166534}
+.section--ivory .btn.btn--primary.btn-big[data-quiz-start],.section--ivory .quiz-gate .btn.btn--primary.btn-big[type=submit]{background:#2A7C13;color:#fff;border-color:#2A7C13}
+.section--ivory .btn.btn--primary.btn-big[data-quiz-start]:hover,.section--ivory .btn.btn--primary.btn-big[data-quiz-start]:focus-visible,.section--ivory .quiz-gate .btn.btn--primary.btn-big[type=submit]:hover,.section--ivory .quiz-gate .btn.btn--primary.btn-big[type=submit]:focus-visible{background:#1F5E0E;color:#fff;border-color:#1F5E0E}
+.quiz-start-word{text-transform:uppercase;font-weight:800;letter-spacing:.03em}
 .quiz-disclaimer__title{font-size:var(--step-1);margin:0 0 .5rem;color:#0A1B31}
 .quiz-who{font-size:.95rem;color:#34435A;max-width:38em;margin:0}
 .quiz-safety{margin:2rem 0;padding:1.25rem 1.35rem;border-left:4px solid #EED9A4;background:#fff;box-shadow:0 0 0 1px rgba(10,27,49,.16);border-radius:var(--radius-sm);color:#0A1B31}
@@ -167,7 +168,7 @@
 <p>One way of thinking treats every disagreement as a threat to the ego. It has to win, it keeps score, it punishes, and it would rather blow up a Tuesday than lose a point. The other way comes from hostage negotiation. It slows the moment down, listens for what the other person actually needs, and trades on interests instead of fighting over facts and positions. The exchange is about the interest, not the argument.</p>
 <p>This quiz puts you in 25 real situations and asks what you would honestly do. Some are about divorce, custody, and co-parenting. Others are about work, money, family, neighbors, and business, because the same thinking shows up everywhere you have something to lose. At the end, a graph shows where your answers land on the scale, closer to narcissist thinking or closer to hostage negotiator thinking, and what to do with that either way.</p>
 <p>It takes about 4 minutes.</p></div>
-<p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start>Start</button></p>
+<p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start><span class="quiz-start-word">Start</span></button></p>
 <div class="quiz-copy"><p>Answer as yourself on a normal day, not your best day and not your worst hour. Pick the answer closest to what you would actually do, not what sounds good. There are no right answers, and trying to beat the quiz only blurs the one result that could help you. Your answers stay on your device.</p></div>
 <p class="quiz-who">Built for anyone in a situation of conflict or disagreement, with spouses, exes, co-parents, family, coworkers, neighbors, and business partners. Answer about yourself. If you are really here to check the other parent, be honest about that too, the result still teaches you the negotiator moves that work on that pattern.</p>
 <div class="quiz-disclaimer" role="note">
@@ -201,7 +202,7 @@
 <p class="field__error" id="quiz-email-error" hidden></p>
 </div>
 </div>
-<div class="form__actions"><button class="btn btn--primary btn-big" type="submit">Start the Quiz</button></div>
+<div class="form__actions"><button class="btn btn--primary btn-big" type="submit"><span><span class="quiz-start-word">Start</span> the Quiz</span></button></div>
 <div class="form__status" role="status" aria-live="polite" data-status></div>
 </form>
 <p class="quiz-privacy">Your answers stay on your device. We only receive your name and email from the start screen.</p>
@@ -388,6 +389,6 @@
 </div>
 </dialog>
 <script src="/assets/js/site.js?v=0d54a6aaef" defer></script>
-<script src="/assets/js/quiz.js?v=f5bb85c301" defer></script>
+<script src="/assets/js/quiz.js?v=2c506ba15d" defer></script>
 </body>
 </html>

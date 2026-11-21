@@ -204,8 +204,9 @@ const style = `<style>
 .quiz-disclaimer p{margin:0 0 .75rem}.quiz-disclaimer p:last-child{margin:0}
 .quiz-disclaimer a,.quiz-safety a,.quiz a:not(.btn){color:#0A1B31;font-weight:700;text-decoration:underline;text-underline-offset:.2em}
 .quiz-start{margin:1.75rem 0 2rem;text-align:center}
-.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]{background:#15803D;color:#fff;border-color:#15803D}
-.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]:hover,.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]:focus-visible{background:#166534;color:#fff;border-color:#166534}
+.section--ivory .btn.btn--primary.btn-big[data-quiz-start],.section--ivory .quiz-gate .btn.btn--primary.btn-big[type=submit]{background:#2A7C13;color:#fff;border-color:#2A7C13}
+.section--ivory .btn.btn--primary.btn-big[data-quiz-start]:hover,.section--ivory .btn.btn--primary.btn-big[data-quiz-start]:focus-visible,.section--ivory .quiz-gate .btn.btn--primary.btn-big[type=submit]:hover,.section--ivory .quiz-gate .btn.btn--primary.btn-big[type=submit]:focus-visible{background:#1F5E0E;color:#fff;border-color:#1F5E0E}
+.quiz-start-word{text-transform:uppercase;font-weight:800;letter-spacing:.03em}
 .quiz-disclaimer__title{font-size:var(--step-1);margin:0 0 .5rem;color:#0A1B31}
 .quiz-who{font-size:.95rem;color:#34435A;max-width:38em;margin:0}
 .quiz-safety{margin:2rem 0;padding:1.25rem 1.35rem;border-left:4px solid #EED9A4;background:#fff;box-shadow:0 0 0 1px rgba(10,27,49,.16);border-radius:var(--radius-sm);color:#0A1B31}
@@ -317,7 +318,7 @@ export const quizPage = {
 
     <div class="quiz-screen" data-screen="intro" tabindex="-1">
       <div class="quiz-copy">${opening.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}</div>
-      <p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start>Start</button></p>
+      <p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start><span class="quiz-start-word">Start</span></button></p>
       <div class="quiz-copy">${instructions.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
       <p class="quiz-who">${esc(whoFor[0])}</p>
       ${disclaimerHtml(true, 'Disclaimer')}
@@ -336,7 +337,7 @@ export const quizPage = {
           ${f({ name: 'first_name', label: 'First name', autocomplete: 'given-name', maxlength: 80 })}
           ${f({ name: 'email', label: 'Email address', type: 'email', autocomplete: 'email', maxlength: 160 })}
         </div>
-        <div class="form__actions"><button class="btn btn--primary btn-big" type="submit">${esc(gateButton)}</button></div>
+        <div class="form__actions"><button class="btn btn--primary btn-big" type="submit"><span>${esc(gateButton).replace(/^Start\b/, '<span class="quiz-start-word">Start</span>')}</span></button></div>
         <div class="form__status" role="status" aria-live="polite" data-status></div>
       </form>
       <p class="quiz-privacy">${esc(PRIVACY_LINE)}</p>

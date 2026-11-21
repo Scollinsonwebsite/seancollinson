@@ -174,7 +174,7 @@
     if (!first) { form.first_name.focus(); return; }
     if (!emailOk) { form.email.focus(); return; }
     var button = form.querySelector('button[type="submit"]');
-    var label = button.textContent;
+    var label = button.innerHTML; // keeps the styled START word
     button.disabled = true;
     button.textContent = 'Sending…';
     say('', '');
@@ -187,7 +187,7 @@
         say('error', (res && res.message) || 'Something went wrong. Please try again in a moment.');
       })
       .catch(function () { say('error', 'A connection problem stopped the request. Please check your connection and try again.'); })
-      .then(function () { button.disabled = false; button.textContent = label; });
+      .then(function () { button.disabled = false; button.innerHTML = label; });
   });
 
   reset();
