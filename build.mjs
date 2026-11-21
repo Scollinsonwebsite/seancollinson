@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 
 import { ctx } from './src/lib/render.mjs';
-import { site, contact, analytics, scheduler } from './src/config.mjs';
+import { site, contact, analytics, scheduler, paidConsult } from './src/config.mjs';
 import * as home from './src/pages/home.mjs';
 import * as about from './src/pages/about.mjs';
 import * as mediation from './src/pages/mediation.mjs';
@@ -20,6 +20,13 @@ import * as support from './src/pages/support.mjs';
 import { spousal, property, separation, paternity, holidays } from './src/pages/services-family.mjs';
 import { business, workplace, howItWorks, faq } from './src/pages/services-other.mjs';
 import { blogPages } from './src/pages/blog.mjs';
+import { highConflict } from './src/pages/high-conflict.mjs';
+import { mediatorLosAngeles } from './src/pages/mediator-los-angeles.mjs';
+import { ebookPage, ebookReady } from './src/pages/ebook.mjs';
+import { mediationCost, mediationVsLitigation, testimonialsPage, neighborhoods } from './src/pages/growth-pages.mjs';
+import { checklistPage } from './src/pages/checklist.mjs';
+import { newsletterPage } from './src/pages/newsletter.mjs';
+import { quizPage } from './src/pages/quiz.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -39,6 +46,7 @@ ctx.year = new Date().getFullYear();
 const cssRaw = readFileSync(join(srcDir, 'assets/css/site.css'), 'utf8');
 const jsRaw = readFileSync(join(srcDir, 'assets/js/site.js'), 'utf8');
 ctx.version = createHash('sha256').update(cssRaw + jsRaw).digest('hex').slice(0, 10);
+ctx.engageVersion = createHash('sha256').update(readFileSync(join(srcDir, 'assets/js/engage.js'))).digest('hex').slice(0, 10);
 
 // Light, safe minification (comments and redundant whitespace only).
 const minifyCss = (css) =>
@@ -61,6 +69,7 @@ mkdirSync(outDir, { recursive: true });
 
 const copy = (from, to) => cpSync(join(srcDir, from), join(outDir, to), { recursive: true });
 copy('assets/fonts', 'assets/fonts');
+if (existsSync(join(srcDir, 'assets/video'))) copy('assets/video', 'assets/video'); // copied byte for byte, never re-encoded
 copy('assets/icons', 'assets/icons');
 mkdirSync(join(outDir, 'assets/img'), { recursive: true });
 for (const f of ['social-share.jpg', 'logo.png']) {
@@ -68,7 +77,7 @@ for (const f of ['social-share.jpg', 'logo.png']) {
 }
 if (existsSync(join(srcDir, 'assets/img/generated'))) copy('assets/img/generated', 'assets/img/generated');
 // Page photos added directly on the live site (home video poster, About and Mediation heroes).
-for (const d of ['home', 'about', 'mediation']) {
+for (const d of ['home', 'about', 'mediation', 'settlement', 'contact']) {
   if (existsSync(join(srcDir, 'assets/img', d))) copy(`assets/img/${d}`, `assets/img/${d}`);
 }
 copy('static/forms', 'forms');
@@ -79,12 +88,18 @@ mkdirSync(join(outDir, 'assets/css'), { recursive: true });
 mkdirSync(join(outDir, 'assets/js'), { recursive: true });
 writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
+writeFileSync(join(outDir, 'assets/js/ebook.js'), readFileSync(join(srcDir, 'assets/js/ebook.js'), 'utf8'));
+writeFileSync(join(outDir, 'assets/js/quiz.js'), readFileSync(join(srcDir, 'assets/js/quiz.js'), 'utf8'));
+const engageRaw = readFileSync(join(srcDir, 'assets/js/engage.js'), 'utf8');
+writeFileSync(join(outDir, 'assets/js/engage.js'), engageRaw);
 
 // ── Pages ───────────────────────────────────────────────────────────────────
 const primary = [
-  home, about, mediation, howItWorks, faq,
-  divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace,
+  home, about, mediation, mediationCost, mediationVsLitigation, mediatorLosAngeles, ...neighborhoods, howItWorks, faq,
+  divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
+  ...(ebookReady() ? [ebookPage] : []),
+  checklistPage, testimonialsPage, newsletterPage, quizPage,
   ...blogPages(),
 ];
 const all = [...primary, ...legalPages, notfound];
@@ -105,10 +120,24 @@ writeFileSync(
     : `User-agent: *\nAllow: /\nDisallow: /forms/\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\nSitemap: ${base}/sitemap.xml\n`
 );
 const sitemapPages = [...primary, ...legalPages.filter((p) => !p.meta.noindex)];
+// Honest lastmod: a page keeps its previously published date unless its HTML
+// changed since the last committed build (compared with git HEAD).
+const gitShow = (path) => {
+  try { return execFileSync('git', ['show', `HEAD:${path}`], { cwd: root, stdio: ['ignore', 'pipe', 'ignore'] }).toString(); } catch { return null; }
+};
+const prevSitemap = draft ? null : gitShow('bluehost-upload/sitemap.xml');
+const prevLastmod = new Map([...(prevSitemap || '').matchAll(/<loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+const lastmodFor = (p) => {
+  const url = `${base}${p.meta.path}`;
+  const prev = prevLastmod.get(url);
+  if (!prev) return today;
+  const before = gitShow(`bluehost-upload/${p.meta.out}`);
+  return before !== null && before === readFileSync(join(outDir, p.meta.out), 'utf8') ? prev : today;
+};
 writeFileSync(
   join(outDir, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapPages
-    .map((p) => `  <url><loc>${base}${p.meta.path}</loc><lastmod>${today}</lastmod></url>`)
+    .map((p) => `  <url><loc>${base}${p.meta.path}</loc><lastmod>${lastmodFor(p)}</lastmod></url>`)
     .join('\n')}\n</urlset>\n`
 );
 
@@ -140,16 +169,16 @@ const gaInline = analytics.ga4MeasurementId
   ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${analytics.ga4MeasurementId}');`
   : '';
 const gaHash = gaInline ? `'sha256-${createHash('sha256').update(gaInline).digest('base64')}'` : '';
-const frameSrc = ["https://www.youtube-nocookie.com", "https://player.vimeo.com"];
+const frameSrc = ["https://www.youtube-nocookie.com", "https://player.vimeo.com", new URL(paidConsult.url).origin];
 if (scheduler.url) frameSrc.push(new URL(scheduler.url).origin);
 if (contact.mapEmbedUrl) frameSrc.push(new URL(contact.mapEmbedUrl).origin);
 const csp = [
   "default-src 'self'",
-  `script-src 'self'${gaInline ? ` ${gaHash} https://www.googletagmanager.com` : ''}`,
+  `script-src 'self' ${new URL(paidConsult.embedScript).origin}${gaInline ? ` ${gaHash} https://*.googletagmanager.com` : ''}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://i.ytimg.com https://i.vimeocdn.com" + (gaInline ? ' https://www.google-analytics.com https://www.googletagmanager.com' : ''),
+  "img-src 'self' data: https://i.ytimg.com https://i.vimeocdn.com" + (gaInline ? ' https://*.google-analytics.com https://*.googletagmanager.com' : ''),
   "font-src 'self'",
-  "connect-src 'self'" + (gaInline ? ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com' : ''),
+  "connect-src 'self'" + (gaInline ? ' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com' : ''),
   `frame-src ${frameSrc.join(' ')}`,
   "form-action 'self'",
   "base-uri 'self'",
@@ -166,8 +195,9 @@ const csp = [
 // existing file. Every rule is scoped to this host and to the new site's own
 // paths, so nothing else (WordPress, other domains) is affected.
 const hostRe = `^(www\\.)?${host.replace(/\./g, '\\.')}$`;
-const ownRoutes = [...primary, ...legalPages].map((p) => p.meta.path.replace(/\//g, '')).filter(Boolean);
-const ownPathRe = `^/($|(${ownRoutes.join('|')})(/|$)|assets/|forms/|404\\.html$)`;
+const ownRoutes = [...new Set([...primary, ...legalPages].map((p) => p.meta.path.split('/')[1]).filter(Boolean))];
+// Apache serves "/" as "/index.html" internally, so match that name too.
+const ownPathRe = `^/($|index\\.html$|(${ownRoutes.join('|')})(/|$)|assets/|forms/|404\\.html$)`;
 const ours = `%{HTTP_HOST} =~ m#${hostRe}#i && %{REQUEST_URI} =~ m#${ownPathRe}#`;
 const hstsLine = site.domainConfirmed
   ? `\n  Header always set Strict-Transport-Security "max-age=31536000" "expr=${ours}"`
@@ -198,6 +228,11 @@ ${httpsBlock}
   RewriteRule ^contact-us/?$ /contact/ [R=301,L]
   RewriteCond %{HTTP_HOST} ${hostRe} [NC]
   RewriteRule ^(home|hello-world)/?$ / [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\\.)?seancollinson\\.com$ [NC]
+  RewriteRule ^(category/uncategorized|author/theneutral|feed|comments/feed)/?$ / [R=301,L]
+  # Yoast's WordPress sitemaps listed the old pages; point them at the real sitemap.
+  RewriteCond %{HTTP_HOST} ^(www\\.)?seancollinson\\.com$ [NC]
+  RewriteRule ^(sitemap_index|post-sitemap|page-sitemap|category-sitemap|author-sitemap)\\.xml$ /sitemap.xml [R=301,L]
 
   # /about/index.html -> /about/
   RewriteCond %{HTTP_HOST} ${hostRe} [NC]

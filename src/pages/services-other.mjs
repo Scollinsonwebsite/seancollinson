@@ -133,13 +133,31 @@ export const howItWorks = page({
       title: 'The process, step by step',
       jump: 'Step by step',
       html: `<h3>1. Consultation</h3>
-    <p>A private first conversation about your dispute, the format, and fees, so you know what to expect before you commit.</p>
+    <p>A private first conversation about your dispute, the format, and fees, so you know what to expect before you commit. See <a href="/mediation-cost/">what mediation costs</a>.</p>
     <h3>2. Preparation</h3>
     <p>You list the issues to decide and gather the information you need to decide them. Sean will tell you what is useful for your matter. See the <a href="/mediation/#what-to-bring">what to bring checklist</a>.</p>
     <h3>3. Sessions</h3>
     <p>Sessions can be joint, separate, or both. In private caucuses, each side can speak candidly with the mediator. You work through each issue in an order that makes sense.</p>
     <h3>4. Written terms</h3>
     <p>Agreed points are written down so each party can review them, with independent counsel if they choose, before anything is final. Family matters then move through the court process that finalizes them.</p>`,
+    },
+    {
+      id: 'what-to-bring',
+      title: 'What to bring to your first session',
+      jump: 'What to bring',
+      html: `<ul>
+      <li><strong>Financial documents:</strong> tax returns, pay stubs, bank, retirement, mortgage, and loan statements</li>
+      <li><strong>Parenting information:</strong> school calendars, current schedules, health needs, and childcare costs</li>
+      <li><strong>Legal papers:</strong> any court orders, filed papers, and prenuptial or written agreements</li>
+      <li><strong>Your goals in writing:</strong> your top priorities, the points you can trade, and your questions</li>
+    </ul>
+    <p>Get the full list: <a href="/divorce-mediation-checklist/">free checklist, What to Bring to Divorce Mediation in California</a>.</p>`,
+    },
+    {
+      id: 'how-long',
+      title: 'How long mediation takes',
+      jump: 'How long it takes',
+      html: `<p>Some matters settle in a single session. Others take several sessions over a few weeks. That is still far faster than a court case, which can run many months or longer. Every matter is different, so timelines vary.</p>`,
     },
     {
       id: 'mediator-role',
@@ -195,7 +213,7 @@ export const faq = page({
     <ul>
       ${services.map((s) => `<li><a href="${s.path}#faq">${s.label}</a></li>`).join('\n      ')}
     </ul>
-    <p>For the full process, see <a href="/how-mediation-works/">how mediation works</a>.</p>`,
+    <p>For the full process, see <a href="/how-mediation-works/">how mediation works</a>. To compare the two paths, see <a href="/mediation-vs-litigation/">mediation vs. litigation</a>.</p>`,
     },
   ],
   faqTitle: 'Common questions about mediation',

@@ -3,7 +3,7 @@ import { layout } from '../lib/render.mjs';
 export const meta = {
   path: '/404.html',
   out: '404.html',
-  title: 'Page Not Found | Mediation Office of S. Collinson',
+  title: 'Page Not Found | The Mediation Office of Sean Collinson',
   description: 'The page you were looking for could not be found.',
   h1: 'This page could not be found',
   noindex: true,

@@ -1,16 +1,20 @@
 import { claims, testimonials } from '../config.mjs';
 import {
   layout, photo, ctaBand, faqList, faqSchema, isDraft, esc, CTA_PRIMARY, CTA_SECONDARY,
-  websiteSchema, organizationSchema, businessSchema, personSchema, partial, officeAddress, officePhoneLink,
+  websiteSchema, organizationSchema, businessSchema, personSchema, partial, serviceRegionHtml, officeAddress, officePhoneLink,
 } from '../lib/render.mjs';
 import { icon } from '../lib/icons.mjs';
+import { drPhilSection, drPhilStyle, drPhilSchema } from '../lib/dr-phil.mjs';
+import { ebookReady, ebookStrip, ebookStripStyle } from './ebook.mjs';
+import { statsBand, reviewStrip, checklistStrip, credentialsSection, stripsStyle } from '../lib/strips.mjs';
+import { ebook } from '../config.mjs';
 
 export const meta = {
   path: '/',
   out: 'index.html',
   title: 'Los Angeles Divorce Mediator | Sean Collinson',
   description:
-    'Resolve divorce, family, civil, and business disputes privately with experienced Los Angeles mediator Sean Collinson. In-person and virtual mediation.',
+    'Looking for a mediator in Los Angeles? Sean Collinson helps settle divorce, custody, civil, and business disputes privately, in Sherman Oaks or by Zoom.',
   h1: 'Los Angeles Divorce and Family Mediator',
   subtitle: 'Resolve Conflict Without Losing Control',
 };
@@ -46,6 +50,11 @@ const services = [
     title: 'Workplace and community disputes',
     href: '/mediation/#partnership-contract-workplace',
     text: 'Employment conflict, landlord and tenant matters, and neighbor or community disagreements.',
+  },
+  {
+    title: 'High-conflict settlement officer',
+    href: '/high-conflict-settlement-officer/',
+    text: 'For family and civil cases that are stuck. Sean also serves as a parental coordinator for parenting plans and holiday schedules.',
   },
 ];
 
@@ -157,7 +166,7 @@ function bento() {
         <li>${icon('map-pin', 'icon icon--sm')} In person across California</li>
         <li>${icon('video', 'icon icon--sm')} By Zoom, nationwide</li>
       </ul>
-      <address style="font-style:normal;font-size:0.95rem;color:var(--muted);margin:0 0 1rem">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
+      <address style="font-style:normal;font-size:0.95rem;color:var(--t-muted);margin:0 0 1rem">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
       <a class="btn btn--primary btn--block btn--sm" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
     </article>
 
@@ -203,11 +212,13 @@ export function render() {
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <h1 id="hero-title" class="hero__title">${meta.h1}</h1>
-      <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--white);margin:0 0 0.75em">${meta.subtitle}</p>
+      <p class="hero__subtitle" style="font-size:var(--step-2);font-weight:700;line-height:1.2;color:var(--t-head);margin:0 0 0.75em">${meta.subtitle}</p>
       <p class="hero__lede">Sean Collinson is a family and civil mediator who helps individuals, families, and businesses reach practical agreements without the cost, delay, and strain of prolonged litigation. You keep the decisions. He keeps the process calm, focused, and fair.</p>
+      <p class="hero__lede">Case stuck? Sean also serves as a <a href="/high-conflict-settlement-officer/" style="color:var(--t-head);text-decoration:underline;text-underline-offset:3px">High-Conflict Settlement Officer</a> and parental coordinator.</p>
       <div class="hero__actions">
         <a class="btn btn--white" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
         <a class="btn btn--glass" href="/mediation/">${CTA_SECONDARY}</a>
+        <a class="btn btn--glass" href="/narcissist-or-negotiator-quiz/">Negotiator Quiz</a>
       </div>
       <ul class="hero__values" aria-label="The approach">
         <li>Private</li><li>Practical</li><li>Solution-focused</li>
@@ -226,6 +237,12 @@ export function render() {
     </aside>
   </div>
 </section>
+
+${statsBand()}
+
+${ebookStrip()}
+
+${drPhilSection({ postscript: 'Nearly 400,000 views, the most-watched mediator in the history of the show.' })}
 
 ${bento()}
 
@@ -271,22 +288,35 @@ ${bento()}
     <div class="btn-row btn-row--section">
       <a class="btn btn--secondary" href="/mediation/">See how each type of mediation works</a>
     </div>
+    <p style="margin-top:var(--space-3)"><a href="/mediator-los-angeles/">Mediator Los Angeles: why people choose Sean, where he works, and how to start</a></p>
   </div>
 </section>
 
 <section class="section" aria-labelledby="about-preview-title">
   <div class="wrap split">
     <div class="split__media">
-      ${photo('office', { sizes: '(min-width: 1000px) 45vw, 90vw', className: 'split__photo' })}
+      <picture class="split__photo">
+        <source type="image/webp" srcset="/assets/img/about/sean-collinson-about-480.webp?v=20261027 480w, /assets/img/about/sean-collinson-about-800.webp?v=20261027 800w, /assets/img/about/sean-collinson-about-1200.webp?v=20261027 1200w, /assets/img/about/sean-collinson-about-1676.webp?v=20261027 1676w" sizes="(min-width: 1000px) 45vw, 90vw">
+        <img src="/assets/img/about/sean-collinson-about-1200.jpg?v=20261027" srcset="/assets/img/about/sean-collinson-about-480.jpg?v=20261027 480w, /assets/img/about/sean-collinson-about-800.jpg?v=20261027 800w, /assets/img/about/sean-collinson-about-1200.jpg?v=20261027 1200w, /assets/img/about/sean-collinson-about-1676.jpg?v=20261027 1676w" sizes="(min-width: 1000px) 45vw, 90vw" width="1676" height="939" alt="Sean Collinson, family and civil mediator, in his Los Angeles office" loading="lazy" decoding="async">
+      </picture>
     </div>
     <div class="split__copy">
       <h2 id="about-preview-title" class="section__title">A steady neutral for difficult conversations</h2>
-      <p>Sean Collinson has spent more than 22 years helping people resolve disputes they could not settle on their own. His training includes Harvard’s Program on Negotiation, Loyola Law School’s Mediating the Litigated Case program, and advanced family mediation training recognized by the Florida Supreme Court.</p>
+      <p class="positioning-line" style="margin:-.25rem 0 1rem;font-size:1.05rem;font-weight:700;line-height:1.4;color:var(--t-accent)">Family Court, Divorce and Civil Mediator, Settlement Neutral, FBI-Trained Crisis Negotiator</p>
+      <p>Helping attorneys and their clients navigate difficult negotiations, overcome settlement impasses, and find practical pathways to resolution. Sean Collinson has spent more than 22 years helping people resolve disputes they could not settle on their own. His training includes Harvard’s Program on Negotiation, Loyola Law School’s Mediating the Litigated Case program, and advanced family mediation training recognized by the Florida Supreme Court.</p>
       <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to every mediation, while staying strictly neutral between the parties.</p>
       <p><a class="text-link" href="/about/">Read Sean Collinson’s background and approach</a></p>
     </div>
   </div>
 </section>
+
+<section class="section section--ivory" aria-labelledby="region-title">
+  <div class="wrap narrow prose">
+    ${serviceRegionHtml()}
+  </div>
+</section>
+
+${credentialsSection()}
 
 <section class="statement sky sky--dusk" aria-labelledby="experience-title">
   <div class="wrap statement__inner">
@@ -306,10 +336,12 @@ ${testimonialsSection()}
   </div>
 </section>
 
+${reviewStrip()}
+
 ${ctaBand({
   heading: 'Your Dispute Does Not Have to Control Your Future',
   text: 'A short, confidential consultation is the simplest way to find out whether mediation fits your situation.',
-  primary: 'Schedule a Consultation',
+  primary: 'Book a Free Consultation',
 })}
 `;
   return layout({
@@ -317,9 +349,8 @@ ${ctaBand({
     title: meta.title,
     description: meta.description,
     body,
-    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q)))],
+    schema: [websiteSchema(), organizationSchema(), businessSchema(), personSchema(), faqSchema(faqs.filter((f) => schemaFaqs.includes(f.q))), drPhilSchema()],
     bodyClass: 'page-home',
-    headExtra: partial('home-head.html'),
-    bodyEnd: partial('home-script.html'),
+    headExtra: partial('home-head.html') + '<style>@media (min-width:1100px){.services .service:last-child{grid-column:auto}}@media (min-width:1000px){.hero--photo .hero__actions{flex-wrap:nowrap;width:max-content;max-width:calc(100vw - 2 * var(--gutter))}}</style>' + drPhilStyle + (ebookReady() ? ebookStripStyle : '') + stripsStyle,
   });
 }

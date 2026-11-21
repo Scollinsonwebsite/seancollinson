@@ -255,6 +255,21 @@
     });
   });
 
+  // ── Home page YouTube facade (moved from an inline script for the CSP) ───
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.yt-facade__play');
+    if (!b) return;
+    var w = b.parentNode, id = w.getAttribute('data-yt'), f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+    f.title = "Sean Collinson is America's Mediator";
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.allowFullscreen = true;
+    w.innerHTML = '';
+    w.appendChild(f);
+    f.focus();
+  });
+
   // ── Lightweight video embeds (player loads only when activated) ──────────
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('.video__play');
@@ -288,5 +303,37 @@
       });
       if (statusEl) statusEl.textContent = shown + (shown === 1 ? ' video' : ' videos') + ' shown';
     });
+  }
+})();
+
+// Paid consultation booking: load TidyCal's official embed script only when the
+// booking section nears the viewport. If it fails, show the gold button.
+(function () {
+  var frame = document.querySelector('[data-booking-embed]');
+  if (!frame) return;
+  var started = false;
+  function fail() {
+    frame.classList.add('is-failed');
+    var fb = document.querySelector('[data-booking-fallback]');
+    if (fb) fb.hidden = false;
+  }
+  function load() {
+    if (started) return;
+    started = true;
+    var s = document.createElement('script');
+    s.src = frame.getAttribute('data-src');
+    s.async = true;
+    s.onerror = fail;
+    document.body.appendChild(s);
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { io.disconnect(); load(); return; }
+      }
+    }, { rootMargin: '900px 0px' });
+    io.observe(frame);
+  } else {
+    load();
   }
 })();
