@@ -152,10 +152,17 @@ const leadBold = (p) => {
   const m = p.match(/^(What this usually means:|The honest part:)(.*)$/);
   return m ? `<strong>${esc(m[1])}</strong>${esc(m[2])}` : esc(p);
 };
-const disclaimerHtml = (linkSafety) => `<div class="quiz-disclaimer" role="note">
-  <p><strong>${esc(disclaimer[0].match(/^Please read this first\./)[0])}</strong>${esc(disclaimer[0].replace(/^Please read this first\./, ''))}</p>
+const disclaimerHtml = (linkSafety, heading = '') => {
+  const lead = disclaimer[0].match(/^Please read this first\./)[0];
+  const rest = disclaimer[0].replace(/^Please read this first\./, '');
+  const first = heading
+    ? `<h2 class="quiz-disclaimer__title">${esc(heading)}</h2>\n  <p>${esc(rest.trim())}</p>`
+    : `<p><strong>${esc(lead)}</strong>${esc(rest)}</p>`;
+  return `<div class="quiz-disclaimer" role="note">
+  ${first}
   <p>${linkSafety ? esc(disclaimer[1]).replace('go to the safety note', 'go to <a href="#quiz-safety">the safety note</a>') : esc(disclaimer[1])}</p>
 </div>`;
+};
 const safetyBox = (id) => `<aside class="quiz-safety"${id ? ` id="${id}"` : ''} aria-label="Safety note">
   <h2 class="quiz-safety__title">Safety note</h2>
   ${safety.map((p) => `<p>${safetyHtml(p)}</p>`).join('\n  ')}
@@ -195,7 +202,10 @@ const style = `<style>
 .quiz-disclaimer p{margin:0 0 .75rem}.quiz-disclaimer p:last-child{margin:0}
 .quiz-disclaimer a,.quiz-safety a,.quiz a:not(.btn){color:#0A1B31;font-weight:700;text-decoration:underline;text-underline-offset:.2em}
 .quiz-start{margin:1.75rem 0 2rem;text-align:center}
-.quiz-who{font-size:.95rem;color:#34435A;max-width:38em;margin:0 0 2.25rem}
+.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]{background:#15803D;color:#fff;border-color:#15803D}
+.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]:hover,.section--ivory .quiz-start .btn.btn--primary.btn-big[data-quiz-start]:focus-visible{background:#166534;color:#fff;border-color:#166534}
+.quiz-disclaimer__title{font-size:var(--step-1);margin:0 0 .5rem;color:#0A1B31}
+.quiz-who{font-size:.95rem;color:#34435A;max-width:38em;margin:0}
 .quiz-safety{margin:2rem 0;padding:1.25rem 1.35rem;border-left:4px solid #EED9A4;background:#fff;box-shadow:0 0 0 1px rgba(10,27,49,.16);border-radius:var(--radius-sm);color:#0A1B31}
 .quiz-safety__title{font-size:var(--step-1);margin:0 0 .5rem}
 .quiz-safety p{margin:0 0 .75rem}.quiz-safety p:last-child{margin:0}
@@ -307,8 +317,8 @@ export const quizPage = {
       <div class="quiz-copy">${opening.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}</div>
       <p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start>Start</button></p>
       <div class="quiz-copy">${instructions.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
-      ${disclaimerHtml(true)}
       <p class="quiz-who">${esc(whoFor[0])}</p>
+      ${disclaimerHtml(true, 'Disclaimer')}
       ${safetyBox('quiz-safety')}
       <p class="quiz-footer-line">${esc(footerLine)}</p>
     </div>
