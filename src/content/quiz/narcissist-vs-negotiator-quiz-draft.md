@@ -40,7 +40,7 @@ If you are in danger, being controlled, followed, threatened, or afraid in your 
 Instruction copy
 Answer as yourself on a normal day, not your best day and not your worst hour. Pick the answer closest to what you would actually do, not what sounds good. There are no right answers, and trying to beat the quiz only blurs the one result that could help you. Your answers stay on your device. Your name and email are collected at the start, only so your result and full breakdown can be sent to you.
 Who this quiz is for (one line under the Start button)
-Built for parents and spouses in divorce, custody, and co parenting conflict. Answer about yourself. If you are really here to check the other parent, be honest about that too, the result still teaches you the negotiator moves that work on that pattern.
+Built for anyone in a situation of conflict or disagreement, with spouses, exes, co-parents, family, coworkers, neighbors, and business partners. Answer about yourself. If you are really here to check the other parent, be honest about that too, the result still teaches you the negotiator moves that work on that pattern.
 The flow (Sean's decision, Fri Nov 20, 2026, about 10:28am)
 Sean decided the gate for this spectrum quiz: visitors enter their email to take the quiz and see how they are thinking. This supersedes the free result first recommendation made for the earlier 24 question pattern test. The reasoning is Sean's explicit call, and it also means every person who sees a spectrum result is on the list to receive the breakdown, the e-book offer, and the weekly newsletter invitation.
 Screen flow, in order:
