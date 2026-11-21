@@ -28,7 +28,7 @@ Meta description draft: A free 25 question quiz from a Los Angeles mediator and 
 Headline
 Can You Pass the Hostage Negotiator or Narcissist Test?
 Subhead
-25 questions. One spectrum. Find out if you think like a narcissist or like a hostage negotiator when the fight is with the other parent.
+25 questions. One spectrum. Find out if you think like a narcissist or like a hostage negotiator.
 Opening copy
 Everybody says they want peace. Then exchange day comes, the phone lights up at 11 p.m., and a different brain takes over.
 One way of thinking treats every disagreement as a threat to the ego. It has to win, it keeps score, it punishes, and it would rather blow up a Tuesday than lose a point. The other way of thinking comes from hostage negotiation. It slows the moment down, listens for what the other person actually needs, trades on interests instead of positions, and protects the one relationship that matters most in a custody fight, the kids' relationship with both parents.
