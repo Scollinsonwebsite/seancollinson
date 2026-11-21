@@ -306,8 +306,8 @@ export const quizPage = {
     <div class="quiz-screen" data-screen="intro" tabindex="-1">
       <div class="quiz-copy">${opening.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}</div>
       <p class="quiz-start"><button class="btn btn--primary btn-big" type="button" data-quiz-start>Start</button></p>
-      ${disclaimerHtml(true)}
       <div class="quiz-copy">${instructions.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
+      ${disclaimerHtml(true)}
       <p class="quiz-who">${esc(whoFor[0])}</p>
       ${safetyBox('quiz-safety')}
       <p class="quiz-footer-line">${esc(footerLine)}</p>
