@@ -27,6 +27,7 @@ import { mediationCost, mediationVsLitigation, testimonialsPage, neighborhoods }
 import { checklistPage } from './src/pages/checklist.mjs';
 import { newsletterPage } from './src/pages/newsletter.mjs';
 import { quizPage } from './src/pages/quiz.mjs';
+import { coursePage } from './src/pages/course.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -99,7 +100,7 @@ const primary = [
   divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
   ...(ebookReady() ? [ebookPage] : []),
-  checklistPage, testimonialsPage, newsletterPage, quizPage,
+  checklistPage, testimonialsPage, newsletterPage, quizPage, coursePage,
   ...blogPages(),
 ];
 const all = [...primary, ...legalPages, notfound];
