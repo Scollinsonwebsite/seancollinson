@@ -227,7 +227,7 @@ const style = `<style>
 .quiz-privacy{font-size:.9rem;color:#34435A;margin:1rem 0 0}
 .quiz-q{padding-bottom:0}
 .quiz-progress{position:sticky;top:var(--header-h);z-index:5;height:5px;background:rgba(10,27,49,.1);margin:0 calc(var(--gutter) * -1)}
-.quiz-progress__bar{display:block;height:100%;width:0;background:#0A1B31;transition:width .3s var(--ease)}
+.quiz-progress__bar{display:block;height:100%;width:0;background:#2A7C13;transition:width .3s var(--ease)}
 .quiz-q__top{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:44px;margin:1rem 0 .5rem}
 .quiz-q__count{font-size:.875rem;font-weight:700;color:#34435A;margin:0}
 .quiz-back{min-height:44px;padding:.4rem .9rem;border:1.5px solid rgba(10,27,49,.35);border-radius:999px;background:#fff;color:#0A1B31;font:700 .9375rem/1 var(--sans);cursor:pointer}
@@ -241,8 +241,8 @@ const style = `<style>
 .quiz-answer__text{flex:1}
 .quiz-answer__radio{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid rgba(10,27,49,.5);display:grid;place-items:center;background:#fff}
 .quiz-answer__radio svg{width:15px;height:15px;opacity:0;stroke:#fff}
-.quiz-answer.is-selected{background:rgba(238,217,164,.55);border-color:#0A1B31;box-shadow:0 0 0 1px #0A1B31}
-.quiz-answer.is-selected .quiz-answer__radio{background:#0A1B31;border-color:#0A1B31}
+.quiz-answer.is-selected{background:rgba(42,124,19,.12);border-color:#2A7C13;box-shadow:0 0 0 1px #2A7C13}
+.quiz-answer.is-selected .quiz-answer__radio{background:#2A7C13;border-color:#2A7C13}
 .quiz-answer.is-selected .quiz-answer__radio svg{opacity:1}
 .quiz-answer:has(input:focus-visible){outline:3px solid #0A1B31;outline-offset:3px}
 .quiz-nextbar{position:sticky;bottom:0;z-index:5;margin:1.5rem calc(var(--gutter) * -1) 0;padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -10px 24px -18px rgba(10,27,49,.45)}
@@ -364,7 +364,6 @@ export const quizPage = {
     <div class="quiz-screen quiz-results" data-screen="results" tabindex="-1" hidden>
       <div data-band-only="1" hidden>${safetyBox('')}</div>
       <p class="quiz-results__header">${esc(sharedHeader)}</p>
-      ${disclaimerHtml(false)}
       <figure class="quiz-meter">
         <div class="quiz-meter__ends" aria-hidden="true"><span>Narcissist thinking</span><span>Hostage negotiator thinking</span></div>
         <div class="quiz-meter__track" aria-hidden="true">
@@ -391,6 +390,7 @@ export const quizPage = {
       </div>
       <div data-band-not="1">${safetyBox('')}</div>
       <p class="quiz-privacy">${esc(PRIVACY_LINE)}</p>
+      ${disclaimerHtml(false)}
     </div>
   </div>
   <script type="application/json" id="quiz-data">${dataJson}</script>
