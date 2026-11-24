@@ -19,7 +19,7 @@ const aboutSean = (topic) => `
     <p>He is also an FBI-trained crisis negotiator who volunteers with the Los Angeles County Sheriff’s Department. That work demands disciplined listening and calm under pressure, and he brings the same skills to ${topic}. <a href="/about/">Meet Sean Collinson</a>.</p>
     <p class="fine-print">Sean’s volunteer crisis-negotiation service is separate from his mediation practice. Neither the FBI nor the Los Angeles County Sheriff’s Department endorses this practice or its services.</p>`;
 
-export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consultText, seanTopic, cta }) {
+export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consultText, seanTopic, cta, hero, headExtra = '', extraSchema = [], beforeCta = '', consultActions = '' }) {
   const crumbs = breadcrumbs([{ name: crumb, path: meta.path }]);
   const blocks = [
     ...sections,
@@ -28,7 +28,7 @@ export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consu
       title: 'Book a confidential consultation',
       html: `<p>${consultText || 'A private first conversation about your situation, the issues to settle, the format, and fees.'} Call the office or request a consultation online.</p>
     <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
-    <div class="btn-row"><a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a></div>`,
+    <div class="btn-row">${consultActions || `<a class="btn btn--primary" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>`}</div>`,
     },
   ];
   const sectionHtml = blocks
@@ -42,8 +42,16 @@ export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consu
     )
     .join('\n\n');
   const n = blocks.length;
+  // `hero` (optional) returns custom hero HTML, given the breadcrumb and jump-link markup.
+  const jumpNav = `<nav class="jump" aria-label="On this page">
+      <p class="jump__label">On this page</p>
+      <ul>
+        ${sections.map((s) => `<li><a href="#${s.id}">${s.jump || s.title}</a></li>`).join('\n        ')}
+        <li><a href="#faq">Questions</a></li>
+      </ul>
+    </nav>`;
   const body = `
-<section class="page-hero" aria-labelledby="page-title">
+${hero ? hero(crumbs.html, jumpNav) : `<section class="page-hero" aria-labelledby="page-title">
   <div class="wrap">${crumbs.html}</div>
   <div class="wrap">
     <h1 id="page-title" class="page-hero__title">${meta.h1}</h1>
@@ -57,7 +65,7 @@ export function servicePage({ meta, crumb, lede, sections, faqs, faqTitle, consu
       </ul>
     </nav>
   </div>
-</section>
+</section>`}
 
 ${sectionHtml}
 
@@ -73,6 +81,7 @@ ${sectionHtml}
   </div>
 </section>
 
+${beforeCta}
 ${ctaBand(cta)}
 `;
   return layout({
@@ -80,7 +89,8 @@ ${ctaBand(cta)}
     title: meta.title,
     description: meta.description,
     body,
-    schema: [crumbs.schema, faqSchema(faqs)],
+    schema: [crumbs.schema, faqSchema(faqs), ...extraSchema],
     bodyClass: `page-${meta.path.replace(/\//g, '')}`,
+    headExtra,
   });
 }

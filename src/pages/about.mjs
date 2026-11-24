@@ -1,4 +1,4 @@
-import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial, services, guides, officeAddress, officePhoneLink, reviewsLine, areasLine } from '../lib/render.mjs';
+import { layout, photo, ctaBand, breadcrumbs, personSchema, CTA_PRIMARY, partial, services, guides, officeAddress, officePhoneLink, reviewsLine, areasHtml } from '../lib/render.mjs';
 
 export const meta = {
   path: '/about/',
@@ -30,6 +30,11 @@ const credentials = [
     org: 'FBI-trained; volunteer with the Los Angeles County Sheriff’s Department',
     text: 'Crisis-negotiation training applied in a volunteer capacity with the department’s crisis-negotiation function.',
   },
+  {
+    name: 'Author',
+    org: 'RESET OR REPEAT: Break Your Patterns Before They Break You',
+    text: 'Sean\u2019s book on breaking the patterns that keep conflict going.',
+  },
 ];
 
 const values = [
@@ -49,7 +54,7 @@ ${partial('about-hero.html')}
 <section class="section" aria-labelledby="bio-title">
   <div class="wrap narrow prose">
     <h2 id="bio-title" class="section__title">Professional background</h2>
-    <p>Sean Collinson is a professional family and civil mediator with more than 22 years of experience helping individuals, families, and businesses resolve complex disputes. His advanced training includes Harvard’s Program on Negotiation, Loyola Law School’s Mediating the Litigated Case program, and advanced family mediation training recognized by the Florida Supreme Court. Sean is also an FBI-trained crisis negotiator who serves in a volunteer capacity with the Los Angeles County Sheriff’s Department, bringing calm leadership, disciplined listening, and proven negotiation skills to every case.</p>
+    <p>Helping attorneys and their clients navigate difficult negotiations, overcome settlement impasses, and find practical pathways to resolution. Sean Collinson is a professional family and civil mediator with more than 22 years of experience helping individuals, families, and businesses resolve complex disputes. His advanced training includes Harvard’s Program on Negotiation, Loyola Law School’s Mediating the Litigated Case program, and advanced family mediation training recognized by the Florida Supreme Court. Sean is also an FBI-trained crisis negotiator who serves in a volunteer capacity with the Los Angeles County Sheriff’s Department, bringing calm leadership, disciplined listening, and proven negotiation skills to every case.</p>
     <p>Sean’s approach is practical, direct, and solution-focused. He helps parties cut through emotion, identify the real issues, and develop fair, workable agreements without the excessive cost, delay, and uncertainty of prolonged litigation. Whether the dispute involves divorce, custody, property, business, or civil matters, Sean creates a respectful and confidential process designed to reduce conflict, preserve dignity, and help clients move forward with clarity.</p>
   </div>
 </section>
@@ -57,7 +62,7 @@ ${partial('about-hero.html')}
 <section class="section section--ivory" aria-labelledby="training-title">
   <div class="wrap">
     <div class="section__head">
-      <h2 id="training-title" class="section__title">Training and credentials</h2>
+      <h2 id="training-title" class="section__title">Training and Background</h2>
       <p class="section__lede">Formal training in negotiation, litigated-case mediation, family mediation, and crisis communication.</p>
     </div>
     <ul class="credentials">
@@ -132,7 +137,7 @@ ${partial('about-hero.html')}
     <p>Sessions are held at the office in Sherman Oaks or by Zoom, for parties throughout California and nationwide.</p>
     <address style="font-style:normal">${officeAddress()}<br>Phone: ${officePhoneLink()}</address>
     <h3>Areas served</h3>
-    <p>${areasLine()}, plus virtual sessions across California and nationwide.</p>
+    ${areasHtml()}
     <h3>What clients say</h3>
     <p>${reviewsLine()}</p>
   </div>

@@ -1,3 +1,4 @@
+import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
 import { layout, ctaBand, breadcrumbs, faqList, faqSchema, partial, CTA_PRIMARY } from '../lib/render.mjs';
 
 export const meta = {
@@ -6,7 +7,7 @@ export const meta = {
   title: 'Divorce, Family, Civil and Business Mediation | Los Angeles',
   description:
     'Private mediation for divorce, custody, legal separation, civil, workplace, and business disputes in California, with virtual sessions available nationwide.',
-  h1: 'Mediation Services in Los Angeles',
+  h1: 'Divorce, Family, Civil and Business Mediation in Los Angeles',
 };
 
 const comparison = [
@@ -49,7 +50,7 @@ const services = [
   {
     id: 'high-asset',
     title: 'High-asset and complex family matters',
-    body: `<p>High-asset divorce mediation often involves business ownership, equity compensation, multiple properties, trusts, or significant separate-property claims. These matters benefit from careful preparation, a clear agenda, and coordination with each party’s attorneys and financial advisors. Mediation also keeps sensitive financial details out of open court as far as possible.</p>`,
+    body: `<p>High-asset divorce mediation often involves business ownership, equity compensation, multiple properties, trusts, or significant separate-property claims. These matters benefit from careful preparation, a clear agenda, and coordination with each party’s attorneys and financial advisors. Mediation also keeps sensitive financial details out of open court as far as possible. For disputes that have become entrenched, see <a href="/high-conflict-settlement-officer/">high-conflict settlement</a>.</p>`,
   },
   {
     id: 'civil-and-business',
@@ -164,6 +165,12 @@ ${partial('mediation-hero.html')}
       <p>Sessions are available in person in California and online by Zoom, which makes virtual mediation practical for parties in different cities or states.</p>
     </div>
   </div>
+  <div class="wrap split split--text" style="margin-top:var(--space-5)">
+    <div><h2 id="mediator-la-title" class="section__title">Mediator Los Angeles</h2></div>
+    <div class="prose">
+      <p>Sean Collinson mediates from his office in Sherman Oaks and serves families and businesses across Los Angeles and Southern California, with Zoom sessions nationwide. <a href="/mediator-los-angeles/">Learn why people choose Sean as their Los Angeles mediator</a>.</p>
+    </div>
+  </div>
 </section>
 
 <section class="section section--ivory" id="comparison" aria-labelledby="compare-title">
@@ -181,6 +188,7 @@ ${partial('mediation-hero.html')}
         </tbody>
       </table>
     </div>
+    <p class="compare-more">See the full comparison with cost ranges: <a href="/mediation-vs-litigation/">mediation vs. litigation</a>. And see <a href="/mediation-cost/">what mediation with Sean costs</a>.</p>
   </div>
 </section>
 
@@ -235,6 +243,8 @@ ${partial('mediation-hero.html')}
   </div>
 </section>
 
+${ebookStrip()}
+
 ${ctaBand({
   heading: 'Find Out Whether Mediation Fits Your Situation',
   text: 'Book a confidential consultation to talk through the issues, the format, and the next practical step.',
@@ -242,7 +252,7 @@ ${ctaBand({
 })}
 `;
   return layout({
-    headExtra: partial('mediation-head.html'),
+    headExtra: partial('mediation-head.html') + (ebookReady() ? ebookStripStyle : ''),
     path: meta.path,
     title: meta.title,
     description: meta.description,

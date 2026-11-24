@@ -1,3 +1,5 @@
+import { ebookStrip, ebookStripStyle, ebookReady } from './ebook.mjs';
+import { statsBand, reviewStrip, checklistStrip, credentialsSection, stripsStyle } from '../lib/strips.mjs';
 import {
   layout, ctaBand, breadcrumbs, faqList, faqSchema, officeAddress, officePhoneLink, CTA_PRIMARY,
 } from '../lib/render.mjs';
@@ -93,6 +95,7 @@ export function render() {
     <h2 id="co-parenting-title" class="section__title">Co-parenting after the agreement</h2>
     <p>You will be parents together long after the paperwork is done. Mediation gives you practice making decisions as a team, and the plan you build reflects how your family actually lives. When the children grow, change schools, or pick up new activities, you can come back and adjust the plan rather than start a new fight.</p>
     <p>Sessions can be held together or in separate rooms, in person or by Zoom. If being in the same room is hard, Sean can work with each parent separately and carry proposals between you.</p>
+    <p>From the blog: <a href="/blog/high-conflict-custody-mediation-los-angeles/">High-conflict custody in Los Angeles: what actually works when you can’t agree on anything</a>.</p>
     <p>Child support is usually worked out alongside the parenting plan, because parenting time is part of the calculation. <a href="/child-support-mediation/">Read about child support mediation</a>.</p>
   </div>
 </section>
@@ -107,7 +110,7 @@ export function render() {
       <li><strong>Time and pace:</strong> private sessions are scheduled around your family, and you can take the time a detailed plan needs.</li>
       <li><strong>Tone:</strong> mediation is more private, more flexible, and less adversarial, which matters when you will keep raising children together.</li>
     </ul>
-    <p>Private mediation does not replace legal advice. Many parents consult their own attorneys before signing a final agreement. <a href="/mediation/">See how mediation works</a>, or <a href="/divorce-mediation/">read about divorce mediation</a>.</p>
+    <p>Private mediation does not replace legal advice. Many parents consult their own attorneys before signing a final agreement. <a href="/mediation/">See how mediation works</a>, or <a href="/divorce-mediation/">read about divorce mediation</a>. For custody disputes that have become entrenched, see <a href="/high-conflict-settlement-officer/">high-conflict settlement</a>.</p>
   </div>
 </section>
 
@@ -136,6 +139,12 @@ export function render() {
   </div>
 </section>
 
+${reviewStrip()}
+
+${ebookStrip()}
+
+${checklistStrip()}
+
 ${ctaBand({
   heading: 'Build a Parenting Plan That Works for Your Children',
   text: 'Book a confidential consultation to talk through your schedule, the format, and the next practical step.',
@@ -149,5 +158,6 @@ ${ctaBand({
     body,
     schema: [crumbs.schema, faqSchema(faqs)],
     bodyClass: 'page-custody',
+    headExtra: (ebookReady() ? ebookStripStyle : '') + stripsStyle,
   });
 }

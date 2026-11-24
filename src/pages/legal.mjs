@@ -17,9 +17,9 @@ const pages = [
     key: 'privacy',
     path: '/privacy-policy/',
     out: 'privacy-policy/index.html',
-    title: 'Privacy Policy | Mediation Office of S. Collinson',
+    title: 'Privacy Policy | The Mediation Office of Sean Collinson',
     h1: 'Privacy Policy',
-    description: 'How the Mediation Office of S. Collinson collects, uses, and protects information submitted through this website.',
+    description: 'How The Mediation Office of Sean Collinson collects, uses, and protects information submitted through this website.',
     body: `
 <h2>Information you provide</h2>
 <p>When you use a form on this website, the office receives the information you enter, such as your name, email address, phone number, the type of matter, and your message. The forms ask only for general, non-confidential information. Please do not send confidential, privileged, financial, medical, or time-sensitive information through this website.</p>
@@ -39,9 +39,9 @@ const pages = [
     key: 'terms',
     path: '/terms-of-use/',
     out: 'terms-of-use/index.html',
-    title: 'Terms of Use | Mediation Office of S. Collinson',
+    title: 'Terms of Use | The Mediation Office of Sean Collinson',
     h1: 'Terms of Use',
-    description: 'Terms that apply to use of the Mediation Office of S. Collinson website.',
+    description: 'Terms that apply to use of The Mediation Office of Sean Collinson website.',
     body: `
 <h2>Informational purpose</h2>
 <p>This website provides general information about mediation and related services. It is not legal, financial, or tax advice, and it is not a substitute for advice from a qualified professional about your situation.</p>
@@ -58,9 +58,9 @@ const pages = [
     key: 'accessibility',
     path: '/accessibility/',
     out: 'accessibility/index.html',
-    title: 'Accessibility Statement | Mediation Office of S. Collinson',
+    title: 'Accessibility Statement | The Mediation Office of Sean Collinson',
     h1: 'Accessibility Statement',
-    description: 'The Mediation Office of S. Collinson’s commitment to an accessible website, and how to report a barrier.',
+    description: 'The Mediation Office of Sean Collinson’s commitment to an accessible website, and how to report a barrier.',
     body: `
 <h2>Our commitment</h2>
 <p>The office wants everyone to be able to use this website, including people who rely on assistive technology. The site is designed with the Web Content Accessibility Guidelines (WCAG) 2.2, Level AA, as its target.</p>
@@ -79,7 +79,7 @@ const pages = [
     key: 'disclaimer',
     path: '/disclaimer/',
     out: 'disclaimer/index.html',
-    title: 'Disclaimer | Mediation Office of S. Collinson',
+    title: 'Disclaimer | The Mediation Office of Sean Collinson',
     h1: 'Disclaimer',
     description: 'Important information about the scope of mediation services and the content of this website.',
     body: `

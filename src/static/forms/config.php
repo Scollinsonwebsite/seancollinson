@@ -34,6 +34,22 @@ $config = [
             'masterclass' => 'Master class inquiries',
         ],
     ],
+    // Free e-book opt-in (forms/ebook.php): MailerLite group. pdf_url is the media-library
+    // PDF linked from the MailerLite automation email (not returned to the browser).
+    'ebook' => [
+        'group' => 'Hostage Negotiator E-Book',
+        'pdf_url' => '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-narcissist-ebook.pdf',
+    ],
+    // Ask Sean (forms/ask.php): full submission is emailed to 'recipient'; first name and
+    // email only are added to this MailerLite group, in the same account as 'ebook'.
+    'ask' => ['group' => 'Ask Sean'],
+    // Other opt-ins handled by forms/ebook.php (hidden field "offer"); same MailerLite account.
+    'optins' => [
+        'checklist' => ['group' => 'Mediation Checklist'],
+        'newsletter' => ['group' => 'Think Like a Hostage Negotiator Newsletter'],
+        // Narcissist or Negotiator Quiz email gate: quiz group plus the e-book group, so quiz takers get the free e-book.
+        'quiz' => ['group' => 'Narcissist or Negotiator Quiz', 'extra_groups' => ['Hostage Negotiator E-Book']],
+    ],
 ];
 
 // Private overrides, never shipped in the zip.

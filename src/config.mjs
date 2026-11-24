@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-//  CENTRAL SITE CONFIGURATION — Mediation Office of S. Collinson
+//  CENTRAL SITE CONFIGURATION — The Mediation Office of Sean Collinson
 //
 //  Every fact the website publishes about the practice lives here.
 //  Anything set to `null` is a placeholder: the production build hides it
@@ -19,8 +19,9 @@ export const site = {
   domainConfirmed: true,
   preferWww: false,
 
-  name: 'Mediation Office of S. Collinson',
-  shortName: 'S. Collinson Mediation',
+  // Matches the verified Google Business Profile listing (Sean, 2026-11-17).
+  name: 'The Mediation Office of Sean Collinson',
+  shortName: 'Sean Collinson Mediation',
   person: 'Sean Collinson',
   jobTitle: 'Family and Civil Mediator',
   locale: 'en_US',
@@ -38,7 +39,12 @@ export const contact = {
   phone: null, // e.g. '+13105550100'  (E.164 format, used for tel: links and schema)
   phoneDisplay: null, // e.g. '(310) 555-0100'
   email: null, // e.g. 'office@seancollinson.com'
-  officeHours: null, // e.g. 'Monday to Friday, 9 a.m. to 5 p.m. Pacific'
+  officeHours: 'Monday to Friday 9.30am to 7.30pm. Saturday 2pm to 5pm. Sunday closed, by appointment only.',
+  // Same hours for LocalBusiness schema (Sunday closed, so not listed).
+  openingHours: [
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:30', closes: '19:30' },
+    { days: ['Saturday'], opens: '14:00', closes: '17:00' },
+  ],
   responseTime: null, // e.g. 'The office usually replies within one business day.'
   // Only fill in if clients are received at a verified public office.
   // When null, no street address, map, or LocalBusiness address schema is published.
@@ -65,24 +71,38 @@ export const office = {
 // ineligible, and tests/qa.mjs blocks it.
 export const reviews = {
   rating: '4.9',
-  count: 30,
+  count: 36, // Sean, 2026-11-20
   source: 'Google',
-  // Google Business Profile, opens the reviews (supplied by Sean 2026-11-17).
-  url: 'https://maps.app.goo.gl/bf7M1erHgG23CqPS9',
-  // "Write a review" link, not shown on the site yet.
-  writeUrl: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
+  // Google "write a review" link, used for the rating line (Sean, 2026-11-17).
+  url: 'https://g.page/r/CbV0bc4rBNXnEAI/review',
+  // Business profile page for reading reviews.
+  profileUrl: 'https://maps.app.goo.gl/bf7M1erHgG23CqPS9',
 };
 
-// Areas served, confirmed by Sean on 2026-11-17.
-export const areasServed = [
-  'Sherman Oaks', 'Encino', 'Studio City', 'Van Nuys', 'Burbank', 'Glendale',
-  'Pasadena', 'Beverly Hills', 'West Los Angeles', 'Santa Monica', 'the San Fernando Valley',
-];
+// Southern California service area (Sean, 2026-11-17): homepage, footer, and
+// schema areaServed. The office itself is only in Sherman Oaks (see `office`).
+export const serviceRegion = {
+  heading: 'Serving Southern California',
+  line: 'In person across Southern California, and by Zoom nationwide. Office in Sherman Oaks.',
+  counties: ['Los Angeles', 'Orange', 'Ventura', 'Riverside', 'San Bernardino', 'San Diego'],
+  cities: ['Los Angeles', 'Huntington Beach', 'Irvine', 'Burbank', 'Sherman Oaks'],
+};
+
+// About page "Areas served": the same single list as serviceRegion (Sean, 2026-11-17).
+export const areasServed = {
+  line: serviceRegion.line,
+  counties: serviceRegion.counties.map((c) => `${c} County`),
+  cities: serviceRegion.cities,
+};
 
 // Social profiles. Only list real, active profiles owned by the practice.
 export const social = [
-  // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/…' },
-  // { label: 'YouTube', url: 'https://www.youtube.com/@…' },
+  { label: 'YouTube', url: 'https://www.youtube.com/@SeanCollinson' },
+  // X account verified live by Sean, 2026-11-20 (@seancollinson).
+  { label: 'X', url: 'https://x.com/seancollinson', aria: 'Sean Collinson on X' },
+  // Verified 2026-11-17: LinkedIn's preview shows "Sean Collinson - Mediation Offices S. Collinson".
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/seancollinson' },
+  { label: 'Instagram', url: 'https://www.instagram.com/seancollinson_official/' },
 ];
 
 // Online forms. The bundled PHP handler (forms/submit.php) runs on Bluehost.
@@ -93,6 +113,25 @@ export const social = [
 export const forms = {
   enabled: true,
   endpoint: '/forms/submit.php',
+};
+
+// Booking link for the "Book a Consultation" buttons in the header, footer,
+// and Contact page (Sean's TidyCal "Consultation in-office", 2026-11-17).
+export const booking = {
+  label: 'Book a Free Consultation',
+  provider: 'TidyCal',
+  url: 'https://tidycal.com/mediation/consul',
+};
+
+// Paid consultation (a different offer from the free consultation above).
+// Shown as an inline TidyCal embed near the bottom of every page. Do not label
+// it free and do not state a duration in site copy.
+export const paidConsult = {
+  heading: 'Book a Consultation with The Mediator',
+  text: 'Ready to talk it through? Book a consultation with Sean and leave with a clear picture of your options and next steps.',
+  url: 'https://tidycal.com/mediation/30-minute-consultation-with-the-mediator',
+  path: 'mediation/30-minute-consultation-with-the-mediator',
+  embedScript: 'https://asset-tidycal.b-cdn.net/js/embed.js',
 };
 
 // Online scheduler (Calendly, Acuity, etc.). Paste the public scheduling URL
@@ -190,6 +229,43 @@ export const videoCategories = [
 ];
 
 export const videos = [
+  {
+    title: "Sean Collinson is America's Mediator",
+    category: 'family',
+    platform: 'youtube',
+    id: '_641WEXYGwQ',
+    thumbnail: 'https://i.ytimg.com/vi/_641WEXYGwQ/hqdefault.jpg',
+    uploadDate: '2026-10-29',
+    summary: 'If you are facing divorce, legal separation, child custody, support, property division, or another serious family or civil dispute, you do not have to navigate the process alone.',
+    featured: true,
+  },
+  {
+    title: 'What the Halle Berry Custody Fight Teaches Parents',
+    category: 'family',
+    platform: 'youtube',
+    id: 'UKu97xQd9o0',
+    thumbnail: 'https://i.ytimg.com/vi/UKu97xQd9o0/hqdefault.jpg',
+    uploadDate: '2026-11-07',
+    summary: 'The Mediator with Sean Collinson breaks down divorce, child custody, support, property disputes, restraining orders, high-conflict litigation, and real-world settlement strategy in plain English.',
+  },
+  {
+    title: 'Jensen Huang’s Affair: Does Betrayal Have to End a Marriage?',
+    category: 'family',
+    platform: 'youtube',
+    id: 'DUhTHwX09gw',
+    thumbnail: 'https://i.ytimg.com/vi/DUhTHwX09gw/hqdefault.jpg',
+    uploadDate: '2026-11-11',
+    summary: 'Does an affair have to end a marriage? Sean Collinson looks beyond the headlines surrounding Jensen Huang to explore betrayal, forgiveness, reconciliation and the choices that come next.',
+  },
+  {
+    title: '$20,000—or 20 Years of Hurt? | The Mediator #Shorts',
+    category: 'conflict',
+    platform: 'youtube',
+    id: 'P8p3TjtqFZs',
+    thumbnail: 'https://i.ytimg.com/vi/P8p3TjtqFZs/hqdefault.jpg',
+    uploadDate: '2026-11-11',
+    summary: 'Is the argument really about the money? A couple can fight over $20,000 when the deeper issue is 20 years of disappointment. Sean Collinson explains why understanding the hurt beneath a financial disagreement can change the conversation.',
+  },
   // {
   //   title: 'What happens in a first mediation session',
   //   category: 'family',               // one of the ids above
@@ -210,10 +286,10 @@ export const masterclass = {
   // The CALM framework: supply the approved acronym definitions.
   calm: null, // [{ letter: 'C', word: '…', text: '…' }, …]
   formats: {
-    keynote: { availability: null, price: null },
-    workshop: { availability: null, price: null },
-    team: { availability: null, price: null },
-    digital: { availability: null, price: null, enrollUrl: null },
+    keynote: { availability: 'Availability on request', price: 'Pricing on request' },
+    workshop: { availability: 'Availability on request', price: 'Pricing on request' },
+    team: { availability: 'Availability on request', price: 'Pricing on request' },
+    digital: { availability: 'Availability on request', price: 'Pricing on request', enrollUrl: null },
   },
   certificates: false, // set true only if completion certificates are actually issued
 };
@@ -221,8 +297,33 @@ export const masterclass = {
 // Legal pages. Set `reviewed: true` for each page after professional review;
 // until then it is marked as a draft and excluded from search (noindex).
 export const legal = {
-  privacy: { reviewed: false },
-  terms: { reviewed: false },
-  accessibility: { reviewed: false },
-  disclaimer: { reviewed: false },
+  // Reviewed and approved by Sean on 2026-11-17.
+  privacy: { reviewed: true },
+  terms: { reviewed: true },
+  accessibility: { reviewed: true },
+  disclaimer: { reviewed: true },
+};
+
+// Free e-book (/think-like-a-hostage-negotiator/). The cover and PDF live in
+// the WordPress media library; fill in their URLs after uploading. The PDF URL
+// is also set in forms/config.php ['ebook']['pdf_url'], which the opt-in
+// handler returns after a successful signup. While cover or pdf is null the
+// page, the homepage strip and the internal links are not built.
+export const ebook = {
+  path: '/think-like-a-hostage-negotiator/',
+  // Media library attachments 150 (cover), 154 (hero photo, cropped from banner 152), 148 (PDF).
+  cover: {
+    src: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover.jpg',
+    width: 1275,
+    height: 1650,
+    srcset: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover-232x300.jpg 232w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover-480x621.jpg 480w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover-768x994.jpg 768w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-ebook-cover.jpg 1275w',
+  },
+  hero: {
+    src: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-hero-photo.jpg',
+    width: 720,
+    height: 634,
+    srcset: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-hero-photo-480x423.jpg 480w, /wp-content/uploads/2026/11/think-like-a-hostage-negotiator-hero-photo.jpg 720w',
+    alt: 'A negotiator in a tactical vest sitting in the doorway of a command vehicle',
+  },
+  pdf: '/wp-content/uploads/2026/11/think-like-a-hostage-negotiator-narcissist-ebook.pdf',
 };

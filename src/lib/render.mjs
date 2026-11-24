@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { site, contact, office, social, analytics, images, legal, reviews, areasServed } from '../config.mjs';
+import { site, contact, office, social, analytics, images, legal, reviews, areasServed, booking, serviceRegion, paidConsult } from '../config.mjs';
 import { icon } from './icons.mjs';
 import { quickRequestDialog } from './forms.mjs';
 
@@ -108,6 +108,7 @@ export const nav = [
   { path: '/consultation/', label: 'Consultation' },
   { path: '/videos/', label: 'Videos' },
   { path: '/masterclass/', label: 'Masterclass' },
+  { path: '/blog/', label: 'Blog' },
   { path: '/contact/', label: 'Contact' },
 ];
 
@@ -123,6 +124,7 @@ export const services = [
   { path: '/holiday-parenting-schedules/', label: 'Holiday schedules' },
   { path: '/business-mediation/', label: 'Civil and business' },
   { path: '/workplace-mediation/', label: 'Workplace' },
+  { path: '/high-conflict-settlement-officer/', label: 'High-conflict settlement' },
 ];
 export const guides = [
   { path: '/how-mediation-works/', label: 'How mediation works' },
@@ -131,9 +133,29 @@ export const guides = [
 
 export const reviewsLine = () =>
   `<a href="${esc(reviews.url)}" rel="noopener" target="_blank"><span aria-hidden="true">★</span> ${esc(reviews.rating)} out of 5 from ${reviews.count} ${esc(reviews.source)} reviews<span class="visually-hidden"> (opens in a new tab)</span></a>`;
-export const areasLine = () => `${areasServed.slice(0, -1).join(', ')}, and ${areasServed[areasServed.length - 1]}`;
+const andList = (items) => `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+export const areasHtml = () => `<p>${esc(areasServed.line)}</p>
+    <p><strong>Counties:</strong> ${esc(andList(areasServed.counties))}.</p>
+    <p><strong>Cities:</strong> ${esc(andList(areasServed.cities))}.</p>`;
 
-export const CTA_PRIMARY = 'Schedule a Confidential Consultation';
+// "Book a Consultation" opens the online booking page in a new tab.
+export const bookingLink = (cls) =>
+  `<a class="${cls}" href="${esc(booking.url)}" target="_blank" rel="noopener">${esc(booking.label)}<span class="visually-hidden"> (opens ${esc(booking.provider)} in a new tab)</span></a>`;
+
+const socialSvg = {
+  YouTube: '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3L10 15Z" fill="currentColor"/>',
+  Instagram: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>',
+  X: '<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>',
+  LinkedIn: '<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-3.95v-11Z" fill="currentColor"/>',
+};
+export const socialIcons = (cls) =>
+  social.length
+    ? `<ul class="${cls}">${social
+        .map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener" aria-label="${esc(s.aria || s.label)} (opens in a new tab)"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">${socialSvg[s.label] || ''}</svg></a></li>`)
+        .join('')}</ul>`
+    : '';
+
+export const CTA_PRIMARY = 'Book a Free Consultation';
 export const CTA_SECONDARY = 'Explore Mediation Services';
 
 function header(path) {
@@ -143,7 +165,7 @@ function header(path) {
         `<li><a href="${n.path}"${n.path === path ? ' aria-current="page"' : ''}>${n.label}</a></li>`
     )
     .join('');
-  const sub = [...services, ...guides];
+  const sub = [...services, ...guides, { path: '/mediation-cost/', label: 'Mediation cost' }, { path: '/think-like-a-hostage-negotiator/', label: 'Think Like a Hostage Negotiator' }, { path: '/narcissist-or-negotiator-quiz/', label: 'Narcissist or Negotiator Quiz' }];
   const subLinks = sub
     .map((s) => `<li><a href="${s.path}"${s.path === path ? ' aria-current="page"' : ''}>${s.label}</a></li>`)
     .join('');
@@ -157,14 +179,15 @@ function header(path) {
   return `<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header" data-header>
   <div class="site-header__inner wrap">
-    <a class="brand" href="/" aria-label="Mediation Office of S. Collinson, home">
+    <a class="brand" href="/" aria-label="${esc(site.name)}, home">
       <span class="brand__badge">${markSvg()}</span>
-      <span class="brand__text"><span class="brand__name">Sean Collinson</span><span class="brand__sub">Mediation Office</span></span>
+      <span class="brand__text"><span class="brand__pre">The Mediation Office of</span><span class="brand__name">Sean Collinson</span></span>
     </a>
     <nav class="primary-nav" aria-label="Primary">
       <ul class="primary-nav__list">${withSub(items, false)}</ul>
     </nav>
-    <a class="btn btn--header btn--sm site-header__cta" href="/consultation/" data-consult-open>Schedule a Consultation</a>
+    ${socialIcons('header-social')}
+    ${bookingLink('btn btn--header btn--sm site-header__cta')}
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
       <span class="menu-toggle__bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
     </button>
@@ -173,17 +196,40 @@ function header(path) {
     <nav aria-label="Mobile">
       <ul class="mobile-menu__list">${withSub(items, true)}</ul>
     </nav>
-    <a class="btn btn--primary mobile-menu__cta" href="/consultation/" data-consult-open>${CTA_PRIMARY}</a>
+    ${bookingLink('btn btn--primary mobile-menu__cta')}
+    ${socialIcons('mobile-menu__social')}
   </div>
 </header>`;
 }
 
+// Paid consultation booking, an inline TidyCal embed above the footer on every
+// page. site.js loads TidyCal's official embed script when this section nears
+// the viewport, so pages stay fast. If the script cannot load, the gold button
+// below is shown instead.
+function bookingSection() {
+  return `<section class="booking" id="book-consultation" aria-labelledby="booking-title">
+  <div class="wrap booking__inner">
+    <div class="booking__intro">
+      <h2 id="booking-title" class="booking__title">${esc(paidConsult.heading)}</h2>
+      <p class="booking__text">${esc(paidConsult.text)}</p>
+    </div>
+    <div class="booking__card">
+      <div class="booking__frame" data-booking-embed data-src="${esc(paidConsult.embedScript)}">
+        <div class="tidycal-embed" data-path="${esc(paidConsult.path)}"></div>
+      </div>
+      <p class="booking__fallback" data-booking-fallback hidden><a class="btn booking__btn" href="${esc(paidConsult.url)}" target="_blank" rel="noopener">${esc(paidConsult.heading)}</a></p>
+      <noscript><p class="booking__fallback"><a class="btn booking__btn" href="${esc(paidConsult.url)}" target="_blank" rel="noopener">${esc(paidConsult.heading)}</a></p></noscript>
+    </div>
+  </div>
+</section>`;
+}
+
 function footer() {
-  const pageLinks = nav.map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
+  const pageLinks = [...nav, { path: '/testimonials/', label: 'Testimonials' }, { path: '/newsletter/', label: 'Newsletter' }, { path: '/ask-sean/', label: 'Ask Sean' }].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const serviceLinks = [...services, ...guides].map((n) => `<li><a href="${n.path}">${n.label}</a></li>`).join('');
   const socials = social.length
     ? `<ul class="footer__social">${social
-        .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>`)
+        .map((s) => `<li><a href="${esc(s.url)}" rel="noopener noreferrer" target="_blank"${s.aria ? ` aria-label="${esc(s.aria)} (opens in a new tab)"` : ''}>${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>`)
         .join('')}</ul>`
     : '';
   const contactLines = [
@@ -203,9 +249,10 @@ function footer() {
       <p class="footer__name">${esc(site.name)}</p>
       <p>${esc(site.positioning)}</p>
       <ul class="footer__contact">${contactLines}</ul>
+      <p class="footer__book">${bookingLink('btn btn--header btn--sm')}</p>
       <p class="footer__rating">${reviewsLine()}</p>
       <p class="footer__area">${esc(site.serviceArea)}</p>
-      <p class="footer__area">Areas served: ${esc(areasLine())}.</p>
+      <div class="footer__area footer__region">${serviceRegionHtml('p', 'footer__heading', 'footer-region')}</div>
       ${socials}
     </div>
     <nav class="footer__nav" aria-label="Footer">
@@ -307,18 +354,25 @@ const officePostalAddress = () => ({
   postalCode: office.postalCode,
   addressCountry: 'US',
 });
-const losAngeles = () => ({
-  '@type': 'City',
-  name: 'Los Angeles',
-  containedInPlace: { '@type': 'State', name: 'California' },
-});
+// Schema service area: the Southern California counties in serviceRegion.
+const losAngeles = () =>
+  serviceRegion.counties.map((c) => ({
+    '@type': 'AdministrativeArea',
+    name: `${c} County`,
+    containedInPlace: { '@type': 'State', name: 'California' },
+  }));
+
+const listLine = (items) => (items.length > 1 ? `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}` : items.join(''));
+export const serviceRegionHtml = (headingTag = 'h2', cls = 'section__title', id = 'region-title') => `<${headingTag} id="${id}" class="${cls}">${esc(serviceRegion.heading)}</${headingTag}>
+    <p>${esc(serviceRegion.line)}</p>
+    <p><strong>Counties:</strong> ${esc(listLine(serviceRegion.counties.map((c) => `${c} County`)))}.</p>
+    <p><strong>Cities:</strong> ${esc(listLine(serviceRegion.cities))}.</p>`;
 
 export function organizationSchema() {
   const o = {
     '@type': 'Organization',
     '@id': ids.organization,
     name: office.name,
-    alternateName: [site.name, 'Sean Collinson Mediation'],
     url: abs('/'),
     logo: abs('/assets/img/logo.png'),
     image: abs('/assets/img/social-share.jpg'),
@@ -345,13 +399,18 @@ export function businessSchema() {
     '@type': ['LocalBusiness', 'ProfessionalService'],
     '@id': ids.business,
     name: office.name,
-    alternateName: [site.name, 'Sean Collinson Mediation'],
     url: abs('/'),
     description: site.positioning,
     telephone: office.phone,
     address: officePostalAddress(),
     areaServed: losAngeles(),
     parentOrganization: { '@id': ids.organization },
+    openingHoursSpecification: (contact.openingHours || []).map((h) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: h.days.map((d) => `https://schema.org/${d}`),
+      opens: h.opens,
+      closes: h.closes,
+    })),
     founder: { '@id': ids.person },
     employee: { '@id': ids.person },
     knowsAbout: [
@@ -390,6 +449,9 @@ export const jsonld = (graph) =>
 // Hand-built page sections kept as exact HTML (ported from the live site).
 export const partial = (name) => readFileSync(join(ctx.srcDir, 'partials', name), 'utf8').replace(/\n$/, '');
 
+// Pages that never load the engagement pop-up (they already have their own form).
+export const ENGAGE_EXCLUDED = ['/contact/', '/think-like-a-hostage-negotiator/', '/narcissist-or-negotiator-quiz/'];
+
 export function layout({ path, title, description, body, schema = [], noindex = false, bodyClass = '', headExtra = '', bodyEnd = '' }) {
   const canonical = abs(path);
   const ogImage = abs('/assets/img/social-share.jpg');
@@ -419,7 +481,7 @@ ${path === '/404.html' ? '' : `<meta property="og:url" content="${canonical}">`}
 <meta property="og:image" content="${ogImage}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Mediation Office of S. Collinson">
+<meta property="og:image:alt" content="${esc(site.name)}">
 <meta property="og:locale" content="${site.locale}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
@@ -443,10 +505,11 @@ ${header(path)}
 <main id="main" tabindex="-1">
 ${body}
 </main>
+${bookingSection()}
 ${footer()}
 ${quickRequestDialog()}
 <script src="/assets/js/site.js?v=${ctx.version}" defer></script>
-${bodyEnd}
+${ENGAGE_EXCLUDED.includes(path) ? '' : `<script src="/assets/js/engage.js?v=${ctx.engageVersion}" defer></script>\n`}${bodyEnd}
 </body>
 </html>
 `;
