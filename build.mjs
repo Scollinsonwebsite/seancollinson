@@ -28,6 +28,7 @@ import { checklistPage } from './src/pages/checklist.mjs';
 import { newsletterPage } from './src/pages/newsletter.mjs';
 import { quizPage } from './src/pages/quiz.mjs';
 import { coursePage } from './src/pages/course.mjs';
+import { askSeanPage } from './src/pages/ask-sean.mjs';
 import * as consultation from './src/pages/consultation.mjs';
 import * as videos from './src/pages/videos.mjs';
 import * as masterclass from './src/pages/masterclass.mjs';
@@ -91,6 +92,7 @@ writeFileSync(join(outDir, 'assets/css/site.css'), minifyCss(cssRaw));
 writeFileSync(join(outDir, 'assets/js/site.js'), jsRaw);
 writeFileSync(join(outDir, 'assets/js/ebook.js'), readFileSync(join(srcDir, 'assets/js/ebook.js'), 'utf8'));
 writeFileSync(join(outDir, 'assets/js/quiz.js'), readFileSync(join(srcDir, 'assets/js/quiz.js'), 'utf8'));
+writeFileSync(join(outDir, 'assets/js/ask.js'), readFileSync(join(srcDir, 'assets/js/ask.js'), 'utf8'));
 const engageRaw = readFileSync(join(srcDir, 'assets/js/engage.js'), 'utf8');
 writeFileSync(join(outDir, 'assets/js/engage.js'), engageRaw);
 
@@ -100,7 +102,7 @@ const primary = [
   divorce, custody, support, spousal, property, separation, paternity, holidays, business, workplace, highConflict,
   consultation, videos, masterclass, contactPage,
   ...(ebookReady() ? [ebookPage] : []),
-  checklistPage, testimonialsPage, newsletterPage, quizPage, coursePage,
+  checklistPage, testimonialsPage, newsletterPage, quizPage, coursePage, askSeanPage,
   ...blogPages(),
 ];
 const all = [...primary, ...legalPages, notfound];
